@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-export default function FirstPage() {
+export default function LandingPage() {
   return (
     <div className="relative w-full flex flex-col items-center pb-2">
         <Image

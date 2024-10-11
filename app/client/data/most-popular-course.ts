@@ -1,13 +1,6 @@
-interface Course {
-  title: string;
-  cuisine: string;
-  price: string;
-  rating: number;
-  chef: string;
-  imageSrc: string;
-}
+import { Course } from "../types/coures";
 
-const courses: Course[] = [
+export const courses: Course[] = [
   {
     title: 'Uma Parlour - Pure Vegetarian',
     cuisine: 'India',
@@ -39,7 +32,5 @@ const courses: Course[] = [
     rating: 3.2,
     chef: 'Chef Sieng',
     imageSrc: '/images/uma-parlour.png',
-  }
+  },
 ];
-
-export default courses;

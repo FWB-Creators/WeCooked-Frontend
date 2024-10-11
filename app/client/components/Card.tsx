@@ -1,5 +1,5 @@
 import CourseCard from "./CourseCard";
-import courses from "../data/most-popular-course";
+import { courses } from "../data/most-popular-course";
 
 export default function Card() {
   return (

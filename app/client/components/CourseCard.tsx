@@ -1,16 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { Course } from '../types/coures';
 
-interface CourseCardProps {
-  title: string;
-  cuisine: string;
-  price: string;
-  rating: number;
-  chef: string;
-  imageSrc: string;
-}
-
-export default function CourseCard({ title, cuisine, price, rating, chef, imageSrc }: CourseCardProps) {
+export default function CourseCard({ title, cuisine, price, rating, chef, imageSrc }:Course) {
   return (
     <div className="bg-white rounded-xl shadow-lg p-6 w-68 my-6 transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
       <Image
