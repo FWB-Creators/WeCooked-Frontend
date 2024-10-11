@@ -1,4 +1,4 @@
-import { Course } from "../types/coures";
+import { Course } from '../types/courses'
 
 export const courses: Course[] = [
   {
@@ -33,4 +33,4 @@ export const courses: Course[] = [
     chef: 'Chef Sieng',
     imageSrc: '/images/uma-parlour.png',
   },
-];
+]
