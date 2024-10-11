@@ -97,15 +97,15 @@ export default function SignUpChef() {
                 />
               </div>
               {/* Eye Icon for Show/Hide Password */}
-              <div className="absolute inset-y-0 right-4 flex items-center">
+              <div className="absolute inset-y-0 right-4 flex items-center cursor-pointer">
                 {showPassword ? (
                   <EyeSlashIcon 
-                    className="size-6 text-[#697077] mt-6 cursor-pointer" 
+                    className="size-6 text-[#697077] mt-7" 
                     onClick={togglePasswordVisibility} 
                   />
                 ) : (
                   <EyeIcon 
-                    className="size-6 text-[#697077] mt-6 cursor-pointer" 
+                    className="size-6 text-[#697077] mt-7" 
                     onClick={togglePasswordVisibility} 
                   />
                 )}

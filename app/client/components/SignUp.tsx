@@ -79,12 +79,12 @@ export default function SignUp() {
             <div className="absolute inset-y-0 right-4 flex items-center cursor-pointer">
               {showPassword ? (
                 <EyeSlashIcon
-                  className="h-6 w-6 text-[#697077] mt-6"
+                  className="h-6 w-6 text-[#697077] mt-7"
                   onClick={togglePasswordVisibility}
                 />
               ) : (
                 <EyeIcon
-                  className="h-6 w-6 text-[#697077] mt-6"
+                  className="h-6 w-6 text-[#697077] mt-7"
                   onClick={togglePasswordVisibility}
                 />
               )}
