@@ -56,7 +56,7 @@ export default function CourseCard({
       <div className="flex flex-row items-center justify-between mt-4">
         <p className="text-black font-semibold">{cuisine}</p>
         <p className="font-semibold bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text">
-          {price.formatted}
+          {price}
         </p>
       </div>
     </div>
