@@ -1,6 +1,7 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/16/solid';
 import Link from 'next/link';
 import Image from 'next/image';
+import NavLink from './NavLink';
 
 export default function NavbarBefore() {
   return (
@@ -17,35 +18,16 @@ export default function NavbarBefore() {
         </Link>
       </div>
       <div className="flex items-center px-6">
-        <Link href="/">
-          <p className="font-semibold px-4 bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text">
-            Home
-          </p>
-        </Link>
-        <Link href="/client/my-learning">
-          <p className="font-semibold px-4 bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text">
-            My Learning
-          </p>
-        </Link>
-        <Link href="/client/video">
-          <p className="font-semibold px-4 bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text">
-            Video
-          </p>
-        </Link>
-        <Link href="/client/group">
-          <p className="font-semibold px-4 bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text">
-            Group
-          </p>
-        </Link>
-        <Link href="/client/private">
-          <p className="font-semibold px-4 bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text">
-            Private
-          </p>
-        </Link>
+        <NavLink href="/">Home</NavLink>
+        <NavLink href="/client/my-learning">My Learning</NavLink>
+        <NavLink href="/client/video">Video</NavLink>
+        <NavLink href="/client/group">Group</NavLink>
+        <NavLink href="/client/private">Private</NavLink>
       </div>
         <div className="relative">
           <input
             type="text"
+            aria-label="Search"
             className="border border-[#FE3511] rounded-lg w-[530px] pl-10 pr-3 outline-none"
           />
           <MagnifyingGlassIcon
@@ -54,17 +36,9 @@ export default function NavbarBefore() {
           />
         </div>
         <div className="flex items-center px-6">
-          <Link href="/client/login">
-            <p className="font-semibold px-4 bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text">
-              Login
-            </p>
-          </Link>
-          <Link href="/client/sign-up">
-            <p className="font-semibold px-4 bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text">
-              Sign Up
-            </p>
-          </Link>
-        </div>
+        <NavLink href="/client/login">Login</NavLink>
+        <NavLink href="/client/sign-up">Sign Up</NavLink>
+      </div>
     </nav>
   )
 }

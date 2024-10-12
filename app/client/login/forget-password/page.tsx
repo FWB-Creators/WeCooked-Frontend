@@ -3,8 +3,8 @@ import React from 'react'
 
 export default function forget_password() {
   return (
-    <div>
+    <>
       <Forget_password />
-    </div>
+    </>
   )
 }
