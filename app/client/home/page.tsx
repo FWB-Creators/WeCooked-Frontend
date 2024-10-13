@@ -1,7 +1,7 @@
-import NavbarAfter from "../components/NavbarAfter";
-import LandingPage from "../components/LandingPage";
-import Card from "../components/Card";
-import CurvePage from "../components/CurvePage";
+import NavbarAfter from '../components/NavbarAfter'
+import LandingPage from '../components/LandingPage'
+import Card from '../components/Card'
+import CurvePage from '../components/CurvePage'
 
 export default function Home() {
   return (
@@ -11,5 +11,5 @@ export default function Home() {
       <Card />
       <CurvePage />
     </div>
-  );
+  )
 }

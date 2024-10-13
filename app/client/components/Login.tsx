@@ -25,7 +25,7 @@ export default function Login() {
           className="absolute right-32 w-full h-screen"
           width={20}
           height={20}
-          src="/images/svg/Login_pic.svg"
+          src="/svg/Login_pic.svg"
           alt="client login picture"
         />
       </div>
@@ -35,7 +35,7 @@ export default function Login() {
             width={20}
             height={20}
             className="w-[171px] h-[120px]"
-            src="/images/svg/Wecooked_logo.svg"
+            src="/svg/Wecooked_logo.svg"
             alt="Wecooked logo"
           />
         </div>
@@ -98,7 +98,7 @@ export default function Login() {
               <Image
                 width={20}
                 height={20}
-                src="/images/svg/Google.svg"
+                src="/svg/Google.svg"
                 alt="google logo"
               />
               <span className="text-xs text-transparent bg-clip-text bg-gradient-to-t from-[#FE3511] to bg-[#F0725C]">
