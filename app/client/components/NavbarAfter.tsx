@@ -1,30 +1,59 @@
-'use client'
-import { useState, useRef, useEffect } from 'react'
-import { MagnifyingGlassIcon } from '@heroicons/react/16/solid'
-import Link from 'next/link'
-import Image from 'next/image'
-import NavLink from './NavLink'
+'use client';
+import { useState, useRef, useEffect } from 'react';
+import { MagnifyingGlassIcon } from '@heroicons/react/16/solid';
+import Link from 'next/link';
+import Image from 'next/image';
+import NavLink from './NavLink';
+import { courses as popularCourses } from '../data/most-popular-course';
+import { courses as newCourses } from '../data/new-course';
+import { courses as topCourses } from '../data/top-course';
+
+const courses = [...popularCourses, ...newCourses, ...topCourses];
 
 export default function NavbarAfter() {
-  const [dropdownOpen, setDropdownOpen] = useState(false)
-  const dropdownRef = useRef<HTMLDivElement>(null)
+  const [userDropdownOpen, setUserDropdownOpen] = useState(false);
+  const [searchDropdownOpen, setSearchDropdownOpen] = useState(false);
+  const userDropdownRef = useRef<HTMLDivElement>(null);
+  const searchRef = useRef<HTMLDivElement>(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredCourses, setFilteredCourses] = useState(courses);
 
-  const toggleDropdown = () => {
-    setDropdownOpen((prevState) => !prevState)
-  }
+  const toggleUserDropdown = () => {
+    setUserDropdownOpen((prevState) => !prevState);
+  };
+
+  const handleSearchFocus = () => {
+    setSearchDropdownOpen(true);
+  };
+
+  const handleSearchBlur = () => {
+    setSearchDropdownOpen(false);
+  };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setDropdownOpen(false);
+      if (
+        userDropdownRef.current && !userDropdownRef.current.contains(event.target as Node) &&
+        searchRef.current && !searchRef.current.contains(event.target as Node)
+      ) {
+        setUserDropdownOpen(false);
+        setSearchDropdownOpen(false);
       }
     };
-  
+
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+    const results = courses.filter(course =>
+      course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      course.chef.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredCourses(results);
+  }, [searchTerm]);
 
   return (
     <nav className="flex items-center justify-between bg-white py-[15px] shadow-xl">
@@ -46,10 +75,14 @@ export default function NavbarAfter() {
         <NavLink href="/client/group">Group</NavLink>
         <NavLink href="/client/private">Private</NavLink>
       </div>
-      <div className="relative">
+      <div className="relative" ref={searchRef}>
         <input
           type="text"
           className="border border-[#FE3511] rounded-lg w-[530px] pl-10 pr-3 outline-none"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          onFocus={handleSearchFocus}
+          onBlur={handleSearchBlur}
         />
         <MagnifyingGlassIcon
           className="h-6 w-6 absolute left-3 top-1/2 transform -translate-y-1/2 text-[#FE3511] pointer-events-none"
@@ -75,17 +108,17 @@ export default function NavbarAfter() {
             className="cursor-pointer mx-3 hover:opacity-80 transition-opacity"
           />
         </Link>
-        <div className="relative" ref={dropdownRef}>
+        <div className="relative" ref={userDropdownRef}>
           <button
             className="rounded-full border border-[#FE3511] w-11 h-11 mx-2 cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 hover:border-[#F0725C]"
-            onClick={toggleDropdown}
+            onClick={toggleUserDropdown}
             aria-label="User menu"
             aria-haspopup="true"
-            aria-expanded={dropdownOpen}
+            aria-expanded={userDropdownOpen}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault()
-                toggleDropdown()
+                e.preventDefault();
+                toggleUserDropdown();
               }
             }}
           >
@@ -97,7 +130,7 @@ export default function NavbarAfter() {
               className="rounded-full"
             />
           </button>
-          {dropdownOpen && (
+          {userDropdownOpen && (
             <div
               className="absolute right-0 z-20 mt-2 w-36 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
               role="menu"
@@ -121,6 +154,31 @@ export default function NavbarAfter() {
           )}
         </div>
       </div>
+      {searchTerm && (
+        <div className="absolute top-14 right-[210px] z-30 border-2 border-red-400 mt-1 bg-white rounded-xl shadow-lg w-[530px] 2xl:right-[575px]">
+          {filteredCourses.slice(0, 3).length > 0 ? (
+            filteredCourses.slice(0, 3).map((course, index) => (
+              <Link href={`/client/video/search/${encodeURIComponent(course.title.replace(/ /g, '-'))}`} key={index}>
+                <div className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer rounded-xl">
+                  <Image
+                    src={course.imageSrc}
+                    alt={course.title}
+                    width={50}
+                    height={50}
+                    className="rounded-xl"
+                  />
+                  <div className="ml-3">
+                    <h2 className="font-semibold">{course.title}</h2>
+                    <p className="text-gray-500">{course.chef}</p>
+                  </div>
+                </div>
+              </Link>
+            ))
+          ) : (
+            <div className="px-4 py-2 text-gray-500">No results found</div>
+          )}
+        </div>
+      )}
     </nav>
-  )
+  );
 }
