@@ -26,10 +26,6 @@ export default function NavbarAfter() {
     setSearchDropdownOpen(true);
   };
 
-  const handleSearchBlur = () => {
-    setSearchDropdownOpen(false);
-  };
-
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -156,7 +152,10 @@ export default function NavbarAfter() {
         <div className="absolute top-14 right-[210px] z-30 border-2 border-red-400 mt-1 bg-white rounded-xl shadow-lg w-[530px] 2xl:right-[575px]">
           {filteredCourses.slice(0, 3).length > 0 ? (
             filteredCourses.slice(0, 3).map((course) => (
-              <Link href={`/client/video/search/${encodeURIComponent(course.title.replace(/ /g, '-'))}`}>
+              <Link
+                key={course.course_id}
+                href={`/client/video/search/${encodeURIComponent(course.title.replace(/ /g, '-'))}`}
+              >
                 <div className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer rounded-xl">
                   <Image
                     src={course.imageSrc}
