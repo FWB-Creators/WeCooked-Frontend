@@ -7,7 +7,7 @@ import { useState } from "react";
 export default function Card() {
   const [startIndex, setStartIndex] = useState(0);
   const cardsToShow = 3;
-  const maxIndex = Math.ceil(courses.length / cardsToShow) - 1;
+  const maxIndex = Math.ceil(courses.length / cardsToShow) - 1
   const nextSlide = () => {
     setStartIndex((prev) => Math.min(prev + 1, maxIndex));
   };

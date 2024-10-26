@@ -10,12 +10,12 @@ export default function CurvePage() {
         height={100}
         className="w-full h-auto"
       />
-      <div className="absolute top-32 mx-24">
+      <div className="absolute top-28 mx-24">
         <div className="flex flex-col justify-center items-center space-y-4 my-10">
           <p className="text-lg tracking-widest font-semibold">WECOOKED</p>
           <h1 className="text-5xl font-bold">Why Are We Unique ?</h1>
         </div>
-        <div className="grid grid-cols-3 justify-items-center content-center gap-28 w-full mt-24">
+        <div className="grid grid-cols-3 justify-items-center content-center gap-28 w-full mt-28">
           <div className="flex flex-col items-center text-center">
             <div className="rounded-full bg-white p-4 flex items-center justify-center w-24 h-24 shadow-2xl">
               <Image
@@ -36,7 +36,7 @@ export default function CurvePage() {
             </p>
           </div>
           <div className="flex flex-col items-center text-center">
-            <div className="rounded-full bg-white p-4 flex items-center justify-center w-24 h-24 shadow-lg">
+            <div className="rounded-full bg-white p-4 flex items-center justify-center w-24 h-24 shadow-2xl">
               <Image
                 src="/svg/Store.svg"
                 alt="Order Ingredients Icon"

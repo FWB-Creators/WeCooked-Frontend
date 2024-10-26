@@ -78,11 +78,15 @@ export default function NavbarAfter() {
       <div className="relative" ref={searchRef}>
         <input
           type="text"
+          aria-label="Search"
+          aria-expanded={searchDropdownOpen}
+          aria-controls="search-results"
+          aria-describedby="search-description"
           className="border border-[#FE3511] rounded-lg w-[530px] pl-10 pr-3 outline-none"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           onFocus={handleSearchFocus}
-          onBlur={handleSearchBlur}
+          role="combobox"
         />
         <MagnifyingGlassIcon
           className="h-6 w-6 absolute left-3 top-1/2 transform -translate-y-1/2 text-[#FE3511] pointer-events-none"
@@ -108,19 +112,13 @@ export default function NavbarAfter() {
             className="cursor-pointer mx-3 hover:opacity-80 transition-opacity"
           />
         </Link>
-        <div className="relative" ref={userDropdownRef}>
+        <div className="flex items-center relative" ref={userDropdownRef}>
           <button
             className="rounded-full border border-[#FE3511] w-11 h-11 mx-2 cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 hover:border-[#F0725C]"
             onClick={toggleUserDropdown}
             aria-label="User menu"
             aria-haspopup="true"
             aria-expanded={userDropdownOpen}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                toggleUserDropdown();
-              }
-            }}
           >
             <Image
               src="/images/profile.jpg"
@@ -157,8 +155,8 @@ export default function NavbarAfter() {
       {searchTerm && (
         <div className="absolute top-14 right-[210px] z-30 border-2 border-red-400 mt-1 bg-white rounded-xl shadow-lg w-[530px] 2xl:right-[575px]">
           {filteredCourses.slice(0, 3).length > 0 ? (
-            filteredCourses.slice(0, 3).map((course, index) => (
-              <Link href={`/client/video/search/${encodeURIComponent(course.title.replace(/ /g, '-'))}`} key={index}>
+            filteredCourses.slice(0, 3).map((course) => (
+              <Link href={`/client/video/search/${encodeURIComponent(course.title.replace(/ /g, '-'))}`}>
                 <div className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer rounded-xl">
                   <Image
                     src={course.imageSrc}

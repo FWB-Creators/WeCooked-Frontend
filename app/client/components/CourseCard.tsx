@@ -1,17 +1,21 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Course } from '../types/courses'
+import { StarRating } from './StarRating'
 
 export default function CourseCard({
+  course_id,
   title,
   cuisine,
   price,
+  currency,
   rating,
   chef,
   imageSrc,
+  chefImageUrl
 }: Course) {
   return (
-    <Link href="/client/video/course-detail">
+    <Link href={`/client/video/course-detail/${course_id}`}>
       <div className="bg-white rounded-xl shadow-lg p-6 w-72 my-6 transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
         <Image
           src={imageSrc}
@@ -25,8 +29,8 @@ export default function CourseCard({
           <div className="flex items-center">
             <div className="flex items-center rounded-full w-11 h-11">
               <Image
-                src="/images/chef.png"
-                alt="profile"
+                src={chefImageUrl}
+                alt={`Profile picture of ${chef}`}
                 width={35}
                 height={35}
                 className="rounded-full"
@@ -34,28 +38,12 @@ export default function CourseCard({
             </div>
             <p className="text-[#808080] font-semibold">{chef}</p>
           </div>
-          <div className="flex items-center ml-4">
-            <svg
-              className="h-5 w-5 text-green-400"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              aria-hidden="true"
-              role="img"
-            >
-              <path
-                fill="currentColor"
-                d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z"
-              />
-            </svg>
-            <span className="text-black font-semibold ml-1">
-              {rating.toFixed(1)}
-            </span>
-          </div>
+          <StarRating rating={rating} />
         </div>
         <div className="flex flex-row items-center justify-between mt-4">
           <p className="text-black font-semibold">{cuisine}</p>
           <p className="font-semibold bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text">
-            {price}
+            {price} {currency}
           </p>
         </div>
       </div>

@@ -1,45 +1,51 @@
-"use client";
-import { useState } from 'react';
-import { MagnifyingGlassIcon } from '@heroicons/react/16/solid';
-import Link from 'next/link';
-import Image from 'next/image';
-import NavLink from './NavLink';
-import { courses as popularCourses } from '../data/most-popular-course';
-import { courses as newCourses } from '../data/new-course';
-import { courses as topCourses } from '../data/top-course';
+'use client'
+import { useState } from 'react'
+import { MagnifyingGlassIcon } from '@heroicons/react/16/solid'
+import Link from 'next/link'
+import Image from 'next/image'
+import NavLink from './NavLink'
+import { courses as popularCourses } from '../data/most-popular-course'
+import { courses as newCourses } from '../data/new-course'
+import { courses as topCourses } from '../data/top-course'
 
-const courses = [...popularCourses, ...newCourses, ...topCourses];
+const courses = [...popularCourses, ...newCourses, ...topCourses]
 
 export default function NavbarBefore() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filteredCourses, setFilteredCourses] = useState(courses);
-  const [searchDropdownOpen, setSearchDropdownOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('')
+  const [filteredCourses, setFilteredCourses] = useState(courses)
+  const [searchDropdownOpen, setSearchDropdownOpen] = useState(false)
 
   const handleSearchFocus = () => {
-    setSearchDropdownOpen(true);
-  };
+    setSearchDropdownOpen(true)
+  }
 
   const handleSearchBlur = () => {
     setTimeout(() => {
-      setSearchDropdownOpen(false);
-    }, 100);
-  };
+      setSearchDropdownOpen(false)
+    }, 100)
+  }
 
+  const normalizeText = (text: string) =>
+    text
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setSearchTerm(value);
-    const results = courses.filter(course =>
-      course.title.toLowerCase().includes(value.toLowerCase()) ||
-      course.chef.toLowerCase().includes(value.toLowerCase())
-    );
-    setFilteredCourses(results);
-  };
+    const value = e.target.value
+    setSearchTerm(value)
+    const results = courses.filter(
+      (course) =>
+        normalizeText(course.title).includes(normalizeText(value)) ||
+        normalizeText(course.chef).includes(normalizeText(value))
+    )
+    setFilteredCourses(results)
+  }
 
   return (
     <nav className="flex items-center justify-between bg-white py-6 shadow-xl">
       <div className="px-12">
         <Link href="/">
-          <Image 
+          <Image
             src="/svg/WecookedLogo.svg"
             alt="WeCooked Logo"
             width={120}
@@ -59,21 +65,31 @@ export default function NavbarBefore() {
         <input
           type="text"
           aria-label="Search"
+          aria-expanded={searchDropdownOpen}
+          aria-controls="search-results"
+          aria-describedby="search-description"
           className="border border-[#FE3511] rounded-lg w-[530px] pl-10 pr-3 outline-none"
           value={searchTerm}
           onChange={handleSearchChange}
           onFocus={handleSearchFocus}
+          role="combobox"
         />
         <MagnifyingGlassIcon
           className="h-6 w-6 absolute left-3 top-1/2 transform -translate-y-1/2 text-[#FE3511] pointer-events-none"
           aria-hidden="true"
         />
         {searchDropdownOpen && searchTerm && (
-          <div className="absolute top-7 right-0 z-30 border-2 border-red-400 mt-1 bg-white rounded-xl shadow-lg w-[530px]">
+          <div
+            id="search-results"
+            role="listbox"
+            className="absolute top-7 right-0 z-30 border-2 border-red-400 mt-1 bg-white rounded-xl shadow-lg w-[530px]"
+          >
             {filteredCourses.length > 0 ? (
               filteredCourses.slice(0, 3).map((course, index) => (
-                <Link 
-                  href={`/client/video/search/${encodeURIComponent(course.title.replace(/ /g, '-'))}`} 
+                <Link
+                  href={`/client/video/search/${encodeURIComponent(
+                    course.title.replace(/ /g, '-')
+                  )}`}
                   key={index}
                 >
                   <div className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer rounded-xl">
@@ -102,5 +118,5 @@ export default function NavbarBefore() {
         <NavLink href="/client/sign-up">Sign Up</NavLink>
       </div>
     </nav>
-  );
+  )
 }

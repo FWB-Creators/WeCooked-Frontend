@@ -1,14 +1,14 @@
-"use client";
-import Image from 'next/image';
-import Link from 'next/link';
-import { useState } from 'react';
-import { foodtype } from '../data/food-type';
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/16/solid';
+'use client'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useState, useEffect } from 'react'
+import { foodtype } from '../data/food-type'
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/16/solid'
 
 interface FoodType {
-  title: string;
-  total_course: number;
-  imageSrc: string;
+  title: string
+  total_course: number
+  imageSrc: string
 }
 
 function CourseCard({ title, total_course, imageSrc }: FoodType) {
@@ -28,21 +28,38 @@ function CourseCard({ title, total_course, imageSrc }: FoodType) {
         </p>
       </div>
     </div>
-  );
+  )
 }
+const useResponsiveCards = () => {
+    const [cardsToShow, setCardsToShow] = useState(5);
+    
+    useEffect(() => {
+      const updateCards = () => {
+        if (window.innerWidth < 640) setCardsToShow(1);
+        else if (window.innerWidth < 1024) setCardsToShow(3);
+        else setCardsToShow(5);
+      };
+      
+      window.addEventListener('resize', updateCards);
+      updateCards();
+      return () => window.removeEventListener('resize', updateCards);
+    }, []);
+    
+    return cardsToShow;
+  };
 
 export default function FoodTypeCard() {
-  const [startIndex, setStartIndex] = useState(0);
-  const cardsToShow = 5;
-  const maxIndex = foodtype.length - cardsToShow;
+  const [startIndex, setStartIndex] = useState(0)
+  const cardsToShow = useResponsiveCards();
+  const maxIndex = foodtype.length - cardsToShow
 
   const nextSlide = () => {
-    setStartIndex((prev) => Math.min(prev + 2, maxIndex));
-  };
+    setStartIndex((prev) => Math.min(prev + 2, maxIndex))
+  }
 
   const prevSlide = () => {
-    setStartIndex((prev) => Math.max(prev - 2, 0));
-  };
+    setStartIndex((prev) => Math.max(prev - 2, 0))
+  }
 
   return (
     <div className="flex flex-col justify-start py-12">
@@ -51,18 +68,30 @@ export default function FoodTypeCard() {
       </h1>
       <div className="relative flex">
         <div className="flex overflow-hidden">
-          <div 
+          <div
             className="flex transition-transform duration-300 ease-in-out"
-            style={{ transform: `translateX(-${startIndex * (100 / cardsToShow)}%)` }}
+            style={
+              {
+                '--slide-offset': startIndex * (100 / cardsToShow),
+                transform: 'translateX(calc(-1 * var(--slide-offset) * 1%))',
+              } as React.CSSProperties
+            }
           >
             {foodtype.map((food, index) => (
-              <Link key={index} href="/client/video/search" className="w-full pl-12">
+              <Link
+                key={index}
+                href={`/client/video/search?type=${food.title.replace(
+                  /\s+/g,
+                  '-'
+                )}`}
+                className="w-full pl-12"
+              >
                 <CourseCard {...food} />
               </Link>
             ))}
           </div>
         </div>
-        
+
         {startIndex > 0 && (
           <button
             onClick={prevSlide}
@@ -71,7 +100,7 @@ export default function FoodTypeCard() {
             <ChevronLeftIcon className="w-6 h-6" />
           </button>
         )}
-        
+
         {startIndex + 2 < maxIndex && (
           <button
             onClick={nextSlide}
@@ -82,5 +111,5 @@ export default function FoodTypeCard() {
         )}
       </div>
     </div>
-  );
+  )
 }
