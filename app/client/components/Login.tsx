@@ -18,6 +18,16 @@ export default function Login() {
     setRemember((prev) => !prev)
   }
 
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
+
+  const handleSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    console.log(`Email : ${email}`)
+    console.log(`Password : ${password}`)
+  }
+
   return (
     <div className="grid grid-cols-3 animation h-screen overflow-hidden animate-fadeIn">
       <div className="col-span-2 object-fill">
@@ -44,12 +54,14 @@ export default function Login() {
         </div>
         <div className="mt-6 ml-14 text-xs">Login</div>
         <input
+          onChange={(e) => setEmail(e.target.value)}
           className="ml-10 mt-2 mr-12 bg-[#F2F4F8] rounded-[5px] py-3 px-4 outline-none shadow-md"
           type="email"
           placeholder="Email or phone number"
         ></input>
         <div className="mt-6 ml-14 text-xs">Password</div>
         <input
+          onChange={(e) => setPassword(e.target.value)}
           className="ml-10 mt-2 mr-12 bg-[#F2F4F8] rounded-[5px] py-3 px-4 outline-none shadow-md"
           type={showPassword ? 'text' : 'password'}
           placeholder="Enter password"
@@ -87,9 +99,13 @@ export default function Login() {
           </div>
         </div>
 
-        <div className="cursor-pointer py-3 px-4 items-center rounded-[5px] flex justify-center ml-10 mr-12 mt-6 font-bold text-[white] bg-gradient-to-t from-[#FE3511] to-[#F0725C] transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg">
-          Login
-        </div>
+        <form
+          onSubmit={handleSubmit}
+          className="cursor-pointer py-3 px-4 items-center rounded-[5px] flex justify-center ml-10 mr-12 mt-6 font-bold text-[white] bg-gradient-to-t from-[#FE3511] to-[#F0725C] transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg"
+        >
+          <button type="submit">Login</button>
+        </form>
+
         <div className="ml-10 my-5 mr-12 bg-[#E5E5E5] h-[0.5px] "></div>
         {/*border gradient */}
         <div className="cursor-pointer flex justify-center ml-10 mr-12">
