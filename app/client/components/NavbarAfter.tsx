@@ -42,17 +42,18 @@ export default function NavbarAfter() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
   const filterCourses = useCallback((searchTerm: string) => {
-      return courses.filter(course =>
-        course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        course.chef.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }, []);
+    return courses.filter(course =>
+      course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      course.chef.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, []);
 
   useEffect(() => {
     const results = filterCourses(searchTerm);
     setFilteredCourses(results);
-  }, [searchTerm]);
+  }, [searchTerm, filterCourses]); // Add filterCourses as a dependency
 
   return (
     <nav className="flex items-center justify-between bg-white py-[15px] shadow-xl">

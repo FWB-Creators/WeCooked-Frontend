@@ -5,6 +5,8 @@ import FoodTypeCard from '../components/FoodTypeCard'
 import Card from '../components/Card'
 import NewCourseCard from '../components/NewCourseCard'
 import TopRateCourse from '../components/TopRateCourse'
+import OrderIngredients from '../components/OrderIngredientPage'
+import PersonalCourseCard from '../components/PersonalCourseCard'
 
 export default function MyLearningPage() {
   return (
@@ -15,6 +17,8 @@ export default function MyLearningPage() {
       <Card />
       <NewCourseCard />
       <TopRateCourse />
+      <OrderIngredients />
+      <PersonalCourseCard />
     </div>
   )
 }
