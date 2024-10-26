@@ -53,7 +53,7 @@ export default function NavbarAfter() {
   useEffect(() => {
     const results = filterCourses(searchTerm);
     setFilteredCourses(results);
-  }, [searchTerm, filterCourses]); // Add filterCourses as a dependency
+  }, [searchTerm, filterCourses]);
 
   return (
     <nav className="flex items-center justify-between bg-white py-[15px] shadow-xl">

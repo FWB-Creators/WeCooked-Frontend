@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from "react";
-import { courses } from '../data/pesonal-course';
+import { courses } from '../data/personal-course';
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
 import { Course } from '../types/courses';
 import { StarRating } from './StarRating';

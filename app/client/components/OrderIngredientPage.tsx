@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export default function OrderIngredients() {
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between gap-20 px-24 pb-12 py-20">
+    <div className="flex flex-col md:flex-row items-center justify-between gap-20 px-6 md:px-24 pb-12 py-20">
       <div className="md:w-1/2 text-center md:text-left">
         <h1 className="text-white font-bold text-4xl md:text-5xl leading-tight mb-6">
           Order Ingredients Easily And Deliver Them To Your Home!
