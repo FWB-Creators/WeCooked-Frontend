@@ -1,5 +1,5 @@
 'use client';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { MagnifyingGlassIcon } from '@heroicons/react/16/solid';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -42,12 +42,15 @@ export default function NavbarAfter() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+  const filterCourses = useCallback((searchTerm: string) => {
+      return courses.filter(course =>
+        course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        course.chef.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }, []);
 
   useEffect(() => {
-    const results = courses.filter(course =>
-      course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      course.chef.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const results = filterCourses(searchTerm);
     setFilteredCourses(results);
   }, [searchTerm]);
 
@@ -72,6 +75,9 @@ export default function NavbarAfter() {
         <NavLink href="/client/private">Private</NavLink>
       </div>
       <div className="relative" ref={searchRef}>
+        <span id="search-description" className="sr-only">    
+          Search for courses by title or chef name
+        </span>
         <input
           type="text"
           aria-label="Search"

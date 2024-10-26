@@ -23,7 +23,7 @@ export default function LearningPage() {
           intimidated at first, but the instructor made everything feel
           accessible and fun.
         </p>
-        <div className="flex items-center">
+        <div className="flex items-center pt-2">
           <div className="flex items-center rounded-full">
             <Image
               src="/images/chef.png"
