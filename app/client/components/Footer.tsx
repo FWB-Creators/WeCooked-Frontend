@@ -17,7 +17,7 @@ export default function Footer() {
               src="/svg/WecookedLogo.svg"
               alt="WeCooked Logo"
               width={120}
-              height={100}
+              height={120}
               className="cursor-pointer"
             />
           </Link>

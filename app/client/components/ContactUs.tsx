@@ -24,22 +24,20 @@ export default function ContactUs() {
           </button>
         </Link>
       </div>
-      <div className="absolute left-[-100px] bottom-0">
+      <div className="absolute left-[-20px] bottom-0">
         <Image
-          className="size-[32rem]"
-          src="/svg/pasta.svg"
+          src="/images/pasta.png"
           alt="Pasta picture"
-          width={20}
-          height={20}
+          width={500}
+          height={500}
         />
       </div>
-      <div className="absolute right-[-24px] bottom-6">
+      <div className="absolute right-[-4px] bottom-6">
         <Image
-          className="size-[32rem]"
           src="/svg/chef.svg"
           alt="Chef picture"
-          width={20}
-          height={20}
+          width={550}
+          height={550}
         />
       </div>
     </div>

@@ -11,7 +11,7 @@ export default function ClientReview() {
           src="/svg/CurveBG.svg"
           alt="White Background"
           width={1100}
-          height={100}
+          height={1100}
           className="w-full h-auto"
         />
         <div className="absolute top-32 mx-24">
@@ -21,15 +21,22 @@ export default function ClientReview() {
           </div>
         </div>
         <div className="absolute font-semibold left-28 top-[400px] w-[1250px]">
-          This course is ideal for beginners and seasoned cooks alike, offering
-          a chance to
-          <br />
-          to deepen your understanding of vegetarian cooking while enjoying a
-          collaborative
-          <br /> and engaging experience. The focus on using fresh,
-          locally-sourced ingredients <br />
-          adds an extra layer of authenticity and quality to each meal prepared.
-          <br />
+          <p className="break-words">
+            This course is ideal for beginners and seasoned cooks alike,
+            offering a chance to
+          </p>
+          <p className="break-words">
+            deepen your understanding of vegetarian cooking while enjoying a
+            collaborative
+          </p>
+          <p className="break-words">
+            and engaging experience. The focus on using fresh, locally-sourced
+            ingredients
+          </p>
+          <p className="break-words">
+            adds an extra layer of authenticity and quality to each meal
+            prepared.
+          </p>
         </div>
 
         <div className="absolute left-[6.75rem] bottom-64 flex justify-center items-center gap-x-2">
@@ -45,7 +52,7 @@ export default function ClientReview() {
             </Link>
           </div>
           <div>
-            <div className="font-bold">Gimmanee</div>
+            <div className="font-bold">Allhalal</div>
             <div className="flex items-center">
               <svg
                 className="h-5 w-5 text-green-400"
@@ -72,13 +79,12 @@ export default function ClientReview() {
         ))}
       </div>
 
-      <div className="absolute left-[-75px] bottom-48">
+      <div className="absolute left-0 bottom-56">
         <Image
-          className=" size-[277px]"
           src="/svg/salmon_steak.svg"
           alt="salmon steak"
-          width={20}
-          height={20}
+          width={125}
+          height={125}
         />
       </div>
     </div>
