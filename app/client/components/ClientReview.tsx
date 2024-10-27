@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import CourseCard from './CourseCard'
 import { courses } from '../data/client-review'
+import { StarRating } from './StarRating'
 
 export default function ClientReview() {
   return (
@@ -20,60 +21,35 @@ export default function ClientReview() {
             <h1 className="text-5xl font-bold">Client Reviews</h1>
           </div>
         </div>
-        <div className="absolute font-semibold left-28 top-[400px] w-[1250px]">
-          <p className="break-words">
-            This course is ideal for beginners and seasoned cooks alike,
-            offering a chance to
-          </p>
-          <p className="break-words">
-            deepen your understanding of vegetarian cooking while enjoying a
-            collaborative
-          </p>
-          <p className="break-words">
-            and engaging experience. The focus on using fresh, locally-sourced
-            ingredients
-          </p>
-          <p className="break-words">
-            adds an extra layer of authenticity and quality to each meal
-            prepared.
-          </p>
-        </div>
 
-        <div className="absolute left-[6.75rem] bottom-64 flex justify-center items-center gap-x-2">
+        <div className="absolute font-semibold left-36 top-[400px] w-[700px]">
+          This course is ideal for beginners and seasoned cooks alike, offering
+          a chance to deepen your understanding of vegetarian cooking while
+          enjoying a collaborative and engaging experience. The focus on using
+          fresh, locally-sourced ingredients adds an extra layer of authenticity
+          and quality to each meal prepared.
+        </div>
+        <div className="absolute left-36 bottom-[360px] flex justify-center items-center gap-x-2">
           <div>
             <Link href="/client/sign-up">
               <Image
-                className="size-20 rounded-full"
+                className="rounded-full"
                 src="/svg/user_profile.svg"
                 alt="profile picture"
-                width={20}
-                height={20}
+                width={60}
+                height={60}
               />
             </Link>
           </div>
-          <div>
-            <div className="font-bold">Allhalal</div>
-            <div className="flex items-center">
-              <svg
-                className="h-5 w-5 text-green-400"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                aria-hidden="true"
-                role="img"
-              >
-                <path
-                  fill="currentColor"
-                  d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z"
-                />
-              </svg>
-              <span className="text-black font-semibold ml-1">3.2</span>
-            </div>
+          <div className="flex flex-col">
+            <p className="font-bold text-lg">Allahu Akbar</p>
+            <StarRating rating={3.2} />
           </div>
         </div>
       </div>
 
       {/*card*/}
-      <div className="absolute right-0 bottom-24 mr-16 py-12 w-64">
+      <div className="absolute right-24 bottom-36 py-12 w-64">
         {courses.map((course, index) => (
           <CourseCard key={index} {...course} />
         ))}
