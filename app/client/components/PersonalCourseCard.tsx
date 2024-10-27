@@ -89,7 +89,7 @@ export default function PersonalCourseCard() {
   return (
     <div className="flex flex-col justify-start py-12">
       <h1 className="text-3xl font-bold mb-2 text-white px-12">
-        Top Rated Courses
+        Personalized Courses for You
       </h1>
       <div className="relative flex">
         <div className="flex overflow-hidden">

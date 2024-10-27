@@ -39,9 +39,9 @@ export default function NavbarAfter() {
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
 
   const filterCourses = useCallback((searchTerm: string) => {
     return courses.filter(course =>
