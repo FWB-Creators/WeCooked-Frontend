@@ -13,6 +13,7 @@ export default function MostPopularCourse() {
         aria-label="Most Popular Courses"
         tabIndex={0}
       >
+        {/*Gonna fix it later in parameter*/}
         {courses.map((course, index) => (
           <CourseCard key={index} {...course} />
         ))}
