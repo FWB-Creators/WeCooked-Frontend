@@ -15,6 +15,7 @@ export default function Login() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    console.log(email, password)
   }
 
   return (
@@ -29,7 +30,6 @@ export default function Login() {
         />
       </div>
       <div className="bg-white z-10 rounded-2xl pt-20 flex flex-col relative max-w-[500px]">
-        {/* Close Button */}
         <div className="absolute right-4 top-4">
           <Link href="/">
             <XMarkIcon className="w-6 h-6 text-[#F0725C] hover:text-[#FE3511] transition-colors cursor-pointer" />
@@ -45,14 +45,10 @@ export default function Login() {
             alt="Wecooked logo"
           />
         </div>
-
-        {/* Content Container with Consistent Padding */}
         <div className="px-10 w-full">
           <div className="text-2xl font-bold mt-14">
             <div>Nice to see you again</div>
           </div>
-          
-          {/* Email Input */}
           <div className="mt-8">
             <p className="mb-1">Email</p>
             <input
@@ -63,8 +59,6 @@ export default function Login() {
               required
             />
           </div>
-
-          {/* Password Input */}
           <div className="mt-6">
             <p className="mb-1">Password</p>
             <div className="relative w-full">
@@ -88,8 +82,6 @@ export default function Login() {
               </button>
             </div>
           </div>
-
-          {/* Remember Me Section */}
           <div className="flex flex-row justify-between items-center mt-6">
             <div className="flex items-center gap-x-2">
               <div
@@ -121,10 +113,7 @@ export default function Login() {
               Login
             </button>
           </form>
-
           <div className="my-6 bg-[#E5E5E5] h-[0.5px]"></div>
-
-          {/* Google Sign In */}
           <button className="w-full h-11 rounded-lg relative bg-gradient-to-t from-[#FE3511] to-[#F0725C] p-[1px] hover:shadow-md transition-shadow">
             <div className="w-full h-full rounded-lg bg-white flex justify-center items-center gap-x-2">
               <Image
@@ -140,13 +129,13 @@ export default function Login() {
           </button>
 
           <div className="flex justify-center mt-6 gap-x-1 text-sm">
-            <p>Don't have an account?</p>
-            <Link 
-              href="/client/sign-up"
-              className="cursor-pointer text-transparent bg-clip-text bg-gradient-to-t from-[#FE3511] to-[#F0725C] hover:underline font-medium"
-            >
-              Sign up now
-            </Link>
+            <p>Don&apos;t have an account?</p>
+              <Link 
+                href="/client/sign-up"
+                className="cursor-pointer text-transparent bg-clip-text bg-gradient-to-t from-[#FE3511] to-[#F0725C] hover:underline font-medium"
+              >
+                Sign up now
+              </Link>
           </div>
         </div>
       </div>

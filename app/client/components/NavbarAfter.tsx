@@ -7,8 +7,11 @@ import NavLink from './NavLink';
 import { courses as popularCourses } from '../data/most-popular-course';
 import { courses as newCourses } from '../data/new-course';
 import { courses as topCourses } from '../data/top-course';
+import { courses as personalCourses } from '../data/personal-course';
+import { courses as recentlyCourses } from '../data/recently-course';
+import { courses as recommendCourses } from '../data/recommended-for-you';
 
-const courses = [...popularCourses, ...newCourses, ...topCourses];
+const courses = [...popularCourses, ...newCourses, ...topCourses, ...personalCourses, ...recentlyCourses, ...recommendCourses];
 
 export default function NavbarAfter() {
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
@@ -24,6 +27,13 @@ export default function NavbarAfter() {
 
   const handleSearchFocus = () => {
     setSearchDropdownOpen(true);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      const formattedSearchTerm = searchTerm.replace(/ /g, '-');
+      window.location.href = `/client/video/search/${formattedSearchTerm}`;
+    }
   };
 
   useEffect(() => {
@@ -89,6 +99,7 @@ export default function NavbarAfter() {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           onFocus={handleSearchFocus}
+          onKeyDown={handleKeyDown}
           role="combobox"
         />
         <MagnifyingGlassIcon
@@ -133,7 +144,7 @@ export default function NavbarAfter() {
           </button>
           {userDropdownOpen && (
             <div
-              className="absolute right-0 z-20 mt-2 w-36 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+              className="absolute top-12 right-2 z-20 mt-2 w-36 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
               role="menu"
               aria-orientation="vertical"
             >
@@ -161,7 +172,7 @@ export default function NavbarAfter() {
             filteredCourses.slice(0, 3).map((course) => (
               <Link
                 key={course.course_id}
-                href={`/client/video/search/${encodeURIComponent(course.title.replace(/ /g, '-'))}`}
+                href={`/client/video/course-detail/${encodeURIComponent(course.course_id)}`}
               >
                 <div className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer rounded-xl">
                   <Image

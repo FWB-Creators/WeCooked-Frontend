@@ -1,19 +1,18 @@
-'use client'
-import Image from 'next/image'
-import { XMarkIcon } from '@heroicons/react/24/solid'
-import Link from 'next/link'
-import { useState } from 'react'
+'use client';
+import Image from 'next/image';
+import { XMarkIcon } from '@heroicons/react/24/solid';
+import Link from 'next/link';
+import { useState } from 'react';
 
 export default function ForgetPassword() {
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState('');
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-  }
+    e.preventDefault();
+  };
 
   return (
     <div className="relative flex justify-center items-center min-h-screen bg-gradient-to-t from-[#FE3511]/90 to-[#F0725C]/90 overflow-hidden">
-      {/* Background Images */}
       <div className="absolute inset-0 w-full h-full">
         <div className="absolute left-64 bottom-[-60px] transform hover:scale-105 transition-transform z-10 opacity-75">
           <Image
@@ -117,16 +116,15 @@ export default function ForgetPassword() {
         </div>
       </div>
 
-      {/* Main Content */}
       <div className="relative bg-white rounded-2xl w-[600px] p-8 shadow-xl flex flex-col items-center justify-center">
-        {/* Close Button */}
         <div className="absolute right-4 top-4">
           <Link href="/client/login">
-            <XMarkIcon className="w-6 h-6 text-[#F0725C] hover:text-[#FE3511] transition-colors cursor-pointer" />
+          <XMarkIcon
+            className="w-6 h-6 text-[#F0725C] hover:text-[#FE3511] transition-colors cursor-pointer"
+            aria-hidden="true"
+            />
           </Link>
         </div>
-
-        {/* Content */}
         <div className="space-y-6 w-full max-w-[500px]">
           <h1 className="text-4xl font-bold text-center mt-4">
             Forgotten your password?
@@ -134,7 +132,7 @@ export default function ForgetPassword() {
 
           <div className="text-center font-semibold text-gray-600 space-y-1">
             <p>
-              There is nothing to worry about, we'll send you a message to help
+              There is nothing to worry about, we&apos;ll send you a message to help
             </p>
             <p>you reset your password.</p>
           </div>
@@ -164,5 +162,5 @@ export default function ForgetPassword() {
         </div>
       </div>
     </div>
-  )
+  );
 }

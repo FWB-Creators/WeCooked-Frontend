@@ -1,45 +1,63 @@
-'use client'
-import { useState } from 'react'
-import { MagnifyingGlassIcon } from '@heroicons/react/16/solid'
-import Link from 'next/link'
-import Image from 'next/image'
-import NavLink from './NavLink'
-import { courses as popularCourses } from '../data/most-popular-course'
-import { courses as newCourses } from '../data/new-course'
-import { courses as topCourses } from '../data/top-course'
+'use client';
+import { useState, useRef, useEffect, useCallback } from 'react';
+import { MagnifyingGlassIcon } from '@heroicons/react/16/solid';
+import Link from 'next/link';
+import Image from 'next/image';
+import NavLink from './NavLink';
+import { courses as popularCourses } from '../data/most-popular-course';
+import { courses as newCourses } from '../data/new-course';
+import { courses as topCourses } from '../data/top-course';
+import { courses as personalCourses } from '../data/personal-course';
+import { courses as recentlyCourses } from '../data/recently-course';
+import { courses as recommendCourses } from '../data/recommended-for-you';
 
-const courses = [...popularCourses, ...newCourses, ...topCourses]
+const courses = [...popularCourses, ...newCourses, ...topCourses, ...personalCourses, ...recentlyCourses, ...recommendCourses];
 
 export default function NavbarBefore() {
-  const [searchTerm, setSearchTerm] = useState('')
-  const [filteredCourses, setFilteredCourses] = useState(courses)
-  const [searchDropdownOpen, setSearchDropdownOpen] = useState(false)
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredCourses, setFilteredCourses] = useState(courses);
+  const [searchDropdownOpen, setSearchDropdownOpen] = useState(false);
+  const userDropdownRef = useRef<HTMLDivElement>(null);
+  const searchRef = useRef<HTMLDivElement>(null);
 
   const handleSearchFocus = () => {
-    setSearchDropdownOpen(true)
-  }
+    setSearchDropdownOpen(true);
+  };
 
-  const handleSearchBlur = () => {
-    setTimeout(() => {
-      setSearchDropdownOpen(false)
-    }, 100)
-  }
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      const formattedSearchTerm = searchTerm.replace(/ /g, '-');
+      window.location.href = `/client/video/search/${formattedSearchTerm}`;
+    }
+  };
 
-  const normalizeText = (text: string) =>
-    text
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .toLowerCase()
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value
-    setSearchTerm(value)
-    const results = courses.filter(
-      (course) =>
-        normalizeText(course.title).includes(normalizeText(value)) ||
-        normalizeText(course.chef).includes(normalizeText(value))
-    )
-    setFilteredCourses(results)
-  }
+  const filterCourses = useCallback((searchTerm: string) => {
+    return courses.filter(course =>
+      course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      course.chef.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, []);
+
+  useEffect(() => {
+    const results = filterCourses(searchTerm);
+    setFilteredCourses(results);
+  }, [searchTerm, filterCourses]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        userDropdownRef.current && !userDropdownRef.current.contains(event.target as Node) &&
+        searchRef.current && !searchRef.current.contains(event.target as Node)
+      ) {
+        setSearchDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <nav className="flex items-center justify-between bg-white py-6 shadow-xl">
@@ -61,17 +79,17 @@ export default function NavbarBefore() {
         <NavLink href="/client/group">Group</NavLink>
         <NavLink href="/client/private">Private</NavLink>
       </div>
-      <div className="relative" onBlur={handleSearchBlur}>
+      <div className="relative" ref={searchRef}>
         <input
           type="text"
           aria-label="Search"
           aria-expanded={searchDropdownOpen}
           aria-controls="search-results"
-          aria-describedby="search-description"
           className="border border-[#FE3511] rounded-lg w-[530px] pl-10 pr-3 outline-none"
           value={searchTerm}
-          onChange={handleSearchChange}
+          onChange={(e) => setSearchTerm(e.target.value)}
           onFocus={handleSearchFocus}
+          onKeyDown={handleKeyDown}
           role="combobox"
         />
         <MagnifyingGlassIcon
@@ -84,13 +102,11 @@ export default function NavbarBefore() {
             role="listbox"
             className="absolute top-7 right-0 z-30 border-2 border-red-400 mt-1 bg-white rounded-xl shadow-lg w-[530px]"
           >
-            {filteredCourses.length > 0 ? (
-              filteredCourses.slice(0, 3).map((course, index) => (
+            {filteredCourses.slice(0, 3).length > 0 ? (
+              filteredCourses.slice(0, 3).map((course) => (
                 <Link
-                  href={`/client/video/search/${encodeURIComponent(
-                    course.title.replace(/ /g, '-')
-                  )}`}
-                  key={index}
+                  href={`/client/video/course-detail/${encodeURIComponent(course.course_id)}`}
+                  key={course.course_id}
                 >
                   <div className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer rounded-xl">
                     <Image
@@ -118,5 +134,5 @@ export default function NavbarBefore() {
         <NavLink href="/client/sign-up">Sign Up</NavLink>
       </div>
     </nav>
-  )
+  );
 }
