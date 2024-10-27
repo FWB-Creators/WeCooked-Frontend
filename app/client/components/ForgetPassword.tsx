@@ -6,13 +6,11 @@ import { useState } from 'react'
 
 export default function ForgetPassword() {
   const [email, setEmail] = useState('')
-  const [error, setError] = useState('')
 
   const handleSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault()
     console.log(`Email : ${email}`)
   }
-
   return (
     <div className="flex justify-center items-center bg-gradient-to-t from bg-[#FE3511]/75 to bg-[#F0725C]/75 w-full h-screen animate-fadeIn">
       {/*White box in the middle */}

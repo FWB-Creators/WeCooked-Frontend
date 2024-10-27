@@ -2,10 +2,10 @@ import NavbarBefore from './client/components/NavbarBefore'
 import LandingPage from './client/components/LandingPage'
 import Card from './client/components/MostPopularCourse'
 import CurvePage from './client/components/CurvePage'
-import Card_2 from './client/components/RecentlyCourse'
-import Card_3 from './client/components/RecommendedForyou'
-import Client_review from './client/components/Client_review'
-import Contact_us from './client/components/Contact_us'
+import RecentCourses from './client/components/RecentCourses'
+import RecommendedForyou from './client/components/RecommendedForyou'
+import ClientReview from './client/components/ClientReview'
+import ContactUs from './client/components/ContactUs'
 import Footer from './client/components/Footer'
 
 export default function Home() {
@@ -15,10 +15,10 @@ export default function Home() {
       <LandingPage />
       <Card />
       <CurvePage />
-      <Card_2 />
-      <Card_3 />
-      <Client_review />
-      <Contact_us />
+      <RecentCourses />
+      <RecommendedForyou />
+      <ClientReview />
+      <ContactUs />
       <Footer />
     </div>
   )
