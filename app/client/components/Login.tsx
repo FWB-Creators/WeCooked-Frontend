@@ -6,20 +6,20 @@ import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 
 export default function Login() {
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState<boolean>(false)
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev)
   }
 
-  const [Remember, setRemember] = useState(false)
+  const [Remember, setRemember] = useState<boolean>(false)
 
   const toggleRemember = () => {
     setRemember((prev) => !prev)
   }
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
   //const [error, setError] = useState('')
 
   const handleSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {

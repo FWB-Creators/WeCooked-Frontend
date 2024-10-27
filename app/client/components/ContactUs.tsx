@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-export default function Contact_us() {
+export default function ContactUs() {
   return (
     <div className="relative bg-white">
       <div className="pt-16 flex justify-center font-semibold text-transparent bg-clip-text bg-gradient-to-t from-[#F0725C] to-[#FE3511]">

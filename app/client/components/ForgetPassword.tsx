@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 
 export default function ForgetPassword() {
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState<string>('')
 
   const handleSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault()

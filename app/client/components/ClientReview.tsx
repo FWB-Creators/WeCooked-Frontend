@@ -3,7 +3,7 @@ import Link from 'next/link'
 import CourseCard from './CourseCard'
 import { courses } from '../data/client-review'
 
-export default function client_review() {
+export default function ClientReview() {
   return (
     <div className="relative">
       <div className="w-full flex flex-col items-center py-12">
