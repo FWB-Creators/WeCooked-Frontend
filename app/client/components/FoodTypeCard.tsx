@@ -95,6 +95,7 @@ export default function FoodTypeCard() {
         {startIndex > 0 && (
           <button
             onClick={prevSlide}
+            aria-label="Previous slide"
             className="absolute left-4 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg z-50"
           >
             <ChevronLeftIcon className="w-6 h-6" />
@@ -104,6 +105,7 @@ export default function FoodTypeCard() {
         {startIndex + 2 < maxIndex && (
           <button
             onClick={nextSlide}
+            aria-label="Next slide"
             className="absolute right-4 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg z-50"
           >
             <ChevronRightIcon className="w-6 h-6" />

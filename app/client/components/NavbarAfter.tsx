@@ -4,6 +4,7 @@ import { MagnifyingGlassIcon } from '@heroicons/react/16/solid';
 import Link from 'next/link';
 import Image from 'next/image';
 import NavLink from './NavLink';
+import { useRouter } from 'next/navigation';
 import { courses as popularCourses } from '../data/most-popular-course';
 import { courses as newCourses } from '../data/new-course';
 import { courses as topCourses } from '../data/top-course';
@@ -20,6 +21,7 @@ export default function NavbarAfter() {
   const searchRef = useRef<HTMLDivElement>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredCourses, setFilteredCourses] = useState(courses);
+  const router = useRouter(); // Moved useRouter here
 
   const toggleUserDropdown = () => {
     setUserDropdownOpen((prevState) => !prevState);
@@ -32,7 +34,7 @@ export default function NavbarAfter() {
   const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') {
       const formattedSearchTerm = searchTerm.replace(/ /g, '-');
-      window.location.href = `/client/video/search/${formattedSearchTerm}`;
+      router.push(`/client/video/search/${formattedSearchTerm}`); // Using router directly here
     }
   };
 
@@ -49,9 +51,9 @@ export default function NavbarAfter() {
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [])
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const filterCourses = useCallback((searchTerm: string) => {
     return courses.filter(course =>
@@ -167,12 +169,23 @@ export default function NavbarAfter() {
         </div>
       </div>
       {searchTerm && (
-        <div className="absolute top-14 right-[210px] z-30 border-2 border-red-400 mt-1 bg-white rounded-xl shadow-lg w-[530px] 2xl:right-[575px]">
+        <div className="absolute top-14 right-[210px] z-30 border-2 border-red-400 mt-1 bg-white rounded-xl shadow-lg w-[530px] 2xl:right-[575px]"
+          role="listbox"
+          id="search-results"
+          >
           {filteredCourses.slice(0, 3).length > 0 ? (
             filteredCourses.slice(0, 3).map((course) => (
               <Link
                 key={course.course_id}
                 href={`/client/video/course-detail/${encodeURIComponent(course.course_id)}`}
+                role="option"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    window.location.href = `/client/video/course-detail/${encodeURIComponent(course.course_id)}`;
+                  }
+                }}
               >
                 <div className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer rounded-xl">
                   <Image
