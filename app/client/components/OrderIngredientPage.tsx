@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export default function OrderIngredients() {
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between gap-20 px-6 md:px-24 pb-12 py-20">
+    <div className="flex flex-col md:flex-row items-center justify-between gap-32 px-6 md:px-24 pb-12 py-20">
       <div className="md:w-1/2 text-center md:text-left">
         <h1 className="text-white font-bold text-4xl md:text-5xl leading-tight mb-6">
           Order Ingredients Easily And Deliver Them To Your Home!
@@ -20,8 +20,8 @@ export default function OrderIngredients() {
           <Image
             src="/images/white-circle.png"
             alt="White Circle Background"
-            width={520}
-            height={520}
+            width={500}
+            height={500}
             className="absolute"
             priority
           />
@@ -29,7 +29,7 @@ export default function OrderIngredients() {
             src="/images/phone.png"
             alt="Phone showing ingredients order screen"
             width={300}
-            height={600}
+            height={300}
             className="relative z-10"
             priority
           />

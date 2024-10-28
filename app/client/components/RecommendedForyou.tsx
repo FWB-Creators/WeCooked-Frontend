@@ -56,7 +56,7 @@ const CourseCard = ({
 };
 
 const useResponsiveCards = () => {
-  const [cardsToShow, setCardsToShow] = useState(3);
+  const [cardsToShow, setCardsToShow] = useState<number>(3);
   
   useEffect(() => {
     const updateCards = () => {
@@ -74,7 +74,7 @@ const useResponsiveCards = () => {
 };
 
 export default function RecommendedForYou() {
-  const [startIndex, setStartIndex] = useState(0);
+  const [startIndex, setStartIndex] = useState<number>(0);
   const cardsToShow = useResponsiveCards();
   const maxIndex = Math.ceil(courses.length / cardsToShow) - 1;
 

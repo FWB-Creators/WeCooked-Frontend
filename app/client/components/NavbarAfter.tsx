@@ -12,15 +12,27 @@ import { courses as personalCourses } from '../data/personal-course';
 import { courses as recentlyCourses } from '../data/recently-course';
 import { courses as recommendCourses } from '../data/recommended-for-you';
 
+interface Course {
+  course_id: number,
+  title: string,
+  cuisine: string,
+  price: number,
+  currency: string,
+  rating: number,
+  chef: string,
+  imageSrc: string,
+  chefImageUrl: string,
+}
+
 const courses = [...popularCourses, ...newCourses, ...topCourses, ...personalCourses, ...recentlyCourses, ...recommendCourses];
 
 export default function NavbarAfter() {
-  const [userDropdownOpen, setUserDropdownOpen] = useState(false);
-  const [searchDropdownOpen, setSearchDropdownOpen] = useState(false);
+  const [userDropdownOpen, setUserDropdownOpen] = useState<boolean>(false);
+  const [searchDropdownOpen, setSearchDropdownOpen] = useState<boolean>(false);
   const userDropdownRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLDivElement>(null);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filteredCourses, setFilteredCourses] = useState(courses);
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [filteredCourses, setFilteredCourses] = useState<Course[]>(courses);
   const router = useRouter();
 
   const toggleUserDropdown = () => {

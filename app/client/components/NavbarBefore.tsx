@@ -11,12 +11,24 @@ import { courses as personalCourses } from '../data/personal-course';
 import { courses as recentlyCourses } from '../data/recently-course';
 import { courses as recommendCourses } from '../data/recommended-for-you';
 
+interface Course {
+  course_id: number,
+  title: string,
+  cuisine: string,
+  price: number,
+  currency: string,
+  rating: number,
+  chef: string,
+  imageSrc: string,
+  chefImageUrl: string,
+}
+
 const courses = [...popularCourses, ...newCourses, ...topCourses, ...personalCourses, ...recentlyCourses, ...recommendCourses];
 
 export default function NavbarBefore() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filteredCourses, setFilteredCourses] = useState(courses);
-  const [searchDropdownOpen, setSearchDropdownOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [filteredCourses, setFilteredCourses] = useState<Course[]>(courses);
+  const [searchDropdownOpen, setSearchDropdownOpen] = useState<boolean>(false);
   const userDropdownRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLDivElement>(null);
 
@@ -74,10 +86,10 @@ export default function NavbarBefore() {
       </div>
       <div className="flex items-center px-6">
         <NavLink href="/">Home</NavLink>
-        <NavLink href="/client/my-learning">My Learning</NavLink>
-        <NavLink href="/client/video">Video</NavLink>
-        <NavLink href="/client/group">Group</NavLink>
-        <NavLink href="/client/private">Private</NavLink>
+        <NavLink href="/my-learning">My Learning</NavLink>
+        <NavLink href="/video">Video</NavLink>
+        <NavLink href="/group">Group</NavLink>
+        <NavLink href="/private">Private</NavLink>
       </div>
       <div className="relative" ref={searchRef}>
         <input
