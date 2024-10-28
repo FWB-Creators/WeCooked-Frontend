@@ -21,7 +21,7 @@ export default function NavbarAfter() {
   const searchRef = useRef<HTMLDivElement>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredCourses, setFilteredCourses] = useState(courses);
-  const router = useRouter(); // Moved useRouter here
+  const router = useRouter();
 
   const toggleUserDropdown = () => {
     setUserDropdownOpen((prevState) => !prevState);
@@ -34,7 +34,7 @@ export default function NavbarAfter() {
   const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') {
       const formattedSearchTerm = searchTerm.replace(/ /g, '-');
-      router.push(`/client/video/search/${formattedSearchTerm}`); // Using router directly here
+      router.push(`/client/video/search/${formattedSearchTerm}`);
     }
   };
 
@@ -68,7 +68,7 @@ export default function NavbarAfter() {
   }, [searchTerm, filterCourses]);
 
   return (
-    <nav className="flex items-center justify-between bg-white py-[15px] shadow-xl">
+    <nav className="flex items-center justify-between bg-white py-[15px]">
       <div className="px-12">
         <Link href="/client/home">
           <Image
@@ -81,7 +81,7 @@ export default function NavbarAfter() {
         </Link>
       </div>
       <div className="flex items-center px-6">
-        <NavLink href="/">Home</NavLink>
+        <NavLink href="/client/home">Home</NavLink>
         <NavLink href="/client/my-learning">My Learning</NavLink>
         <NavLink href="/client/video">Video</NavLink>
         <NavLink href="/client/group">Group</NavLink>

@@ -7,7 +7,7 @@ import { StarRating } from './StarRating'
 export default function ClientReview() {
   return (
     <div className="relative">
-      <div className="w-full flex flex-col items-center py-12">
+      <div className="w-full flex flex-col items-center py-16">
         <Image
           src="/svg/CurveBG.svg"
           alt="White Background"
@@ -47,14 +47,11 @@ export default function ClientReview() {
           </div>
         </div>
       </div>
-
-      {/*card*/}
       <div className="absolute right-24 bottom-36 py-12 w-64">
         {courses.map((course, index) => (
           <CourseCard key={index} {...course} />
         ))}
       </div>
-
       <div className="absolute left-0 bottom-56">
         <Image
           src="/svg/salmon_steak.svg"
