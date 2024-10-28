@@ -8,9 +8,10 @@ export default function IngredientPage() {
       <div className="absolute left-0 top-[-140px] z-10 w-1/2 md:w-auto">
         <Image
           src="/images/spice.png"
-          alt="Spices"
+          alt="Cooking spices and ingredients for the course"
           width={750}
           height={750}
+          priority
           className="object-contain w-full h-auto"
         />
       </div>
