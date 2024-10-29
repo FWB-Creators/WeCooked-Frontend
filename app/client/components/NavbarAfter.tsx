@@ -12,16 +12,28 @@ import { courses as personalCourses } from '../data/personal-course';
 import { courses as recentlyCourses } from '../data/recently-course';
 import { courses as recommendCourses } from '../data/recommended-for-you';
 
+interface Course {
+  course_id: number,
+  title: string,
+  cuisine: string,
+  price: number,
+  currency: string,
+  rating: number,
+  chef: string,
+  imageSrc: string,
+  chefImageUrl: string,
+}
+
 const courses = [...popularCourses, ...newCourses, ...topCourses, ...personalCourses, ...recentlyCourses, ...recommendCourses];
 
 export default function NavbarAfter() {
-  const [userDropdownOpen, setUserDropdownOpen] = useState(false);
-  const [searchDropdownOpen, setSearchDropdownOpen] = useState(false);
+  const [userDropdownOpen, setUserDropdownOpen] = useState<boolean>(false);
+  const [searchDropdownOpen, setSearchDropdownOpen] = useState<boolean>(false);
   const userDropdownRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLDivElement>(null);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filteredCourses, setFilteredCourses] = useState(courses);
-  const router = useRouter(); // Moved useRouter here
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [filteredCourses, setFilteredCourses] = useState<Course[]>(courses);
+  const router = useRouter();
 
   const toggleUserDropdown = () => {
     setUserDropdownOpen((prevState) => !prevState);
@@ -34,7 +46,7 @@ export default function NavbarAfter() {
   const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') {
       const formattedSearchTerm = searchTerm.replace(/ /g, '-');
-      router.push(`/client/video/search/${formattedSearchTerm}`); // Using router directly here
+      router.push(`/client/video/search/${formattedSearchTerm}`);
     }
   };
 
@@ -68,7 +80,7 @@ export default function NavbarAfter() {
   }, [searchTerm, filterCourses]);
 
   return (
-    <nav className="flex items-center justify-between bg-white py-[15px] shadow-xl">
+    <nav className="flex items-center justify-between bg-white py-[15px]">
       <div className="px-12">
         <Link href="/client/home">
           <Image
@@ -81,7 +93,7 @@ export default function NavbarAfter() {
         </Link>
       </div>
       <div className="flex items-center px-6">
-        <NavLink href="/">Home</NavLink>
+        <NavLink href="/client/home">Home</NavLink>
         <NavLink href="/client/my-learning">My Learning</NavLink>
         <NavLink href="/client/video">Video</NavLink>
         <NavLink href="/client/group">Group</NavLink>

@@ -5,10 +5,10 @@ import { EyeIcon, EyeSlashIcon, XMarkIcon } from '@heroicons/react/16/solid'
 import Link from 'next/link'
 
 export default function Login() {
-  const [showPassword, setShowPassword] = useState(false)
-  const [remember, setRemember] = useState(false)
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState<boolean>(false)
+  const [remember, setRemember] = useState<boolean>(false)
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
 
   const togglePasswordVisibility = () => setShowPassword(prev => !prev)
   const toggleRemember = () => setRemember(prev => !prev)
@@ -29,7 +29,7 @@ export default function Login() {
           alt="client login picture"
         />
       </div>
-      <div className="bg-white z-10 rounded-2xl pt-20 flex flex-col relative max-w-[500px]">
+      <div className="bg-white z-10 rounded-2xl pt-40 flex flex-col relative max-w-[500px]">
         <div className="absolute right-4 top-4">
           <Link href="/">
             <XMarkIcon className="w-6 h-6 text-[#F0725C] hover:text-[#FE3511] transition-colors cursor-pointer" />
@@ -45,11 +45,11 @@ export default function Login() {
             alt="Wecooked logo"
           />
         </div>
-        <div className="px-10 w-full">
+        <div className="px-12 w-full py-2">
           <div className="text-2xl font-bold mt-14">
             <div>Nice to see you again</div>
           </div>
-          <div className="mt-8">
+          <div className="mt-6">
             <p className="mb-1">Email</p>
             <input
               onChange={(e) => setEmail(e.target.value)}
@@ -105,7 +105,7 @@ export default function Login() {
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="mt-8">
+          <form onSubmit={handleSubmit} className="mt-6">
             <button
               type="submit"
               className="w-full py-3 px-4 rounded-lg font-bold text-white bg-gradient-to-t from-[#FE3511] to-[#F0725C] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"

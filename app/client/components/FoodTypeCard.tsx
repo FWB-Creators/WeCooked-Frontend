@@ -31,7 +31,7 @@ function CourseCard({ title, total_course, imageSrc }: FoodType) {
   )
 }
 const useResponsiveCards = () => {
-    const [cardsToShow, setCardsToShow] = useState(5);
+    const [cardsToShow, setCardsToShow] = useState<number>(5);
     
     useEffect(() => {
       const updateCards = () => {
@@ -49,7 +49,7 @@ const useResponsiveCards = () => {
   };
 
 export default function FoodTypeCard() {
-  const [startIndex, setStartIndex] = useState(0)
+  const [startIndex, setStartIndex] = useState<number>(0)
   const cardsToShow = useResponsiveCards();
   const maxIndex = foodtype.length - cardsToShow
 
