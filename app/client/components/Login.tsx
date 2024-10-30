@@ -1,6 +1,7 @@
 'use client'
 import Image from 'next/image'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { EyeIcon, EyeSlashIcon, XMarkIcon } from '@heroicons/react/16/solid'
 import Link from 'next/link'
 
@@ -9,13 +10,15 @@ export default function Login() {
   const [remember, setRemember] = useState<boolean>(false)
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
+  const router = useRouter()
 
-  const togglePasswordVisibility = () => setShowPassword(prev => !prev)
-  const toggleRemember = () => setRemember(prev => !prev)
+  const togglePasswordVisibility = () => setShowPassword((prev) => !prev)
+  const toggleRemember = () => setRemember((prev) => !prev)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     console.log(email, password)
+    router.push('/client/home')
   }
 
   return (
@@ -69,7 +72,7 @@ export default function Login() {
                 placeholder="Enter password"
                 required
               />
-              <button 
+              <button
                 type="button"
                 onClick={togglePasswordVisibility}
                 className="absolute right-4 top-1/2 -translate-y-1/2"
@@ -88,13 +91,15 @@ export default function Login() {
                 onClick={toggleRemember}
                 className="relative h-6 w-11 rounded-full cursor-pointer border-[0.5px] border-[#E5E5E5] transition-colors duration-300 ease-in-out"
                 style={{
-                  backgroundColor: remember ? '#F0725C' : '#F2F4F8'
+                  backgroundColor: remember ? '#F0725C' : '#F2F4F8',
                 }}
               >
                 <div
                   className="absolute h-5 w-5 rounded-full bg-white top-[1px] transition-transform duration-300 ease-in-out"
                   style={{
-                    transform: remember ? 'translateX(22px)' : 'translateX(1px)'
+                    transform: remember
+                      ? 'translateX(22px)'
+                      : 'translateX(1px)',
                   }}
                 ></div>
               </div>
@@ -130,12 +135,12 @@ export default function Login() {
 
           <div className="flex justify-center mt-6 gap-x-1 text-sm">
             <p>Don&apos;t have an account?</p>
-              <Link 
-                href="/client/sign-up"
-                className="cursor-pointer text-transparent bg-clip-text bg-gradient-to-t from-[#FE3511] to-[#F0725C] hover:underline font-medium"
-              >
-                Sign up now
-              </Link>
+            <Link
+              href="/client/sign-up"
+              className="cursor-pointer text-transparent bg-clip-text bg-gradient-to-t from-[#FE3511] to-[#F0725C] hover:underline font-medium"
+            >
+              Sign up now
+            </Link>
           </div>
         </div>
       </div>
