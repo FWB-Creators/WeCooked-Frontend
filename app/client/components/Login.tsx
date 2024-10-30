@@ -1,35 +1,25 @@
-'use client' //use state cannot run in server side
+'use client'
 import Image from 'next/image'
 import { useState } from 'react'
-import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid'
-//import { useRouter } from 'next/navigation'
+import { EyeIcon, EyeSlashIcon, XMarkIcon } from '@heroicons/react/16/solid'
 import Link from 'next/link'
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState<boolean>(false)
-
-  const togglePasswordVisibility = () => {
-    setShowPassword((prev) => !prev)
-  }
-
-  const [Remember, setRemember] = useState<boolean>(false)
-
-  const toggleRemember = () => {
-    setRemember((prev) => !prev)
-  }
-
+  const [remember, setRemember] = useState<boolean>(false)
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
-  //const [error, setError] = useState('')
 
-  const handleSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    console.log(`Email : ${email}`)
-    console.log(`Password : ${password}`)
+  const togglePasswordVisibility = () => setShowPassword(prev => !prev)
+  const toggleRemember = () => setRemember(prev => !prev)
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    console.log(email, password)
   }
 
   return (
-    <div className="grid grid-cols-3 animation h-screen overflow-hidden animate-fadeIn">
+    <div className="grid grid-cols-3 h-screen overflow-hidden animate-fadeIn">
       <div className="col-span-2 object-fill">
         <Image
           className="absolute right-32 w-full h-screen"
@@ -39,7 +29,13 @@ export default function Login() {
           alt="client login picture"
         />
       </div>
-      <div className="bg-white z-10 rounded-2xl pt-20 flex flex-col">
+      <div className="bg-white z-10 rounded-2xl pt-40 flex flex-col relative max-w-[500px]">
+        <div className="absolute right-4 top-4">
+          <Link href="/">
+            <XMarkIcon className="w-6 h-6 text-[#F0725C] hover:text-[#FE3511] transition-colors cursor-pointer" />
+          </Link>
+        </div>
+
         <div className="flex justify-center">
           <Image
             width={20}
@@ -49,84 +45,97 @@ export default function Login() {
             alt="Wecooked logo"
           />
         </div>
-        <div className="flex text-xl font-bold mt-14 ml-10">
-          <div>Nice to see you again</div>
-        </div>
-        <div className="mt-6 ml-14 text-xs">Login</div>
-        <input
-          onChange={(e) => setEmail(e.target.value)}
-          className="ml-10 mt-2 mr-12 bg-[#F2F4F8] rounded-[5px] py-3 px-4 outline-none shadow-md"
-          type="email"
-          placeholder="Email or phone number"
-        ></input>
-        <div className="mt-6 ml-14 text-xs">Password</div>
-        <input
-          onChange={(e) => setPassword(e.target.value)}
-          className="ml-10 mt-2 mr-12 bg-[#F2F4F8] rounded-[5px] py-3 px-4 outline-none shadow-md"
-          type={showPassword ? 'text' : 'password'}
-          placeholder="Enter password"
-          id="password"
-        ></input>
-        {/* eye icon for show/hide password */}
-        <div className="absolute inset-y-0 right-16 top-[520px]">
-          {showPassword ? (
-            <EyeSlashIcon
-              className="size-6 cursor-pointer"
-              onClick={togglePasswordVisibility}
-            />
-          ) : (
-            <EyeIcon
-              className="size-6 cursor-pointer"
-              onClick={togglePasswordVisibility}
-            />
-          )}
-        </div>
-        {/*Remember */}
-        <div className="flex flex-row justify-between items-center mt-6 ml-10">
-          <div
-            onClick={toggleRemember}
-            className={`flex h-5 w-10 rounded-full cursor-pointer border-[0.5px] border-[#E5E5E5] ${
-              Remember
-                ? 'items-center justify-start bg-[#F2F4F8]'
-                : 'items-center justify-end bg-[#F0725C]'
-            } p-[1px]`}
-          >
-            <div className="flex h-4 w-4 rounded-full bg-white"></div>
+        <div className="px-12 w-full py-2">
+          <div className="text-2xl font-bold mt-14">
+            <div>Nice to see you again</div>
           </div>
-          <div className="text-xs">Remember me</div>
-          <div className="text-xs mr-12 ml-[96px] cursor-pointer hover:underline">
-            <Link href="/client/login/forget-password">Forgot password?</Link>
+          <div className="mt-6">
+            <p className="mb-1">Email</p>
+            <input
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
+              type="email"
+              placeholder="Email or phone number"
+              required
+            />
           </div>
-        </div>
+          <div className="mt-6">
+            <p className="mb-1">Password</p>
+            <div className="relative w-full">
+              <input
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Enter password"
+                required
+              />
+              <button 
+                type="button"
+                onClick={togglePasswordVisibility}
+                className="absolute right-4 top-1/2 -translate-y-1/2"
+              >
+                {showPassword ? (
+                  <EyeSlashIcon className="h-6 w-6 text-[#697077]" />
+                ) : (
+                  <EyeIcon className="h-6 w-6 text-[#697077]" />
+                )}
+              </button>
+            </div>
+          </div>
+          <div className="flex flex-row justify-between items-center mt-6">
+            <div className="flex items-center gap-x-2">
+              <div
+                onClick={toggleRemember}
+                className="relative h-6 w-11 rounded-full cursor-pointer border-[0.5px] border-[#E5E5E5] transition-colors duration-300 ease-in-out"
+                style={{
+                  backgroundColor: remember ? '#F0725C' : '#F2F4F8'
+                }}
+              >
+                <div
+                  className="absolute h-5 w-5 rounded-full bg-white top-[1px] transition-transform duration-300 ease-in-out"
+                  style={{
+                    transform: remember ? 'translateX(22px)' : 'translateX(1px)'
+                  }}
+                ></div>
+              </div>
+              <p className="text-sm">Remember me</p>
+            </div>
+            <div className="text-sm cursor-pointer hover:underline hover:text-[#F0725C]">
+              <Link href="/client/login/forget-password">Forgot password?</Link>
+            </div>
+          </div>
 
-        <form
-          onSubmit={handleSubmit}
-          className="cursor-pointer py-3 px-4 items-center rounded-[5px] flex justify-center ml-10 mr-12 mt-6 font-bold text-[white] bg-gradient-to-t from-[#FE3511] to-[#F0725C] transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg"
-        >
-          <button type="submit">Login</button>
-        </form>
-
-        <div className="ml-10 my-5 mr-12 bg-[#E5E5E5] h-[0.5px] "></div>
-        {/*border gradient */}
-        <div className="cursor-pointer flex justify-center ml-10 mr-12">
-          <div className="w-80 h-10 rounded-[5px] bg-gradient-to-t from-[#FE3511] to bg-[#F0725C] p-[1px]">
-            <div className="w-full h-full rounded-[4px] bg-white flex justify-center items-center gap-x-2">
+          <form onSubmit={handleSubmit} className="mt-6">
+            <button
+              type="submit"
+              className="w-full py-3 px-4 rounded-lg font-bold text-white bg-gradient-to-t from-[#FE3511] to-[#F0725C] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
+            >
+              Login
+            </button>
+          </form>
+          <div className="my-6 bg-[#E5E5E5] h-[0.5px]"></div>
+          <button className="w-full h-11 rounded-lg relative bg-gradient-to-t from-[#FE3511] to-[#F0725C] p-[1px] hover:shadow-md transition-shadow">
+            <div className="w-full h-full rounded-lg bg-white flex justify-center items-center gap-x-2">
               <Image
                 width={20}
                 height={20}
                 src="/svg/Google.svg"
                 alt="google logo"
               />
-              <span className="text-xs text-transparent bg-clip-text bg-gradient-to-t from-[#FE3511] to bg-[#F0725C]">
-                Sign in with google
-              </span>
+              <p className="text-sm font-medium text-transparent bg-clip-text bg-gradient-to-t from-[#FE3511] to-[#F0725C]">
+                Sign in with Google
+              </p>
             </div>
-          </div>
-        </div>
-        <div className="flex justify-center mt-4 gap-x-1 text-xs">
-          Don`t have an account?
-          <div className="cursor-pointer text-transparent bg-clip-text bg-gradient-to-t from-[#FE3511] to bg-[#F0725C] hover:underline">
-            <Link href="/client/sign-up">Sign up now</Link>
+          </button>
+
+          <div className="flex justify-center mt-6 gap-x-1 text-sm">
+            <p>Don&apos;t have an account?</p>
+              <Link 
+                href="/client/sign-up"
+                className="cursor-pointer text-transparent bg-clip-text bg-gradient-to-t from-[#FE3511] to-[#F0725C] hover:underline font-medium"
+              >
+                Sign up now
+              </Link>
           </div>
         </div>
       </div>

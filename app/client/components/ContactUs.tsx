@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export default function ContactUs() {
   return (
-    <div className="relative bg-white">
+    <div className="relative bg-white w-full flex flex-col items-center py-24 overflow-hidden">
       <div className="pt-16 flex justify-center font-semibold text-transparent bg-clip-text bg-gradient-to-t from-[#F0725C] to-[#FE3511]">
         CONTACT US
       </div>
@@ -11,11 +11,11 @@ export default function ContactUs() {
         Want To Teach
       </h1>
       <h1 className="mb-8 flex justify-center text-5xl font-bold">Cooking?</h1>
-      <div className="flex justify-center font-semibold">
-        Join our team of expert chefs and share
+      <div className="flex justify-center">
+        Join Our Team Of Expert Chefs And Share
       </div>
-      <div className="flex justify-center font-semibold">
-        your passion for culinary arts with others
+      <div className="flex justify-center">
+        Your Passion For Culinary Arts With Others
       </div>
       <div className="flex justify-center mt-16 pb-36">
         <Link href="/chef/sign-up-chef">
@@ -24,7 +24,7 @@ export default function ContactUs() {
           </button>
         </Link>
       </div>
-      <div className="absolute left-[-20px] bottom-0">
+      <div className="absolute left-0 top-0">
         <Image
           src="/images/pasta.png"
           alt="Pasta picture"
@@ -36,8 +36,8 @@ export default function ContactUs() {
         <Image
           src="/svg/chef.svg"
           alt="Chef picture"
-          width={550}
-          height={550}
+          width={600}
+          height={600}
         />
       </div>
     </div>

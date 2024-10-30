@@ -10,7 +10,7 @@ export default function Footer() {
   ]
   return (
     <div className="relative bg-white">
-      <div className="flex justify-between w-full p-8">
+      <div className="flex justify-between w-full p-8 px-28">
         <div>
           <Link href="/">
             <Image
@@ -26,19 +26,19 @@ export default function Footer() {
           {footer_elements.map((item, index) => (
             <ul
               key={index}
-              className="duration-300 cursor-pointer hover:text-lg hover:text-transparent bg-clip-text bg-gradient-to-t from-[#FE3511] to-[#F0725C]"
+              className="cursor-pointer hover:text-transparent bg-clip-text bg-gradient-to-t from-[#FE3511] to-[#F0725C]"
             >
               {item}
             </ul>
           ))}
         </div>
-        <div className="flex items-center gap-x-2">
+        <div className="flex items-center gap-x-3">
           <Link href="/">
             <Image
               src="/svg/fb-ic.svg"
               alt="Facebook icon"
-              width={40}
-              height={40}
+              width={25}
+              height={25}
               className="cursor-pointer"
             />
           </Link>
@@ -46,8 +46,8 @@ export default function Footer() {
             <Image
               src="/svg/tweet-ic.svg"
               alt="twitter icon"
-              width={40}
-              height={40}
+              width={25}
+              height={25}
               className="cursor-pointer"
             />
           </Link>
@@ -55,8 +55,8 @@ export default function Footer() {
             <Image
               src="/svg/insta-ic.svg"
               alt="instagram icon"
-              width={40}
-              height={40}
+              width={25}
+              height={25}
               className="cursor-pointer"
             />
           </Link>
@@ -64,14 +64,14 @@ export default function Footer() {
             <Image
               src="/svg/google-ic.svg"
               alt="Google icon"
-              width={40}
-              height={40}
+              width={25}
+              height={25}
               className="cursor-pointer"
             />
           </Link>
         </div>
       </div>
-      <div className="flex justify-center pb-16">WeCooked</div>
+      <div className="flex justify-center pb-16">Copyright ©{new Date().getFullYear()} Seven spices</div>
     </div>
   )
 }

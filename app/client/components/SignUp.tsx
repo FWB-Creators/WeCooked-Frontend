@@ -1,7 +1,7 @@
 'use client'
 import { FormEvent, useState } from 'react'
 import Image from 'next/image'
-import { EyeIcon, EyeSlashIcon } from '@heroicons/react/16/solid'
+import { EyeIcon, EyeSlashIcon, XMarkIcon } from '@heroicons/react/16/solid'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link';
 
@@ -21,7 +21,6 @@ export default function SignUp() {
   return (
     <div className="flex justify-end items-center min-h-screen bg-gradient-to-b from-[#F0725C] to-[#FE3511] h-screen overflow-hidden animate-fadeIn">
       <div className="flex w-5/12 h-full relative">
-        {/* Left Side Images */}
         <div className="absolute z-10 left-[-40px]">
           <Image src="/images/pasta.png" alt="Pasta" width={550} height={200} />
         </div>
@@ -36,7 +35,13 @@ export default function SignUp() {
         </div>
       </div>
 
-      <div className="flex flex-col justify-center items-center bg-white rounded-l-2xl p-40 w-7/12 h-full">
+      <div className="flex flex-col justify-center items-center bg-white rounded-l-2xl p-40 w-7/12 h-full relative">
+        <div className="absolute right-4 top-4">
+          <Link href="/">
+            <XMarkIcon className="w-6 h-6 text-[#F0725C] hover:text-[#FE3511] transition-colors cursor-pointer" />
+          </Link>
+        </div>
+
         <h1 className="text-4xl font-bold mb-12 text-center w-full">Sign Up</h1>
         <form onSubmit={handleSubmit} className="flex flex-col w-full space-y-4">
           <div className="grid grid-cols-2 gap-4">

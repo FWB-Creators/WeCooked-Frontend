@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from "react";
-import { courses } from '../data/recently-course';
+import { courses } from '../data/personal-course';
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
 import { Course } from '../types/courses';
 import { StarRating } from './StarRating';
@@ -25,7 +25,7 @@ const CourseCard = ({
           src={imageSrc}
           alt={title}
           width={280}
-          height={280}
+          height={250}
           className="rounded-xl"
         />
         <h2 className="my-6 text-xl font-semibold">{title}</h2>
@@ -73,7 +73,7 @@ const useResponsiveCards = () => {
   return cardsToShow;
 };
 
-export default function NewCourseCard() {
+export default function PersonalCourseCard() {
   const [startIndex, setStartIndex] = useState<number>(0);
   const cardsToShow = useResponsiveCards();
   const maxIndex = Math.ceil(courses.length / cardsToShow) - 1;
@@ -89,7 +89,7 @@ export default function NewCourseCard() {
   return (
     <div className="flex flex-col justify-start py-12">
       <h1 className="text-3xl font-bold mb-2 text-white px-12">
-        Recently  Course
+        Personalized Courses for You
       </h1>
       <div className="relative flex">
         <div className="flex overflow-hidden">
@@ -125,4 +125,4 @@ export default function NewCourseCard() {
       </div>
     </div>
   );
-};
+}

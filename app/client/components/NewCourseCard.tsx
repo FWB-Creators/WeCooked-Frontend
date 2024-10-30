@@ -2,9 +2,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from "react";
-import { courses } from '../data/recently-course';
+import { courses } from '../data/new-course';
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
-import { Course } from '../types/courses';
+import { Course } from '../types/courses'
 import { StarRating } from './StarRating';
 
 const CourseCard = ({
@@ -89,7 +89,7 @@ export default function NewCourseCard() {
   return (
     <div className="flex flex-col justify-start py-12">
       <h1 className="text-3xl font-bold mb-2 text-white px-12">
-        Recently  Course
+        New Courses on Wecooked
       </h1>
       <div className="relative flex">
         <div className="flex overflow-hidden">
