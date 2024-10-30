@@ -52,68 +52,70 @@ export default function Login() {
           <div className="text-2xl font-bold mt-14">
             <div>Nice to see you again</div>
           </div>
-          <div className="mt-6">
-            <p className="mb-1">Email</p>
-            <input
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
-              type="email"
-              placeholder="Email or phone number"
-              required
-            />
-          </div>
-          <div className="mt-6">
-            <p className="mb-1">Password</p>
-            <div className="relative w-full">
+          <form onSubmit={handleSubmit}>
+            <div className="mt-6">
+              <p className="mb-1">Email</p>
               <input
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
-                type={showPassword ? 'text' : 'password'}
-                placeholder="Enter password"
+                type="email"
+                placeholder="Email or phone number"
                 required
               />
-              <button
-                type="button"
-                onClick={togglePasswordVisibility}
-                className="absolute right-4 top-1/2 -translate-y-1/2"
-              >
-                {showPassword ? (
-                  <EyeSlashIcon className="h-6 w-6 text-[#697077]" />
-                ) : (
-                  <EyeIcon className="h-6 w-6 text-[#697077]" />
-                )}
-              </button>
             </div>
-          </div>
-          <div className="flex flex-row justify-between items-center mt-6">
-            <div className="flex items-center gap-x-2">
-              <div
-                onClick={toggleRemember}
-                className="relative h-6 w-11 rounded-full cursor-pointer border-[0.5px] border-[#E5E5E5] transition-colors duration-300 ease-in-out"
-                style={{
-                  backgroundColor: remember ? '#F0725C' : '#F2F4F8',
-                }}
-              >
-                <div
-                  className="absolute h-5 w-5 rounded-full bg-white top-[1px] transition-transform duration-300 ease-in-out"
-                  style={{
-                    transform: remember
-                      ? 'translateX(22px)'
-                      : 'translateX(1px)',
-                  }}
-                ></div>
+            <div className="mt-6">
+              <p className="mb-1">Password</p>
+              <div className="relative w-full">
+                <input
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="Enter password"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="absolute right-4 top-1/2 -translate-y-1/2"
+                >
+                  {showPassword ? (
+                    <EyeSlashIcon className="h-6 w-6 text-[#697077]" />
+                  ) : (
+                    <EyeIcon className="h-6 w-6 text-[#697077]" />
+                  )}
+                </button>
               </div>
-              <p className="text-sm">Remember me</p>
             </div>
-            <div className="text-sm cursor-pointer hover:underline hover:text-[#F0725C]">
-              <Link href="/client/login/forget-password">Forgot password?</Link>
+            <div className="flex flex-row justify-between items-center mt-6">
+              <div className="flex items-center gap-x-2">
+                <div
+                  onClick={toggleRemember}
+                  className="relative h-6 w-11 rounded-full cursor-pointer border-[0.5px] border-[#E5E5E5] transition-colors duration-300 ease-in-out"
+                  style={{
+                    backgroundColor: remember ? '#F0725C' : '#F2F4F8',
+                  }}
+                >
+                  <div
+                    className="absolute h-5 w-5 rounded-full bg-white top-[1px] transition-transform duration-300 ease-in-out"
+                    style={{
+                      transform: remember
+                        ? 'translateX(22px)'
+                        : 'translateX(1px)',
+                    }}
+                  ></div>
+                </div>
+                <p className="text-sm">Remember me</p>
+              </div>
+              <div className="text-sm cursor-pointer hover:underline hover:text-[#F0725C]">
+                <Link href="/client/login/forget-password">
+                  Forgot password?
+                </Link>
+              </div>
             </div>
-          </div>
 
-          <form onSubmit={handleSubmit} className="mt-6">
             <button
               type="submit"
-              className="w-full py-3 px-4 rounded-lg font-bold text-white bg-gradient-to-t from-[#FE3511] to-[#F0725C] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
+              className="w-full py-3 px-4 mt-6 rounded-lg font-bold text-white bg-gradient-to-t from-[#FE3511] to-[#F0725C] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
             >
               Login
             </button>

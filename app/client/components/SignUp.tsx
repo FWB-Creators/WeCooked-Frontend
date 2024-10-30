@@ -3,7 +3,7 @@ import { FormEvent, useState } from 'react'
 import Image from 'next/image'
 import { EyeIcon, EyeSlashIcon, XMarkIcon } from '@heroicons/react/16/solid'
 import { useRouter } from 'next/navigation'
-import Link from 'next/link';
+import Link from 'next/link'
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState<boolean>(false)
@@ -14,9 +14,9 @@ export default function SignUp() {
   }
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
     router.push('/client/login')
-  };
+  }
 
   return (
     <div className="flex justify-end items-center min-h-screen bg-gradient-to-b from-[#F0725C] to-[#FE3511] h-screen overflow-hidden animate-fadeIn">
@@ -25,13 +25,23 @@ export default function SignUp() {
           <Image src="/images/pasta.png" alt="Pasta" width={550} height={200} />
         </div>
         <div className="absolute right-[-30px] top-[-30px]">
-          <Image src="/images/waffle.png" alt="Waffle" width={320} height={200} />
+          <Image
+            src="/images/waffle.png"
+            alt="Waffle"
+            width={320}
+            height={200}
+          />
         </div>
         <div className="absolute z-10 bottom-0 left-[-300px]">
           <Image src="/images/steak.png" alt="Steak" width={650} height={400} />
         </div>
         <div className="absolute z-10 bottom-[-40px] right-[-45px]">
-          <Image src="/images/burger.png" alt="Burger" width={400} height={200} />
+          <Image
+            src="/images/burger.png"
+            alt="Burger"
+            width={400}
+            height={200}
+          />
         </div>
       </div>
 
@@ -43,7 +53,10 @@ export default function SignUp() {
         </div>
 
         <h1 className="text-4xl font-bold mb-12 text-center w-full">Sign Up</h1>
-        <form onSubmit={handleSubmit} className="flex flex-col w-full space-y-4">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col w-full space-y-4"
+        >
           <div className="grid grid-cols-2 gap-4">
             <div>
               <p className="mb-1">First Name</p>
