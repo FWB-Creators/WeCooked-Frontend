@@ -36,10 +36,10 @@ export default function SignUp() {
   }
 
   const [clientcontextvalue] = useState<ClientContextValue>({
-    firstname: 'Supanut', //firstname: firstname
-    lastname: 'Wongtanom', //lastname: lastname
-    email: 'tongs2004@gmail.com', //email: email
-    password: '55555', //password: password
+    firstname: firstname,
+    lastname: lastname,
+    email: email,
+    password: password,
   })
 
   return (
