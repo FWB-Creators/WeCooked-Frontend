@@ -71,7 +71,9 @@ export default function Footer() {
           </Link>
         </div>
       </div>
-      <div className="flex justify-center pb-16">Copyright ©{new Date().getFullYear()} Seven spices</div>
+      <div className="flex justify-center pb-16">
+        Copyright ©{new Date().getFullYear()} Seven spices
+      </div>
     </div>
   )
 }

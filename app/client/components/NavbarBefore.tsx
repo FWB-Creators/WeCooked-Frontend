@@ -4,7 +4,6 @@ import { MagnifyingGlassIcon } from '@heroicons/react/16/solid'
 import Link from 'next/link'
 import Image from 'next/image'
 import NavLink from './NavLink'
-import { createContext } from 'react'
 
 import { courses as popularCourses } from '../data/most-popular-course'
 import { courses as newCourses } from '../data/new-course'
