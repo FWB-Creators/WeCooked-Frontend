@@ -9,25 +9,18 @@ import ClientReview from '../components/ClientReview'
 import ContactUs from '../components/ContactUs'
 import Footer from '../components/Footer'
 
-import { useContext } from 'react'
-import { ClientContext } from '../components/context'
-
 export default function Home() {
-  const clientcontextvalue = useContext(ClientContext)
-
   return (
-    <ClientContext.Provider value={clientcontextvalue}>
-      <div className="bg-gradient-to-b from-[#F0725C] to-[#FE3511] animate-fadeIn">
-        <NavbarAfter />
-        <LandingPage />
-        <MostPopularCourse />
-        <CurvePage />
-        <RecentCourses />
-        <RecommendedForyou />
-        <ClientReview />
-        <ContactUs />
-        <Footer />
-      </div>
-    </ClientContext.Provider>
+    <div className="bg-gradient-to-b from-[#F0725C] to-[#FE3511] animate-fadeIn">
+      <NavbarAfter />
+      <LandingPage />
+      <MostPopularCourse />
+      <CurvePage />
+      <RecentCourses />
+      <RecommendedForyou />
+      <ClientReview />
+      <ContactUs />
+      <Footer />
+    </div>
   )
 }
