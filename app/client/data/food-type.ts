@@ -28,14 +28,14 @@ export const foodtype: FoodType[] = [
   },
   {
     title: 'Japanese Food',
-    cuisine: 'Japan',
-    total_course: courseCountByCuisine['Japan'] || 0,
+    cuisine: 'Japanese',
+    total_course: courseCountByCuisine['Japanese'] || 0,
     imageSrc: '/images/japanese-food.png',
   },
   {
     title: 'Indian Food',
-    cuisine: 'India',
-    total_course: courseCountByCuisine['India'] || 0,
+    cuisine: 'Indian',
+    total_course: courseCountByCuisine['Indian'] || 0,
     imageSrc: '/images/indian-food.png',
   },
   {

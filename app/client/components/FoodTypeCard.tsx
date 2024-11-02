@@ -75,10 +75,11 @@ export default function FoodTypeCard() {
             {foodtype.map((food, index) => (
               <Link
                 key={index}
-                href={`/client/video/search/${(food.cuisine ?? '').replace(
-                  /\s+/g,
-                  '-'
-                )}`}
+                href={`/client/video/search/${
+                    food.cuisine 
+                      ? encodeURIComponent(food.cuisine.trim().toLowerCase())
+                      : 'all'
+                  }`}
                 className="w-full ml-12"
               >
                 <CourseCard {...food} />

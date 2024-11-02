@@ -21,10 +21,9 @@ interface FilterSectionProps {
 const CUISINE_TYPES = [
   'Italian',
   'French',
-  'Chinese',
   'Thai',
-  'India',
-  'Japan',
+  'Indian',
+  'Japanese',
   'American',
   'Mexican',
 ]
@@ -79,9 +78,9 @@ const FilterSection: React.FC<FilterSectionProps> = ({
                 viewBox="0 0 22 22"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="4"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 <polyline points="20 6 9 17 4 12"></polyline>
               </svg>
