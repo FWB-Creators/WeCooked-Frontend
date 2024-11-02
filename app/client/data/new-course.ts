@@ -92,8 +92,8 @@ export const courses: Course[] = [
   {
     course_id: 8,
     title: 'Sushi Rolling and Japanese Cuisine Basics',
-    cuisine: 'Japan',
-    price: 300,
+    cuisine: 'Thai',
+    price: 600,
     currency: 'THB',
     rating: 4.0,
     chef: 'Chef Sieng',

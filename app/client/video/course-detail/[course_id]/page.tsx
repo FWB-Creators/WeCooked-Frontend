@@ -8,7 +8,7 @@ import Footer from '@/app/client/components/Footer'
 
 export default function CourseDetailPage() {
   return (
-    <div>
+    <>
       <NavbarAfter />
       <CourseDetailFirstPage />
       <MeetChefCurvePage />
@@ -16,6 +16,6 @@ export default function CourseDetailPage() {
       <JoinOurCoursePage />
       <FAQPage />
       <Footer />
-    </div>
+    </>
   )
 }

@@ -4,7 +4,7 @@ export const courses: Course[] = [
   {
     course_id: 0,
     title: 'Uma Parlour - Pure Vegetarian',
-    cuisine: 'India',
+    cuisine: 'Japan',
     price: 300,
     currency: 'THB',
     rating: 4.0,
@@ -92,13 +92,14 @@ export const courses: Course[] = [
   {
     course_id: 8,
     title: 'Sushi Rolling and Japanese Cuisine Basics',
-    cuisine: 'Japan',
-    price: 300,
+    cuisine: 'Thai',
+    price: 800,
     currency: 'THB',
     rating: 4.0,
     chef: 'Chef Sieng',
     imageSrc: '/images/sushiplate.png',
     chefImageUrl: '/images/chef.png',
+    dietary: ['Vegetarian', 'Vegan']
   },
   {
     course_id: 9,
