@@ -1,8 +1,4 @@
-export interface Ingredient {
-  name: string
-  quantity?: SVGAnimatedNumber
-  price?: number
-}
+import { Ingredient } from '../types/ingredient';
 
 export const ingredients: Ingredient[] = [
   { name: 'Spaghetti' },

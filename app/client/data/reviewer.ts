@@ -1,9 +1,4 @@
-export interface Review {
-  name: string
-  rating: number
-  comment: string
-  imageSrc: string
-}
+import { Review } from '../types/review';
 
 export const reviews: Review[] = [
   {

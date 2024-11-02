@@ -4,13 +4,7 @@ import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { foodtype } from '../data/food-type'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/16/solid'
-
-interface FoodType {
-  title: string
-  cuisine?: string
-  total_course: number
-  imageSrc: string
-}
+import { FoodType } from '../types/foodtype';
 
 function CourseCard({ title, total_course, imageSrc }: FoodType) {
   return (
@@ -81,7 +75,7 @@ export default function FoodTypeCard() {
             {foodtype.map((food, index) => (
               <Link
                 key={index}
-                href={`/client/video/search/${food.cuisine.replace(
+                href={`/client/video/search/${(food.cuisine ?? '').replace(
                   /\s+/g,
                   '-'
                 )}`}

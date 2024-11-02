@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { courses } from '../data/recently-course';
+import { courses } from '../data/most-popular-course';
 import CourseCard from './CourseCard';
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
 

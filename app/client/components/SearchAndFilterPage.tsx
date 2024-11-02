@@ -2,21 +2,9 @@
 import React, { useState, useMemo } from 'react'
 import { Course } from '../types/courses'
 import CourseCard from './CourseCard'
-import { courses as popularCourses } from '../data/most-popular-course'
-import { courses as newCourses } from '../data/new-course'
-import { courses as topCourses } from '../data/top-course'
-import { courses as personalCourses } from '../data/personal-course'
-import { courses as recentlyCourses } from '../data/recently-course'
-import { courses as recommendCourses } from '../data/recommended-for-you'
+import { courses as fullmockdata } from '../data/full-mock-data'
 
-const courses = [
-  ...popularCourses,
-  ...newCourses,
-  ...topCourses,
-  ...personalCourses,
-  ...recentlyCourses,
-  ...recommendCourses,
-]
+const courses: Course[] = [...fullmockdata];
 
 interface FilterOption {
   label: string
@@ -73,7 +61,7 @@ const FilterSection: React.FC<FilterSectionProps> = ({
               <input
                 id={checkboxId}
                 type="checkbox"
-                className="accent-[#FE3511] w-5 h-5"
+                className="relative peer rounded-md shrink-0 appearance-none w-5 h-5 border-2 border-[#ff593b] bg-white checked:bg-gradient-to-b from-[#F0725C] to-[#FE3511] checked:border-0"
                 checked={isSelected}
                 onChange={() => onChange(option.label)}
               />
@@ -85,6 +73,18 @@ const FilterSection: React.FC<FilterSectionProps> = ({
               >
                 {option.label}
               </label>
+              <svg
+                className="absolute w-3.5 h-3.5 hidden peer-checked:block text-white pl-1"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 22 22"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
             </div>
             <p className="text-[#737373] font-semibold">{option.count}</p>
           </div>
@@ -208,27 +208,22 @@ export default function SearchAndFilterPage({
     return courses.filter((course) => {
       const matchesSearch =
         course.title.toLowerCase().includes(search.toLowerCase()) ||
-        course.cuisine.toLowerCase().includes(search.toLowerCase());
-  
+        course.cuisine.toLowerCase().includes(search.toLowerCase())
+
       const withinPriceRange =
-        course.price >= priceRange[0] && course.price <= priceRange[1];
-  
+        course.price >= priceRange[0] && course.price <= priceRange[1]
+
       const cuisineMatch =
-        selectedCuisine.length === 0 || selectedCuisine.includes(course.cuisine);
-  
+        selectedCuisine.length === 0 || selectedCuisine.includes(course.cuisine)
+
       const dietMatch =
         selectedDiet.length === 0 ||
         (course.dietary &&
-          course.dietary.some((diet) => selectedDiet.includes(diet)));
-  
-      return (
-        matchesSearch &&
-        withinPriceRange &&
-        cuisineMatch &&
-        dietMatch
-      );
-    });
-  }, [search, priceRange, selectedCuisine, selectedDiet]);
+          course.dietary.some((diet) => selectedDiet.includes(diet)))
+
+      return matchesSearch && withinPriceRange && cuisineMatch && dietMatch
+    })
+  }, [search, priceRange, selectedCuisine, selectedDiet])
 
   const cuisineOptions = useMemo(
     () => getCuisineCounts(filteredCourses),

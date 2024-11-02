@@ -1,18 +1,8 @@
-import { courses as popularCourses } from '../data/most-popular-course'
-import { courses as newCourses } from '../data/new-course'
-import { courses as topCourses } from '../data/top-course'
-import { courses as personalCourses } from '../data/personal-course'
-import { courses as recentlyCourses } from '../data/recently-course'
-import { courses as recommendCourses } from '../data/recommended-for-you'
+import { courses as fullmockdata} from '../data/full-mock-data';
+import { Course } from '../types/courses'
+import { FoodType } from '../types/foodtype';
 
-const courses = [
-  ...popularCourses,
-  ...newCourses,
-  ...topCourses,
-  ...personalCourses,
-  ...recentlyCourses,
-  ...recommendCourses,
-]
+const courses: Course[] = [...fullmockdata];
 
 const courseCountByCuisine: Record<string, number> = courses.reduce((acc, course) => {
   if (acc[course.cuisine]) {
@@ -23,13 +13,6 @@ const courseCountByCuisine: Record<string, number> = courses.reduce((acc, course
   return acc;
 }, {} as Record<string, number>);
 
-interface FoodType {
-    title: string;
-    cuisine: string;
-    total_course: number;
-    imageSrc: string;
-  }
-  
 export const foodtype: FoodType[] = [
   {
     title: 'Italian Food',
