@@ -2,7 +2,7 @@
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import CourseCard from './CourseCard'
-import { courses } from '../data/top-course'
+import { courses } from '../data/upcoming-course'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/16/solid'
 
 const useResponsiveCards = () => {
@@ -47,7 +47,7 @@ export default function NewCourseCard() {
       />
       <div className="flex flex-col justify-start py-12 -mt-[810px] 2xl:-mt-[1230px]">
         <h1 className="text-3xl font-bold mb-2 text-white px-12">
-          Top Rated Courses
+          Upcoming workshop weeks
         </h1>
         <div className="relative flex">
           <div className="flex overflow-hidden py-6">

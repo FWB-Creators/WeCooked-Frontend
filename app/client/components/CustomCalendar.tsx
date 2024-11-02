@@ -128,7 +128,7 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({ value, onChange }) => {
   }
 
   return (
-    <div className="absolute top-[-190px] inset-x-[-30px] bg-white rounded-lg shadow-2xl p-4 z-50">
+    <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-2xl p-4 z-50">
       <div className="flex gap-4">
         <div className="w-64">
           <div className="flex items-center justify-between mb-4">

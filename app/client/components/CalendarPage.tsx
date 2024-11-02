@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import { MagnifyingGlassIcon, CalendarIcon } from '@heroicons/react/24/solid'
-import CustomCalendar from './CustomCalemdar'
+import CustomCalendar from './CustomCalendar'
 
 export default function CalendarPage() {
   const [value, setValue] = useState<{

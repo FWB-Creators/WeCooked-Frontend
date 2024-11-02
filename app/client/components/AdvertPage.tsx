@@ -1,9 +1,10 @@
 import React from 'react'
+import Link from 'next/link'
 import Image from 'next/image'
 
 export default function AdvertPage() {
   return (
-    <div className="h-[800px] relative w-full flex flex-col items-center">
+    <div className="min-h-[800px] relative w-full flex flex-col items-center">
       <div className="absolute left-20 top-36 z-10 w-1/2">
         <h1 className="py-1.5 text-6xl font-bold bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text">
           Unlock the Secret to the Perfect Pork Chop Steak
@@ -21,6 +22,7 @@ export default function AdvertPage() {
             <Image
               src="/images/chef.png"
               alt="Profile picture of chef"
+              priority
               width={50}
               height={50}
               className="rounded-full"
@@ -58,9 +60,14 @@ export default function AdvertPage() {
           </button>
         </div>
         <div className="flex">
-          <button className="px-7 py-2 bg-gradient-to-b from-[#F0725C] to-[#FE3511] text-white rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+          <Link
+            href="/client/my-learning"
+            className="px-7 py-2 bg-gradient-to-b from-[#F0725C] to-[#FE3511] text-white rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+            role="button"
+            aria-label="Start cooking pork chop steak course"
+          >
             Let&apos;s Cook
-          </button>
+          </Link>
         </div>
       </div>
       <div className="absolute right-0 top-20 z-10 w-1/2 md:w-auto">
