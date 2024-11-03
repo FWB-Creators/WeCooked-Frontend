@@ -106,48 +106,69 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({ value, onChange }) => {
         <div
           key={day}
           onClick={() => handleDateClick(currentDay)}
-          className={`h-8 flex items-center justify-center cursor-pointer rounded-full
-            ${isSelected ? 'bg-[#faebe8] text-[#FE3511]' : 'hover:bg-gray-100'}
-            ${
-              isStart
-                ? 'bg-gradient-to-t from-[#FE3511] to-[#F0725C] text-white hover:bg-[#FE3511]'
-                : ''
-            }
-            ${
-              isEnd
-                ? 'bg-gradient-to-t from-[#FE3511] to-[#F0725C] text-white hover:bg-[#FE3511]'
-                : ''
-            }`}
+          className={`h-8 flex items-center justify-center cursor-pointer rounded-lg 
+        ${
+          isSelected
+            ? 'bg-[#faebe8] text-[#FE3511]'
+            : 'text-gray-400 hover:bg-gray-100'
+        }
+        ${
+          isStart || isEnd
+            ? 'bg-gradient-to-t from-[#FE3511] to-[#F0725C] text-white hover:bg-gray-100'
+            : ''
+        }`}
         >
           {day}
         </div>
       )
     }
-
     return days
   }
 
+  const renderCalendarHeader = (
+    date: Date,
+    handlePrev: () => void,
+    handleNext: () => void
+  ) => {
+    return (
+      <div className="flex items-center justify-between mb-4 pl-2">
+        <span className="text-gray-400 text-lg">
+          {months[date.getMonth()]} {date.getFullYear()}
+        </span>
+        <div className="flex gap-1">
+          <button
+            onClick={handlePrev}
+            className="p-2 hover:bg-gray-100 rounded-full"
+            aria-label="Previous month"
+          >
+            <ChevronLeftIcon className="w-4 h-4 text-gray-400" />
+          </button>
+          <button
+            onClick={handleNext}
+            className="p-2 hover:bg-gray-100 rounded-full"
+            aria-label="Next month"
+          >
+            <ChevronRightIcon className="w-4 h-4 text-gray-400" />
+          </button>
+        </div>
+      </div>
+    )
+  }
+
   return (
-    <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-2xl p-4 z-50">
-      <div className="flex gap-4">
-        <div className="w-64">
-          <div className="flex items-center justify-between mb-4">
-            <button
-              onClick={handlePrevMonth}
-              className="p-1 hover:bg-gray-100 rounded"
-            >
-              <ChevronLeftIcon className="w-4 h-4" />
-            </button>
-            <span className="font-medium">
-              {months[currentDate.getMonth()]} {currentDate.getFullYear()}
-            </span>
-            <div className="w-6" />
-          </div>
+    <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-2/3 bg-white rounded-lg shadow-2xl p-6 z-50">
+      <div className="flex gap-8">
+        <div className="w-72">
+          {renderCalendarHeader(currentDate, handlePrevMonth, handleNextMonth)}
           <div className="grid grid-cols-7 gap-1">
             {daysOfWeek.map((day) => (
               <div
                 key={day}
-                className="h-8 flex items-center justify-center text-sm text-gray-500"
+                className={`h-8 flex items-center justify-center text-sm ${
+                  day === 'Sun' || day === 'Sat'
+                    ? 'text-red-500'
+                    : 'text-gray-400'
+                }`}
               >
                 {day}
               </div>
@@ -155,24 +176,21 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({ value, onChange }) => {
             {renderCalendar(currentDate)}
           </div>
         </div>
-        <div className="w-64">
-          <div className="flex items-center justify-between mb-4">
-            <div className="w-6" />
-            <span className="font-medium">
-              {months[nextMonthDate.getMonth()]} {nextMonthDate.getFullYear()}
-            </span>
-            <button
-              onClick={handleNextMonth}
-              className="p-1 hover:bg-gray-100 rounded"
-            >
-              <ChevronRightIcon className="w-4 h-4" />
-            </button>
-          </div>
+        <div className="w-72">
+          {renderCalendarHeader(
+            nextMonthDate,
+            handlePrevMonth,
+            handleNextMonth
+          )}
           <div className="grid grid-cols-7 gap-1">
             {daysOfWeek.map((day) => (
               <div
                 key={day}
-                className="h-8 flex items-center justify-center text-sm text-gray-500"
+                className={`h-8 flex items-center justify-center text-sm ${
+                  day === 'Sun' || day === 'Sat'
+                    ? 'text-red-500'
+                    : 'text-gray-400'
+                }`}
               >
                 {day}
               </div>

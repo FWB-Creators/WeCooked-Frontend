@@ -55,7 +55,7 @@ export default function CalendarPage() {
   return (
     <div className="relative">
       {isCalendarOpen && (
-        <div className="fixed inset-y-[74px] bg-white/10 backdrop-blur-sm z-10 xl:w-full h-[842px] 2xl:h-full 2xl:w-full" />
+        <div className="absolute top-0 inset-y-[74px] bg-white/10 backdrop-blur-sm z-10 xl:w-full h-[842px] 2xl:h-full 2xl:w-full" />
       )}
 
       <div className="relative">
@@ -95,7 +95,7 @@ export default function CalendarPage() {
                   placeholder="Select Date Range"
                   value={formatDateRange()}
                   onClick={() => setIsCalendarOpen(!isCalendarOpen)}
-                  className="w-full pl-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none cursor-pointer"
+                  className="w-full pl-4 py-2 rounded-lg bg-[#F2F4F8] text-gray-400 border-b-2 border-[#C1C7CD] outline-none cursor-pointer"
                 />
                 <CalendarIcon className="h-5 w-5 text-gray-400 absolute right-3 bottom-3" />
                 {isCalendarOpen && (
