@@ -56,7 +56,7 @@ export default function ProgressCard({
   return (
     <Link href={`/client/my-learning/${course_id}`}>
     {/* <Link href={`/client/my-learning/${slug}`}> */}
-    <div className="relative p-5 pr-7 border rounded-xl bg-white my-4 transition-all duration-300 hover:scale-[1.01] hover:shadow-lg">
+    <div className="relative z-10 p-5 pr-7 border rounded-xl bg-white my-4 transition-all duration-300 hover:scale-[1.01] hover:shadow-lg">
       <div className="flex gap-4">
         <div className="relative w-28 h-28 rounded-lg overflow-hidden">
           <Image src={image} alt={title} fill className="object-cover" />

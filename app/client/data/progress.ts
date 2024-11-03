@@ -15,7 +15,7 @@ export const progress: Progress[] = [
   {
     course_id: 1,
     title: 'Mexican Madness - Burritos & Nachos',
-    timeInMins: 45,
+    timeInMins: 80,
     chef: {
       name: 'Chef Marie',
       image: '/images/chef.png'
