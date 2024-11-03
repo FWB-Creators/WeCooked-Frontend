@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export default function MyLearning() {
   return (
-    <div className="relative w-full">
+    <div className="relative w-full z-10">
       <div className="relative w-full">
         <Image
           src="/svg/TopWhiteBG.svg"

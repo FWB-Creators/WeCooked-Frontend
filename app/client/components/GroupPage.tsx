@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import React from 'react'
 import { group } from '../data/group-course';
 import GroupCard from './GroupCard';
 
@@ -14,7 +14,6 @@ export default function GroupPage() {
           <GroupCard key={index} {...item} />
         ))}
       </div>
-      <Image src="/images/pancake.png" alt="pancake" width={1200} height={80} className="absolute -right-52 bottom-0" />
     </div>
   );
 }

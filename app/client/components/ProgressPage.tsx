@@ -2,7 +2,7 @@ import React from 'react'
 import { progress } from '../data/progress'
 import ProgressCard from './ProgressCard'
 
-export default function ProgessPage() {
+export default function ProgressPage() {
   return (
     <div className="flex flex-col justify-start py-12">
       <h1 className="text-3xl font-bold mb-2 text-white px-12">
