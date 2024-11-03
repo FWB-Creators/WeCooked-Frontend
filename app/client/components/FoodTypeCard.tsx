@@ -4,16 +4,11 @@ import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { foodtype } from '../data/food-type'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/16/solid'
-
-interface FoodType {
-  title: string
-  total_course: number
-  imageSrc: string
-}
+import { FoodType } from '../types/foodtype';
 
 function CourseCard({ title, total_course, imageSrc }: FoodType) {
   return (
-    <div className="bg-white rounded-xl shadow-lg w-56 my-6 transition-transform duration-300 transform hover:scale-105 hover:shadow-lg">
+    <div className="bg-white rounded-xl shadow-lg w-56 transition-transform duration-300 transform hover:scale-105 hover:shadow-lg">
       <Image
         src={imageSrc}
         alt={title}
@@ -31,12 +26,12 @@ function CourseCard({ title, total_course, imageSrc }: FoodType) {
   )
 }
 const useResponsiveCards = () => {
-    const [cardsToShow, setCardsToShow] = useState<number>(5);
+    const [cardsToShow, setCardsToShow] = useState<number>(3);
     
     useEffect(() => {
       const updateCards = () => {
         if (window.innerWidth < 640) setCardsToShow(1);
-        else if (window.innerWidth < 1024) setCardsToShow(3);
+        else if (window.innerWidth < 1024) setCardsToShow(2);
         else setCardsToShow(5);
       };
       
@@ -54,11 +49,11 @@ export default function FoodTypeCard() {
   const maxIndex = foodtype.length - cardsToShow
 
   const nextSlide = () => {
-    setStartIndex((prev) => Math.min(prev + 2, maxIndex))
+    setStartIndex((prev) => Math.min(prev + 3, maxIndex))
   }
 
   const prevSlide = () => {
-    setStartIndex((prev) => Math.max(prev - 2, 0))
+    setStartIndex((prev) => Math.max(prev - 3, 0))
   }
 
   return (
@@ -67,12 +62,12 @@ export default function FoodTypeCard() {
         Explore Food Type and Skills
       </h1>
       <div className="relative flex">
-        <div className="flex overflow-hidden">
+        <div className="flex overflow-hidden py-6">
           <div
             className="flex transition-transform duration-300 ease-in-out"
             style={
               {
-                '--slide-offset': startIndex * (100 / cardsToShow),
+                '--slide-offset': startIndex * (100 / 7),
                 transform: 'translateX(calc(-1 * var(--slide-offset) * 1%))',
               } as React.CSSProperties
             }
@@ -80,11 +75,12 @@ export default function FoodTypeCard() {
             {foodtype.map((food, index) => (
               <Link
                 key={index}
-                href={`/client/video/search?type=${food.title.replace(
-                  /\s+/g,
-                  '-'
-                )}`}
-                className="w-full pl-12"
+                href={`/client/video/search/${
+                    food.cuisine 
+                      ? encodeURIComponent(food.cuisine.trim().toLowerCase())
+                      : 'all'
+                  }`}
+                className="w-full ml-12"
               >
                 <CourseCard {...food} />
               </Link>
@@ -102,7 +98,7 @@ export default function FoodTypeCard() {
           </button>
         )}
 
-        {startIndex + 2 < maxIndex && (
+        {startIndex + 1 < maxIndex && (
           <button
             onClick={nextSlide}
             aria-label="Next slide"

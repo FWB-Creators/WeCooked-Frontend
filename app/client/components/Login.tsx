@@ -108,7 +108,7 @@ export default function Login() {
           <form onSubmit={handleSubmit} className="mt-6">
             <button
               type="submit"
-              className="w-full py-3 px-4 rounded-lg font-bold text-white bg-gradient-to-t from-[#FE3511] to-[#F0725C] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
+              className="w-full py-3 px-4 rounded-lg font-semibold text-white bg-gradient-to-t from-[#FE3511] to-[#F0725C] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
             >
               Login
             </button>

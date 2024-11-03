@@ -1,29 +1,13 @@
 'use client';
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { MagnifyingGlassIcon } from '@heroicons/react/16/solid';
+import { Course } from '../types/courses'
 import Link from 'next/link';
 import Image from 'next/image';
 import NavLink from './NavLink';
-import { courses as popularCourses } from '../data/most-popular-course';
-import { courses as newCourses } from '../data/new-course';
-import { courses as topCourses } from '../data/top-course';
-import { courses as personalCourses } from '../data/personal-course';
-import { courses as recentlyCourses } from '../data/recently-course';
-import { courses as recommendCourses } from '../data/recommended-for-you';
+import { courses as fullmockdata } from '../data/full-mock-data';
 
-interface Course {
-  course_id: number,
-  title: string,
-  cuisine: string,
-  price: number,
-  currency: string,
-  rating: number,
-  chef: string,
-  imageSrc: string,
-  chefImageUrl: string,
-}
-
-const courses = [...popularCourses, ...newCourses, ...topCourses, ...personalCourses, ...recentlyCourses, ...recommendCourses];
+const courses: Course[] = [...fullmockdata];
 
 export default function NavbarBefore() {
   const [searchTerm, setSearchTerm] = useState<string>('');
