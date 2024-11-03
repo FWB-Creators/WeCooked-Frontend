@@ -1,3 +1,4 @@
+//NavbarAfter.tsx
 'use client'
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { MagnifyingGlassIcon } from '@heroicons/react/16/solid'
@@ -5,6 +6,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import NavLink from './NavLink'
 import { useRouter } from 'next/navigation'
+import { useAuthContext } from './authcontext'
 
 import { courses as popularCourses } from '../data/most-popular-course'
 import { courses as newCourses } from '../data/new-course'
@@ -35,6 +37,8 @@ const courses = [
 ]
 
 export default function NavbarAfter() {
+  const authcontextvalue = useAuthContext()
+
   const [userDropdownOpen, setUserDropdownOpen] = useState<boolean>(false)
   const [searchDropdownOpen, setSearchDropdownOpen] = useState<boolean>(false)
   const userDropdownRef = useRef<HTMLDivElement>(null)
@@ -92,6 +96,10 @@ export default function NavbarAfter() {
 
   return (
     <nav className="flex items-center justify-between bg-white py-[15px]">
+      <p>
+        login state ={' '}
+        {authcontextvalue?.isAuthenticated ? 'logged in' : 'logged out'}
+      </p>
       <div className="px-12">
         <Link href="/client/home">
           <Image
