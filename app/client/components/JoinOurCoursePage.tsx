@@ -3,14 +3,7 @@ import Image from 'next/image'
 import { StarIcon, UserGroupIcon, BookOpenIcon, ShoppingBagIcon } from '@heroicons/react/24/outline'
 import { StarIcon as StarSolid } from '@heroicons/react/24/solid'
 import { reviews } from '../data/reviewer'
-
-interface CourseStats {
-  rating: number
-  totalReviews: number
-  completions: number
-  ingredients: number
-  enrolled: number
-}
+import { CourseStats } from '../types/coursestat'
 
 export default function JoinOurCoursePage() {
   const stats: CourseStats = {

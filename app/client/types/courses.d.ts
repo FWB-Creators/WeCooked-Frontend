@@ -8,4 +8,5 @@ export interface Course {
   chef: string;
   imageSrc: string;
   chefImageUrl: string;
+  dietary?: string[];
 }

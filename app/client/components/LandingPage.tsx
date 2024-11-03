@@ -29,12 +29,12 @@ export default function LandingPage() {
           </button>
         </div>
       </div>
-      <div className="absolute right-0 top-0 z-10 w-1/2 md:w-auto">
+      <div className="absolute right-0 top-0 z-10 w-1/2">
         <Image
           src="/images/cooked.png"
           alt="Cooked Image"
           width={750}
-          height={100}
+          height={750}
           className="object-contain w-full h-auto"
         />
       </div>

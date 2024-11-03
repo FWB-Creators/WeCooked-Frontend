@@ -119,7 +119,7 @@ export default function SignUp() {
           </div>
           <button
             type="submit"
-            className="mt-6 px-6 py-3 w-full rounded-lg text-white font-semibold bg-gradient-to-b from-[#F0725C] to-[#FE3511] transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg"
+            className="mt-8 w-full py-3 px-4 rounded-lg font-semibold text-white bg-gradient-to-t from-[#FE3511] to-[#F0725C] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
           >
             Sign Up
           </button>

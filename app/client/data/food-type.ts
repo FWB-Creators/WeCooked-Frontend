@@ -1,58 +1,59 @@
-interface FoodType {
-    title: string;
-    total_course: number;
-    imageSrc: string;
+import { courses as fullmockdata} from '../data/full-mock-data';
+import { Course } from '../types/courses'
+import { FoodType } from '../types/foodtype';
+
+const courses: Course[] = [...fullmockdata];
+
+const courseCountByCuisine: Record<string, number> = courses.reduce((acc, course) => {
+  if (acc[course.cuisine]) {
+    acc[course.cuisine]++;
+  } else {
+    acc[course.cuisine] = 1;
   }
-  
+  return acc;
+}, {} as Record<string, number>);
+
 export const foodtype: FoodType[] = [
   {
-    title: 'Fast Food',
-    total_course: 11,
-    imageSrc: '/images/fast-food.png',
-  },
-  {
-    title: 'Vegan Food',
-    total_course: 34,
-    imageSrc: '/images/vegan-food.png',
-  },
-  {
     title: 'Italian Food',
-    total_course: 20,
+    cuisine: 'Italian',
+    total_course: courseCountByCuisine['Italian'] || 0,
     imageSrc: '/images/italian-food.png',
   },
   {
     title: 'Thai Food',
-    total_course: 50,
+    cuisine: 'Thai',
+    total_course: courseCountByCuisine['Thai'] || 0,
     imageSrc: '/images/thai-food.png',
   },
   {
     title: 'Japanese Food',
-    total_course: 0,
+    cuisine: 'Japanese',
+    total_course: courseCountByCuisine['Japanese'] || 0,
     imageSrc: '/images/japanese-food.png',
   },
   {
     title: 'Indian Food',
-    total_course: 5,
+    cuisine: 'Indian',
+    total_course: courseCountByCuisine['Indian'] || 0,
     imageSrc: '/images/indian-food.png',
   },
   {
     title: 'French Food',
-    total_course: 15,
+    cuisine: 'French',
+    total_course: courseCountByCuisine['French'] || 0,
     imageSrc: '/images/french-food.png',
   },
   {
     title: 'Mexican Food',
-    total_course: 21,
+    cuisine: 'Mexican',
+    total_course: courseCountByCuisine['Mexican'] || 0,
     imageSrc: '/images/mexican-food.png',
   },
   {
     title: 'American Food',
-    total_course: 11,
+    cuisine: 'American',
+    total_course: courseCountByCuisine['American'] || 0,
     imageSrc: '/images/american-food.png',
-  },
-  {
-    title: 'Diet Food',
-    total_course: 29,
-    imageSrc: '/images/diet-food.png',
   }
 ];
