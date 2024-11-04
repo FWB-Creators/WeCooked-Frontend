@@ -1,6 +1,6 @@
 //authcontext.ts
 import { createContext, useContext } from 'react'
-import { AuthContextValue } from './Login'
+import { AuthContextValue } from '../client/components/Login'
 
 export const AuthContext = createContext<AuthContextValue | undefined>(
   undefined

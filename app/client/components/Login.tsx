@@ -5,15 +5,14 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { EyeIcon, EyeSlashIcon, XMarkIcon } from '@heroicons/react/16/solid'
 import Link from 'next/link'
-import { AuthContext } from '@/app/client/components/authcontext'
-import NavbarAfter from './NavbarAfter'
+import { AuthContext } from '@/app/contexts/authcontext'
 
 export interface AuthContextValue {
   isAuthenticated: boolean
   setIsAuthenticated: (value: boolean) => void
 }
 
-export const AuthProvide = () => {
+export const AuthProvide = ({ children }: { children: React.ReactNode }) => {
   const [authcontextvalue] = useState<AuthContextValue>({
     isAuthenticated: true,
     setIsAuthenticated: () => {},
@@ -21,9 +20,7 @@ export const AuthProvide = () => {
 
   return (
     <AuthContext.Provider value={authcontextvalue}>
-      <div>
-        <NavbarAfter />
-      </div>
+      <div>{children}</div>
     </AuthContext.Provider>
   )
 }
@@ -144,7 +141,6 @@ export function Login() {
               onClick={login}
               type="submit"
               className="w-full py-3 px-4 rounded-lg font-semibold text-white bg-gradient-to-t from-[#FE3511] to-[#F0725C] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
-              className="w-full py-3 px-4 mt-6 rounded-lg font-bold text-white bg-gradient-to-t from-[#FE3511] to-[#F0725C] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
             >
               Login
             </button>
@@ -177,4 +173,5 @@ export function Login() {
       </div>
     </div>
   )
+  return { isAuthenticated, setIsAuthenticated }
 }

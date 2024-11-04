@@ -7,7 +7,7 @@ import Image from 'next/image'
 import NavLink from './NavLink'
 import { useRouter } from 'next/navigation'
 import { courses as fullmockdata } from '../data/full-mock-data'
-import { useAuthContext } from './authcontext'
+import { useAuthContext } from '@/app/contexts/authcontext'
 
 const courses: Course[] = [...fullmockdata]
 
