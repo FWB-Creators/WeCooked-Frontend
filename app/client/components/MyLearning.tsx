@@ -14,7 +14,7 @@ export default function MyLearning() {
           priority
         />
         
-        <h1 className="absolute top-28 left-20 py-3.5 text-7xl font-bold bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text">
+        <h1 className="absolute top-24 left-20 py-3.5 text-[84px] font-bold bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text">
           My Learning
         </h1>
         
