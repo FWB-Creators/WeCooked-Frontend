@@ -1,5 +1,5 @@
 'use client'
-import NavbarAfter from '../components/NavbarAfter'
+import Navbar from '../components/Navbar'
 import LandingPage from '../components/LandingPage'
 import MostPopularCourse from '../components/MostPopularCourse'
 import CurvePage from '../components/CurvePage'
@@ -12,7 +12,7 @@ import Footer from '../components/Footer'
 export default function Home() {
   return (
     <div className="bg-gradient-to-b from-[#F0725C] to-[#FE3511] animate-fadeIn">
-      <NavbarAfter />
+      <Navbar />
       <LandingPage />
       <MostPopularCourse />
       <CurvePage />

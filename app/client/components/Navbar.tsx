@@ -11,7 +11,7 @@ import { useAuthContext } from '@/app/contexts/authcontext'
 
 const courses: Course[] = [...fullmockdata]
 
-export default function NavbarAfter() {
+export default function Navbar() {
   const authcontextvalue = useAuthContext()
 
   const [userDropdownOpen, setUserDropdownOpen] = useState<boolean>(false)
@@ -115,64 +115,73 @@ export default function NavbarAfter() {
           aria-hidden="true"
         />
       </div>
-      <div className="flex items-center px-6">
-        <Link href="/client/notification" aria-label="Notifications">
-          <Image
-            src="/svg/Bell.svg"
-            alt="Bell"
-            width={25}
-            height={25}
-            className="cursor-pointer mx-3 hover:opacity-80 transition-opacity"
-          />
-        </Link>
-        <Link href="/client/setting">
-          <Image
-            src="/svg/Cog.svg"
-            alt="Setting"
-            width={25}
-            height={25}
-            className="cursor-pointer mx-3 hover:opacity-80 transition-opacity"
-          />
-        </Link>
-        <div className="flex items-center relative" ref={userDropdownRef}>
-          <button
-            className="rounded-full border border-[#FE3511] w-11 h-11 mx-2 cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 hover:border-[#F0725C]"
-            onClick={toggleUserDropdown}
-            aria-label="User menu"
-            aria-haspopup="true"
-            aria-expanded={userDropdownOpen}
-          >
-            <Image
-              src="/images/profile.jpg"
-              alt="Profile"
-              width={45}
-              height={45}
-              className="rounded-full"
-            />
-          </button>
-          {userDropdownOpen && (
-            <div
-              className="absolute top-12 right-2 z-20 mt-2 w-36 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-              role="menu"
-              aria-orientation="vertical"
-            >
-              <Link
-                href="/client/profile"
-                className="block px-4 py-2 hover:bg-gray-100"
-                role="menuitem"
+      <div>
+        {authcontextvalue?.isAuthenticated ? (
+          <div className="flex items-center px-6">
+            <Link href="/client/notification" aria-label="Notifications">
+              <Image
+                src="/svg/Bell.svg"
+                alt="Bell"
+                width={25}
+                height={25}
+                className="cursor-pointer mx-3 hover:opacity-80 transition-opacity"
+              />
+            </Link>
+            <Link href="/client/setting">
+              <Image
+                src="/svg/Cog.svg"
+                alt="Setting"
+                width={25}
+                height={25}
+                className="cursor-pointer mx-3 hover:opacity-80 transition-opacity"
+              />
+            </Link>
+            <div className="flex items-center relative" ref={userDropdownRef}>
+              <button
+                className="rounded-full border border-[#FE3511] w-11 h-11 mx-2 cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 hover:border-[#F0725C]"
+                onClick={toggleUserDropdown}
+                aria-label="User menu"
+                aria-haspopup="true"
+                aria-expanded={userDropdownOpen}
               >
-                View Profile
-              </Link>
-              <Link
-                href="/"
-                className="block px-4 py-2 hover:bg-red-600 text-white bg-red-500 rounded-b-md"
-                role="menuitem"
-              >
-                Log Out
-              </Link>
+                <Image
+                  src="/images/profile.jpg"
+                  alt="Profile"
+                  width={45}
+                  height={45}
+                  className="rounded-full"
+                />
+              </button>
+              {userDropdownOpen && (
+                <div
+                  className="absolute top-12 right-2 z-20 mt-2 w-36 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                  role="menu"
+                  aria-orientation="vertical"
+                >
+                  <Link
+                    href="/client/profile"
+                    className="block px-4 py-2 hover:bg-gray-100"
+                    role="menuitem"
+                  >
+                    View Profile
+                  </Link>
+                  <Link
+                    href="/"
+                    className="block px-4 py-2 hover:bg-red-600 text-white bg-red-500 rounded-b-md"
+                    role="menuitem"
+                  >
+                    Log Out
+                  </Link>
+                </div>
+              )}
             </div>
-          )}
-        </div>
+          </div>
+        ) : (
+          <div className="flex items-center px-6">
+            <NavLink href="/client/login">Login</NavLink>
+            <NavLink href="/client/sign-up">Sign Up</NavLink>
+          </div>
+        )}
       </div>
       {searchTerm && (
         <div

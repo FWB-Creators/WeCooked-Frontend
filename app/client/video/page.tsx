@@ -1,5 +1,5 @@
 import React from 'react'
-import NavbarAfter from '../components/NavbarAfter'
+import Navbar from '../components/Navbar'
 import LearningPage from '../components/LearningPage'
 import FoodTypeCard from '../components/FoodTypeCard'
 import MostPopularCourse from '../components/MostPopularCourse'
@@ -13,7 +13,7 @@ import Footer from '../components/Footer'
 export default function MyLearningPage() {
   return (
     <div className="bg-gradient-to-b from-[#F0725C] to-[#FE3511] animate-fadeIn">
-      <NavbarAfter />
+      <Navbar />
       <LearningPage />
       <FoodTypeCard />
       <MostPopularCourse />
