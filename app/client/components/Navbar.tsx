@@ -87,11 +87,23 @@ export default function Navbar() {
         </Link>
       </div>
       <div className="flex items-center px-6">
-        <NavLink href="/client/home">Home</NavLink>
-        <NavLink href="/client/my-learning">My Learning</NavLink>
-        <NavLink href="/client/video">Video</NavLink>
-        <NavLink href="/client/group">Group</NavLink>
-        <NavLink href="/client/private">Private</NavLink>
+        {authcontextvalue?.isAuthenticated ? (
+          <>
+            <NavLink href="/client/home">Home</NavLink>
+            <NavLink href="/client/my-learning">My Learning</NavLink>
+            <NavLink href="/client/video">Video</NavLink>
+            <NavLink href="/client/group">Group</NavLink>
+            <NavLink href="/client/private">Private</NavLink>
+          </>
+        ) : (
+          <>
+            <NavLink href="/">Home</NavLink>
+            <NavLink href="/my-learning">My Learning</NavLink>
+            <NavLink href="/video">Video</NavLink>
+            <NavLink href="/group">Group</NavLink>
+            <NavLink href="/private">Private</NavLink>
+          </>
+        )}
       </div>
       <div className="relative" ref={searchRef}>
         <span id="search-description" className="sr-only">

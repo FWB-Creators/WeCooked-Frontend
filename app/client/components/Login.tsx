@@ -14,7 +14,7 @@ export interface AuthContextValue {
 
 export const AuthProvide = ({ children }: { children: React.ReactNode }) => {
   const [authcontextvalue] = useState<AuthContextValue>({
-    isAuthenticated: true,
+    isAuthenticated: false,
     setIsAuthenticated: () => {},
   })
 
