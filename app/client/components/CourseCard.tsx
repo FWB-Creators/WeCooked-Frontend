@@ -14,8 +14,17 @@ export default function CourseCard({
   imageSrc,
   chefImageUrl
 }: Course) {
+
+  // const slug = title
+  // .toLowerCase() 
+  // .replace(/[^a-z0-9\s-]/g, '')
+  // .trim()
+  // .replace(/\s+/g, '-')
+  // .replace(/--+/g, '-')
+  
   return (
     <Link href={`/client/video/course-detail/${course_id}`}>
+      {/* <Link href={`/client/video/course-detail/${slug}`}> */}
       <div className="bg-white rounded-xl shadow-lg p-6 w-72 transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
         <Image
           src={imageSrc}
