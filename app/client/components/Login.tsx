@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { EyeIcon, EyeSlashIcon, XMarkIcon } from '@heroicons/react/16/solid'
 import Link from 'next/link'
-import { AuthContext } from '@/app/contexts/authcontext'
+import { AuthContext, useAuthContext } from '@/app/contexts/authcontext'
 
 export interface AuthContextValue {
   isAuthenticated: boolean
@@ -13,14 +13,16 @@ export interface AuthContextValue {
 }
 
 export const AuthProvide = ({ children }: { children: React.ReactNode }) => {
-  const [authcontextvalue] = useState<AuthContextValue>({
-    isAuthenticated: false,
-    setIsAuthenticated: () => {},
-  })
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
+
+  const authcontextvalue: AuthContextValue = {
+    isAuthenticated,
+    setIsAuthenticated,
+  }
 
   return (
     <AuthContext.Provider value={authcontextvalue}>
-      <div>{children}</div>
+      {children}
     </AuthContext.Provider>
   )
 }
@@ -28,7 +30,7 @@ export const AuthProvide = ({ children }: { children: React.ReactNode }) => {
 export function Login() {
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const [remember, setRemember] = useState<boolean>(false)
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
+  const { setIsAuthenticated } = useAuthContext()
 
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')

@@ -14,6 +14,7 @@ const courses: Course[] = [...fullmockdata]
 export default function Navbar() {
   const authcontextvalue = useAuthContext()
 
+  const logout = () => authcontextvalue.setIsAuthenticated(false)
   const [userDropdownOpen, setUserDropdownOpen] = useState<boolean>(false)
   const [searchDropdownOpen, setSearchDropdownOpen] = useState<boolean>(false)
   const userDropdownRef = useRef<HTMLDivElement>(null)
@@ -71,10 +72,6 @@ export default function Navbar() {
 
   return (
     <nav className="flex items-center justify-between bg-white py-[15px]">
-      <p>
-        login state ={' '}
-        {authcontextvalue?.isAuthenticated ? 'logged in' : 'logged out'}
-      </p>
       <div className="px-12">
         <Link href="/client/home">
           <Image
@@ -177,13 +174,15 @@ export default function Navbar() {
                   >
                     View Profile
                   </Link>
-                  <Link
-                    href="/"
-                    className="block px-4 py-2 hover:bg-red-600 text-white bg-red-500 rounded-b-md"
-                    role="menuitem"
-                  >
-                    Log Out
-                  </Link>
+                  <button onClick={logout} className="w-full">
+                    <Link
+                      href="/"
+                      className="block px-4 py-2 hover:bg-red-600 text-white bg-red-500 rounded-b-md"
+                      role="menuitem"
+                    >
+                      <p className="flex justify-start">Log Out</p>
+                    </Link>
+                  </button>
                 </div>
               )}
             </div>
