@@ -1,10 +1,9 @@
-'use client'
 import Navbar from '../components/Navbar'
-import LandingPage from '../components/LandingPage'
+import LandingPage from '../components/home/LandingPage'
 import MostPopularCourse from '../components/MostPopularCourse'
-import CurvePage from '../components/CurvePage'
+import CurvePage from '../components/home/CurvePage'
 import RecentCourses from '../components/RecentCourses'
-import RecommendedForyou from '../components/RecommendedForyou'
+import RecommendForYou from '../components/RecommendForYou'
 import ClientReview from '../components/ClientReview'
 import ContactUs from '../components/ContactUs'
 import Footer from '../components/Footer'
@@ -17,7 +16,7 @@ export default function Home() {
       <MostPopularCourse />
       <CurvePage />
       <RecentCourses />
-      <RecommendedForyou />
+      <RecommendForYou />
       <ClientReview />
       <ContactUs />
       <Footer />

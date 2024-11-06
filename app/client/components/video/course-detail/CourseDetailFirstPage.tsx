@@ -4,7 +4,7 @@ import Image from 'next/image'
 export default function CourseDetailFirstPage() {
   return (
     <div className="h-[750px] relative w-full flex flex-col items-center">
-      <div className="absolute left-20 top-36 z-10 max-w-2xl">
+      <div className="absolute left-20 top-28 z-10 max-w-[45%]">
         <h1 className="py-1.5 text-6xl font-bold bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text">
           How to Make Classic Carbonara
         </h1>
@@ -62,13 +62,13 @@ export default function CourseDetailFirstPage() {
           </button>
         </div>
       </div>
-      <div className="absolute right-8 top-20 z-10 w-1/2 md:w-auto">
+      <div className="absolute right-8 top-20 z-10 w-[45%]">
         <Image
           src="/images/pastadish.png"
           alt="Cooked Image"
           width={750}
           height={750}
-          className="object-contain w-full h-auto"
+          className="object-contain w-full h-full"
         />
       </div>
     </div>

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/16/solid'
-import { FAQItem } from '../types/faqitem';
+import { FAQItem } from '@/app/client/types/faqitem';
 
 export default function FAQPage() {
   const [faqs, setFaqs] = useState<FAQItem[]>([

@@ -2,8 +2,8 @@ import React from 'react'
 import Image from 'next/image'
 import { StarIcon, UserGroupIcon, BookOpenIcon, ShoppingBagIcon } from '@heroicons/react/24/outline'
 import { StarIcon as StarSolid } from '@heroicons/react/24/solid'
-import { reviews } from '../data/reviewer'
-import { CourseStats } from '../types/coursestat'
+import { reviews } from '@/app/client/data/reviewer'
+import { CourseStats } from '@/app/client/types/coursestat'
 
 export default function JoinOurCoursePage() {
   const stats: CourseStats = {

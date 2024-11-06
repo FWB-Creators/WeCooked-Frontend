@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from '@/app/client/components/Navbar'
 import Footer from '@/app/client/components/Footer'
-import SearchAndFilterPage from '@/app/client/components/SearchAndFilterPage'
+import SearchAndFilterPage from '@/app/client/components/video/search/SearchAndFilterPage'
 
 export default function Page({ params }: { params: { search: string } }) {
   return (

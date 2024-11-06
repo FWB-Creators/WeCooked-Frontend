@@ -1,7 +1,7 @@
 import Navbar from '../components/Navbar'
-import MyLearning from '../components/MyLearning'
-import ProgressPage from '../components/ProgressPage'
-import GroupPage from '../components/GroupPage'
+import MyLearning from '../components/my-learning/MyLearning'
+import ProgressPage from '../components/my-learning/ProgressPage'
+import GroupPage from '../group/page'
 import Footer from '../components/Footer'
 
 export default function MyLearningPage() {

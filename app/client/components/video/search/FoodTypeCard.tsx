@@ -2,9 +2,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { foodtype } from '../data/food-type'
+import { foodtype } from '@/app/client/data/food-type'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/16/solid'
-import { FoodType } from '../types/foodtype';
+import { FoodType } from '@/app/client/types/foodtype'
 
 function CourseCard({ title, total_course, imageSrc }: FoodType) {
   return (
