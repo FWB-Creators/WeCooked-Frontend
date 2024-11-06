@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
-import CourseCard from './CourseCard';
-import { courses } from '../data/top-course';
+import CourseCard from "../../CourseCard";
+import { courses } from "@/app/client/data/top-course";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
 
 const useResponsiveCards = () => {

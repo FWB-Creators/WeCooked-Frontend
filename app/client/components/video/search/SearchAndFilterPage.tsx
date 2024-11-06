@@ -1,10 +1,10 @@
 'use client'
 import React, { useState, useMemo } from 'react'
-import { Course } from '../types/courses'
-import CourseCard from './CourseCard'
-import { courses as fullmockdata } from '../data/full-mock-data'
+import { Course } from '../../../types/courses'
+import CourseCard from '../../CourseCard'
+import { courses as fullmockdata } from '../../../data/full-mock-data'
 
-const courses: Course[] = [...fullmockdata];
+const courses: Course[] = [...fullmockdata]
 
 interface FilterOption {
   label: string

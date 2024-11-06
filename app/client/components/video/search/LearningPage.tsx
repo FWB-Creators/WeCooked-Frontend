@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import { StarRating } from './StarRating';
+import Image from 'next/image'
+import { StarRating } from '../../StarRating'
 
 export default function LearningPage() {
   return (
@@ -18,10 +18,10 @@ export default function LearningPage() {
         </h1>
         <h1 className="py-1.5 text-7xl font-bold">With Sushi Course</h1>
         <p className="text-lg max-w-lg py-6">
-          I recently completed the &quot;Master Sushi Making&quot; online course, and I
-          couldn&apos;t be happier with my experience! As a beginner, I was a bit
-          intimidated at first, but the instructor made everything feel
-          accessible and fun.
+          I recently completed the &quot;Master Sushi Making&quot; online
+          course, and I couldn&apos;t be happier with my experience! As a
+          beginner, I was a bit intimidated at first, but the instructor made
+          everything feel accessible and fun.
         </p>
         <div className="flex items-center pt-2">
           <div className="flex items-center rounded-full">
@@ -39,7 +39,7 @@ export default function LearningPage() {
           </div>
         </div>
       </div>
-      <div className="absolute right-0 top-10 z-10 w-1/2 md:w-auto hidden md:block">
+      <div className="absolute right-0 top-10 z-10 w-1/2 hidden md:block">
         <Image
           src="/images/sushi-learningpage.png"
           alt="Cooked Image"
@@ -49,21 +49,23 @@ export default function LearningPage() {
         />
       </div>
       <div className="absolute lg:right-20 right-4 lg:top-[640px] top-[540px] z-10 flex space-x-2.5">
-        <button className="px-8 py-2 bg-gradient-to-b from-[#F0725C] to-[#FE3511] text-white rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
-        type="button"
-        aria-label="Start the course"
-        tabIndex={0}
+        <button
+          className="px-8 py-2 bg-gradient-to-b from-[#F0725C] to-[#FE3511] text-white rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+          type="button"
+          aria-label="Start the course"
+          tabIndex={0}
         >
           Get Started
         </button>
-        <button className="px-8 py-2 border-2 border-[#FE3511] rounded-full font-semibold bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
-        type="button"
-        aria-label="View more details"
-        tabIndex={0}
+        <button
+          className="px-8 py-2 border-2 border-[#FE3511] rounded-full font-semibold bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+          type="button"
+          aria-label="View more details"
+          tabIndex={0}
         >
           View More
         </button>
       </div>
     </div>
-  );
+  )
 }

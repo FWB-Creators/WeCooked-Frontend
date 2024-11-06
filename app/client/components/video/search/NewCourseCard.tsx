@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
-import { courses } from '../data/recommended-for-you';
-import CourseCard from './CourseCard';
+import { courses } from "@/app/client/data/new-course";
+import CourseCard from "../../CourseCard";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
 
 const useResponsiveCards = () => {
@@ -22,7 +22,7 @@ const useResponsiveCards = () => {
   return cardsToShow;
 };
 
-export default function RecommendedForYou() {
+export default function NewCourseCard() {
   const [startIndex, setStartIndex] = useState<number>(0);
   const cardsToShow = useResponsiveCards();
   const maxIndex = Math.ceil(courses.length / cardsToShow) - 1;
@@ -38,7 +38,7 @@ export default function RecommendedForYou() {
   return (
     <div className="flex flex-col justify-start py-12">
       <h1 className="text-3xl font-bold mb-2 text-white px-12">
-        Recommended For You
+        New Courses on Wecooked
       </h1>
       <div className="relative flex">
         <div className="flex overflow-hidden py-6">
