@@ -39,8 +39,8 @@ export default function ProgressCard({
   }
 
   const getProgressColor = (progress: number) => {
-    if (progress === 100) return 'bg-green-500'
-    if (progress > 0) return 'bg-[#FE3511]'
+    if (progress === 100) return 'bg-gradient-to-r from-[#22c55e] to-[#16a34a]'
+    if (progress > 0) return 'bg-gradient-to-r from-[#ef4444] to-[#dc2626]'
     return 'bg-gray-200'
   }
 

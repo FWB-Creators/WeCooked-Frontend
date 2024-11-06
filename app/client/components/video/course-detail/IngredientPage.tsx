@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import { ingredients } from '../data/ingredient';
+import { ingredients } from '@/app/client/data/ingredient';
 
 export default function IngredientPage() {
   return (

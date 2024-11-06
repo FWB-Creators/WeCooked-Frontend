@@ -1,8 +1,8 @@
 'use client'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
-import CourseCard from './CourseCard'
-import { courses } from '../data/upcoming-course'
+import CourseCard from '../CourseCard'
+import { courses } from '../../data/upcoming-course'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/16/solid'
 
 const useResponsiveCards = () => {

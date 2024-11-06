@@ -1,9 +1,9 @@
 import NavbarAfter from '../components/NavbarAfter'
-import LandingPage from '../components/LandingPage'
+import LandingPage from '../components/home/LandingPage'
 import MostPopularCourse from '../components/MostPopularCourse'
-import CurvePage from '../components/CurvePage'
+import CurvePage from '../components/home/CurvePage'
 import RecentCourses from '../components/RecentCourses'
-import RecommendedForyou from '../components/RecommendedForyou'
+import RecommendedForYou from '../components/RecommendedForYou'
 import ClientReview from '../components/ClientReview'
 import ContactUs from '../components/ContactUs'
 import Footer from '../components/Footer'
@@ -16,7 +16,7 @@ export default function Home() {
       <MostPopularCourse />
       <CurvePage />
       <RecentCourses />
-      <RecommendedForyou />
+      <RecommendedForYou />
       <ClientReview />
       <ContactUs />
       <Footer />

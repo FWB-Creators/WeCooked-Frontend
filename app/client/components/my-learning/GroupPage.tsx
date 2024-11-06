@@ -1,6 +1,6 @@
 import React from 'react'
-import { group } from '../data/group-course';
-import GroupCard from './GroupCard';
+import { group } from '../../data/group-course';
+import GroupCard from '../GroupCard';
 
 export default function GroupPage() {
   return (
