@@ -1,6 +1,6 @@
 //authcontext.ts
 import { createContext, useContext } from 'react'
-import { AuthContextValue } from '../client/components/Login'
+import { AuthContextValue } from '../client/components/login&forget-password/Login'
 
 export const AuthContext = createContext<AuthContextValue | undefined>(
   undefined
