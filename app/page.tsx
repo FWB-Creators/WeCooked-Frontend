@@ -3,7 +3,7 @@ import LandingPage from './client/components/home/LandingPage'
 import MostPopularCourse from './client/components/MostPopularCourse'
 import CurvePage from './client/components/home/CurvePage'
 import RecentCourses from './client/components/RecentCourses'
-import RecommendedForYou from './client/components/RecommendedForYou'
+import RecommendForYou from './client/components/RecommendForYou'
 import ClientReview from './client/components/ClientReview'
 import ContactUs from './client/components/ContactUs'
 import Footer from './client/components/Footer'
@@ -16,7 +16,7 @@ export default function Home() {
       <MostPopularCourse />
       <CurvePage />
       <RecentCourses />
-      <RecommendedForYou />
+      <RecommendForYou />
       <ClientReview />
       <ContactUs />
       <Footer />

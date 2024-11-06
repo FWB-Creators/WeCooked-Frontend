@@ -22,7 +22,7 @@ const useResponsiveCards = () => {
   return cardsToShow;
 };
 
-export default function RecommendedForYou() {
+export default function RecommendForYou() {
   const [startIndex, setStartIndex] = useState<number>(0);
   const cardsToShow = useResponsiveCards();
   const maxIndex = Math.ceil(courses.length / cardsToShow) - 1;
