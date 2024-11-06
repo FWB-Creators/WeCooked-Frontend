@@ -33,7 +33,9 @@ export default function Navbar() {
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') {
-      const formattedSearchTerm = searchTerm.replace(/ /g, '-')
+      const formattedSearchTerm = encodeURIComponent(
+        searchTerm.trim().replace(/ /g, '-')
+      )
       router.push(`/client/video/search/${formattedSearchTerm}`)
     }
   }
@@ -174,14 +176,15 @@ export default function Navbar() {
                   >
                     View Profile
                   </Link>
-                  <button onClick={logout} className="w-full">
-                    <Link
-                      href="/"
-                      className="block px-4 py-2 hover:bg-red-600 text-white bg-red-500 rounded-b-md"
-                      role="menuitem"
-                    >
-                      <p className="flex justify-start">Log Out</p>
-                    </Link>
+                  <button
+                    onClick={() => {
+                      logout()
+                      router.push('/')
+                    }}
+                    className="block px-4 py-2 w-full text-left hover:bg-red-600 text-white bg-red-500 rounded-b-md"
+                    role="menuitem"
+                  >
+                    Log Out
                   </button>
                 </div>
               )}
@@ -212,9 +215,11 @@ export default function Navbar() {
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
                     e.preventDefault()
-                    window.location.href = `/client/video/course-detail/${encodeURIComponent(
-                      course.course_id
-                    )}`
+                    router.push(
+                      `/client/video/course-detail/${encodeURIComponent(
+                        course.course_id
+                      )}`
+                    )
                   }
                 }}
               >

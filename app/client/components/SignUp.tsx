@@ -61,6 +61,8 @@ export default function SignUp() {
         <form
           onSubmit={handleSubmit}
           className="flex flex-col w-full space-y-4"
+          aria-label="Sign up form"
+          noValidate
         >
           <div className="grid grid-cols-2 gap-4">
             <div>
