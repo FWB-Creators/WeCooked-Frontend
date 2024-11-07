@@ -5,22 +5,22 @@ import { Group } from '../types/group'
 import { CalendarIcon } from '@heroicons/react/24/outline'
 
 export default function GroupCard({
-  course_id,
+  // course_id,
   title,
   date,
   description,
   image,
 }: Group) {
-  // const slug = title
-  //   .toLowerCase()
-  //   .replace(/[^a-z0-9\s-]/g, '')
-  //   .trim()
-  //   .replace(/\s+/g, '-')
-  //   .replace(/--+/g, '-')
+  const slug = title
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/--+/g, '-')
 
   return (
-    <Link href={`/client/my-learning/${course_id}`}>
-      {/* <Link href={`/client/my-learning/${slug}`}> */}
+    // <Link href={`/client/my-learning/${course_id}`}>
+    <Link href={`/client/my-learning/${slug}`}>
       <div className="relative z-10 p-5 pr-7 border rounded-xl bg-white my-4 transition-all duration-300 hover:scale-[1.01] hover:shadow-lg">
         <div className="flex gap-4">
           <div className="relative w-28 h-28 rounded-lg overflow-hidden">
