@@ -13,6 +13,16 @@ export default function SignUp() {
   const [password, setPassword] = useState<string>('')
   const router = useRouter()
 
+  const clientData = {
+    firstname: firstname,
+    lastname: lastname,
+    email: email,
+    password: password,
+  }
+
+  const clientJSON = JSON.stringify(clientData)
+  console.log(clientJSON) //to be continue in next sprint please don't delete
+
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev)
   }

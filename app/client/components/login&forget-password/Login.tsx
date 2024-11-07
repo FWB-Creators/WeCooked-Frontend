@@ -35,6 +35,14 @@ export default function Login() {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
+  const clientAuthData = {
+    email: email,
+    password: password,
+  }
+
+  const clientAuthJSON = JSON.stringify(clientAuthData)
+  console.log(clientAuthJSON) //to be continue in next sprint please don't delete
+
   const router = useRouter()
 
   const login = () => setIsAuthenticated(true)
