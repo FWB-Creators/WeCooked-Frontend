@@ -19,7 +19,6 @@ export default function SignUp() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log(firstname, lastname, email, password)
     router.push('/client/login')
   }
 

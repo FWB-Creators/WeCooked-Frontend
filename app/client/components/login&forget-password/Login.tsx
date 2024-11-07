@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   )
 }
 
-export function Login() {
+export default function Login() {
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const [remember, setRemember] = useState<boolean>(false)
   const { setIsAuthenticated } = useAuthContext()
@@ -43,7 +43,7 @@ export function Login() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log(email, password)
+    login()
     router.push('/client/home')
   }
 
@@ -140,7 +140,6 @@ export function Login() {
             </div>
 
             <button
-              onClick={login}
               type="submit"
               className="mt-8 w-full py-3 px-4 rounded-lg font-semibold text-white bg-gradient-to-t from-[#FE3511] to-[#F0725C] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
             >

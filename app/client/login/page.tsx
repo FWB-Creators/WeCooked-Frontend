@@ -1,5 +1,5 @@
 import React from 'react'
-import { Login } from '../components/login&forget-password/Login'
+import Login from '../components/login&forget-password/Login'
 import { ErrorBoundary } from 'react-error-boundary'
 import { Suspense } from 'react'
 
