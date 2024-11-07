@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Course } from '../types/courses'
 import { StarRating } from './StarRating'
+import { titleString } from '../data/title-string'
 
 export default function CourseCard({
   // course_id,
@@ -15,12 +16,7 @@ export default function CourseCard({
   chefImageUrl
 }: Course) {
 
-  const slug = title
-  .toLowerCase() 
-  .replace(/[^a-z0-9\s-]/g, '')
-  .trim()
-  .replace(/\s+/g, '-')
-  .replace(/--+/g, '-')
+  const slug = titleString(title)
   
   return (
     // <Link href={`/client/video/course-detail/${course_id}`}>

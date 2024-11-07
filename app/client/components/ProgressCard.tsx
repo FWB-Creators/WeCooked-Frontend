@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Progress } from '../types/progress'
 import { ClockIcon } from '@heroicons/react/24/outline'
+import { titleString } from '../data/title-string'
 
 export default function ProgressCard({
   // course_id,
@@ -45,13 +46,7 @@ export default function ProgressCard({
   }
 
   const status = getStatus(progress)
-
-  const slug = title
-    .toLowerCase() 
-    .replace(/[^a-z0-9\s-]/g, '')
-    .trim()
-    .replace(/\s+/g, '-')
-    .replace(/--+/g, '-')
+  const slug = titleString(title)
 
   return (
     // <Link href={`/client/my-learning/${course_id}`}>

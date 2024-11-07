@@ -1,10 +1,13 @@
 'use client'
 import React, { useState, useRef, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { MagnifyingGlassIcon, CalendarIcon } from '@heroicons/react/24/solid'
 import CustomCalendar from './CustomCalendar'
 
 export default function CalendarPage() {
+  const router = useRouter()
+  const [title, setTitle] = useState('')
   const [value, setValue] = useState<{
     startDate: Date | null
     endDate: Date | null
@@ -36,7 +39,9 @@ export default function CalendarPage() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log('Selected dates:', value)
+    if (title.trim()) {
+      router.push(`/client/group/search/${encodeURIComponent(title)}`)
+    }
   }
 
   const formatDateRange = () => {
@@ -82,6 +87,8 @@ export default function CalendarPage() {
                   type="text"
                   placeholder="Search for a cuisine type"
                   className="w-full pl-11 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
                   required
                 />
                 <MagnifyingGlassIcon className="h-5 w-5 text-gray-400 absolute left-3 bottom-3" />
