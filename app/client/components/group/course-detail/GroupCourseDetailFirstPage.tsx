@@ -1,15 +1,12 @@
 import React from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
-import { courses } from '../../data/advert'
 
-export default function AdvertPage() {
-  const course = courses[0]
+export default function GroupCourseDetailFirstPage() {
   return (
     <div className="min-h-[800px] relative w-full flex flex-col items-center">
-      <div className="absolute left-20 top-36 z-10 w-1/2">
+      <div className="absolute left-20 top-28 z-10 max-w-[45%]">
         <h1 className="py-1.5 text-6xl font-bold bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text">
-          Unlock the Secret to the Perfect Pork Chop Steak
+          Secrets to a Flavor-Packed Pork Chop Steak
         </h1>
         <p className="text-xl max-w-2xl pt-12">
           Discover the techniques behind creating an unforgettable pork chop
@@ -24,7 +21,6 @@ export default function AdvertPage() {
             <Image
               src="/images/chef.png"
               alt="Profile picture of chef"
-              priority
               width={50}
               height={50}
               className="rounded-full"
@@ -62,23 +58,18 @@ export default function AdvertPage() {
           </button>
         </div>
         <div className="flex">
-          <Link
-            href={`/client/group/course-detail/${course.course_id}`}
-            className="px-7 py-2 bg-gradient-to-b from-[#F0725C] to-[#FE3511] text-white rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
-            role="button"
-            aria-label="Start cooking pork chop steak course"
-          >
+          <button className="px-7 py-2 bg-gradient-to-b from-[#F0725C] to-[#FE3511] text-white rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
             Let&apos;s Cook
-          </Link>
+          </button>
         </div>
       </div>
-      <div className="absolute right-0 top-20 z-10 w-1/2 md:w-auto">
+      <div className="absolute right-8 top-20 z-10 w-[45%]">
         <Image
           src="/images/plate-grilled-steak.png"
           alt="Cooked Image"
-          width={400}
-          height={400}
-          className="object-contain w-full h-auto"
+          width={750}
+          height={750}
+          className="object-contain w-full h-full"
         />
       </div>
     </div>

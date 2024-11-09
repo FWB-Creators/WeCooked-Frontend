@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 export default function CourseDetailFirstPage() {
   return (
-    <div className="h-[750px] relative w-full flex flex-col items-center">
+    <div className="min-h-[800px] relative w-full flex flex-col items-center">
       <div className="absolute left-20 top-28 z-10 max-w-[45%]">
         <h1 className="py-1.5 text-6xl font-bold bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text">
           How to Make Classic Carbonara

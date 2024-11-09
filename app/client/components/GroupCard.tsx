@@ -3,20 +3,17 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Group } from '../types/group'
 import { CalendarIcon } from '@heroicons/react/24/outline'
-import { titleString } from '../data/title-string'
 
 export default function GroupCard({
-  // course_id,
+  course_id,
   title,
   date,
   description,
   image,
 }: Group) {
-  const slug = titleString(title)
-
+  
   return (
-    // <Link href={`/client/my-learning/${course_id}`}>
-    <Link href={`/client/my-learning/${slug}`}>
+    <Link href={`/client/my-learning/${course_id}`}>
       <div className="relative z-10 p-5 pr-7 border rounded-xl bg-white my-4 transition-all duration-300 hover:scale-[1.01] hover:shadow-lg">
         <div className="flex gap-4">
           <div className="relative w-28 h-28 rounded-lg overflow-hidden">

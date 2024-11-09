@@ -2,10 +2,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Course } from '../types/courses'
 import { StarRating } from './StarRating'
-import { titleString } from '../data/title-string'
 
 export default function CourseCard({
-  // course_id,
+  course_id,
   title,
   cuisine,
   price,
@@ -13,14 +12,11 @@ export default function CourseCard({
   rating,
   chef,
   imageSrc,
-  chefImageUrl
+  chefImageUrl,
 }: Course) {
-
-  const slug = titleString(title)
   
   return (
-    // <Link href={`/client/video/course-detail/${course_id}`}>
-      <Link href={`/client/video/course-detail/${slug}`}>
+    <Link href={`/client/video/course-detail/${course_id}`}>
       <div className="bg-white rounded-xl shadow-lg p-6 w-72 transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
         <Image
           src={imageSrc}
@@ -52,6 +48,6 @@ export default function CourseCard({
           </p>
         </div>
       </div>
-    </Link> 
+    </Link>
   )
 }

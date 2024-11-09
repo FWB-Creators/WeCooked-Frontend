@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { ingredients } from '@/app/client/data/ingredient';
 
-export default function IngredientPage() {
+export default function GroupIngredientPage() {
   return (
     <div className="h-[450px] relative w-full flex flex-col items-center">
       <div className="absolute left-0 top-[-140px] z-10 w-1/2 md:w-auto">
@@ -21,7 +21,7 @@ export default function IngredientPage() {
         </h1>
         <ul className="list-disc text-lg max-w-2xl p-8" aria-label="Course ingredients">
           {ingredients.map((ingredient) => (
-            ingredient.id === 0 &&
+            ingredient.id === 1 &&
               ingredient.name.map((item, index) => (
                 <li key={`${ingredient.id}-${index}`} className="py-1 text-gray-700">
                   {item}
