@@ -6,6 +6,18 @@ import { useRouter } from 'next/navigation'
 import { EyeIcon, EyeSlashIcon, XMarkIcon } from '@heroicons/react/16/solid'
 import Link from 'next/link'
 import { AuthContext, useAuthContext } from '@/app/contexts/authcontext'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+
+// Define the validation schema
+const loginSchema = z.object({
+  email: z.string().email('Invalid email address'),
+  password: z.string().min(8, 'Password must be 8 letters at least'),
+})
+
+// Infer TypeScript type for form data from schema
+type LoginFormData = z.infer<typeof loginSchema>
 
 export interface AuthContextValue {
   isAuthenticated: boolean
@@ -28,20 +40,17 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 }
 
 export default function Login() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema), //integrate zod with reactForm
+  })
+
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const [remember, setRemember] = useState<boolean>(false)
   const { setIsAuthenticated } = useAuthContext()
-
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
-
-  const clientAuthData = {
-    email: email,
-    password: password,
-  }
-
-  const clientAuthJSON = JSON.stringify(clientAuthData)
-  console.log(clientAuthJSON) //to be continue in next sprint please don't delete
 
   const router = useRouter()
 
@@ -49,8 +58,9 @@ export default function Login() {
   const togglePasswordVisibility = () => setShowPassword((prev) => !prev)
   const toggleRemember = () => setRemember((prev) => !prev)
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  // Update handleFormSubmit to handle form data
+  const handleFormSubmit = (data: LoginFormData) => {
+    console.log(JSON.stringify(data)) // Placeholder for auth logic
     login()
     router.push('/client/home')
   }
@@ -86,22 +96,27 @@ export default function Login() {
           <div className="text-2xl font-bold mt-14">
             <div>Nice to see you again</div>
           </div>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit(handleFormSubmit)}>
             <div className="mt-6">
               <p className="mb-1">Email</p>
               <input
-                onChange={(e) => setEmail(e.target.value)}
+                {...register('email')}
                 className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
                 type="email"
                 placeholder="Email or phone number"
                 required
               />
+              {errors.email && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.email.message}
+                </p>
+              )}
             </div>
             <div className="mt-6">
               <p className="mb-1">Password</p>
               <div className="relative w-full">
                 <input
-                  onChange={(e) => setPassword(e.target.value)}
+                  {...register('password')}
                   className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
                   type={showPassword ? 'text' : 'password'}
                   placeholder="Enter password"
@@ -119,6 +134,11 @@ export default function Login() {
                   )}
                 </button>
               </div>
+              {errors.password && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.password.message}
+                </p>
+              )}
             </div>
             <div className="flex flex-row justify-between items-center mt-6">
               <div className="flex items-center gap-x-2">

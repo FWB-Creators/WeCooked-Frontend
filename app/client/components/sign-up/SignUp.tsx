@@ -21,7 +21,7 @@ export default function SignUp() {
   }
 
   const clientJSON = JSON.stringify(clientData)
-  console.log(clientJSON) //to be continue in next sprint please don't delete
+  console.log(clientJSON)
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev)
@@ -29,7 +29,15 @@ export default function SignUp() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    router.push('/client/login')
+    try {
+      if (!firstname || !lastname || !email || !password) {
+        //validation
+        throw new Error('All fields are required')
+      }
+      router.push('/client/login')
+    } catch (error) {
+      console.error('Registration failed:', error)
+    }
   }
 
   return (
@@ -78,6 +86,7 @@ export default function SignUp() {
               <p className="mb-1">First Name</p>
               <input
                 onChange={(e) => setFirstname(e.target.value)}
+                value={firstname}
                 type="text"
                 placeholder="First Name"
                 required
@@ -88,6 +97,7 @@ export default function SignUp() {
               <p className="mb-1">Last Name</p>
               <input
                 onChange={(e) => setLastname(e.target.value)}
+                value={lastname}
                 type="text"
                 placeholder="Last Name"
                 required
@@ -99,6 +109,7 @@ export default function SignUp() {
             <p className="mb-1">Email</p>
             <input
               onChange={(e) => setEmail(e.target.value)}
+              value={email}
               type="email"
               placeholder="Email"
               required
@@ -109,6 +120,7 @@ export default function SignUp() {
             <p className="mb-1">Password</p>
             <input
               onChange={(e) => setPassword(e.target.value)}
+              value={password}
               type={showPassword ? 'text' : 'password'}
               placeholder="Password"
               required
