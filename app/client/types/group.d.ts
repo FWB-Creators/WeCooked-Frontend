@@ -1,7 +1,7 @@
 export interface Group {
   course_id: number
   title: string
-  date: string
+  date: Date
   description: string
   image: string
 }

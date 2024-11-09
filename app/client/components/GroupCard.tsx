@@ -1,8 +1,8 @@
-import React from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
-import { Group } from '../types/group'
-import { CalendarIcon } from '@heroicons/react/24/outline'
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Group } from '../types/group';
+import { CalendarIcon } from '@heroicons/react/24/outline';
 
 export default function GroupCard({
   course_id,
@@ -11,7 +11,10 @@ export default function GroupCard({
   description,
   image,
 }: Group) {
-  
+
+  const formattedDate = date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  const formattedTime = date.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+
   return (
     <Link href={`/client/my-learning/${course_id}`}>
       <div className="relative z-10 p-5 pr-7 border rounded-xl bg-white my-4 transition-all duration-300 hover:scale-[1.01] hover:shadow-lg">
@@ -26,7 +29,9 @@ export default function GroupCard({
             <div className="flex items-center gap-4 mb-4">
               <div className="flex items-center gap-1 text-gray-600">
                 <CalendarIcon className="w-5 h-5 text-[#FE3511]" />
-                <p className="font-semibold text-black">{date}</p>
+                <p className="font-semibold text-black">
+                  {formattedDate}, at {formattedTime}
+                </p>
               </div>
               <div className="flex items-center gap-2"></div>
             </div>
@@ -44,5 +49,5 @@ export default function GroupCard({
         </div>
       </div>
     </Link>
-  )
+  );
 }
