@@ -11,6 +11,18 @@ import { useAuthContext } from '@/app/contexts/authcontext'
 
 const courses: Course[] = [...fullmockdata]
 
+//for set the local state in local storage (need to declare in useEffect to prevent the netlify error)
+export const AuthLocal = () => {
+  const [authLocalState, setAuthLocalState] = useState<string | null>(null)
+
+  useEffect(() => {
+    const AuthLocalState = localStorage.getItem('isAuthenticated')
+    setAuthLocalState(AuthLocalState)
+  }, [])
+
+  return authLocalState
+}
+
 export default function Navbar() {
   const authcontextvalue = useAuthContext()
 
@@ -93,8 +105,7 @@ export default function Navbar() {
         </Link>
       </div>
       <div className="flex items-center px-6">
-        {authcontextvalue?.isAuthenticated ||
-        localStorage.getItem('isAuthenticated') ? (
+        {authcontextvalue?.isAuthenticated || AuthLocal() == 'true' ? (
           <>
             <NavLink href="/client/home">Home</NavLink>
             <NavLink href="/client/my-learning">My Learning</NavLink>
@@ -135,8 +146,7 @@ export default function Navbar() {
         />
       </div>
       <div>
-        {authcontextvalue?.isAuthenticated ||
-        localStorage.getItem('isAuthenticated') ? (
+        {authcontextvalue?.isAuthenticated || AuthLocal() == 'true' ? (
           <div className="flex items-center px-6">
             <Link href="/client/notification" aria-label="Notifications">
               <Image
