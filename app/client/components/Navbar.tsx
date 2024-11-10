@@ -14,7 +14,6 @@ const courses: Course[] = [...fullmockdata]
 export default function Navbar() {
   const authcontextvalue = useAuthContext()
 
-  const logout = () => authcontextvalue.setIsAuthenticated(false)
   const [userDropdownOpen, setUserDropdownOpen] = useState<boolean>(false)
   const [searchDropdownOpen, setSearchDropdownOpen] = useState<boolean>(false)
   const userDropdownRef = useRef<HTMLDivElement>(null)
@@ -22,6 +21,12 @@ export default function Navbar() {
   const [searchTerm, setSearchTerm] = useState<string>('')
   const [filteredCourses, setFilteredCourses] = useState<Course[]>(courses)
   const router = useRouter()
+
+  const logout = () => {
+    authcontextvalue.setIsAuthenticated(false)
+    localStorage.removeItem('isAuthenticated')
+    router.push('/')
+  }
 
   const toggleUserDropdown = () => {
     setUserDropdownOpen((prevState) => !prevState)
@@ -177,10 +182,7 @@ export default function Navbar() {
                     View Profile
                   </Link>
                   <button
-                    onClick={() => {
-                      logout()
-                      router.push('/')
-                    }}
+                    onClick={logout}
                     className="block px-4 py-2 w-full text-left hover:bg-red-600 text-white bg-red-500 rounded-b-md"
                     role="menuitem"
                   >

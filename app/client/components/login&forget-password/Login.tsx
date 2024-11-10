@@ -54,15 +54,19 @@ export default function Login() {
 
   const router = useRouter()
 
-  const login = () => setIsAuthenticated(true)
+  const login = () => {
+    setIsAuthenticated(true)
+    router.push('/client/home')
+    localStorage.setItem('isAuthenticated', 'true')
+  }
+
   const togglePasswordVisibility = () => setShowPassword((prev) => !prev)
   const toggleRemember = () => setRemember((prev) => !prev)
 
   // Update handleFormSubmit to handle form data
   const handleFormSubmit = (data: LoginFormData) => {
     console.log(JSON.stringify(data)) // Placeholder for auth logic
-    login()
-    router.push('/client/home')
+    login() //set login state to true
   }
 
   return (
