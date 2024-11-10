@@ -91,7 +91,8 @@ export default function Navbar() {
         </Link>
       </div>
       <div className="flex items-center px-6">
-        {authcontextvalue?.isAuthenticated ? (
+        {authcontextvalue?.isAuthenticated ||
+        localStorage.getItem('isAuthenticated') ? (
           <>
             <NavLink href="/client/home">Home</NavLink>
             <NavLink href="/client/my-learning">My Learning</NavLink>
@@ -132,7 +133,8 @@ export default function Navbar() {
         />
       </div>
       <div>
-        {authcontextvalue?.isAuthenticated ? (
+        {authcontextvalue?.isAuthenticated ||
+        localStorage.getItem('isAuthenticated') ? (
           <div className="flex items-center px-6">
             <Link href="/client/notification" aria-label="Notifications">
               <Image

@@ -57,7 +57,9 @@ export default function Login() {
   const login = () => {
     setIsAuthenticated(true)
     router.push('/client/home')
-    localStorage.setItem('isAuthenticated', 'true')
+    if (remember == true) {
+      localStorage.setItem('isAuthenticated', 'true')
+    }
   }
 
   const togglePasswordVisibility = () => setShowPassword((prev) => !prev)
