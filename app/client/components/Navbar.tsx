@@ -24,7 +24,9 @@ export default function Navbar() {
 
   const logout = () => {
     authcontextvalue.setIsAuthenticated(false)
-    localStorage.removeItem('isAuthenticated')
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('isAuthenticated')
+    }
     router.push('/')
   }
 

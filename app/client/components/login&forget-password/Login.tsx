@@ -56,11 +56,9 @@ export default function Login() {
   const login = () => {
     setIsAuthenticated(true)
     router.push('/client/home')
-    if (remember == true) {
-      if (typeof window !== 'undefined') {
-        // Access localStorage here (to prevent netlify approvement fail)
-        localStorage.setItem('isAuthenticated', 'true')
-      }
+    if (remember == true && typeof window !== 'undefined') {
+      // Access localStorage here (to prevent netlify approvement fail)
+      localStorage.setItem('isAuthenticated', 'true')
     }
   }
 
