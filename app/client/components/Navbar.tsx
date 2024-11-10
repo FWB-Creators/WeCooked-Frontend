@@ -11,7 +11,11 @@ import { useAuthContext } from '@/app/contexts/authcontext'
 
 const courses: Course[] = [...fullmockdata]
 
-//for set the local state in local storage (need to declare in useEffect to prevent the netlify error)
+/**
+ * Custom hook to manage authentication state in localStorage.
+ * Wrapped in useEffect to prevent SSR issues with Netlify.
+ * @returns {string | null} The authentication state
+ */
 export const AuthLocal = () => {
   const [authLocalState, setAuthLocalState] = useState<string | null>(null)
 
