@@ -3,4 +3,5 @@ export interface Video {
   videoTitle: string
   videoPath: { quality: string; src: string }[]
   timestamps: Timestamp[]
+  tutorial: Tutorial[]
 }

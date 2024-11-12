@@ -1,17 +1,24 @@
 'use client'
 import { useRef, useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { PauseIcon, PlayIcon, XMarkIcon } from '@heroicons/react/16/solid'
 import { Timestamp } from '../../types/timestamp'
 import { Video } from '../../types/video'
+import { Tutorial } from '../../types/Tutorial'
+import { PlayCircleIcon } from '@heroicons/react/24/outline'
 
 const VideoPlayer: React.FC<Video> = ({
   videoPath,
   timestamps: initialTimestamps,
+  tutorial: initialTutorial,
 }) => {
+  const router = useRouter()
   const videoRef = useRef<HTMLVideoElement>(null)
 
   const [currentSrc] = useState<string | null>(videoPath[0]?.src || '')
-  const [quality, setQuality] = useState<string>(videoPath[0]?.quality || '720p')
+  const [quality, setQuality] = useState<string>(
+    videoPath[0]?.quality || '720p'
+  )
   const [isPlaying, setIsPlaying] = useState<boolean>(false)
   const [progress, setProgress] = useState<number>(0)
   const [volume, setVolume] = useState<number>(1)
@@ -19,10 +26,16 @@ const VideoPlayer: React.FC<Video> = ({
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false)
   const [isSound, setIsSound] = useState<boolean>(true)
   const [currentPopup, setCurrentPopup] = useState<string | null>(null)
+  const [typePopup, setTypePopup] = useState<string | null>(null)
   const [countdown, setCountdown] = useState<number | null>(null)
   const [isCountingDown, setIsCountingDown] = useState<boolean>(false)
-  const [countdownInterval, setCountdownInterval] = useState<NodeJS.Timeout | null>(null)
+  const [countdownInterval, setCountdownInterval] =
+    useState<NodeJS.Timeout | null>(null)
   const [timestamps, setTimestamps] = useState<Timestamp[]>(initialTimestamps)
+  const [tutorial, setTutorial] = useState<Tutorial[]>(initialTutorial)
+  const [currentTutorialId, setCurrentTutorialId] = useState<number | null>(
+    null
+  )
 
   useEffect(() => {
     const video = videoRef.current
@@ -33,22 +46,43 @@ const VideoPlayer: React.FC<Video> = ({
       const current = video.currentTime
       const duration = video.duration
       setProgress((current / duration) * 100)
-      if (isCountingDown) return null
 
       timestamps.forEach((timestamp) => {
         if (
           Math.floor(current) === Math.floor(timestamp.timeStop) &&
           !timestamp.timeTriggered
         ) {
-          setCurrentPopup(`${"Time Tracking"}`)
-          setCountdown(timestamp.timecountdown)
+          setCurrentPopup('Time Tracking')
+          setCountdown(timestamp.timeCountdown)
           video.pause()
           setIsPlaying(false)
           setIsCountingDown(false)
 
           setTimestamps((prev) =>
             prev.map((t) =>
-              t.timeStop === timestamp.timeStop ? { ...t, timeTriggered: true } : t
+              t.timeStop === timestamp.timeStop
+                ? { ...t, timeTriggered: true }
+                : t
+            )
+          )
+        }
+      })
+
+      tutorial.forEach((tutorialItem) => {
+        if (
+          Math.floor(current) === Math.floor(tutorialItem.timeStop) &&
+          !tutorialItem.timeTriggered
+        ) {
+          setTypePopup('Step-by-Step Tutorial Available')
+          setCurrentTutorialId(tutorialItem.tutorialId)
+          video.pause()
+          setIsPlaying(false)
+
+          setTutorial((prev) =>
+            prev.map((t) =>
+              t.timeStop === tutorialItem.timeStop
+                ? { ...t, timeTriggered: true }
+                : t
             )
           )
         }
@@ -56,11 +90,14 @@ const VideoPlayer: React.FC<Video> = ({
     }
 
     video.addEventListener('timeupdate', handleTimeUpdate)
+    return () => video.removeEventListener('timeupdate', handleTimeUpdate)
+  }, [timestamps, tutorial, isCountingDown])
 
-    return () => {
-      video.removeEventListener('timeupdate', handleTimeUpdate)
+  const handleTutorialConfirm = () => {
+    if (currentTutorialId !== null) {
+      router.push(`/client/my-learning/tutorial/${currentTutorialId}`)
     }
-  }, [timestamps])
+  }
 
   // Keydown event listener for left and right arrow keys
   useEffect(() => {
@@ -214,6 +251,7 @@ const VideoPlayer: React.FC<Video> = ({
             clearInterval(interval)
             setCountdownInterval(null)
             setCurrentPopup(null)
+            setTypePopup(null)
             setCountdown(null)
             setIsCountingDown(false)
             video.play()
@@ -238,6 +276,7 @@ const VideoPlayer: React.FC<Video> = ({
         setCountdownInterval(null)
       }
       setCurrentPopup(null)
+      setTypePopup(null)
       setCountdown(null)
       setIsCountingDown(false)
       video.play()
@@ -282,7 +321,7 @@ const VideoPlayer: React.FC<Video> = ({
         {/* Popup */}
         {currentPopup && (
           <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
-            <div className="relative bg-white text-black w-1/2 h-1/2 px-6 py-4 rounded-lg shadow-lg flex flex-col items-center justify-center z-10">
+            <div className="relative bg-white text-black w-[45%] h-[45%] px-6 py-4 rounded-lg shadow-lg flex flex-col items-center justify-center z-10">
               <div className="font-semibold pb-12 text-3xl bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text">
                 {currentPopup}
               </div>
@@ -305,6 +344,44 @@ const VideoPlayer: React.FC<Video> = ({
                   <PauseIcon className="w-5 h-5" />
                 </button>
               </div>
+              <div className="absolute right-0 top-0">
+                <button
+                  onClick={() => handlePopupAction('close')}
+                  className="absolute right-3 top-3 bg-transparent border-none p-0 cursor-pointer"
+                >
+                  <XMarkIcon className="w-6 h-6 text-[#F0725C] hover:text-[#FE3511] transition-colors" />
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {typePopup && (
+          <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
+            <div className="relative bg-white text-black w-[45%] h-1/3 px-6 py-4 rounded-lg shadow-lg flex flex-col items-center justify-center z-10">
+              <div className="flex justify-between w-11/12 gap-12">
+                <div className="">
+                  <div className="absolute mt-2 w-[70px] h-[70px] bg-[#F0725C] opacity-20 rounded-xl"></div>
+                  <PlayCircleIcon className="relative top-5 left-[13px] w-11 h-11 text-[#F0725C]" />
+                </div>
+                <div className="w-5/6">
+                  <div className="font-semibold text-2xl bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text">
+                    {typePopup}
+                  </div>
+                  <div className="text-gray-500 pr-2">
+                    <p className="my-6">
+                      Click here to access the full tutorial and master this
+                      recipe with detailed guidance!
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <button
+                onClick={handleTutorialConfirm}
+                className="py-3 w-11/12 px-4 rounded-lg font-semibold text-white bg-gradient-to-t from-[#FE3511] to-[#F0725C] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
+              >
+                Yes, Confirm
+              </button>
               <div className="absolute right-0 top-0">
                 <button
                   onClick={() => handlePopupAction('close')}
@@ -413,11 +490,10 @@ const VideoPlayer: React.FC<Video> = ({
             onClick={handleProgressClick}
           >
             <div
-              className="h-2 bg-red-500 rounded"
+              className="h-2 bg-gradient-to-r from-[#fe3511] to-[#7600d0] rounded"
               style={{ width: `${progress}%` }}
             ></div>
 
-            {/* Yellow markers for timestamps */}
             {timestamps.map((timestamp) => {
               const duration = videoRef.current?.duration || 1
               const markerPosition = (timestamp.timeStop / duration) * 100
@@ -425,6 +501,24 @@ const VideoPlayer: React.FC<Video> = ({
                 <div
                   key={timestamp.timeStop}
                   className="absolute h-2 bg-yellow-500"
+                  style={{
+                    left: `${markerPosition}%`,
+                    top: 0,
+                    width: '3px',
+                    height: '100%',
+                    transform: 'translateX(-50%)',
+                  }}
+                />
+              )
+            })}
+
+            {tutorial.map((tutorial) => {
+              const duration = videoRef.current?.duration || 1
+              const markerPosition = (tutorial.timeStop / duration) * 100
+              return (
+                <div
+                  key={tutorial.timeStop}
+                  className="absolute h-2 bg-blue-500"
                   style={{
                     left: `${markerPosition}%`,
                     top: 0,
