@@ -1,11 +1,9 @@
 export interface Progress {
-  course_id: number
-  title: string
+  videoID: number
+  videoTitle: string
   timeInMins: number
-  chef: {
-    name: string
-    image: string
-  }
+  ChefName: string
+  chefImage: string
   progress: number
-  image: string
+  courseImage: string
 }

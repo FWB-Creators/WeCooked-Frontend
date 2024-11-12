@@ -21,9 +21,9 @@ export default function IngredientPage() {
         </h1>
         <ul className="list-disc text-lg max-w-2xl p-8" aria-label="Course ingredients">
           {ingredients.map((ingredient) => (
-            ingredient.id === 0 &&
-              ingredient.name.map((item, index) => (
-                <li key={`${ingredient.id}-${index}`} className="py-1 text-gray-700">
+            ingredient.ingredientId === 0 &&
+              ingredient.ingredientName.map((item, index) => (
+                <li key={`${ingredient.ingredientId}-${index}`} className="py-1 text-gray-700">
                   {item}
                 </li>
               ))

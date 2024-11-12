@@ -1,15 +1,11 @@
-import { Course } from '../types/courses'
+import { Advert } from '../types/advert'
 
-export const courses: Course[] = [
+export const courses: Advert[] = [
   {
-    course_id: 0,
-    title: 'Pork Chop Steak',
-    cuisine: 'Italian',
-    price: 300,
-    currency: 'THB',
-    rating: 4.0,
-    chef: 'Chef Sieng',
-    imageSrc: '/images/plate-grilled-steak.png',
-    chefImageUrl: '/images/chef.png',
+    courseId: 0,
+    courseTitle: 'Pork Chop Steak',
+    courseCategory: 'Italian',
+    courseChef: 'Chef Sieng',
+    chefImage: '/images/chef.png',
   }
 ]

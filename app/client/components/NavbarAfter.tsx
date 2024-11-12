@@ -54,8 +54,8 @@ export default function NavbarAfter() {
 
   const filterCourses = useCallback((searchTerm: string) => {
     return courses.filter(course =>
-      course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      course.chef.toLowerCase().includes(searchTerm.toLowerCase())
+      course.courseTitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      course.ChefName.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }, []);
 
@@ -82,7 +82,6 @@ export default function NavbarAfter() {
         <NavLink href="/client/my-learning">My Learning</NavLink>
         <NavLink href="/client/video">Video</NavLink>
         <NavLink href="/client/group">Group</NavLink>
-        <NavLink href="/client/private">Private</NavLink>
       </div>
       <div className="relative" ref={searchRef}>
         <span id="search-description" className="sr-only">    
@@ -173,28 +172,28 @@ export default function NavbarAfter() {
           {filteredCourses.slice(0, 3).length > 0 ? (
             filteredCourses.slice(0, 3).map((course) => (
               <Link
-                key={course.course_id}
-                href={`/client/video/course-detail/${encodeURIComponent(course.course_id)}`}
+                key={course.courseId}
+                href={`/client/video/course-detail/${encodeURIComponent(course.courseId)}`}
                 role="option"
                 tabIndex={0}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
                     e.preventDefault();
-                    window.location.href = `/client/video/course-detail/${encodeURIComponent(course.course_id)}`;
+                    window.location.href = `/client/video/course-detail/${encodeURIComponent(course.courseId)}`;
                   }
                 }}
               >
                 <div className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer rounded-xl">
                   <Image
-                    src={course.imageSrc}
-                    alt={course.title}
+                    src={course.courseImage}
+                    alt={course.courseTitle}
                     width={50}
                     height={50}
                     className="rounded-xl"
                   />
                   <div className="ml-3">
-                    <h2 className="font-semibold">{course.title}</h2>
-                    <p className="text-gray-500">{course.chef}</p>
+                    <h2 className="font-semibold">{course.courseTitle}</h2>
+                    <p className="text-gray-500">{course.ChefName}</p>
                   </div>
                 </div>
               </Link>

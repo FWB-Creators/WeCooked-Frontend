@@ -33,22 +33,22 @@ const VideoPlayer: React.FC<Video> = ({
       const current = video.currentTime
       const duration = video.duration
       setProgress((current / duration) * 100)
-      if (isCountingDown) return
+      if (isCountingDown) return null
 
       timestamps.forEach((timestamp) => {
         if (
-          Math.floor(current) === Math.floor(timestamp.time) &&
-          !timestamp.triggered
+          Math.floor(current) === Math.floor(timestamp.timeStop) &&
+          !timestamp.timeTriggered
         ) {
-          setCurrentPopup(`${timestamp.label}`)
-          setCountdown(timestamp.countdownTime)
+          setCurrentPopup(`${"Time Tracking"}`)
+          setCountdown(timestamp.timecountdown)
           video.pause()
           setIsPlaying(false)
           setIsCountingDown(false)
 
           setTimestamps((prev) =>
             prev.map((t) =>
-              t.time === timestamp.time ? { ...t, triggered: true } : t
+              t.timeStop === timestamp.timeStop ? { ...t, timeTriggered: true } : t
             )
           )
         }
@@ -420,10 +420,10 @@ const VideoPlayer: React.FC<Video> = ({
             {/* Yellow markers for timestamps */}
             {timestamps.map((timestamp) => {
               const duration = videoRef.current?.duration || 1
-              const markerPosition = (timestamp.time / duration) * 100
+              const markerPosition = (timestamp.timeStop / duration) * 100
               return (
                 <div
-                  key={timestamp.time}
+                  key={timestamp.timeStop}
                   className="absolute h-2 bg-yellow-500"
                   style={{
                     left: `${markerPosition}%`,

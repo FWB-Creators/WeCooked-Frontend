@@ -1,16 +1,16 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Progress } from '../types/progress'
+import { Progress } from '../../types/progress'
 import { ClockIcon } from '@heroicons/react/24/outline'
 
 export default function ProgressCard({
-  course_id,
-  title,
+  videoID,
+  videoTitle,
   timeInMins,
-  chef,
+  ChefName,
   progress,
-  image,
+  courseImage,
 }: Progress) {
   const formatTime = (mins: number) => {
     if (mins < 60) return `${mins} Mins`
@@ -47,16 +47,21 @@ export default function ProgressCard({
   const status = getStatus(progress)
 
   return (
-    <Link href={`/client/my-learning/${course_id}`}>
-      <div className="relative z-10 p-5 pr-7 border rounded-xl bg-white my-4 transition-all duration-300 hover:scale-[1.01] hover:shadow-lg">
+    <Link href={`/client/my-learning/${videoID}`}>
+      <div className="relative z-10 p-5 pr-7 rounded-xl bg-white my-4 transition-all duration-300 hover:scale-[1.01] hover:shadow-lg">
         <div className="flex gap-4">
           <div className="relative w-28 h-28 rounded-lg overflow-hidden">
-            <Image src={image} alt={title} fill className="object-cover" />
+            <Image
+              src={courseImage}
+              alt={videoTitle}
+              fill
+              className="object-cover"
+            />
           </div>
 
           <div className="flex-1">
             <h3 className="text-lg font-semibold text-gray-900 mb-2">
-              {title}
+              {videoTitle}
             </h3>
             <div className="flex items-center gap-4 mb-2">
               <div className="flex items-center gap-1 text-gray-600">
@@ -68,13 +73,13 @@ export default function ProgressCard({
               <div className="flex items-center gap-2">
                 <div className="relative w-7 h-7 rounded-full overflow-hidden">
                   <Image
-                    src={chef.image}
+                    src={courseImage}
                     alt="chef"
                     fill
                     className="object-cover"
                   />
                 </div>
-                <p className="font-semibold text-gray-500">{chef.name}</p>
+                <p className="font-semibold text-gray-500">{ChefName}</p>
               </div>
             </div>
             <div className="flex items-center mb-2">

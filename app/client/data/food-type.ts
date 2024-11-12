@@ -4,56 +4,56 @@ import { FoodType } from '../types/foodtype';
 
 const courses: Course[] = [...fullmockdata];
 
-const courseCountByCuisine: Record<string, number> = courses.reduce((acc, course) => {
-  if (acc[course.cuisine]) {
-    acc[course.cuisine]++;
+const courseCountBycourseCategory: Record<string, number> = courses.reduce((acc, course) => {
+  if (acc[course.courseCategory]) {
+    acc[course.courseCategory]++;
   } else {
-    acc[course.cuisine] = 1;
+    acc[course.courseCategory] = 1;
   }
   return acc;
 }, {} as Record<string, number>);
 
 export const foodtype: FoodType[] = [
   {
-    title: 'Italian Food',
-    cuisine: 'Italian',
-    total_course: courseCountByCuisine['Italian'] || 0,
-    imageSrc: '/images/italian-food.png',
+    courseTitle: 'Italian Food',
+    courseCategory: 'Italian',
+    total_course: courseCountBycourseCategory['Italian'] || 0,
+    courseImage: '/images/italian-food.png',
   },
   {
-    title: 'Thai Food',
-    cuisine: 'Thai',
-    total_course: courseCountByCuisine['Thai'] || 0,
-    imageSrc: '/images/thai-food.png',
+    courseTitle: 'Thai Food',
+    courseCategory: 'Thai',
+    total_course: courseCountBycourseCategory['Thai'] || 0,
+    courseImage: '/images/thai-food.png',
   },
   {
-    title: 'Japanese Food',
-    cuisine: 'Japanese',
-    total_course: courseCountByCuisine['Japanese'] || 0,
-    imageSrc: '/images/japanese-food.png',
+    courseTitle: 'Japanese Food',
+    courseCategory: 'Japanese',
+    total_course: courseCountBycourseCategory['Japanese'] || 0,
+    courseImage: '/images/japanese-food.png',
   },
   {
-    title: 'Indian Food',
-    cuisine: 'Indian',
-    total_course: courseCountByCuisine['Indian'] || 0,
-    imageSrc: '/images/indian-food.png',
+    courseTitle: 'Indian Food',
+    courseCategory: 'Indian',
+    total_course: courseCountBycourseCategory['Indian'] || 0,
+    courseImage: '/images/indian-food.png',
   },
   {
-    title: 'French Food',
-    cuisine: 'French',
-    total_course: courseCountByCuisine['French'] || 0,
-    imageSrc: '/images/french-food.png',
+    courseTitle: 'French Food',
+    courseCategory: 'French',
+    total_course: courseCountBycourseCategory['French'] || 0,
+    courseImage: '/images/french-food.png',
   },
   {
-    title: 'Mexican Food',
-    cuisine: 'Mexican',
-    total_course: courseCountByCuisine['Mexican'] || 0,
-    imageSrc: '/images/mexican-food.png',
+    courseTitle: 'Mexican Food',
+    courseCategory: 'Mexican',
+    total_course: courseCountBycourseCategory['Mexican'] || 0,
+    courseImage: '/images/mexican-food.png',
   },
   {
-    title: 'American Food',
-    cuisine: 'American',
-    total_course: courseCountByCuisine['American'] || 0,
-    imageSrc: '/images/american-food.png',
+    courseTitle: 'American Food',
+    courseCategory: 'American',
+    total_course: courseCountBycourseCategory['American'] || 0,
+    courseImage: '/images/american-food.png',
   }
 ];

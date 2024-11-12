@@ -1,6 +1,8 @@
 export interface Timestamp {
-  time: number
+  timeId?: number
+  timeVideoId?: number
+  timeStop: number
   label: string
-  countdownTime: number
-  triggered: boolean
+  timecountdown: number
+  timeTriggered: boolean
 }

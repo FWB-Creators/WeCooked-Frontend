@@ -1,12 +1,11 @@
 export interface Course {
-  course_id: number;
-  title: string;
-  cuisine: string;
-  price: number;
-  currency: string,
-  rating: number;
-  chef: string;
-  imageSrc: string;
-  chefImageUrl: string;
-  dietary?: string[];
+  courseId: number;
+  courseTitle: string;
+  courseCategory: string;
+  coursePrice: number;
+  reviewRating: number;
+  ChefName: string;
+  courseImage: string;
+  chefImage: string;
+  courseDietary?: string[];
 }

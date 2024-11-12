@@ -1,6 +1,6 @@
 export interface FoodType {
-  title: string
-  cuisine?: string
+  courseTitle: string
+  courseCategory?: string
   total_course: number
-  imageSrc: string
+  courseImage: string
 }

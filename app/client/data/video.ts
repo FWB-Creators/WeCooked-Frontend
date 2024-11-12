@@ -9,9 +9,9 @@ export const videoData: Video[] = [
       { quality: '1080p', src: '/videos/Video.mp4' }
     ],
     timestamps: [
-      { time: 30, label: "Time Tracking", countdownTime: 236, triggered: false },
-      { time: 40, label: "Time Tracking", countdownTime: 30, triggered: false },
-      { time: 80, label: "Time Tracking", countdownTime: 30, triggered: false },
+      { timeStop: 30, timecountdown: 236, timeTriggered: false },
+      { timeStop: 40, timecountdown: 30, timeTriggered: false },
+      { timeStop: 80, timecountdown: 30, timeTriggered: false },
     ]
   },
   {
@@ -22,8 +22,8 @@ export const videoData: Video[] = [
       { quality: '1080p', src: '/videos/Video.mp4' }
     ],
     timestamps: [
-      { time: 50, label: "Time Tracking", countdownTime: 120, triggered: false },
-      { time: 70, label: "Time Tracking", countdownTime: 5, triggered: false },
+      { timeStop: 50, timecountdown: 120, timeTriggered: false },
+      { timeStop: 70, timecountdown: 5, timeTriggered: false },
     ]
   }
 ];

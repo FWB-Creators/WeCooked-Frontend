@@ -1,6 +1,6 @@
 import React from 'react'
 import { progress } from '../../data/progress'
-import ProgressCard from '../ProgressCard'
+import ProgressCard from './ProgressCard'
 
 export default function ProgressPage() {
   return (

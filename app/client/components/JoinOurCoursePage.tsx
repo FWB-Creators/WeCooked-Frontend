@@ -3,17 +3,10 @@ import Image from 'next/image'
 import { StarIcon, UserGroupIcon, BookOpenIcon, ShoppingBagIcon } from '@heroicons/react/24/outline'
 import { StarIcon as StarSolid } from '@heroicons/react/24/solid'
 import { reviews } from '@/app/client/data/reviewer'
-import { CourseStats } from '@/app/client/types/coursestat'
+import { coursestats } from '../data/course-stats'
 
 export default function JoinOurCoursePage() {
-  const stats: CourseStats = {
-    rating: 4.5,
-    totalReviews: 100,
-    completions: 10000,
-    ingredients: 1800,
-    enrolled: 11000,
-  }
-
+  const stats = coursestats[0]
   const renderStars = (rating: number) => {
     return Array(5)
       .fill(0)
@@ -102,7 +95,7 @@ export default function JoinOurCoursePage() {
           >
             <div className="flex items-center mb-4">
               <Image
-                src={review.imageSrc}
+                src={review.userProfile}
                 alt={review.name}
                 className="rounded-full mr-3"
                 width={40}
@@ -110,10 +103,10 @@ export default function JoinOurCoursePage() {
               />
               <div>
                 <div className="font-semibold">{review.name}</div>
-                <div className="flex">{renderStars(review.rating)}</div>
+                <div className="flex">{renderStars(review.reviewRating)}</div>
               </div>
             </div>
-            <p className="text-gray-700">&quot;{review.comment}&quot;</p>
+            <p className="text-gray-700">&quot;{review.reviewDetail}&quot;</p>
           </div>
         ))}
       </div>

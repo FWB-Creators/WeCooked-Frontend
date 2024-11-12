@@ -1,6 +1,6 @@
 export interface Review {
   name: string
-  rating: number
-  comment: string
-  imageSrc: string
+  reviewRating: number
+  reviewDetail: string
+  userProfile: string
 }
