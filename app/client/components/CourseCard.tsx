@@ -9,7 +9,7 @@ export default function CourseCard({
   courseCategory,
   coursePrice,
   reviewRating,
-  ChefName,
+  chefName,
   courseImage,
   chefImage,
 }: Course) {
@@ -30,13 +30,13 @@ export default function CourseCard({
             <div className="flex items-center rounded-full w-11 h-11">
               <Image
                 src={chefImage}
-                alt={`Profile picture of ${ChefName}`}
+                alt={`Profile picture of ${chefName}`}
                 width={35}
                 height={35}
                 className="rounded-full"
               />
             </div>
-            <p className="text-gray-500 font-semibold">{ChefName}</p>
+            <p className="text-gray-500 font-semibold">{chefName}</p>
           </div>
           <StarRating reviewRating={reviewRating} />
         </div>

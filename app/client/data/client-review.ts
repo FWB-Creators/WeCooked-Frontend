@@ -7,7 +7,7 @@ export const courses: Course[] = [
     courseCategory: 'India',
     coursePrice: 300,
     reviewRating: 4.0,
-    ChefName: 'Chef Sieng',
+    chefName: 'Chef Sieng',
     courseImage: '/images/ramachandra.png',
     chefImage: '/images/chef.png',
   }

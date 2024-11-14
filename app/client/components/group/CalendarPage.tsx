@@ -49,7 +49,7 @@ export default function CalendarPage() {
         item.groupTitle.toLowerCase().includes(title.toLowerCase()) ||
         item.groupDetail.toLowerCase().includes(title.toLowerCase()) ||
         item.groupCategory.toLowerCase().includes(title.toLowerCase()) ||
-        item.ChefName.toLowerCase().includes(title.toLowerCase())
+        item.chefName.toLowerCase().includes(title.toLowerCase())
     )
   
     const dateFilteredGroups = filteredGroups.filter((item) => {
@@ -72,7 +72,7 @@ export default function CalendarPage() {
     }
   }
 
-  const formatDateRange = () => {
+  const chefNameDateRange = () => {
     if (value.startDate && value.endDate) {
       const start = value.startDate.toLocaleDateString()
       const end = value.endDate.toLocaleDateString()
@@ -120,7 +120,7 @@ export default function CalendarPage() {
                   type="text"
                   readOnly
                   placeholder="Select Date Range"
-                  value={formatDateRange()}
+                  value={chefNameDateRange()}
                   onClick={() => setIsCalendarOpen(!isCalendarOpen)}
                   className="w-full pl-4 py-2 rounded-lg bg-[#F2F4F8] text-gray-400 border-b-2 border-[#C1C7CD] outline-none cursor-pointer"
                 />

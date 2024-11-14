@@ -19,7 +19,7 @@ export default function WorkshopPage() {
       item.groupTitle.toLowerCase().includes(title.toLowerCase()) ||
       item.groupDetail.toLowerCase().includes(title.toLowerCase()) ||
       item.groupCategory.toLowerCase().includes(title.toLowerCase()) ||
-      item.ChefName.toLowerCase().includes(title.toLowerCase())
+      item.chefName.toLowerCase().includes(title.toLowerCase())
 
     const groupDate = new Date(item.groupDate).getTime()
     const isDateMatch =

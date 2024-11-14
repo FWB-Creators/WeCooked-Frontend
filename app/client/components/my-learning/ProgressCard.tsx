@@ -8,7 +8,7 @@ export default function ProgressCard({
   videoID,
   videoTitle,
   timeInMins,
-  ChefName,
+  chefName,
   progress,
   courseImage,
 }: Progress) {
@@ -79,7 +79,7 @@ export default function ProgressCard({
                     className="object-cover"
                   />
                 </div>
-                <p className="font-semibold text-gray-500">{ChefName}</p>
+                <p className="font-semibold text-gray-500">{chefName}</p>
               </div>
             </div>
             <div className="flex items-center mb-2">

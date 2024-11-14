@@ -4,7 +4,7 @@ export interface Course {
   courseCategory: string;
   coursePrice: number;
   reviewRating: number;
-  ChefName: string;
+  chefName: string;
   courseImage: string;
   chefImage: string;
   courseDietary?: string[];

@@ -9,7 +9,7 @@ export interface Group {
   groupLinkZoom?: string
   groupPicture: string
   chefImage: string
-  ChefName: string
+  chefName: string
   reviewRating: number
   groupStatus: boolean
   groupChefId?: number

@@ -1,15 +1,10 @@
 'use client'
 import { useRef, useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import { PauseIcon, PlayIcon, XMarkIcon } from '@heroicons/react/16/solid'
 import { Video } from '../../types/video'
-import { PlayCircleIcon } from '@heroicons/react/24/outline'
 
 const VideoTutorialPlayer: React.FC<Video> = ({
-  videoID,
   videoPath,
 }) => {
-  const router = useRouter()
   const videoRef = useRef<HTMLVideoElement>(null)
 
   const [currentSrc] = useState<string | null>(videoPath[0]?.src || '')
@@ -22,21 +17,12 @@ const VideoTutorialPlayer: React.FC<Video> = ({
   const [playbackRate, setPlaybackRate] = useState<number>(1)
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false)
   const [isSound, setIsSound] = useState<boolean>(true)
-  const [currentPopup, setCurrentPopup] = useState<string | null>(null)
-  const [typePopup, setTypePopup] = useState<string | null>(null)
-  const [countdown, setCountdown] = useState<number | null>(null)
-  const [isCountingDown, setIsCountingDown] = useState<boolean>(false)
-  const [countdownInterval, setCountdownInterval] =
-    useState<NodeJS.Timeout | null>(null)
-  const [currentTutorialId, setCurrentTutorialId] = useState<number | null>(
-    null
-  )
+
 
   useEffect(() => {
     const video = videoRef.current
 
     if (!video) return
-    if (!setCurrentTutorialId) return
 
     const handleTimeUpdate = () => {
       const current = video.currentTime
@@ -46,13 +32,7 @@ const VideoTutorialPlayer: React.FC<Video> = ({
 
     video.addEventListener('timeupdate', handleTimeUpdate)
     return () => video.removeEventListener('timeupdate', handleTimeUpdate)
-  }, [isCountingDown])
-
-  const handleTutorialConfirm = () => {
-    if (currentTutorialId !== null) {
-      router.push(`/client/my-learning/${videoID}/tutorial/${currentTutorialId}`)
-    }
-  }
+  }, [])
 
   // Keydown event listener for left and right arrow keys
   useEffect(() => {
@@ -190,64 +170,6 @@ const VideoTutorialPlayer: React.FC<Video> = ({
     togglePlayPause()
   }
 
-  const handlePopupAction = (action: 'start' | 'stop' | 'close') => {
-    const video = videoRef.current
-    if (!video) return
-
-    if (action === 'start') {
-      setIsCountingDown(true)
-      setIsPlaying(false)
-
-      const interval = setInterval(() => {
-        setCountdown((prev) => {
-          if (prev && prev > 1) {
-            return prev - 1
-          } else {
-            clearInterval(interval)
-            setCountdownInterval(null)
-            setCurrentPopup(null)
-            setTypePopup(null)
-            setCountdown(null)
-            setIsCountingDown(false)
-            video.play()
-            setIsPlaying(true)
-            return null
-          }
-        })
-      }, 1000)
-
-      setCountdownInterval(interval)
-    } else if (action === 'stop') {
-      if (countdownInterval) {
-        clearInterval(countdownInterval)
-        setCountdownInterval(null)
-      }
-      video.pause()
-      setIsPlaying(false)
-      setIsCountingDown(false)
-    } else if (action === 'close') {
-      if (countdownInterval) {
-        clearInterval(countdownInterval)
-        setCountdownInterval(null)
-      }
-      setCurrentPopup(null)
-      setTypePopup(null)
-      setCountdown(null)
-      setIsCountingDown(false)
-      video.play()
-      setIsPlaying(true)
-    }
-  }
-
-  const formatTime = (timeInSeconds: number) => {
-    const hours = Math.floor(timeInSeconds / 3600)
-    const minutes = Math.floor((timeInSeconds % 3600) / 60)
-    const seconds = Math.floor(timeInSeconds % 60)
-    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(
-      2,
-      '0'
-    )}:${String(seconds).padStart(2, '0')}`
-  }
 
   const handleRewind = () => {
     const video = videoRef.current
@@ -272,82 +194,6 @@ const VideoTutorialPlayer: React.FC<Video> = ({
           className="w-full h-auto cursor-pointer"
           onClick={handleVideoClick}
         />
-
-        {/* Popup */}
-        {currentPopup && (
-          <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
-            <div className="relative bg-white text-black w-[45%] h-[45%] px-6 py-4 rounded-lg shadow-lg flex flex-col items-center justify-center z-10">
-              <div className="font-semibold pb-12 text-3xl bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text">
-                {currentPopup}
-              </div>
-              {countdown !== null && (
-                <div className="bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text p-4 text-7xl border-4 border-[#fe5f43] border-solid rounded-lg">
-                  {formatTime(countdown)}
-                </div>
-              )}
-              <div className="flex space-x-4 pt-12">
-                <button
-                  onClick={() => handlePopupAction('start')}
-                  className="bg-gradient-to-b from-[#F0725C] to-[#FE3511] text-white p-3 rounded-full"
-                >
-                  <PlayIcon className="w-5 h-5" />
-                </button>
-                <button
-                  onClick={() => handlePopupAction('stop')}
-                  className="bg-gradient-to-b from-[#F0725C] to-[#FE3511] text-white p-3 rounded-full"
-                >
-                  <PauseIcon className="w-5 h-5" />
-                </button>
-              </div>
-              <div className="absolute right-0 top-0">
-                <button
-                  onClick={() => handlePopupAction('close')}
-                  className="absolute right-3 top-3 bg-transparent border-none p-0 cursor-pointer"
-                >
-                  <XMarkIcon className="w-6 h-6 text-[#F0725C] hover:text-[#FE3511] transition-colors" />
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {typePopup && (
-          <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
-            <div className="relative bg-white text-black w-[45%] h-1/3 px-6 py-4 rounded-lg shadow-lg flex flex-col items-center justify-center z-10">
-              <div className="flex justify-between w-11/12 gap-12">
-                <div className="">
-                  <div className="absolute mt-2 w-[70px] h-[70px] bg-[#F0725C] opacity-20 rounded-xl"></div>
-                  <PlayCircleIcon className="relative top-5 left-[13px] w-11 h-11 text-[#F0725C]" />
-                </div>
-                <div className="w-5/6">
-                  <div className="font-semibold text-2xl bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text">
-                    {typePopup}
-                  </div>
-                  <div className="text-gray-500 pr-2">
-                    <p className="my-6">
-                      Click here to access the full tutorial and master this
-                      recipe with detailed guidance!
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <button
-                onClick={handleTutorialConfirm}
-                className="py-3 w-11/12 px-4 rounded-lg font-semibold text-white bg-gradient-to-t from-[#FE3511] to-[#F0725C] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
-              >
-                Yes, Confirm
-              </button>
-              <div className="absolute right-0 top-0">
-                <button
-                  onClick={() => handlePopupAction('close')}
-                  className="absolute right-3 top-3 bg-transparent border-none p-0 cursor-pointer"
-                >
-                  <XMarkIcon className="w-6 h-6 text-[#F0725C] hover:text-[#FE3511] transition-colors" />
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
 
         {/* Controls */}
         <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-60 flex items-center space-x-4 px-4 py-2">

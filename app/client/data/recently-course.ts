@@ -7,7 +7,7 @@ export const courses: Course[] = [
     courseCategory: 'Indian',
     coursePrice: 290,
     reviewRating: 4.2,
-    ChefName: 'Chef Kumar',
+    chefName: 'Chef Kumar',
     courseImage: '/images/ramachandra.png',
     chefImage: '/images/chef.png',
     courseDietary: ['Vegan', 'Kosher']
@@ -18,7 +18,7 @@ export const courses: Course[] = [
     courseCategory: 'French',
     coursePrice: 620,
     reviewRating: 4.7,
-    ChefName: 'Chef Amelie',
+    chefName: 'Chef Amelie',
     courseImage: '/images/ramachandra.png',
     chefImage: '/images/chef.png',
     courseDietary: ['Vegetarian', 'Halal']
@@ -29,7 +29,7 @@ export const courses: Course[] = [
     courseCategory: 'Mexican',
     coursePrice: 360,
     reviewRating: 4.3,
-    ChefName: 'Chef Miguel',
+    chefName: 'Chef Miguel',
     courseImage: '/images/ramachandra.png',
     chefImage: '/images/chef.png',
     courseDietary: ['Gluten-Free', 'Halal']
@@ -40,7 +40,7 @@ export const courses: Course[] = [
     courseCategory: 'American',
     coursePrice: 400,
     reviewRating: 4.0,
-    ChefName: 'Chef Sally',
+    chefName: 'Chef Sally',
     courseImage: '/images/ramachandra.png',
     chefImage: '/images/chef.png',
     courseDietary: ['Vegetarian', 'Low-Carb']
@@ -51,7 +51,7 @@ export const courses: Course[] = [
     courseCategory: 'Indian',
     coursePrice: 280,
     reviewRating: 4.2,
-    ChefName: 'Chef Vikram',
+    chefName: 'Chef Vikram',
     courseImage: '/images/ramachandra.png',
     chefImage: '/images/chef.png',
     courseDietary: ['Halal', 'Kosher']
@@ -62,7 +62,7 @@ export const courses: Course[] = [
     courseCategory: 'French',
     coursePrice: 570,
     reviewRating: 4.1,
-    ChefName: 'Chef Jeanne',
+    chefName: 'Chef Jeanne',
     courseImage: '/images/ramachandra.png',
     chefImage: '/images/chef.png',
     courseDietary: ['Vegan', 'Kosher']
@@ -73,7 +73,7 @@ export const courses: Course[] = [
     courseCategory: 'French',
     coursePrice: 590,
     reviewRating: 4.6,
-    ChefName: 'Chef Monique',
+    chefName: 'Chef Monique',
     courseImage: '/images/ramachandra.png',
     chefImage: '/images/chef.png',
     courseDietary: ['Kosher']
@@ -84,7 +84,7 @@ export const courses: Course[] = [
     courseCategory: 'Mexican',
     coursePrice: 340,
     reviewRating: 3.9,
-    ChefName: 'Chef Jose',
+    chefName: 'Chef Jose',
     courseImage: '/images/ramachandra.png',
     chefImage: '/images/chef.png',
     courseDietary: ['Gluten-Free', 'Halal']
@@ -95,7 +95,7 @@ export const courses: Course[] = [
     courseCategory: 'American',
     coursePrice: 430,
     reviewRating: 4.0,
-    ChefName: 'Chef Lisa',
+    chefName: 'Chef Lisa',
     courseImage: '/images/ramachandra.png',
     chefImage: '/images/chef.png',
     courseDietary: ['Vegetarian', 'Low-Carb']
@@ -106,7 +106,7 @@ export const courses: Course[] = [
     courseCategory: 'Japanese',
     coursePrice: 530,
     reviewRating: 4.8,
-    ChefName: 'Chef Takashi',
+    chefName: 'Chef Takashi',
     courseImage: '/images/ramachandra.png',
     chefImage: '/images/chef.png',
     courseDietary: []
@@ -117,7 +117,7 @@ export const courses: Course[] = [
     courseCategory: 'Italian',
     coursePrice: 480,
     reviewRating: 4.4,
-    ChefName: 'Chef Renzo',
+    chefName: 'Chef Renzo',
     courseImage: '/images/ramachandra.png',
     chefImage: '/images/chef.png',
     courseDietary: ['Low-Carb']
@@ -128,7 +128,7 @@ export const courses: Course[] = [
     courseCategory: 'Thai',
     coursePrice: 350,
     reviewRating: 3.6,
-    ChefName: 'Chef Pim',
+    chefName: 'Chef Pim',
     courseImage: '/images/ramachandra.png',
     chefImage: '/images/chef.png',
     courseDietary: ['Halal', 'Vegan']

@@ -87,7 +87,7 @@ export default function Navbar() {
     return courses.filter(
       (course) =>
         course.courseTitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        course.ChefName.toLowerCase().includes(searchTerm.toLowerCase())
+        course.chefName.toLowerCase().includes(searchTerm.toLowerCase())
     )
   }, [])
 
@@ -252,7 +252,7 @@ export default function Navbar() {
                   />
                   <div className="ml-3">
                     <h2 className="font-semibold">{course.courseTitle}</h2>
-                    <p className="text-gray-500">{course.ChefName}</p>
+                    <p className="text-gray-500">{course.chefName}</p>
                   </div>
                 </div>
               </Link>

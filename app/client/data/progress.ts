@@ -5,7 +5,7 @@ export const progress: Progress[] = [
     videoID: 0,
     videoTitle: 'La Trattoria - Classic Italian',
     timeInMins: 20,
-    ChefName: 'Chef John',
+    chefName: 'Chef John',
     chefImage: '/images/chef.png',
     progress: 100,
     courseImage: '/images/ramachandra.png'
@@ -14,7 +14,7 @@ export const progress: Progress[] = [
     videoID: 1,
     videoTitle: 'Mexican Madness - Burritos & Nachos',
     timeInMins: 80,
-    ChefName: 'Chef Marie',
+    chefName: 'Chef Marie',
     chefImage: '/images/chef.png',
     progress: 50,
     courseImage: '/images/ramachandra.png'
@@ -23,7 +23,7 @@ export const progress: Progress[] = [
     videoID: 2,
     videoTitle: 'Taco Tuesday - Lucha Libre Tacos',
     timeInMins: 30,
-    ChefName: 'Chef Marie',
+    chefName: 'Chef Marie',
     chefImage: '/images/chef.png',
     progress: 25,
     courseImage: '/images/ramachandra.png'
@@ -32,7 +32,7 @@ export const progress: Progress[] = [
     videoID: 3,
     videoTitle: 'Classic Bistro - French Favorites',
     timeInMins: 40,
-    ChefName: 'Chef Marie',
+    chefName: 'Chef Marie',
     chefImage: '/images/chef.png',
     progress: 75,
     courseImage: '/images/ramachandra.png'
@@ -41,7 +41,7 @@ export const progress: Progress[] = [
     videoID: 4,
     videoTitle: 'Tokyo Fusion - Japanese Bowls',
     timeInMins: 50,
-    ChefName: 'Chef Marie',
+    chefName: 'Chef Marie',
     chefImage: '/images/chef.png',
     progress: 0,
     courseImage: '/images/ramachandra.png'

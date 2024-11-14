@@ -14,7 +14,7 @@ export default function GroupCardUnenrolled({
   groupCategory,
   groupPicture,
   chefImage,
-  ChefName,
+  chefName,
   groupStatus,
   reviewRating,
 }: Group) {
@@ -69,13 +69,13 @@ export default function GroupCardUnenrolled({
                   <div className="flex items-center rounded-full w-11 h-11">
                     <Image
                       src={chefImage}
-                      alt={`Profile picture of ${ChefName}`}
+                      alt={`Profile picture of ${chefName}`}
                       width={35}
                       height={35}
                       className="rounded-full"
                     />
                   </div>
-                  <p className="text-gray-500 font-semibold">{ChefName}</p>
+                  <p className="text-gray-500 font-semibold">{chefName}</p>
                 </div>
                 <div className="ml-4">
                   <StarRating reviewRating={reviewRating} />
