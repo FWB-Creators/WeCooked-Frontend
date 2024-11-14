@@ -26,26 +26,26 @@ function CourseCard({ courseTitle, total_course, courseImage }: FoodType) {
   )
 }
 const useResponsiveCards = () => {
-    const [cardsToShow, setCardsToShow] = useState<number>(3);
-    
-    useEffect(() => {
-      const updateCards = () => {
-        if (window.innerWidth < 640) setCardsToShow(1);
-        else if (window.innerWidth < 1024) setCardsToShow(2);
-        else setCardsToShow(5);
-      };
-      
-      window.addEventListener('resize', updateCards);
-      updateCards();
-      return () => window.removeEventListener('resize', updateCards);
-    }, []);
-    
-    return cardsToShow;
-  };
+  const [cardsToShow, setCardsToShow] = useState<number>(3)
+
+  useEffect(() => {
+    const updateCards = () => {
+      if (window.innerWidth < 640) setCardsToShow(1)
+      else if (window.innerWidth < 1024) setCardsToShow(2)
+      else setCardsToShow(5)
+    }
+
+    window.addEventListener('resize', updateCards)
+    updateCards()
+    return () => window.removeEventListener('resize', updateCards)
+  }, [])
+
+  return cardsToShow
+}
 
 export default function FoodTypeCard() {
   const [startIndex, setStartIndex] = useState<number>(0)
-  const cardsToShow = useResponsiveCards();
+  const cardsToShow = useResponsiveCards()
   const maxIndex = foodtype.length - cardsToShow
 
   const nextSlide = () => {

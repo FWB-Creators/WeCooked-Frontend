@@ -1,12 +1,14 @@
 import React from 'react'
 import Image from 'next/image'
+import { courses } from '@/app/client/data/advert'
 
 export default function GroupCourseDetailFirstPage() {
+  const course = courses[0]
   return (
     <div className="min-h-[800px] relative w-full flex flex-col items-center">
       <div className="absolute left-20 top-28 z-10 max-w-[45%]">
         <h1 className="py-1.5 text-6xl font-bold bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text">
-          Secrets to a Flavor-Packed Pork Chop Steak
+          Secrets to a Flavor-Packed {course.courseTitle}
         </h1>
         <p className="text-xl max-w-2xl pt-12">
           Discover the techniques behind creating an unforgettable pork chop
@@ -28,7 +30,7 @@ export default function GroupCourseDetailFirstPage() {
           </div>
           <p className="px-2 text-lg">Instructor:</p>
           <p className="text-lg underline underline-offset-4">
-            Chief Sieng Utahnamnon
+            {course.courseChef}
           </p>
         </div>
         <div className="flex space-x-3 py-8">
@@ -38,23 +40,7 @@ export default function GroupCourseDetailFirstPage() {
             aria-label="View more details"
             tabIndex={0}
           >
-            Steak
-          </button>
-          <button
-            className="px-2 py-0.5 border-[1px] border-[#FE3511] rounded-xl font-semibold bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
-            type="button"
-            aria-label="View more details"
-            tabIndex={0}
-          >
-            Beef
-          </button>
-          <button
-            className="px-2 py-0.5 border-[1px] border-[#FE3511] rounded-xl font-semibold bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
-            type="button"
-            aria-label="View more details"
-            tabIndex={0}
-          >
-            Authentic
+            {course.courseCategory}
           </button>
         </div>
         <div className="flex">

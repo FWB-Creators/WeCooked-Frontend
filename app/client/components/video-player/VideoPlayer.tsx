@@ -8,6 +8,7 @@ import { Tutorial } from '../../types/Tutorial'
 import { PlayCircleIcon } from '@heroicons/react/24/outline'
 
 const VideoPlayer: React.FC<Video> = ({
+  videoID,
   videoPath,
   timestamps: initialTimestamps,
   tutorial: initialTutorial,
@@ -95,7 +96,7 @@ const VideoPlayer: React.FC<Video> = ({
 
   const handleTutorialConfirm = () => {
     if (currentTutorialId !== null) {
-      router.push(`/client/my-learning/tutorial/${currentTutorialId}`)
+      router.push(`/client/my-learning/${videoID}/tutorial/${currentTutorialId}`)
     }
   }
 

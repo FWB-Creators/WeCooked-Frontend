@@ -1,11 +1,17 @@
 'use client'
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 import VideoPlayer from '../../components/video-player/VideoPlayer'
 import { videoData } from '../../data/video'
-import { HandThumbUpIcon, PlayCircleIcon } from '@heroicons/react/24/outline'
+import {
+  HandThumbUpIcon,
+  PlayCircleIcon,
+  StarIcon as Staroutline,
+} from '@heroicons/react/24/outline'
+import { StarIcon } from '@heroicons/react/24/solid'
+import { XMarkIcon } from '@heroicons/react/24/solid'
 
 export default function VideoControl() {
   const { videoID } = useParams()
@@ -14,6 +20,12 @@ export default function VideoControl() {
     console.log('Video ID:', videoID)
   }, [videoID])
 
+  // State for managing the popup
+  const [showRatingPopup, setShowRatingPopup] = useState(false)
+  const [rating, setRating] = useState(0) // Rating value
+  const [comment, setComment] = useState('') // Comment value
+
+  // Handling video ID from useParams
   const videoId = Array.isArray(videoID) ? videoID[0] : videoID
   const video = videoData.find((video) => video.videoID === parseInt(videoId))
 
@@ -22,8 +34,28 @@ export default function VideoControl() {
   }
 
   const { videoTitle, videoPath, timestamps, tutorial } = video
+  const firstTutorialId =
+    tutorial && tutorial.length > 0 ? tutorial[0].tutorialId : null
 
-  const firstTutorialId = tutorial && tutorial.length > 0 ? tutorial[0].tutorialId : null
+  // Toggle Rating Popup
+  const toggleRatingPopup = () => setShowRatingPopup(!showRatingPopup)
+
+  // Handle Rating Change
+  const handleRatingChange = (newRating: number) => {
+    setRating(newRating)
+  }
+
+  // Handle Comment Change
+  const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setComment(e.target.value)
+  }
+
+  // Submit Review (example logic)
+  const handleSubmitReview = () => {
+    console.log('Rating:', rating)
+    console.log('Comment:', comment)
+    setShowRatingPopup(false) // Close popup after submitting
+  }
 
   return (
     <div className="relative w-full p-4">
@@ -63,13 +95,20 @@ export default function VideoControl() {
             </div>
           </div>
           <div className="flex justify-center items-center">
-            <button className="flex hover:text-red-500">
+            <button
+              className="flex hover:text-red-500"
+              onClick={toggleRatingPopup}
+            >
+              <Staroutline className="w-6 h-6" />
+              <p className="ml-2 font-bold">RATING</p>
+            </button>
+            <button className="flex ml-10 hover:text-red-500">
               <HandThumbUpIcon className="w-6 h-6" />
               <p className="ml-2 font-bold">FAVORITE CHEF</p>
             </button>
             {firstTutorialId !== null && (
-              <Link 
-                href={`/client/my-learning/tutorial/${firstTutorialId}`}
+              <Link
+                href={`/client/my-learning/${videoId}/tutorial/${firstTutorialId}`}
                 className="flex ml-10 hover:text-red-500"
               >
                 <PlayCircleIcon className="w-6 h-6" />
@@ -79,6 +118,55 @@ export default function VideoControl() {
           </div>
         </div>
       </div>
+
+      {/* Rating Popup */}
+      {showRatingPopup && (
+        <div className="absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center">
+          <div className="absolute bg-white text-black w-[45%] h-[45%] px-6 py-4 rounded-lg shadow-lg flex flex-col items-center justify-center z-10">
+            <div className="font-semibold text-3xl bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text">
+              Rate this video
+            </div>
+            {/* Rating Stars */}
+            <div className="flex space-x-1 my-4">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <button
+                  key={star}
+                  onClick={() => handleRatingChange(star)}
+                  className={`w-8 h-8 ${
+                    rating >= star ? 'text-green-500' : 'text-gray-300'
+                  }`}
+                >
+                  <StarIcon className="w-full h-full" />
+                </button>
+              ))}
+            </div>
+            <div>
+              <textarea
+                value={comment}
+                onChange={handleCommentChange}
+                className=" mt-4 p-2 w-[400px] h-44 border-2 border-[#FE3511] rounded-md outline-none"
+                placeholder="Leave a comment..."
+              />
+              <div className="flex justify-end space-x-6 mt-4">
+                <button
+                  onClick={handleSubmitReview}
+                  className="bg-gradient-to-b from-[#F0725C] to-[#FE3511] text-white px-4 py-2 rounded-md"
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
+            <div className="absolute right-0 top-0">
+              <button
+                onClick={toggleRatingPopup}
+                className="absolute right-3 top-3 bg-transparent border-none p-0 cursor-pointer"
+              >
+                <XMarkIcon className="w-6 h-6 text-[#F0725C] hover:text-[#FE3511] transition-colors" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

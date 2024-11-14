@@ -1,4 +1,4 @@
-import NavbarAfter from '@/app/client/components/NavbarAfter'
+import Navbar from '@/app/client/components/Navbar'
 import GroupCourseDetailFirstPage from '@/app/client/components/group/course-detail/GroupCourseDetailFirstPage'
 import GroupMeetChefCurvePage from '@/app/client/components/group/course-detail/GroupMeetChefCurvePage'
 import GroupIngredientPage from '@/app/client/components/group/course-detail/GroupIngredientPage'
@@ -9,7 +9,7 @@ import Footer from '@/app/client/components/Footer'
 export default function GroupCourseDetailPage() {
   return (
     <div className="animate-fadeIn">
-      <NavbarAfter />
+      <Navbar />
       <GroupCourseDetailFirstPage />
       <GroupMeetChefCurvePage />
       <GroupIngredientPage />
