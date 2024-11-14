@@ -26,26 +26,26 @@ function CourseCard({ title, total_course, imageSrc }: FoodType) {
   )
 }
 const useResponsiveCards = () => {
-    const [cardsToShow, setCardsToShow] = useState<number>(3);
-    
-    useEffect(() => {
-      const updateCards = () => {
-        if (window.innerWidth < 640) setCardsToShow(1);
-        else if (window.innerWidth < 1024) setCardsToShow(2);
-        else setCardsToShow(5);
-      };
-      
-      window.addEventListener('resize', updateCards);
-      updateCards();
-      return () => window.removeEventListener('resize', updateCards);
-    }, []);
-    
-    return cardsToShow;
-  };
+  const [cardsToShow, setCardsToShow] = useState<number>(3)
+
+  useEffect(() => {
+    const updateCards = () => {
+      if (window.innerWidth < 640) setCardsToShow(1)
+      else if (window.innerWidth < 1024) setCardsToShow(2)
+      else setCardsToShow(5)
+    }
+
+    window.addEventListener('resize', updateCards)
+    updateCards()
+    return () => window.removeEventListener('resize', updateCards)
+  }, [])
+
+  return cardsToShow
+}
 
 export default function FoodTypeCard() {
   const [startIndex, setStartIndex] = useState<number>(0)
-  const cardsToShow = useResponsiveCards();
+  const cardsToShow = useResponsiveCards()
   const maxIndex = foodtype.length - cardsToShow
 
   const nextSlide = () => {
@@ -76,10 +76,10 @@ export default function FoodTypeCard() {
               <Link
                 key={index}
                 href={`/client/video/search/${
-                    food.cuisine 
-                      ? encodeURIComponent(food.cuisine.trim().toLowerCase())
-                      : 'all'
-                  }`}
+                  food.cuisine
+                    ? encodeURIComponent(food.cuisine.trim().toLowerCase())
+                    : 'all'
+                }`}
                 className="w-full ml-12"
               >
                 <CourseCard {...food} />
