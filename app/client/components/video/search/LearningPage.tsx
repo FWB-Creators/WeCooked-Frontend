@@ -35,7 +35,7 @@ export default function LearningPage() {
           </div>
           <div className="flex flex-col pl-4">
             <p className="font-bold text-lg">Allahu Akbar</p>
-            <StarRating rating={3.5} />
+            <StarRating reviewRating={3.5} />
           </div>
         </div>
       </div>

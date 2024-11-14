@@ -155,16 +155,16 @@ export default function SearchAndFilterPage({
     const cuisineCounts: Record<string, number> = {}
 
     filteredCourses.forEach((course) => {
-      if (cuisineCounts[course.cuisine]) {
-        cuisineCounts[course.cuisine]++
+      if (cuisineCounts[course.courseCategory]) {
+        cuisineCounts[course.courseCategory]++
       } else {
-        cuisineCounts[course.cuisine] = 1
+        cuisineCounts[course.courseCategory] = 1
       }
     })
 
-    return CUISINE_TYPES.map((cuisine) => ({
-      label: cuisine,
-      count: cuisineCounts[cuisine] || 0,
+    return CUISINE_TYPES.map((courseCategory) => ({
+      label: courseCategory,
+      count: cuisineCounts[courseCategory] || 0,
     }))
   }
 
@@ -172,7 +172,7 @@ export default function SearchAndFilterPage({
     const dietaryCounts: Record<string, number> = {}
 
     filteredCourses.forEach((course) => {
-      course.dietary?.forEach((diet) => {
+      course.courseDietary?.forEach((diet) => {
         if (dietaryCounts[diet]) {
           dietaryCounts[diet]++
         } else {
@@ -206,19 +206,19 @@ export default function SearchAndFilterPage({
   const filteredCourses = useMemo(() => {
     return courses.filter((course) => {
       const matchesSearch =
-        course.title.toLowerCase().includes(search.toLowerCase()) ||
-        course.cuisine.toLowerCase().includes(search.toLowerCase())
+        course.courseTitle.toLowerCase().includes(search.toLowerCase()) ||
+        course.courseCategory.toLowerCase().includes(search.toLowerCase())
 
       const withinPriceRange =
-        course.price >= priceRange[0] && course.price <= priceRange[1]
+        course.coursePrice >= priceRange[0] && course.coursePrice <= priceRange[1]
 
       const cuisineMatch =
-        selectedCuisine.length === 0 || selectedCuisine.includes(course.cuisine)
+        selectedCuisine.length === 0 || selectedCuisine.includes(course.courseCategory)
 
       const dietMatch =
         selectedDiet.length === 0 ||
-        (course.dietary &&
-          course.dietary.some((diet) => selectedDiet.includes(diet)))
+        (course.courseDietary &&
+          course.courseDietary.some((diet) => selectedDiet.includes(diet)))
 
       return matchesSearch && withinPriceRange && cuisineMatch && dietMatch
     })
@@ -319,8 +319,8 @@ export default function SearchAndFilterPage({
         </h1>
         <div className="flex justify-start flex-wrap gap-16 mb-16">
           {filteredCourses.length > 0 ? (
-            filteredCourses.map((course) => (
-              <CourseCard key={course.course_id} {...course} />
+            filteredCourses.map((course, index) => (
+              <CourseCard key={index} {...course} />
             ))
           ) : (
             <div className="flex items-center justify-center w-full h-full">

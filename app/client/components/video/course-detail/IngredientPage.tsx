@@ -1,5 +1,5 @@
-import React from 'react'
-import Image from 'next/image'
+import React from 'react';
+import Image from 'next/image';
 import { ingredients } from '@/app/client/data/ingredient';
 
 export default function IngredientPage() {
@@ -21,9 +21,12 @@ export default function IngredientPage() {
         </h1>
         <ul className="list-disc text-lg max-w-2xl p-8" aria-label="Course ingredients">
           {ingredients.map((ingredient) => (
-            <li key={ingredient.name} className="py-1 text-gray-700">
-              {ingredient.name}
-            </li>
+            ingredient.ingredientId === 0 &&
+              ingredient.ingredientName.map((item, index) => (
+                <li key={`${ingredient.ingredientId}-${index}`} className="py-1 text-gray-700">
+                  {item}
+                </li>
+              ))
           ))}
         </ul>
       </div>

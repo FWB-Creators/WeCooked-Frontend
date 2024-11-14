@@ -1,7 +1,17 @@
 export interface Group {
-  course_id: number
-  title: string
-  date: string
-  description: string
-  image: string
+  groupId: number
+  groupTitle: string
+  groupDetail: string
+  groupPrice: number
+  groupNumberofparticipants: number
+  groupDate: Date
+  groupCategory: string
+  groupLinkZoom?: string
+  groupPicture: string
+  chefImage: string
+  chefName: string
+  reviewRating: number
+  groupStatus: boolean
+  groupChefId?: number
+  groupPackId?: string
 }

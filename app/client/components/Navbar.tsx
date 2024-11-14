@@ -16,7 +16,7 @@ const courses: Course[] = [...fullmockdata]
  * Wrapped in useEffect to prevent SSR issues with Netlify.
  * @returns {string | null} The authentication state
  */
-export const AuthLocal = () => {
+export const AuthLocal = (): string | null => {
   const [authLocalState, setAuthLocalState] = useState<string | null>(null)
 
   useEffect(() => {
@@ -29,6 +29,7 @@ export const AuthLocal = () => {
 
 export default function Navbar() {
   const authcontextvalue = useAuthContext()
+  const authLocalState = AuthLocal()
 
   const [userDropdownOpen, setUserDropdownOpen] = useState<boolean>(false)
   const [searchDropdownOpen, setSearchDropdownOpen] = useState<boolean>(false)
@@ -85,8 +86,8 @@ export default function Navbar() {
   const filterCourses = useCallback((searchTerm: string) => {
     return courses.filter(
       (course) =>
-        course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        course.chef.toLowerCase().includes(searchTerm.toLowerCase())
+        course.courseTitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        course.chefName.toLowerCase().includes(searchTerm.toLowerCase())
     )
   }, [])
 
@@ -96,7 +97,7 @@ export default function Navbar() {
   }, [searchTerm, filterCourses])
 
   return (
-    <nav className="flex items-center justify-between bg-white py-[15px]">
+    <nav className="flex items-center justify-between bg-white py-4">
       <div className="px-12">
         <Link href="/client/home">
           <Image
@@ -109,13 +110,12 @@ export default function Navbar() {
         </Link>
       </div>
       <div className="flex items-center px-6">
-        {authcontextvalue?.isAuthenticated || AuthLocal() == 'true' ? (
+        {authcontextvalue?.isAuthenticated || authLocalState == 'true' ? (
           <>
             <NavLink href="/client/home">Home</NavLink>
             <NavLink href="/client/my-learning">My Learning</NavLink>
             <NavLink href="/client/video">Video</NavLink>
             <NavLink href="/client/group">Group</NavLink>
-            <NavLink href="/client/private">Private</NavLink>
           </>
         ) : (
           <>
@@ -123,7 +123,6 @@ export default function Navbar() {
             <NavLink href="/my-learning">My Learning</NavLink>
             <NavLink href="/video">Video</NavLink>
             <NavLink href="/group">Group</NavLink>
-            <NavLink href="/private">Private</NavLink>
           </>
         )}
       </div>
@@ -150,7 +149,7 @@ export default function Navbar() {
         />
       </div>
       <div>
-        {authcontextvalue?.isAuthenticated || AuthLocal() == 'true' ? (
+        {authcontextvalue?.isAuthenticated || authLocalState == 'true' ? (
           <div className="flex items-center px-6">
             <Link href="/client/notification" aria-label="Notifications">
               <Image
@@ -211,7 +210,7 @@ export default function Navbar() {
             </div>
           </div>
         ) : (
-          <div className="flex items-center px-6">
+          <div className="flex items-center px-[22px] py-2.5">
             <NavLink href="/client/login">Login</NavLink>
             <NavLink href="/client/sign-up">Sign Up</NavLink>
           </div>
@@ -219,16 +218,16 @@ export default function Navbar() {
       </div>
       {searchTerm && (
         <div
-          className="absolute top-14 right-[210px] z-30 border-2 border-red-400 mt-1 bg-white rounded-xl shadow-lg w-[530px] 2xl:right-[575px]"
+          className="absolute top-14 right-[236px] z-30 border-2 border-red-400 mt-1 bg-white rounded-xl shadow-lg w-[530px] 2xl:right-[575px]"
           role="listbox"
           id="search-results"
         >
           {filteredCourses.slice(0, 3).length > 0 ? (
             filteredCourses.slice(0, 3).map((course) => (
               <Link
-                key={course.course_id}
+                key={course.courseId}
                 href={`/client/video/course-detail/${encodeURIComponent(
-                  course.course_id
+                  course.courseId
                 )}`}
                 role="option"
                 tabIndex={0}
@@ -237,7 +236,7 @@ export default function Navbar() {
                     e.preventDefault()
                     router.push(
                       `/client/video/course-detail/${encodeURIComponent(
-                        course.course_id
+                        course.courseId
                       )}`
                     )
                   }
@@ -245,15 +244,15 @@ export default function Navbar() {
               >
                 <div className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer rounded-xl">
                   <Image
-                    src={course.imageSrc}
-                    alt={course.title}
+                    src={course.courseImage}
+                    alt={course.courseTitle}
                     width={50}
                     height={50}
                     className="rounded-xl"
                   />
                   <div className="ml-3">
-                    <h2 className="font-semibold">{course.title}</h2>
-                    <p className="text-gray-500">{course.chef}</p>
+                    <h2 className="font-semibold">{course.courseTitle}</h2>
+                    <p className="text-gray-500">{course.chefName}</p>
                   </div>
                 </div>
               </Link>

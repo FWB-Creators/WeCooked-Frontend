@@ -1,11 +1,11 @@
 import { useMemo } from 'react'
 interface StarRatingProps {
-  rating: number
+  reviewRating: number
   className?: string
 }
 
-export function StarRating({ rating, className }: StarRatingProps) {
-  const formattedRating = useMemo(() => rating.toFixed(1), [rating])
+export function StarRating({ reviewRating, className }: StarRatingProps) {
+  const formattedRating = useMemo(() => reviewRating.toFixed(1), [reviewRating])
   return (
     <div className={`flex items-center ${className}`} aria-label={`Rating: ${formattedRating} out of 5`}>
       <svg
