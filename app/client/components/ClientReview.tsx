@@ -43,7 +43,7 @@ export default function ClientReview() {
           </div>
           <div className="flex flex-col">
             <p className="font-bold text-lg">Allahu Akbar</p>
-            <StarRating rating={3.2} />
+            <StarRating reviewRating={3.2} />
           </div>
         </div>
       </div>

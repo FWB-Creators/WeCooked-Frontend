@@ -6,18 +6,18 @@ import { foodtype } from '@/app/client/data/food-type'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/16/solid'
 import { FoodType } from '@/app/client/types/foodtype'
 
-function CourseCard({ title, total_course, imageSrc }: FoodType) {
+function CourseCard({ courseTitle, total_course, courseImage }: FoodType) {
   return (
     <div className="bg-white rounded-xl shadow-lg w-56 transition-transform duration-300 transform hover:scale-105 hover:shadow-lg">
       <Image
-        src={imageSrc}
-        alt={title}
+        src={courseImage}
+        alt={courseTitle}
         width={280}
         height={250}
         className="rounded-t-lg"
       />
       <div className="p-4">
-        <h2 className="text-xl font-bold p-1">{title}</h2>
+        <h2 className="text-xl font-bold p-1">{courseTitle}</h2>
         <p className="text-gray-600 p-1">
           {total_course} Course{total_course !== 1 ? 's' : ''}
         </p>
@@ -76,10 +76,10 @@ export default function FoodTypeCard() {
               <Link
                 key={index}
                 href={`/client/video/search/${
-                  food.cuisine
-                    ? encodeURIComponent(food.cuisine.trim().toLowerCase())
-                    : 'all'
-                }`}
+                    food.courseCategory 
+                      ? encodeURIComponent(food.courseCategory.trim().toLowerCase())
+                      : 'all'
+                  }`}
                 className="w-full ml-12"
               >
                 <CourseCard {...food} />

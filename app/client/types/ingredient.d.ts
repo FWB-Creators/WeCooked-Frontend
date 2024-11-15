@@ -1,5 +1,6 @@
 export interface Ingredient {
-  name: string
+  ingredientId: number
+  ingredientName: string[]
   quantity?: number
-  price?: number
+  ingredientPrice?: number
 }
