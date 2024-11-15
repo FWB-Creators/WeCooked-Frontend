@@ -12,7 +12,7 @@ export default function MeetChefCurvePage() {
         className="w-full h-auto"
       />
       <div>
-        <div className="absolute w-5/12 left-20 top-56 z-10 max-w-2xl">
+        <div className="absolute w-5/12 left-20 z-10 max-w-2xl">
           <h1 className="py-1.5 text-5xl font-bold text-white inline-block text-transparent bg-clip-text">
             Meet Chef Sieng: Master of Italian Cuisine
           </h1>

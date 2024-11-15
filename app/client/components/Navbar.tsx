@@ -29,6 +29,7 @@ export const AuthLocal = () => {
 
 export default function Navbar() {
   const authcontextvalue = useAuthContext()
+  const authLocalState = AuthLocal()
 
   const [userDropdownOpen, setUserDropdownOpen] = useState<boolean>(false)
   const [searchDropdownOpen, setSearchDropdownOpen] = useState<boolean>(false)
@@ -109,13 +110,12 @@ export default function Navbar() {
         </Link>
       </div>
       <div className="flex items-center px-6">
-        {authcontextvalue?.isAuthenticated || AuthLocal() == 'true' ? (
+        {authcontextvalue?.isAuthenticated || authLocalState == 'true' ? (
           <>
             <NavLink href="/client/home">Home</NavLink>
             <NavLink href="/client/my-learning">My Learning</NavLink>
             <NavLink href="/client/video">Video</NavLink>
             <NavLink href="/client/group">Group</NavLink>
-            <NavLink href="/client/private">Private</NavLink>
           </>
         ) : (
           <>
@@ -123,7 +123,6 @@ export default function Navbar() {
             <NavLink href="/my-learning">My Learning</NavLink>
             <NavLink href="/video">Video</NavLink>
             <NavLink href="/group">Group</NavLink>
-            <NavLink href="/private">Private</NavLink>
           </>
         )}
       </div>
@@ -150,7 +149,7 @@ export default function Navbar() {
         />
       </div>
       <div>
-        {authcontextvalue?.isAuthenticated || AuthLocal() == 'true' ? (
+        {authcontextvalue?.isAuthenticated || authLocalState == 'true' ? (
           <div className="flex items-center px-6">
             <Link href="/client/notification" aria-label="Notifications">
               <Image

@@ -19,7 +19,7 @@ export default function CalendarPage() {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
-        calendarRef.current && 
+        calendarRef.current &&
         !calendarRef.current.contains(event.target as Node) &&
         inputRef.current &&
         !inputRef.current.contains(event.target as Node)
@@ -70,7 +70,7 @@ export default function CalendarPage() {
         <div className="absolute top-1/4 left-0 right-0 m-auto bg-white rounded-2xl w-[600px] h-96 px-8 py-4 shadow-xl flex flex-col items-center justify-center">
           <div className="space-y-6 w-full max-w-[500px]">
             <h1 className="text-4xl font-bold text-center mb-4">
-              Find Tour Taste!
+              Find Your Taste!
             </h1>
             <form
               onSubmit={handleSubmit}
@@ -113,11 +113,11 @@ export default function CalendarPage() {
                 )}
               </div>
               <button
-              type="submit"
-              className="mt-8 w-full py-3 px-4 rounded-lg font-semibold text-white bg-gradient-to-t from-[#FE3511] to-[#F0725C] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
-            >
-              Search
-            </button>
+                type="submit"
+                className="mt-8 w-full py-3 px-4 rounded-lg font-semibold text-white bg-gradient-to-t from-[#FE3511] to-[#F0725C] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
+              >
+                Search
+              </button>
             </form>
           </div>
         </div>
