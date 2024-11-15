@@ -7,23 +7,21 @@ import VideoTutorialPlayer from './VideoTutorialPlayer'
 import { videoData } from '../../data/video'
 
 export default function VideoTutorialControl() {
-  const { tutorialId } = useParams()
-
+  const { videoID, tutorialId } = useParams()
   const currentTutorialId = parseInt(Array.isArray(tutorialId) ? tutorialId[0] : tutorialId)
+  const currentVideoId = parseInt(Array.isArray(videoID) ? videoID[0] : videoID)
 
   useEffect(() => {
-    console.log('Tutorial ID:', currentTutorialId)
-  }, [currentTutorialId])
+    console.log('Video ID:', currentVideoId, 'Tutorial ID:', currentTutorialId)
+  }, [currentVideoId, currentTutorialId])
 
-  const video = videoData.find((video) =>
-    video.tutorial.some(tutorial => tutorial.tutorialId === currentTutorialId)
-  )
+  const video = videoData.find(v => v.videoID === currentVideoId)
 
   if (!video) {
     return <p className="flex justify-center text-white">Video not found</p>
   }
 
-  const { videoID, videoTitle, timestamps, tutorial } = video
+  const { videoTitle, tutorial } = video
   const currentTutorial = tutorial.find(t => t.tutorialId === currentTutorialId)
 
   if (!currentTutorial) {
@@ -35,18 +33,18 @@ export default function VideoTutorialControl() {
       <div className="w-full bg-gray-100 rounded-lg">
         <span className="flex px-8 py-6 font-light">
           <Link href="/client/my-learning">My Learning /</Link>
-          <Link href={`/client/my-learning/${videoID}`}>
+          <Link href={`/client/my-learning/${currentVideoId}`}>
             <p className="pl-1">{videoTitle} /</p>
           </Link>
           <p className="pl-1 font-semibold">Tutorial: {currentTutorial.tutorialTitle}</p>
         </span>
         {currentTutorial.tutorialVideo ? (
           <VideoTutorialPlayer
-            videoID={videoID}
+            videoID={currentVideoId}
             videoTitle={videoTitle}
             videoPath={[{ quality: '1080p', src: currentTutorial.tutorialVideo }]}
-            timestamps={timestamps}
-            tutorial={tutorial}
+            timestamps={video.timestamps}
+            tutorial={video.tutorial}
           />
         ) : (
           <p className="px-8">No video available</p>

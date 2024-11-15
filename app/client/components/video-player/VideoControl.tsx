@@ -5,11 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import VideoPlayer from '../../components/video-player/VideoPlayer'
 import { videoData } from '../../data/video'
-import {
-  HandThumbUpIcon,
-  PlayCircleIcon,
-  StarIcon as Staroutline,
-} from '@heroicons/react/24/outline'
+import { HandThumbUpIcon, PlayCircleIcon, StarIcon as Staroutline } from '@heroicons/react/24/outline'
 import { StarIcon } from '@heroicons/react/24/solid'
 import { XMarkIcon } from '@heroicons/react/24/solid'
 
@@ -20,12 +16,10 @@ export default function VideoControl() {
     console.log('Video ID:', videoID)
   }, [videoID])
 
-  // State for managing the popup
   const [showRatingPopup, setShowRatingPopup] = useState(false)
-  const [rating, setRating] = useState(0) // Rating value
-  const [comment, setComment] = useState('') // Comment value
+  const [rating, setRating] = useState(0)
+  const [comment, setComment] = useState('')
 
-  // Handling video ID from useParams
   const videoId = Array.isArray(videoID) ? videoID[0] : videoID
   const video = videoData.find((video) => video.videoID === parseInt(videoId))
 
@@ -37,24 +31,20 @@ export default function VideoControl() {
   const firstTutorialId =
     tutorial && tutorial.length > 0 ? tutorial[0].tutorialId : null
 
-  // Toggle Rating Popup
   const toggleRatingPopup = () => setShowRatingPopup(!showRatingPopup)
 
-  // Handle Rating Change
   const handleRatingChange = (newRating: number) => {
     setRating(newRating)
   }
 
-  // Handle Comment Change
   const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setComment(e.target.value)
   }
 
-  // Submit Review (example logic)
   const handleSubmitReview = () => {
     console.log('Rating:', rating)
     console.log('Comment:', comment)
-    setShowRatingPopup(false) // Close popup after submitting
+    setShowRatingPopup(false)
   }
 
   return (
