@@ -212,9 +212,9 @@ export default function GroupTable() {
     }
   }
 
-  const handleTutorialConfirm = () => {
+  const handleDeleteConfirm = () => {
     setTypePopup(null)
-    console.log('Tutorial confirmed')
+    console.log('Delete confirmed')
   }
 
   const renderTableHeader = () => (
@@ -324,7 +324,7 @@ export default function GroupTable() {
       {activeTab === 'enrolled' && (
         <>
           <td className="flex items-center px-4 pl-12 py-2 border-b border-gray-200">
-            <td className="flex items-center rounded-full w-11 h-11">
+            <div className="flex items-center rounded-full w-11 h-11">
               <Image
                 src={group.userProfile}
                 alt={`Profile picture of ${group.userProfile}`}
@@ -332,7 +332,7 @@ export default function GroupTable() {
                 height={35}
                 className="rounded-full"
               />
-            </td>
+            </div>
             <p className="text-gray-800 font-semibold">
               {group.name} {group.surname}
             </p>
@@ -350,8 +350,8 @@ export default function GroupTable() {
       {activeTab === 'review' && (
         <>
           <td className="px-4 pl-12 py-2 border-b border-gray-200">
-            <td className="flex items-center">
-              <td className="flex items-center rounded-full w-11 h-11">
+            <div className="flex items-center">
+              <div className="flex items-center rounded-full w-11 h-11">
                 <Image
                   src={group.userProfile}
                   alt={`Profile picture of ${group.userProfile}`}
@@ -359,11 +359,13 @@ export default function GroupTable() {
                   height={35}
                   className="rounded-full"
                 />
-              </td>
-              <p className="text-gray-800 font-semibold">
-                {group.name} {group.surname}
-              </p>
-            </td>
+              </div>
+              <div>
+                <p className="text-gray-800 font-semibold">
+                  {group.name} {group.surname}
+                </p>
+              </div>
+            </div>
           </td>
           <td className="px-4 text-left border-b border-gray-200">
             <p className="text-gray-800">{group.reviewDetail}</p>
@@ -459,7 +461,7 @@ export default function GroupTable() {
               </div>
             </div>
             <button
-              onClick={handleTutorialConfirm}
+              onClick={handleDeleteConfirm}
               className="py-3 w-11/12 px-4 rounded-lg font-semibold text-white bg-gradient-to-t from-[#FE3511] to-[#F0725C] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
             >
               Yes, Confirm

@@ -47,7 +47,7 @@ export default function Navbar() {
     <nav className="flex items-center justify-between bg-white py-4 shadow-lg">
       <div className="flex items-center">
         <div className="px-12">
-          <Link href="/client/home">
+          <Link href="/chef/video">
             <Image
               src="/svg/WecookedLogo.svg"
               alt="WeCooked Logo"
