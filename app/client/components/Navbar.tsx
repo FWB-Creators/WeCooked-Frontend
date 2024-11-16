@@ -28,6 +28,12 @@ export const AuthLocal = (): string | null => {
 }
 
 export default function Navbar() {
+  const navItems = [
+    { label: 'Home', path: '/home' },
+    { label: 'My Learning', path: '/my-learning' },
+    { label: 'Video', path: '/video' },
+    { label: 'Group', path: '/group' },
+  ]
   const authcontextvalue = useAuthContext()
   const authLocalState = AuthLocal()
 
@@ -112,17 +118,19 @@ export default function Navbar() {
       <div className="flex items-center px-6">
         {authcontextvalue?.isAuthenticated || authLocalState == 'true' ? (
           <>
-            <NavLink href="/client/home">Home</NavLink>
-            <NavLink href="/client/my-learning">My Learning</NavLink>
-            <NavLink href="/client/video">Video</NavLink>
-            <NavLink href="/client/group">Group</NavLink>
+            {navItems.map(({ label, path }) => (
+              <NavLink key={path} href={`/client${path}`}>
+                {label}
+              </NavLink>
+            ))}
           </>
         ) : (
           <>
-            <NavLink href="/">Home</NavLink>
-            <NavLink href="/my-learning">My Learning</NavLink>
-            <NavLink href="/video">Video</NavLink>
-            <NavLink href="/group">Group</NavLink>
+            {navItems.map(({ label, path }) => (
+              <NavLink key={path} href={path}>
+                {label}
+              </NavLink>
+            ))}
           </>
         )}
       </div>

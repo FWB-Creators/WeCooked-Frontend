@@ -9,7 +9,7 @@ export default function GroupThankYouPage() {
         <div className="flex justify-center mb-3">
           <div className="relative w-24 h-24 mb-10">
             <div className="absolute inset-0 bg-gradient-to-b from-[#F0725C] to-[#FE3511] rounded-full"></div>
-            <CheckIcon className="w-24 h-24 text-white relative z-5" />
+            <CheckIcon className="w-24 h-24 text-white relative z-10" />
           </div>
         </div>
         <div className="flex flex-col justify-center items-center">

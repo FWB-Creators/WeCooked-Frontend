@@ -1,5 +1,5 @@
-import Navbar from '../../components/Navbar'
-import GroupPayment from '../../components/group/GroupPayment'
+import Navbar from '../../../components/Navbar'
+import GroupPayment from '../../../components/group/GroupPayment'
 
 export default function GroupPaymentPage() {
   return (
