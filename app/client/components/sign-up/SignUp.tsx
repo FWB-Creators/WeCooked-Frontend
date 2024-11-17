@@ -27,13 +27,28 @@ export default function SignUp() {
     setShowPassword((prev) => !prev)
   }
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
     try {
       if (!firstname || !lastname || !email || !password) {
-        //validation
+        // Validation
         throw new Error('All fields are required')
       }
+
+      const response = await fetch('/api/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(clientData),
+      })
+
+      if (!response.ok) {
+        throw new Error('Registration failed')
+      }
+
+      // If the request is successful, redirect the user to the login page
       router.push('/client/login')
     } catch (error) {
       console.error('Registration failed:', error)
