@@ -3,11 +3,12 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { ArrowLeftIcon, CalendarIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useParams } from 'next/navigation'
 import CustomCalendar from './CustomCalendar'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { group } from '../../data/group-course'
 
 const paymentSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -21,6 +22,12 @@ const paymentSchema = z.object({
 type FormData = z.infer<typeof paymentSchema>
 
 export default function GroupPayment() {
+  const { groupId } = useParams<{ groupId: string }>() // TypeScript typing for useParams
+  const ID = parseInt(groupId)
+  const groupPrice = group[ID].groupPrice
+  const groupAddOn = group[ID].ingredientPrice
+  const groupPicture = group[ID].groupPicture
+
   const {
     register,
     handleSubmit,
@@ -71,7 +78,7 @@ export default function GroupPayment() {
               beef wellington course
             </div>
             <Image
-              src="/images/juicy_beef.png"
+              src={groupPicture}
               alt="Indian food"
               width={500}
               height={500}
@@ -208,27 +215,29 @@ export default function GroupPayment() {
             </div>
             <div className="flex justify-between">
               <p className="font-bold">Subtotal</p>
-              <p className="font-bold">$29.00</p>
+              <p className="font-bold">${groupPrice}</p>
             </div>
             {isDeliver && (
               <div className="flex justify-between text-[#808080]">
                 <p className="font-bold">Add-on Package</p>
-                <p className="font-bold">+6.50</p>
+                <p className="font-bold">+${groupAddOn}</p>
               </div>
             )}
             <div className="flex justify-between text-[#808080]">
               <p className="font-bold">Discount</p>
-              <p className="font-">-0.00</p>
+              <p className="font-">-$0.00</p>
             </div>
             <div className="flex justify-between">
               <p className="font-bold">Total</p>
-              <p className="font-bold">{isDeliver ? '$35.50' : '$29.00'}</p>
+              <p className="font-bold">
+                {isDeliver ? `$${groupPrice + groupAddOn}` : `$${groupPrice}`}
+              </p>
             </div>
             <button
               type="submit"
               className="mt-8 w-full py-3 px-4 rounded-lg font-semibold text-white bg-gradient-to-t from-[#FE3511] to-[#F0725C] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
             >
-              Pay {isDeliver ? '$35.50' : '$29.00'}
+              Pay {isDeliver ? `$${groupPrice + 6.5}` : `$${groupPrice}`}
             </button>
           </div>
         </div>
