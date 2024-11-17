@@ -1,6 +1,7 @@
 'use client'
 import React, { useState, useMemo } from 'react'
 import Image from 'next/image'
+import Upload from './Upload'
 import { GroupData } from '../types/groupdata'
 import { groupData } from '../data/groupdata'
 import {
@@ -8,7 +9,6 @@ import {
   ChevronRightIcon,
   PencilSquareIcon,
   TrashIcon,
-  VideoCameraIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 
@@ -403,10 +403,7 @@ export default function GroupTable() {
           ))}
         </div>
         {activeTab === 'group' && (
-          <button className="flex justify-center items-center px-6 py-3 text-white bg-gradient-to-b from-[#F0725C] to-[#FE3511] rounded-full font-medium transition-transform duration-300 hover:scale-105">
-            <VideoCameraIcon className="w-6 h-6 mr-2" />
-            Upload
-          </button>
+          <Upload />
         )}
       </div>
 
@@ -471,7 +468,7 @@ export default function GroupTable() {
                 onClick={() => handlePopupAction('close')}
                 className="absolute right-3 top-3 bg-transparent border-none p-0 cursor-pointer"
               >
-                <XMarkIcon className="w-6 h-6 text-[#F0725C] hover:text-[#FE3511] transition-colors" />
+                <XMarkIcon className="w-5 h-5 text-[#F0725C] hover:text-[#FE3511] transition-colors" />
               </button>
             </div>
           </div>
