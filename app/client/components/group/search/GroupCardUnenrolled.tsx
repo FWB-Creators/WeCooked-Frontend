@@ -9,7 +9,7 @@ export default function GroupCardUnenrolled({
   groupTitle,
   groupDetail,
   groupPrice,
-  groupNumberofparticipants,
+  groupNumberOfParticipants,
   groupDate,
   groupCategory,
   groupPicture,
@@ -83,7 +83,7 @@ export default function GroupCardUnenrolled({
               </div>
               <div>
                 <p className="flex flex-col text-end text-gray-500 font-semibold">
-                  <span>{groupNumberofparticipants} Participants</span>
+                  <span>{groupNumberOfParticipants} Participants</span>
                   <span>{formatDate(groupDate)}</span>
                 </p>
               </div>

@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { ArrowLeftIcon, CalendarIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 import { useRouter, useParams } from 'next/navigation'
@@ -10,43 +10,43 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { group } from '../../data/group-course'
 
-const paymentSchema = z.object({
-  email: z.string().email('Invalid email address'),
-  cardNumber: z.string().regex(/^[0-9]{16}$/, 'Card number must be 16 digits'),
-  cvc: z.string().regex(/^[0-9]{3}$/, 'CVC must be 3 digits'),
-  expiryDate: z
-    .string()
-    .regex(/^(0[1-9]|1[0-2])\/([0-9]{2})$/, 'Expiry date must be MM/YY'),
-})
+const paymentSchema = (isDeliver: boolean) =>
+  z
+    .object({
+      email: z.string().email('Invalid email address'),
+      cardNumber: z
+        .string()
+        .regex(/^[0-9]{16}$/, 'Card number must be 16 digits'),
+      cvc: z.string().regex(/^[0-9]{3}$/, 'CVC must be 3 digits'),
+      expiryDate: z
+        .string()
+        .regex(/^(0[1-9]|1[0-2])\/([0-9]{2})$/, 'Expiry date must be MM/YY'),
+      billingAddress: z.string().min(1, 'Billing address is required'),
+      shippingAddress: z.string().optional(),
+      deliveryDate: z
+        .date()
+        .optional() // Initially optional
+        .refine((date) => (isDeliver ? !!date : true), {
+          message: 'Delivery date is required when delivery is selected',
+        }),
+    })
+    .refine(
+      (data) => {
+        if (isDeliver) {
+          return !!data.shippingAddress // Validate shippingAddress if delivery is selected
+        }
+        return true // Skip validation if delivery is not selected
+      },
+      {
+        message: 'Shipping address is required when delivery is selected',
+        path: ['shippingAddress'],
+      }
+    )
 
-type FormData = z.infer<typeof paymentSchema>
+// Create a type helper for forms dynamically
+type FormData = z.infer<ReturnType<typeof paymentSchema>>
 
 export default function GroupPayment() {
-  const { groupId } = useParams<{ groupId: string }>() // TypeScript typing for useParams
-  const ID = parseInt(groupId)
-  const groupPrice = group[ID].groupPrice
-  const groupAddOn = group[ID].ingredientPrice
-  const groupPicture = group[ID].groupPicture
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>({
-    resolver: zodResolver(paymentSchema),
-  })
-
-  const router = useRouter()
-
-  const onPaid = () => {
-    router.push('/client/group/complete')
-  }
-
-  const handleFormSubmit = (data: FormData) => {
-    console.log(JSON.stringify(data))
-    onPaid()
-  }
-
   const [isDeliver, setIsDeliver] = useState<boolean>(false)
   const [isCalendarOpen, setIsCalendarOpen] = useState<boolean>(false)
   const [selectedDate, setSelectedDate] = useState<{
@@ -62,8 +62,44 @@ export default function GroupPayment() {
     startDate: Date | null
     endDate: Date | null
   }) => {
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+
+    if (value.startDate && value.startDate < today) {
+      alert('Invalid time')
+      return // or show error message
+    }
     setSelectedDate(value)
     setIsCalendarOpen(false) // Close calendar after selecting a date
+  }
+
+  const { groupId } = useParams<{ groupId: string }>() // TypeScript typing for useParams
+  const ID = parseInt(groupId)
+  const groupTitle = group[ID].groupTitle
+  const groupPrice = group[ID].groupPrice
+  const groupAddOn = group[ID].ingredientPrice
+  const groupPicture = group[ID].groupPicture
+
+  // Dynamically generate the schema based on `isDeliver`
+  const schema = useMemo(() => paymentSchema(isDeliver), [isDeliver])
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
+  })
+
+  const router = useRouter()
+
+  const onPaid = () => {
+    router.push('/client/group/complete')
+  }
+
+  const handleFormSubmit = (data: FormData) => {
+    console.log(JSON.stringify(data))
+    onPaid()
   }
 
   return (
@@ -71,11 +107,11 @@ export default function GroupPayment() {
       <form onSubmit={handleSubmit(handleFormSubmit)}>
         <div className="grid grid-cols-2 mt-8">
           <div className="ml-32 mr-24">
-            <Link href="">
+            <Link href="/client/group">
               <ArrowLeftIcon className="absolute left-12 top-24 w-6 h-6 text-[#FE3511]" />
             </Link>
             <div className="pb-2 mb-4 text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#F0725C] to-[#FE3511]">
-              beef wellington course
+              {groupTitle}
             </div>
             <Image
               src={groupPicture}
@@ -94,6 +130,7 @@ export default function GroupPayment() {
             <div className="mt-4 flex flex-col w-full px-4 py-2 rounded-lg bg-[#DDE1E6]">
               <div className="flex items-center gap-x-2">
                 <button
+                  type="button"
                   className="flex items-center justify-center bg-[#697077] rounded-full w-5 h-5"
                   onClick={toggleDelivery}
                 >
@@ -109,12 +146,15 @@ export default function GroupPayment() {
             </div>
             {isDeliver && (
               <div>
-                <p className="mb-2">Delivery Date</p>
+                <p className="my-2">Delivery Date</p>
                 <div className="relative">
                   <input
-                    className="mb-2 w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
+                    className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
                     placeholder="Select a date"
-                    required
+                    {...register('deliveryDate', {
+                      valueAsDate: true, // Ensures the value is treated as a Date object
+                    })}
+                    required={isDeliver} // Enforce the requirement conditionally
                     readOnly
                     value={
                       selectedDate.startDate
@@ -122,6 +162,11 @@ export default function GroupPayment() {
                         : ''
                     }
                   />
+                  {errors.deliveryDate && (
+                    <p className="text-red-500 text-sm">
+                      {errors.deliveryDate.message}
+                    </p>
+                  )}
                   <CalendarIcon
                     className="absolute top-2 right-2 w-6 h-6 cursor-pointer"
                     onClick={toggleCalendar}
@@ -133,12 +178,17 @@ export default function GroupPayment() {
                     />
                   )}
                 </div>
-                <p className="mb-2">Shipping address</p>
+                <p className="my-2">Shipping address</p>
                 <textarea
-                  className="mb-2 w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
+                  className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
                   placeholder="Enter Your Shipping address"
-                  required
+                  {...register('shippingAddress')}
                 ></textarea>
+                {errors.shippingAddress && (
+                  <p className="text-red-500 text-sm">
+                    {errors.shippingAddress.message}
+                  </p>
+                )}
               </div>
             )}
           </div>
@@ -208,12 +258,17 @@ export default function GroupPayment() {
               </div>
               <p className="mb-2">Billing Address</p>
               <textarea
-                className="mb-2 w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
+                className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
                 placeholder="Enter your billing address"
-                required
+                {...register('billingAddress')}
               ></textarea>
+              {errors.billingAddress && (
+                <p className="text-red-500 text-sm">
+                  {errors.billingAddress.message}
+                </p>
+              )}
             </div>
-            <div className="flex justify-between">
+            <div className="mt-2 flex justify-between">
               <p className="font-bold">Subtotal</p>
               <p className="font-bold">${groupPrice}</p>
             </div>
