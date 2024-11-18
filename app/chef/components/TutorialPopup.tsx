@@ -14,7 +14,7 @@ const ITEMS_PER_PAGE = 5
 const VISIBLE_PAGES = 5
 
 type TutorialPopupProps = {
-  onAddBookmark: (bookmark: { id: number; title: string; time: string; isExpanded: boolean; }) => void;
+  onAddBookmark: (bookmark: { id: number; title: string; time: string; isExpanded: boolean; isTutorial: boolean; }) => void;
 }
 
 export default function TutorialPopup({ onAddBookmark }: TutorialPopupProps) {
@@ -41,7 +41,8 @@ export default function TutorialPopup({ onAddBookmark }: TutorialPopupProps) {
         id: selectedTutorial.tutorialId,
         title: selectedTutorial.tutorialTitle,
         time: '0:00',
-        isExpanded: true
+        isExpanded: true,
+        isTutorial: true
       })
     }
   }
@@ -89,7 +90,7 @@ export default function TutorialPopup({ onAddBookmark }: TutorialPopupProps) {
   const renderTableRow = (tutorial: Tutorial) => (
     <tr
       key={tutorial.tutorialId}
-      className="border-x border-gray-200 text-gray-800 hover:bg-gray-50 cursor-pointer"
+      className="border-x border-gray-200 text-gray-800 hover:bg-gray-200 cursor-pointer"
       onClick={() => handleRowClick(tutorial.tutorialId)}
     >
       <td className="pl-12 px-4 py-2 border-b border-gray-200">

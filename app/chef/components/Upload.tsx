@@ -9,6 +9,7 @@ import {
   BookmarkIcon,
   ArrowPathIcon,
   MinusIcon,
+  TrashIcon,
 } from '@heroicons/react/24/outline'
 import { CldUploadWidget } from 'next-cloudinary'
 import { CheckIcon } from '@heroicons/react/24/outline'
@@ -18,6 +19,7 @@ interface Bookmark {
   id: number
   title: string
   time: string
+  countdown: number
   isExpanded: boolean
 }
 
@@ -33,7 +35,14 @@ export default function Upload() {
   const [coverImageUrl, setCoverImageUrl] = useState('')
   const [currentStep, setCurrentStep] = useState(1)
   const [bookmarks, setBookmarks] = useState<
-    { id: number; title: string; time: string; isExpanded: boolean }[]
+    {
+      id: number
+      title: string
+      time: string
+      countdown: number
+      isExpanded: boolean
+      isTutorial?: boolean
+    }[]
   >([])
   const [courseName, setCourseName] = useState('')
   const [courseDetail, setCourseDetail] = useState('')
@@ -57,10 +66,15 @@ export default function Upload() {
     id: number
     title: string
     time: string
+    countdown?: number
     isExpanded: boolean
+    isTutorial?: boolean
   }) => {
     if (!bookmarks.some((b) => b.id === bookmark.id)) {
-      setBookmarks((prev) => [...prev, { ...bookmark, isExpanded: true }])
+      setBookmarks((prev) => [
+        ...prev,
+        { ...bookmark, countdown: bookmark.countdown ?? 0, isExpanded: true },
+      ])
     }
   }
 
@@ -93,6 +107,7 @@ export default function Upload() {
       id: bookmarks.length + 1,
       title: '',
       time: '0:00',
+      countdown: 30,
       isExpanded: true,
     }
     setBookmarks([...bookmarks, newBookmark])
@@ -132,6 +147,22 @@ export default function Upload() {
     setBookmarks(
       bookmarks.map((bookmark) =>
         bookmark.id === id ? { ...bookmark, title } : bookmark
+      )
+    )
+  }
+
+  const deleteBookmark = (id: number) => {
+    const updatedBookmarks = bookmarks.filter((bookmark) => bookmark.id !== id)
+    setBookmarks(updatedBookmarks)
+  }
+
+  const updateCountdownTime = (id: number, value: string) => {
+    const newCountdownValue = Math.max(0, parseInt(value, 10) || 0)
+    setBookmarks((prevBookmarks) =>
+      prevBookmarks.map((bookmark) =>
+        bookmark.id === id
+          ? { ...bookmark, countdown: newCountdownValue }
+          : bookmark
       )
     )
   }
@@ -269,9 +300,13 @@ export default function Upload() {
           <div className="grid grid-cols-2 gap-6 animate-fadeIn">
             <div className="space-y-4">
               <div className="flex justify-between items-center">
-                <button className="flex items-center text-[#FE3511] hover:text-[#F0725C]">
+                <button
+                  className="flex items-center text-[#FE3511] hover:text-[#F0725C]"
+                  onClick={() => handleAddBookmark}
+                >
                   <TutorialPopup onAddBookmark={handleAddBookmark} />
                 </button>
+
                 <button
                   onClick={addNewBookmark}
                   className="flex items-center text-[#FE3511] hover:text-[#F0725C]"
@@ -288,7 +323,7 @@ export default function Upload() {
                 </button>
               </div>
 
-              <div className="space-y-3 max-h-[468px] h-[580px] overflow-y-auto bg-gray-200 rounded-lg">
+              <div className="space-y-3 max-h-[466px] h-[580px] overflow-y-auto bg-gray-200 rounded-lg">
                 {bookmarks.map((bookmark) => (
                   <div
                     key={bookmark.id}
@@ -309,7 +344,7 @@ export default function Upload() {
                     </div>
 
                     {bookmark.isExpanded && (
-                      <div className="mt-4 space-y-3">
+                      <div className="mt-4 space-y-4">
                         <input
                           type="text"
                           placeholder="Bookmark Title"
@@ -319,19 +354,47 @@ export default function Upload() {
                             updateBookmarkTitle(bookmark.id, e.target.value)
                           }
                         />
-                        <div className="flex items-center gap-2">
-                          <input
-                            type="text"
-                            placeholder="00:00"
-                            className="w-24 px-4 py-2 rounded-lg bg-white border border-gray-200 outline-none"
-                            value={bookmark.time}
-                            readOnly
-                          />
-                          <button
-                            className="text-[#FE3511]"
-                            onClick={() => updateBookmarkTime(bookmark.id)}
-                          >
-                            <ArrowPathIcon className="w-5 h-5" />
+
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <input
+                              type="text"
+                              placeholder="00:00"
+                              className="w-24 px-4 py-2 rounded-lg bg-white border border-gray-200 outline-none"
+                              value={bookmark.time}
+                              readOnly
+                            />
+                            <button
+                              className="text-[#FE3511]"
+                              onClick={() => updateBookmarkTime(bookmark.id)}
+                            >
+                              <ArrowPathIcon className="w-5 h-5" />
+                            </button>
+                          </div>
+
+                          {!bookmark.isTutorial ? (
+                            <div className="flex items-center gap-2">
+                              <input
+                                type="number"
+                                placeholder="30"
+                                min="0"
+                                className="w-20 text-center px-2 py-2 rounded-lg bg-white border border-gray-200 outline-none"
+                                value={bookmark.countdown}
+                                onChange={(e) =>
+                                  updateCountdownTime(
+                                    bookmark.id,
+                                    e.target.value
+                                  )
+                                }
+                              />
+                              <span>Sec</span>
+                            </div>
+                          ) : (
+                            ''
+                          )}
+
+                          <button onClick={() => deleteBookmark(bookmark.id)}>
+                            <TrashIcon className="w-5 h-5 text-[#FE3511] cursor-pointer" />
                           </button>
                         </div>
                       </div>
