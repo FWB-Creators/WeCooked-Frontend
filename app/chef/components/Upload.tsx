@@ -14,6 +14,7 @@ import {
 import { CldUploadWidget } from 'next-cloudinary'
 import { CheckIcon } from '@heroicons/react/24/outline'
 import TutorialPopup from './TutorialPopup'
+import VideoPlayer from './VideoPlayer'
 
 interface Bookmark {
   id: number
@@ -454,7 +455,13 @@ export default function Upload() {
         return (
           <div className="space-y-6 animate-fadeIn">
             <h3 className="text-xl font-medium">Review Your Course</h3>
-            {/* Add confirmation content here */}
+            <VideoPlayer
+              videoID={1}
+              videoTitle="Sample Video"
+              videoPath={videoUrl ? [{ quality: '720p', src: videoUrl }] : []}
+              timestamps={bookmarks}
+              tutorial={[]}
+            />
           </div>
         )
       default:
