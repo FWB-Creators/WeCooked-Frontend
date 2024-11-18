@@ -363,7 +363,7 @@ const VideoPlayer: React.FC<Video> = ({
               <div className="flex justify-between w-11/12 gap-12">
                 <div className="">
                   <div className="absolute mt-2 w-[70px] h-[70px] bg-[#F0725C] opacity-20 rounded-xl"></div>
-                  <PlayCircleIcon className="relative top-5 left-[13px] w-11 h-11 text-[#F0725C]" />
+                  <PlayCircleIcon className="relative top-5 left-[13px] w-11 h-11 text-[#FE3511]" />
                 </div>
                 <div className="w-5/6">
                   <div className="font-semibold text-2xl bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text">
