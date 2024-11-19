@@ -20,8 +20,11 @@ interface Bookmark {
   id: number
   title: string
   time: string
-  countdown: number
+  timeCountdown?: number
   isExpanded: boolean
+  timeTriggered: boolean
+  timeStop: number
+  isTutorial?: boolean
 }
 
 interface UploadResult {
@@ -35,16 +38,7 @@ export default function Upload() {
   const [videoUrl, setVideoUrl] = useState('')
   const [coverImageUrl, setCoverImageUrl] = useState('')
   const [currentStep, setCurrentStep] = useState(1)
-  const [bookmarks, setBookmarks] = useState<
-    {
-      id: number
-      title: string
-      time: string
-      countdown: number
-      isExpanded: boolean
-      isTutorial?: boolean
-    }[]
-  >([])
+  const [bookmarks, setBookmarks] = useState<Bookmark[]>([])
   const [courseName, setCourseName] = useState('')
   const [courseDetail, setCourseDetail] = useState('')
   const [courseCategory, setCourseCategory] = useState('')
@@ -63,20 +57,28 @@ export default function Upload() {
     setIsFormValid(isValid)
   }, [courseName, courseDetail, courseCategory, coursePrice, courseIngredients])
 
-  const handleAddBookmark = (bookmark: {
-    id: number
-    title: string
-    time: string
-    countdown?: number
-    isExpanded: boolean
-    isTutorial?: boolean
-  }) => {
-    if (!bookmarks.some((b) => b.id === bookmark.id)) {
-      setBookmarks((prev) => [
-        ...prev,
-        { ...bookmark, countdown: bookmark.countdown ?? 0, isExpanded: true },
-      ])
+  const handleAddBookmark = (bookmark: Omit<Bookmark, 'id'>) => {
+    const newBookmarkId = bookmarks.length > 0 
+      ? Math.max(...bookmarks.map(b => b.id)) + 1 
+      : 1
+
+    const newBookmark: Bookmark = {
+      ...bookmark,
+      id: newBookmarkId,
+      isTutorial: true,
+      isExpanded: true
     }
+
+    setBookmarks((prev) => {
+      const existingBookmark = prev.find(b => 
+        b.title === newBookmark.title && 
+        b.time === newBookmark.time
+      )
+      
+      return existingBookmark 
+        ? prev 
+        : [...prev, newBookmark]
+    })
   }
 
   const handleUploadSuccess = (result: unknown) => {
@@ -108,8 +110,10 @@ export default function Upload() {
       id: bookmarks.length + 1,
       title: '',
       time: '0:00',
-      countdown: 30,
+      timeCountdown: 0,
       isExpanded: true,
+      timeTriggered: false,
+      timeStop: 0,
     }
     setBookmarks([...bookmarks, newBookmark])
   }
@@ -139,7 +143,13 @@ export default function Upload() {
 
     setBookmarks(
       bookmarks.map((bookmark) =>
-        bookmark.id === id ? { ...bookmark, time: timeString } : bookmark
+        bookmark.id === id
+          ? {
+              ...bookmark,
+              time: timeString,
+              timeStop: convertTimeToSeconds(timeString),
+            }
+          : bookmark
       )
     )
   }
@@ -162,10 +172,15 @@ export default function Upload() {
     setBookmarks((prevBookmarks) =>
       prevBookmarks.map((bookmark) =>
         bookmark.id === id
-          ? { ...bookmark, countdown: newCountdownValue }
+          ? { ...bookmark, timeCountdown: newCountdownValue }
           : bookmark
       )
     )
+  }
+
+  const convertTimeToSeconds = (time: string): number => {
+    const [minutes, seconds] = time.split(':').map(Number)
+    return minutes * 60 + seconds
   }
 
   const renderStepContent = () => {
@@ -264,7 +279,7 @@ export default function Upload() {
               <div>
                 <p className="mb-1">Cover Image</p>
                 <CldUploadWidget
-                  uploadPreset="next_cloudinary_app"
+                  uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
                   onSuccess={handleUploadSuccess}
                 >
                   {({ open }) => (
@@ -301,7 +316,7 @@ export default function Upload() {
           <div className="grid grid-cols-2 gap-6 animate-fadeIn">
             <div className="space-y-4">
               <div className="flex justify-between items-center">
-                <button
+              <button
                   className="flex items-center text-[#FE3511] hover:text-[#F0725C]"
                   onClick={() => handleAddBookmark}
                 >
@@ -350,7 +365,7 @@ export default function Upload() {
                           type="text"
                           placeholder="Bookmark Title"
                           className="w-full px-4 py-2 rounded-lg bg-white border border-gray-200 outline-none"
-                          value={bookmark.title}
+                          value={bookmark.title || ''}
                           onChange={(e) =>
                             updateBookmarkTitle(bookmark.id, e.target.value)
                           }
@@ -360,9 +375,9 @@ export default function Upload() {
                           <div className="flex items-center gap-2">
                             <input
                               type="text"
-                              placeholder="00:00"
+                              placeholder={bookmark.time}
                               className="w-24 px-4 py-2 rounded-lg bg-white border border-gray-200 outline-none"
-                              value={bookmark.time}
+                              value={bookmark.timeStop}
                               readOnly
                             />
                             <button
@@ -377,10 +392,9 @@ export default function Upload() {
                             <div className="flex items-center gap-2">
                               <input
                                 type="number"
-                                placeholder="30"
                                 min="0"
                                 className="w-20 text-center px-2 py-2 rounded-lg bg-white border border-gray-200 outline-none"
-                                value={bookmark.countdown}
+                                value={bookmark.timeCountdown}
                                 onChange={(e) =>
                                   updateCountdownTime(
                                     bookmark.id,
@@ -417,7 +431,7 @@ export default function Upload() {
               <div>
                 <p className="mb-1">Cover Image</p>
                 <CldUploadWidget
-                  uploadPreset="next_cloudinary_app"
+                  uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
                   onSuccess={handleUploadSuccess}
                 >
                   {({ open }) => {
@@ -454,13 +468,29 @@ export default function Upload() {
       case 3:
         return (
           <div className="space-y-6 animate-fadeIn">
-            <h3 className="text-xl font-medium">Review Your Course</h3>
+            <h3 className="text-xl font-medium bg-gradient-to-b from-[#F0725C] to-[#FE3511] text-transparent bg-clip-text">
+              Review Your Course
+            </h3>
             <VideoPlayer
-              videoID={1}
-              videoTitle="Sample Video"
+              tutorial={bookmarks.map((bookmark) => ({
+                tutorialId: bookmark.id,
+                tutorialVideo: '',
+                tutorialTitle: bookmark.title,
+                tutorialDetail: '',
+                timeStop: bookmark.timeStop,
+                timeTriggered: bookmark.timeTriggered,
+                isTutorial: true,
+              }))}
+              // tutorial={[]}
+              videoID={bookmarks.length + 1}
+              videoTitle={videoUrl ? 'Review Video' : 'Default Title'}
               videoPath={videoUrl ? [{ quality: '720p', src: videoUrl }] : []}
-              timestamps={bookmarks}
-              tutorial={[]}
+              timestamps={bookmarks.map((bookmark) => ({
+                timeStop: bookmark.timeStop,
+                timeCountdown: bookmark.timeCountdown,
+                timeTriggered: bookmark.timeTriggered,
+                isTutorial: false,
+              }))}
             />
           </div>
         )
@@ -472,7 +502,7 @@ export default function Upload() {
   return (
     <div>
       <CldUploadWidget
-        uploadPreset="next_cloudinary_app"
+        uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
         onSuccess={handleUploadSuccess}
       >
         {({ open }) => (

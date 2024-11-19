@@ -8,7 +8,7 @@ export const tutorial: Tutorial[] = [
     courseImage: '/images/thumbnail.png',
     tutorialDetail:
       'Keep your fingers curled under (a claw grip) to prevent accidental cuts. Use a serrated knife if your tomato is very soft, as it will grip the tomato skin better than a straight-edge knife. This tutorial will help you get evenly sized tomato pieces, perfect for salads, sauces, or garnishes. Tutorial: How to Properly Cut a Tomato',
-    timeStop: 30,
+    timeStop: null,
     timeTriggered: false,
   },
   {
@@ -18,7 +18,7 @@ export const tutorial: Tutorial[] = [
     courseImage: '/images/thumbnail.png',
     tutorialDetail:
       'Keep your fingers curled under (a claw grip) to prevent accidental cuts. Use a serrated knife if your tomato is very soft, as it will grip the tomato skin better than a straight-edge knife. This tutorial will help you get evenly sized tomato pieces, perfect for salads, sauces, or garnishes. Tutorial: How to Properly Cut a Tomato',
-    timeStop: 40,
+    timeStop: null,
     timeTriggered: false,
   },
   {
@@ -28,7 +28,7 @@ export const tutorial: Tutorial[] = [
     courseImage: '/images/thumbnail.png',
     tutorialDetail:
       'Keep your fingers curled under (a claw grip) to prevent accidental cuts. Use a serrated knife if your tomato is very soft, as it will grip the tomato skin better than a straight-edge knife. This tutorial will help you get evenly sized tomato pieces, perfect for salads, sauces, or garnishes. Tutorial: How to Properly Cut a Tomato',
-    timeStop: 50,
+    timeStop: null,
     timeTriggered: false,
   },
   {
@@ -38,7 +38,7 @@ export const tutorial: Tutorial[] = [
     courseImage: '/images/thumbnail.png',
     tutorialDetail:
       'Keep your fingers curled under (a claw grip) to prevent accidental cuts. Use a serrated knife if your tomato is very soft, as it will grip the tomato skin better than a straight-edge knife. This tutorial will help you get evenly sized tomato pieces, perfect for salads, sauces, or garnishes. Tutorial: How to Properly Cut a Tomato',
-    timeStop: 60,
+    timeStop: null,
     timeTriggered: false,
   },
   {
@@ -48,7 +48,7 @@ export const tutorial: Tutorial[] = [
     courseImage: '/images/thumbnail.png',
     tutorialDetail:
       'Keep your fingers curled under (a claw grip) to prevent accidental cuts. Use a serrated knife if your tomato is very soft, as it will grip the tomato skin better than a straight-edge knife. This tutorial will help you get evenly sized tomato pieces, perfect for salads, sauces, or garnishes. Tutorial: How to Properly Cut a Tomato',
-    timeStop: 90,
+    timeStop: null,
     timeTriggered: false,
   },
   {
@@ -58,7 +58,7 @@ export const tutorial: Tutorial[] = [
     courseImage: '/images/thumbnail.png',
     tutorialDetail:
       'Keep your fingers curled under (a claw grip) to prevent accidental cuts. Use a serrated knife if your tomato is very soft, as it will grip the tomato skin better than a straight-edge knife. This tutorial will help you get evenly sized tomato pieces, perfect for salads, sauces, or garnishes. Tutorial: How to Properly Cut a Tomato',
-    timeStop: 120,
+    timeStop: null,
     timeTriggered: false,
   },
   {
@@ -68,7 +68,7 @@ export const tutorial: Tutorial[] = [
     courseImage: '/images/thumbnail.png',
     tutorialDetail:
       'Keep your fingers curled under (a claw grip) to prevent accidental cuts. Use a serrated knife if your tomato is very soft, as it will grip the tomato skin better than a straight-edge knife. This tutorial will help you get evenly sized tomato pieces, perfect for salads, sauces, or garnishes. Tutorial: How to Properly Cut a Tomato',
-    timeStop: 30,
+    timeStop: null,
     timeTriggered: false,
   },
   {
@@ -78,7 +78,7 @@ export const tutorial: Tutorial[] = [
     courseImage: '/images/thumbnail.png',
     tutorialDetail:
       'Keep your fingers curled under (a claw grip) to prevent accidental cuts. Use a serrated knife if your tomato is very soft, as it will grip the tomato skin better than a straight-edge knife. This tutorial will help you get evenly sized tomato pieces, perfect for salads, sauces, or garnishes. Tutorial: How to Properly Cut a Tomato',
-    timeStop: 40,
+    timeStop: null,
     timeTriggered: false,
   },
   {
@@ -88,7 +88,7 @@ export const tutorial: Tutorial[] = [
     courseImage: '/images/thumbnail.png',
     tutorialDetail:
       'Keep your fingers curled under (a claw grip) to prevent accidental cuts. Use a serrated knife if your tomato is very soft, as it will grip the tomato skin better than a straight-edge knife. This tutorial will help you get evenly sized tomato pieces, perfect for salads, sauces, or garnishes. Tutorial: How to Properly Cut a Tomato',
-    timeStop: 50,
+    timeStop: null,
     timeTriggered: false,
   },
   {
@@ -98,7 +98,7 @@ export const tutorial: Tutorial[] = [
     courseImage: '/images/thumbnail.png',
     tutorialDetail:
       'Keep your fingers curled under (a claw grip) to prevent accidental cuts. Use a serrated knife if your tomato is very soft, as it will grip the tomato skin better than a straight-edge knife. This tutorial will help you get evenly sized tomato pieces, perfect for salads, sauces, or garnishes. Tutorial: How to Properly Cut a Tomato',
-    timeStop: 90,
+    timeStop: null,
     timeTriggered: false,
   },
   {
@@ -108,7 +108,7 @@ export const tutorial: Tutorial[] = [
     courseImage: '/images/thumbnail.png',
     tutorialDetail:
       'Keep your fingers curled under (a claw grip) to prevent accidental cuts. Use a serrated knife if your tomato is very soft, as it will grip the tomato skin better than a straight-edge knife. This tutorial will help you get evenly sized tomato pieces, perfect for salads, sauces, or garnishes. Tutorial: How to Properly Cut a Tomato',
-    timeStop: 30,
+    timeStop: null,
     timeTriggered: false,
   },
   {
@@ -118,7 +118,7 @@ export const tutorial: Tutorial[] = [
     courseImage: '/images/thumbnail.png',
     tutorialDetail:
       'Keep your fingers curled under (a claw grip) to prevent accidental cuts. Use a serrated knife if your tomato is very soft, as it will grip the tomato skin better than a straight-edge knife. This tutorial will help you get evenly sized tomato pieces, perfect for salads, sauces, or garnishes. Tutorial: How to Properly Cut a Tomato',
-    timeStop: 90,
+    timeStop: null,
     timeTriggered: false,
   },
 ]

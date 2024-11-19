@@ -8,7 +8,6 @@ import { Tutorial } from '../types/Tutorial'
 import { PlayCircleIcon } from '@heroicons/react/24/outline'
 
 const VideoPlayer: React.FC<Video> = ({
-  videoID,
   videoPath,
   timestamps: initialTimestamps,
   tutorial: initialTutorial,
@@ -71,6 +70,7 @@ const VideoPlayer: React.FC<Video> = ({
 
       tutorial.forEach((tutorialItem) => {
         if (
+          tutorialItem.timeStop !== null &&
           Math.floor(current) === Math.floor(tutorialItem.timeStop) &&
           !tutorialItem.timeTriggered
         ) {
@@ -96,7 +96,9 @@ const VideoPlayer: React.FC<Video> = ({
 
   const handleTutorialConfirm = () => {
     if (currentTutorialId !== null) {
-      router.push(`/client/my-learning/${videoID}/tutorial/${currentTutorialId}`)
+      router.push(
+        `/chef/video`
+      )
     }
   }
 
@@ -357,9 +359,9 @@ const VideoPlayer: React.FC<Video> = ({
           </div>
         )}
 
-        {typePopup && (
+        {countdown !== null && isNaN(countdown) && typePopup && (
           <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
-            <div className="relative bg-white text-black 2xl:w-[45%] 2xl:h-1/3 h-[40%] w-1/2 px-6 py-4 rounded-lg shadow-lg flex flex-col items-center justify-center z-10">
+            <div className="relative bg-white text-black 2xl:w-[45%] 2xl:h-1/3 h-[45%] w-1/2 px-6 py-4 rounded-lg shadow-lg flex flex-col items-center justify-center z-10">
               <div className="flex justify-between w-11/12 gap-12">
                 <div className="">
                   <div className="absolute mt-2 2xl:w-[70px] 2xl:h-[70px] w-14 h-14 bg-[#F0725C] opacity-20 rounded-xl"></div>
@@ -495,9 +497,11 @@ const VideoPlayer: React.FC<Video> = ({
               style={{ width: `${progress}%` }}
             ></div>
 
+            {/* Render timestamp markers */}
             {timestamps.map((timestamp) => {
               const duration = videoRef.current?.duration || 1
               const markerPosition = (timestamp.timeStop / duration) * 100
+
               return (
                 <div
                   key={timestamp.timeStop}
@@ -513,23 +517,30 @@ const VideoPlayer: React.FC<Video> = ({
               )
             })}
 
-            {tutorial.map((tutorial) => {
-              const duration = videoRef.current?.duration || 1
-              const markerPosition = (tutorial.timeStop / duration) * 100
-              return (
-                <div
-                  key={tutorial.timeStop}
-                  className="absolute h-2 bg-blue-500"
-                  style={{
-                    left: `${markerPosition}%`,
-                    top: 0,
-                    width: '3px',
-                    height: '100%',
-                    transform: 'translateX(-50%)',
-                  }}
-                />
-              )
-            })}
+            {/* Render tutorial markers if countdown is NaN */}
+            {countdown !== null &&
+              isNaN(countdown) &&
+              tutorial.map((tutorial) => {
+                const duration = videoRef.current?.duration || 1
+                const markerPosition =
+                  tutorial.timeStop !== null
+                    ? (tutorial.timeStop / duration) * 100
+                    : 0
+
+                return (
+                  <div
+                    key={tutorial.timeStop}
+                    className="absolute h-2 bg-blue-500"
+                    style={{
+                      left: `${markerPosition}%`,
+                      top: 0,
+                      width: '3px',
+                      height: '100%',
+                      transform: 'translateX(-50%)',
+                    }}
+                  />
+                )
+              })}
           </div>
 
           {/* Current Time */}

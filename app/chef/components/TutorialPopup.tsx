@@ -14,7 +14,7 @@ const ITEMS_PER_PAGE = 5
 const VISIBLE_PAGES = 5
 
 type TutorialPopupProps = {
-  onAddBookmark: (bookmark: { id: number; title: string; time: string; isExpanded: boolean; isTutorial: boolean; }) => void;
+  onAddBookmark: (bookmark: { id: number; title: string; time: string; isExpanded: boolean; isTutorial: boolean; timeTriggered: boolean; timeStop:number; }) => void;
 }
 
 export default function TutorialPopup({ onAddBookmark }: TutorialPopupProps) {
@@ -42,7 +42,9 @@ export default function TutorialPopup({ onAddBookmark }: TutorialPopupProps) {
         title: selectedTutorial.tutorialTitle,
         time: '0:00',
         isExpanded: true,
-        isTutorial: true
+        isTutorial: true,
+        timeTriggered: false,
+        timeStop: selectedTutorial.timeStop ?? 0,
       })
     }
   }

@@ -4,6 +4,6 @@ export interface Tutorial {
   tutorialTitle: string
   courseImage: string
   tutorialDetail: string
-  timeStop: number
+  timeStop: number | null
   timeTriggered: boolean
 }

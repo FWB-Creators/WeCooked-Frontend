@@ -147,7 +147,7 @@ export default function SignUpChef() {
             <div>
               <p className="mb-1">Photo</p>
               <CldUploadWidget
-                uploadPreset="next_cloudinary_app"
+                uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
                 onSuccess={handleUploadSuccess}
               >
                 {({ open }) => {
