@@ -113,13 +113,18 @@ export default function GroupPayment() {
             <div className="pb-2 mb-4 text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#F0725C] to-[#FE3511]">
               {groupTitle}
             </div>
-            <Image
-              src={groupPicture}
-              alt="Indian food"
-              width={500}
-              height={500}
-              priority
-            />
+            <div className="rounded-3xl relative max-h-96 max-w-[450px] w-[500px] h-auto overflow-hidden">
+              <Image
+                className="rounded-3xl"
+                src={groupPicture}
+                alt="Indian food"
+                width={1000}
+                height={1000}
+                quality={100}
+                objectFit="cover" // Crops the image to fit the container
+                priority
+              />
+            </div>
             <div className="my-4">
               Beef Wellington is a classic and luxurious dish, featuring premium
               beef fillet wrapped in a layer of finely chopped mushrooms

@@ -17,7 +17,7 @@ export const group: Group[] = [
     groupDate: parseDate('November 5, 2024, at 6:00 PM'),
     groupCategory: 'Thai',
     groupLinkZoom: 'https://zoom.us/j/123456789',
-    groupPicture: '/images/gordon.png',
+    groupPicture: '/images/gordon-ramsay.png',
     chefImage: '/images/chef.png',
     chefName: 'Chef Gordon',
     reviewRating: 4.9,
