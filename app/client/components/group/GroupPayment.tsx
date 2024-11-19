@@ -117,11 +117,11 @@ export default function GroupPayment() {
               <Image
                 className="rounded-3xl"
                 src={groupPicture}
-                alt="Indian food"
+                alt={`${groupTitle} course image`}
                 width={1000}
                 height={1000}
                 quality={100}
-                objectFit="cover" // Crops the image to fit the container
+                style={{ objectFit: 'cover' }}
                 priority
               />
             </div>
