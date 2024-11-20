@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 export default function Profile() {
   return (
-    <div className="mt-4 mx-48">
+    <div className="mt-6 mx-48">
       <div className="flex justify-between items-center">
         <div className="flex gap-x-8 items-center">
           <div className="relative flex items-center justify-center max-w-28 max-h-28 w-28 h-28 overflow-hidden rounded-full">
