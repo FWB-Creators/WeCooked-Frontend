@@ -275,7 +275,7 @@ export default function TutorialTable() {
           </td>
           <td className="px-4 border-b border-gray-200">{video.courseTitle}</td>
           <td className="px-4 text-center border-b border-gray-200">
-            {formatDate(video.courseDate)}
+            {formatDate(new Date(video.courseDate))}
           </td>
           <td className="px-4 text-center border-b border-gray-200">
             <div className="flex justify-end">

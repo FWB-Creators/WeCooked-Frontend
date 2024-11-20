@@ -304,7 +304,7 @@ export default function GroupTable() {
             {group.groupParticipant.toLocaleString()}
           </td>
           <td className="px-4 text-center border-b border-gray-200">
-            {formatDate(group.groupDate)}
+            {formatDate(new Date(group.groupDate))}
           </td>
           <td className="px-4 text-center border-b border-gray-200">
             <div className="flex justify-end">

@@ -6,7 +6,7 @@ export interface GroupData {
   groupPrice: number
   groupRevenue: number
   groupParticipant: number
-  groupDate: Date
+  groupDate: Date | string
   userProfile: string
   name: string
   surname: string

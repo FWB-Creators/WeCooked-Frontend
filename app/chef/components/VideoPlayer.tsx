@@ -29,8 +29,7 @@ const VideoPlayer: React.FC<Video> = ({
   const [typePopup, setTypePopup] = useState<string | null>(null)
   const [countdown, setCountdown] = useState<number | null>(null)
   const [isCountingDown, setIsCountingDown] = useState<boolean>(false)
-  const [countdownInterval, setCountdownInterval] =
-    useState<NodeJS.Timeout | null>(null)
+  const [countdownInterval, setCountdownInterval] = useState<NodeJS.Timeout | null>(null)
   const [timestamps, setTimestamps] = useState<Timestamp[]>(initialTimestamps)
   const [tutorial, setTutorial] = useState<Tutorial[]>(initialTutorial)
   const [currentTutorialId, setCurrentTutorialId] = useState<number | null>(
