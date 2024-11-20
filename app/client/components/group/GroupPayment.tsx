@@ -14,12 +14,13 @@ const paymentSchema = (isDeliver: boolean) =>
   z.object({
     deliveryDate: z
       .date()
-      .nullable() // Allows null as a valid value
-      .optional() // Allows undefined as well
+      .nullable()
       .refine(
         (date) => {
-          if (isDeliver && !date) return false
-          return true
+          if (isDeliver) {
+            return !!date // Delivery date is required if delivery is toggled on
+          }
+          return true // Skip validation if delivery is toggled off
         },
         {
           message: 'Delivery date is required when delivery is selected',
@@ -30,7 +31,9 @@ const paymentSchema = (isDeliver: boolean) =>
       .optional()
       .refine(
         (address) => {
-          if (isDeliver && !address) return false
+          if (isDeliver) {
+            return !!address // Shipping address is required if delivery is toggled on
+          }
           return true
         },
         {
@@ -48,7 +51,10 @@ export default function GroupPayment() {
   const [selectedDate, setSelectedDate] = useState<{
     startDate: Date | null
     endDate: Date | null
-  }>({ startDate: null, endDate: null })
+  }>({
+    startDate: null,
+    endDate: null,
+  })
 
   const toggleDelivery = () => {
     setIsDeliver((prev) => {
@@ -67,15 +73,24 @@ export default function GroupPayment() {
     startDate: Date | null
     endDate: Date | null
   }) => {
-    const today = new Date()
-    today.setHours(0, 0, 0, 0)
+    if (value.startDate) {
+      const today = new Date()
+      today.setHours(0, 0, 0, 0)
 
-    if (value.startDate && value.startDate < today) {
-      alert('Invalid date')
-      return // or show error message
+      if (value.startDate < today) {
+        alert('Invalid date')
+        return // Prevent further execution if the date is invalid
+      }
     }
+
+    // Update the selected date
     setSelectedDate(value)
-    setIsCalendarOpen(false) // Close calendar after selecting a date
+
+    // Set the value in the form
+    setValue('deliveryDate', value.startDate)
+
+    // Close the calendar after selecting a date
+    setIsCalendarOpen(false)
   }
 
   const { groupId } = useParams<{ groupId: string }>() // TypeScript typing for useParams
@@ -95,7 +110,10 @@ export default function GroupPayment() {
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
-    shouldUnregister: false, // Ensures unmounted fields retain their values
+    defaultValues: {
+      deliveryDate: null,
+      shippingAddress: '',
+    },
   })
 
   const router = useRouter()
@@ -192,14 +210,11 @@ export default function GroupPayment() {
                   <input
                     className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
                     placeholder="Select a date"
-                    {...register('deliveryDate', {
-                      valueAsDate: true, // Ensures the value is treated as a Date object
-                    })}
-                    required={isDeliver} // Enforce the requirement conditionally
+                    {...register('deliveryDate', { valueAsDate: true })}
                     readOnly
                     value={
                       selectedDate.startDate
-                        ? selectedDate.startDate.toDateString()
+                        ? selectedDate.startDate.toISOString().split('T')[0]
                         : ''
                     }
                   />
