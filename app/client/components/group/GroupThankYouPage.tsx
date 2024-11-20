@@ -14,19 +14,19 @@ export default function GroupThankYouPage() {
         </div>
         <div className="flex flex-col justify-center items-center">
           <h1 className="text-6xl font-bold my-2">Thank You</h1>
-          <p className="text-5xl font-bold my-3">Your Subscription</p>
-          <p className="text-gray-600 mt-12 font-medium">
-            We will send you a confirmation email with all the details about our
-            work process. Please check your inbox to ensure you have received
-            all the information.
+          <h2 className="text-5xl font-bold my-3">Your Purchase!</h2>
+          <p className="text-[#1A1B22] mt-12 font-medium text-center">
+            Thank you for choosing to buy ingredients from us! We&apos;re
+            thrilled to be part of your culinary journey and are committed to
+            providing you with high-quality ingredients for your cooking
+            experience.Please check your inbox for a confirmation email with all
+            the details. If you have any questions or need further assistance,
+            don&apos;t hesitate to reach out through the contact information
+            provided in the email.
           </p>
-          <p className="text-gray-600 mb-6 font-medium">
-            If you have any further questions or need advice during the process,
-            please do not hesitate to contact us through the channels provided
-            in the email.
-          </p>
-          <p className="text-gray-600 mb-16 font-medium">
-            Thank you for trusting in choosing our service!
+          <p className="text-[#1A1B22] mb-8 font-medium mt-4">
+            Thank you for trusting us to bring the best ingredients to your
+            kitchen!
           </p>
         </div>
         <Link href="/">

@@ -13,15 +13,6 @@ import { group } from '../../data/group-course'
 const paymentSchema = (isDeliver: boolean) =>
   z
     .object({
-      email: z.string().email('Invalid email address'),
-      cardNumber: z
-        .string()
-        .regex(/^[0-9]{16}$/, 'Card number must be 16 digits'),
-      cvc: z.string().regex(/^[0-9]{3}$/, 'CVC must be 3 digits'),
-      expiryDate: z
-        .string()
-        .regex(/^(0[1-9]|1[0-2])\/([0-9]{2})$/, 'Expiry date must be MM/YY'),
-      billingAddress: z.string().min(1, 'Billing address is required'),
       shippingAddress: z.string().optional(),
       deliveryDate: z
         .date()
@@ -66,7 +57,7 @@ export default function GroupPayment() {
     today.setHours(0, 0, 0, 0)
 
     if (value.startDate && value.startDate < today) {
-      alert('Invalid time')
+      alert('Invalid date')
       return // or show error message
     }
     setSelectedDate(value)
@@ -105,15 +96,15 @@ export default function GroupPayment() {
   return (
     <div>
       <form onSubmit={handleSubmit(handleFormSubmit)}>
+        <Link href="/client/group">
+          <ArrowLeftIcon className="absolute left-12 top-24 w-6 h-6 text-[#FE3511]" />
+        </Link>
+        <div className="ml-32 mt-8 pb-2 mb-4 text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#F0725C] to-[#FE3511]">
+          {groupTitle}
+        </div>
         <div className="grid grid-cols-2 mt-8">
           <div className="ml-32 mr-24">
-            <Link href="/client/group">
-              <ArrowLeftIcon className="absolute left-12 top-24 w-6 h-6 text-[#FE3511]" />
-            </Link>
-            <div className="pb-2 mb-4 text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#F0725C] to-[#FE3511]">
-              {groupTitle}
-            </div>
-            <div className="rounded-3xl relative max-h-96 max-w-[450px] w-[500px] h-auto overflow-hidden">
+            <div className="rounded-3xl relative max-h-96 max-w-[500px] w-[500px] h-auto overflow-hidden">
               <Image
                 className="rounded-3xl"
                 src={groupPicture}
@@ -125,7 +116,35 @@ export default function GroupPayment() {
                 priority
               />
             </div>
-            <div className="my-4">
+            <div className="mt-8 flex justify-between">
+              <p className="font-bold">Subtotal</p>
+              <p className="font-bold">${groupPrice}</p>
+            </div>
+            {isDeliver && (
+              <div className="flex justify-between text-[#808080]">
+                <p className="">Add-on Package</p>
+                <p className="font-bold">+${groupAddOn}</p>
+              </div>
+            )}
+            <div className="flex justify-between text-[#808080]">
+              <p className="">Discount</p>
+              <p className="font-bold">-$0.00</p>
+            </div>
+            <div className="flex justify-between">
+              <p className="font-bold">Total</p>
+              <p className="font-bold">
+                {isDeliver ? `$${groupPrice + groupAddOn}` : `$${groupPrice}`}
+              </p>
+            </div>
+            <button
+              type="submit"
+              className="mt-8 w-full py-3 px-4 rounded-lg font-semibold text-white bg-gradient-to-t from-[#FE3511] to-[#F0725C] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
+            >
+              Pay {isDeliver ? `$${groupPrice + groupAddOn}` : `$${groupPrice}`}
+            </button>
+          </div>
+          <div className="ml-16 mr-40">
+            <div className="font-semibold text-lg">
               Beef Wellington is a classic and luxurious dish, featuring premium
               beef fillet wrapped in a layer of finely chopped mushrooms
               (Duxelles) and Parma ham, then encased in puff pastry and baked to
@@ -196,109 +215,6 @@ export default function GroupPayment() {
                 )}
               </div>
             )}
-          </div>
-          <div className="ml-16 mr-40">
-            <p className="font-bold text-2xl">Payment Details</p>
-            <p className="text-xl">
-              Complete your purchase by providing your payment details
-            </p>
-            <div>
-              <p className="mb-2">Email</p>
-              <input
-                className="mb-2 w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
-                placeholder="Enter your email"
-                required
-                {...register('email')}
-              />
-              {errors.email && (
-                <p className="text-red-500 text-sm mb-2">
-                  {errors.email.message}
-                </p>
-              )}
-              <p className="mb-2">Card Number</p>
-              <input
-                className="mb-2 w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
-                placeholder="Enter your card number"
-                required
-                {...register('cardNumber')}
-              />
-              {errors.cardNumber && (
-                <p className="text-red-500 text-sm mb-2">
-                  {errors.cardNumber.message}
-                </p>
-              )}
-              <div className="mb-2">
-                <div className="grid grid-cols-2 mb-2">
-                  <p>CVC</p>
-                  <p className="ml-5">Expiry Date</p>
-                </div>
-                <div className="mb-2 grid grid-cols-2 gap-x-10">
-                  <div>
-                    <input
-                      className="mb-2 w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
-                      placeholder="Enter Your CVC"
-                      required
-                      {...register('cvc')}
-                    />
-                    {errors.cvc && (
-                      <p className="text-red-500 text-sm">
-                        {errors.cvc.message}
-                      </p>
-                    )}
-                  </div>
-                  <div>
-                    <input
-                      className="mb-2 w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
-                      placeholder="MM/YY"
-                      required
-                      {...register('expiryDate')}
-                    />
-                    {errors.expiryDate && (
-                      <p className="text-red-500 text-sm">
-                        {errors.expiryDate.message}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              </div>
-              <p className="mb-2">Billing Address</p>
-              <textarea
-                className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
-                placeholder="Enter your billing address"
-                {...register('billingAddress')}
-              ></textarea>
-              {errors.billingAddress && (
-                <p className="text-red-500 text-sm">
-                  {errors.billingAddress.message}
-                </p>
-              )}
-            </div>
-            <div className="mt-2 flex justify-between">
-              <p className="font-bold">Subtotal</p>
-              <p className="font-bold">${groupPrice}</p>
-            </div>
-            {isDeliver && (
-              <div className="flex justify-between text-[#808080]">
-                <p className="font-bold">Add-on Package</p>
-                <p className="font-bold">+${groupAddOn}</p>
-              </div>
-            )}
-            <div className="flex justify-between text-[#808080]">
-              <p className="font-bold">Discount</p>
-              <p className="font-">-$0.00</p>
-            </div>
-            <div className="flex justify-between">
-              <p className="font-bold">Total</p>
-              <p className="font-bold">
-                {isDeliver ? `$${groupPrice + groupAddOn}` : `$${groupPrice}`}
-              </p>
-            </div>
-            <button
-              type="submit"
-              className="mt-8 w-full py-3 px-4 rounded-lg font-semibold text-white bg-gradient-to-t from-[#FE3511] to-[#F0725C] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
-            >
-              Pay {isDeliver ? `$${groupPrice + groupAddOn}` : `$${groupPrice}`}
-            </button>
           </div>
         </div>
       </form>
