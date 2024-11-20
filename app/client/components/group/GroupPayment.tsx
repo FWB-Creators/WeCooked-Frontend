@@ -11,28 +11,33 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { group } from '../../data/group-course'
 
 const paymentSchema = (isDeliver: boolean) =>
-  z
-    .object({
-      shippingAddress: z.string().optional(),
-      deliveryDate: z
-        .date()
-        .optional() // Initially optional
-        .refine((date) => (isDeliver ? !!date : true), {
+  z.object({
+    deliveryDate: z
+      .date()
+      .nullable() // Allows null as a valid value
+      .optional() // Allows undefined as well
+      .refine(
+        (date) => {
+          if (isDeliver && !date) return false
+          return true
+        },
+        {
           message: 'Delivery date is required when delivery is selected',
-        }),
-    })
-    .refine(
-      (data) => {
-        if (isDeliver) {
-          return !!data.shippingAddress // Validate shippingAddress if delivery is selected
         }
-        return true // Skip validation if delivery is not selected
-      },
-      {
-        message: 'Shipping address is required when delivery is selected',
-        path: ['shippingAddress'],
-      }
-    )
+      ),
+    shippingAddress: z
+      .string()
+      .optional()
+      .refine(
+        (address) => {
+          if (isDeliver && !address) return false
+          return true
+        },
+        {
+          message: 'Shipping address is required when delivery is selected',
+        }
+      ),
+  })
 
 // Create a type helper for forms dynamically
 type FormData = z.infer<ReturnType<typeof paymentSchema>>
@@ -45,7 +50,16 @@ export default function GroupPayment() {
     endDate: Date | null
   }>({ startDate: null, endDate: null })
 
-  const toggleDelivery = () => setIsDeliver((prev) => !prev)
+  const toggleDelivery = () => {
+    setIsDeliver((prev) => {
+      const newState = !prev
+      if (!newState) {
+        setValue('deliveryDate', null) // Reset deliveryDate to null if toggling off
+        setValue('shippingAddress', '') // Reset address
+      }
+      return newState
+    })
+  }
 
   const toggleCalendar = () => setIsCalendarOpen((prev) => !prev)
 
@@ -77,9 +91,11 @@ export default function GroupPayment() {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
+    shouldUnregister: false, // Ensures unmounted fields retain their values
   })
 
   const router = useRouter()
@@ -89,7 +105,8 @@ export default function GroupPayment() {
   }
 
   const handleFormSubmit = (data: FormData) => {
-    console.log(JSON.stringify(data))
+    console.log('Form submitted with data:', data)
+    console.log('Current isDeliver state:', isDeliver)
     onPaid()
   }
 
