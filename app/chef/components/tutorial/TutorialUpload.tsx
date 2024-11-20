@@ -7,6 +7,7 @@ import {
   CheckIcon,
 } from '@heroicons/react/24/outline'
 import { CldUploadWidget } from 'next-cloudinary'
+import { CloudinaryUploadWidgetResults } from 'next-cloudinary'
 import VideoPlayer from '../VideoPlayer'
 
 interface Bookmark {
@@ -52,44 +53,44 @@ export default function TutorialUpload() {
     coverImageUrl,
   ])
 
-  const handleSubmit = async () => {
-    if (!isFormValid) return
+const handleSubmit = async () => {
+  if (!isFormValid) return
 
-    setIsSubmitting(true)
-    setSubmitError(null)
+  setIsSubmitting(true)
+  setSubmitError(null)
 
-    try {
-      const courseData: CourseSubmission = {
-        courseName,
-        courseDetail,
-        videoUrl,
-        coverImageUrl,
-      }
-
-      const response = await mockSubmitToAPI(courseData)
-
-      if (response.success) {
-        setSubmitSuccess(true)
-        // Reset form or navigate away
-        resetForm()
-      } else {
-        throw new Error('Course submission failed')
-      }
-    } catch (error) {
-      setSubmitError(error instanceof Error ? error.message : 'Unknown error')
-    } finally {
-      setIsSubmitting(false)
+  try {
+    const courseData: CourseSubmission = {
+      courseName,
+      courseDetail,
+      videoUrl,
+      coverImageUrl,
     }
-  }
 
-  const mockSubmitToAPI = async (courseData: CourseSubmission) => {
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    const response = await mockSubmitToAPI(courseData) // Pass courseData here
 
-    return {
-      success: true,
-      courseId: `course_${Date.now()}`,
+    if (response.success) {
+      setSubmitSuccess(true)
+      resetForm()
+    } else {
+      throw new Error('Course submission failed')
     }
+  } catch (error) {
+    setSubmitError(error instanceof Error ? error.message : 'Unknown error')
+  } finally {
+    setIsSubmitting(false)
   }
+}
+
+const mockSubmitToAPI = async (courseData: CourseSubmission) => {
+  await new Promise((resolve) => setTimeout(resolve, 1500))
+
+  return {
+    success: true,
+    courseId: `course_${Date.now()}`,
+    courseDetails: courseData
+  }
+}
 
   const resetForm = () => {
     setVideoUrl('')
@@ -101,14 +102,21 @@ export default function TutorialUpload() {
     setIsUploadComplete(false)
   }
 
-  const handleUploadSuccess = (result: any) => {
-    console.log('Upload successful:', result)
+  const handleUploadSuccess = (results: CloudinaryUploadWidgetResults) => {
+    console.log('Upload successful:', results)
     setIsUploadComplete(true)
-
-    if (result.info.secure_url.includes('image')) {
-      setCoverImageUrl(result.info.secure_url)
-    } else {
-      setVideoUrl(result.info.secure_url)
+  
+    if (results.info && typeof results.info !== 'string') {
+      const secureUrl = results.info.secure_url
+      const resourceType = results.info.resource_type
+  
+      if (secureUrl) {
+        if (resourceType === 'image') {
+          setCoverImageUrl(secureUrl)
+        } else if (resourceType === 'video') {
+          setVideoUrl(secureUrl)
+        }
+      }
     }
   }
 
@@ -124,8 +132,12 @@ export default function TutorialUpload() {
     }
   }
 
-  submitError && console.error('Course submission failed:', submitError)
-  submitSuccess && console.log('Course submitted successfully!')
+  if (submitError) {
+    console.error('Course submission failed:', submitError)
+  }
+  if (submitSuccess) {
+    console.log('Course submitted successfully!')
+  }
 
   const renderStepContent = () => {
     switch (currentStep) {
@@ -227,7 +239,7 @@ export default function TutorialUpload() {
               videoID={bookmarks.length + 1}
               videoTitle={videoUrl ? 'Review Video' : 'Default Title'}
               videoPath={videoUrl ? [{ quality: '720p', src: videoUrl }] : []}
-              timestamps={bookmarks.map((bookmark) => ({
+              timestamps={bookmarks.map(() => ({
                 timeTriggered: '',
               }))}
             />
@@ -262,7 +274,7 @@ export default function TutorialUpload() {
           <div className="relative bg-white rounded-lg w-2/3 p-6 z-50">
             <div className="flex justify-between items-center border-b border-[#FE3511] pb-6">
               <h2 className="bg-gradient-to-b from-[#F0725C] to-[#FE3511] text-transparent bg-clip-text text-2xl font-medium">
-                Upload New Course
+                Upload New Tutorial Course
               </h2>
               <button
                 onClick={() => setIsUploadComplete(false)}

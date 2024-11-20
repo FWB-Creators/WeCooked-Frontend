@@ -13,6 +13,7 @@ import {
   CheckIcon,
 } from '@heroicons/react/24/outline'
 import { CldUploadWidget } from 'next-cloudinary'
+import { CloudinaryUploadWidgetResults } from 'next-cloudinary'
 import TutorialPopup from './TutorialPopup'
 import VideoPlayer from '../VideoPlayer'
 
@@ -31,8 +32,8 @@ interface CourseSubmission {
   courseName: string
   courseDetail: string
   courseCategory: string
-  coursePrice: string
-  coursePackPrice: string
+  coursePrice: number
+  coursePackPrice: number
   courseIngredients: string
   videoUrl: string
   coverImageUrl: string
@@ -53,8 +54,8 @@ export default function VideoUpload() {
   const [courseName, setCourseName] = useState<string>('')
   const [courseDetail, setCourseDetail] = useState<string>('')
   const [courseCategory, setCourseCategory] = useState<string>('')
-  const [coursePrice, setCoursePrice] = useState<string>('')
-  const [coursePackPrice, setCoursePackPrice] = useState<string>('')
+  const [coursePrice, setCoursePrice] = useState<number>(0)
+  const [coursePackPrice, setCoursePackPrice] = useState<number>(0)
   const [courseIngredients, setCourseIngredients] = useState<string>('')
   const [isFormValid, setIsFormValid] = useState<boolean>(false)
 
@@ -68,8 +69,8 @@ export default function VideoUpload() {
       courseName.trim() &&
       courseDetail.trim() &&
       courseCategory.trim() &&
-      coursePrice.trim() &&
-      coursePackPrice.trim() &&
+      coursePrice &&
+      coursePackPrice &&
       courseIngredients.trim() &&
       videoUrl &&
       coverImageUrl
@@ -129,7 +130,7 @@ export default function VideoUpload() {
   const mockSubmitToAPI = async (courseData: CourseSubmission) => {
     await new Promise((resolve) => setTimeout(resolve, 1500))
 
-    if (parseFloat(courseData.coursePrice && coursePackPrice) < 0) {
+    if (parseFloat(courseData.coursePrice.toString()) < 0 || parseFloat(coursePackPrice.toString()) < 0) {
       return {
         success: false,
         message: 'Price cannot be negative',
@@ -149,8 +150,8 @@ export default function VideoUpload() {
     setCourseName('')
     setCourseDetail('')
     setCourseCategory('')
-    setCoursePrice('')
-    setCoursePackPrice('')
+    setCoursePrice(0)
+    setCoursePackPrice(0)
     setCourseIngredients('')
     setCurrentStep(1)
     setIsUploadComplete(false)
@@ -176,14 +177,21 @@ export default function VideoUpload() {
     })
   }
 
-  const handleUploadSuccess = (result: any) => {
-    console.log('Upload successful:', result)
+  const handleUploadSuccess = (results: CloudinaryUploadWidgetResults) => {
+    console.log('Upload successful:', results)
     setIsUploadComplete(true)
-
-    if (result.info.secure_url.includes('image')) {
-      setCoverImageUrl(result.info.secure_url)
-    } else {
-      setVideoUrl(result.info.secure_url)
+  
+    if (results.info && typeof results.info !== 'string') {
+      const secureUrl = results.info.secure_url
+      const resourceType = results.info.resource_type
+  
+      if (secureUrl) {
+        if (resourceType === 'image') {
+          setCoverImageUrl(secureUrl)
+        } else if (resourceType === 'video') {
+          setVideoUrl(secureUrl)
+        }
+      }
     }
   }
 
@@ -277,8 +285,12 @@ export default function VideoUpload() {
     return minutes * 60 + seconds
   }
 
-  submitError && console.error('Course submission failed:', submitError)
-  submitSuccess && console.log('Course submitted successfully!')
+  if (submitError) {
+    console.error('Course submission failed:', submitError)
+  }
+  if (submitSuccess) {
+    console.log('Course submitted successfully!')
+  }
 
   const renderStepContent = () => {
     switch (currentStep) {
@@ -337,11 +349,10 @@ export default function VideoUpload() {
                     id="coursePrice"
                     type="number"
                     min="0"
-                    step="0.01"
                     placeholder="Course Price"
                     required
                     value={coursePrice}
-                    onChange={(e) => setCoursePrice(e.target.value)}
+                    onChange={(e) => setCoursePrice(Number(e.target.value))}
                     className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
                   />
                 </div>
@@ -353,11 +364,10 @@ export default function VideoUpload() {
                     id="coursePackPrice"
                     type="number"
                     min="0"
-                    step="0.01"
                     placeholder="Course Pack Price"
                     required
                     value={coursePackPrice}
-                    onChange={(e) => setCoursePackPrice(e.target.value)}
+                    onChange={(e) => setCoursePackPrice(Number(e.target.value))}
                     className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
                   />
                 </div>
@@ -640,7 +650,7 @@ export default function VideoUpload() {
           <div className="relative bg-white rounded-lg w-2/3 p-6 z-50">
             <div className="flex justify-between items-center border-b border-[#FE3511] pb-6">
               <h2 className="bg-gradient-to-b from-[#F0725C] to-[#FE3511] text-transparent bg-clip-text text-2xl font-medium">
-                Upload New Course
+                Upload New Video Course
               </h2>
               <button
                 onClick={() => setIsUploadComplete(false)}
