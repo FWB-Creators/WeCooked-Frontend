@@ -60,7 +60,7 @@ export default function Navbar() {
       const formattedSearchTerm = encodeURIComponent(
         searchTerm.trim().replace(/ /g, '-')
       )
-      router.push(`/client/video/search/${formattedSearchTerm}`)
+      router.push(`/unsigned/video/search/${formattedSearchTerm}`)
     }
   }
 
@@ -119,7 +119,7 @@ export default function Navbar() {
           </>
         ) : (
           <>
-            <NavLink href="/unsigned/home">Home</NavLink>
+            <NavLink href="/">Home</NavLink>
             <NavLink href="/client/login">My Learning</NavLink>
             <NavLink href="/unsigned/video">Video</NavLink>
             <NavLink href="/unsigned/group">Group</NavLink>

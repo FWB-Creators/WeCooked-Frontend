@@ -65,7 +65,7 @@ export default function CalendarPage() {
   
     if (dateFilteredGroups.length > 0) {
       router.push(
-        `/client/group/search/results?query=${encodeURIComponent(
+        `/unsigned/group/search/results?query=${encodeURIComponent(
           title
         )}&startDate=${startDate}&endDate=${endDate}`
       )
