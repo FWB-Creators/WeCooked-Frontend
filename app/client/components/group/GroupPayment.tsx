@@ -119,7 +119,7 @@ export default function GroupPayment() {
   const router = useRouter()
 
   const onPaid = () => {
-    router.push('/client/group/complete')
+    router.push('https://buy.stripe.com/test_fZe6pN3mu3efb60dQQ')
   }
 
   const handleFormSubmit = (data: FormData) => {
