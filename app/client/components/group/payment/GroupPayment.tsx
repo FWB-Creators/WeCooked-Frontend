@@ -4,11 +4,11 @@ import { useState, useMemo } from 'react'
 import { ArrowLeftIcon, CalendarIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 import { useRouter, useParams } from 'next/navigation'
-import CustomCalendar from './CustomCalendar'
+import CustomCalendar from '../CustomCalendar'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { group } from '../../data/group-course'
+import { group } from '../../../data/group-course'
 
 const paymentSchema = (isDeliver: boolean) =>
   z.object({
