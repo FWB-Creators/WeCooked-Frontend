@@ -4,7 +4,7 @@ export interface Group {
   groupDetail: string
   groupPrice: number
   groupNumberofparticipants: number
-  groupDate: Date
+  groupDate: Date | string
   groupCategory: string
   groupLinkZoom?: string
   groupPicture: string

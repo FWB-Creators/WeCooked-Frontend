@@ -1,0 +1,44 @@
+[
+  {
+    "courseTitle": "Italian Food",
+    "courseCategory": "Italian",
+    "total_course": 0,
+    "courseImage": "/images/italian-food.png"
+  },
+  {
+    "courseTitle": "Thai Food",
+    "courseCategory": "Thai",
+    "total_course": 0,
+    "courseImage": "/images/thai-food.png"
+  },
+  {
+    "courseTitle": "Japanese Food",
+    "courseCategory": "Japanese",
+    "total_course": 0,
+    "courseImage": "/images/japanese-food.png"
+  },
+  {
+    "courseTitle": "Indian Food",
+    "courseCategory": "Indian",
+    "total_course": 0,
+    "courseImage": "/images/indian-food.png"
+  },
+  {
+    "courseTitle": "French Food",
+    "courseCategory": "French",
+    "total_course": 0,
+    "courseImage": "/images/french-food.png"
+  },
+  {
+    "courseTitle": "Mexican Food",
+    "courseCategory": "Mexican",
+    "total_course": 0,
+    "courseImage": "/images/mexican-food.png"
+  },
+  {
+    "courseTitle": "American Food",
+    "courseCategory": "American",
+    "total_course": 0,
+    "courseImage": "/images/american-food.png"
+  }
+]

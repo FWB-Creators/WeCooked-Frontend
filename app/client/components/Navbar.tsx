@@ -99,7 +99,7 @@ export default function Navbar() {
   return (
     <nav className="flex items-center justify-between bg-white py-4">
       <div className="px-12">
-        <Link href="/client/home">
+        <Link href="/">
           <Image
             src="/svg/WecookedLogo.svg"
             alt="WeCooked Logo"
@@ -119,10 +119,10 @@ export default function Navbar() {
           </>
         ) : (
           <>
-            <NavLink href="/">Home</NavLink>
-            <NavLink href="/my-learning">My Learning</NavLink>
-            <NavLink href="/video">Video</NavLink>
-            <NavLink href="/group">Group</NavLink>
+            <NavLink href="/unsigned/home">Home</NavLink>
+            <NavLink href="/client/login">My Learning</NavLink>
+            <NavLink href="/unsigned/video">Video</NavLink>
+            <NavLink href="/unsigned/group">Group</NavLink>
           </>
         )}
       </div>

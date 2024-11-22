@@ -14,12 +14,13 @@ export default function GroupCardEnrolled({
 }: Group) {
   if (!groupStatus) return null
 
-  const formattedDate = groupDate.toLocaleDateString('en-US', {
+  const date = typeof groupDate === 'string' ? new Date(groupDate) : groupDate;
+  const formattedDate = date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   })
-  const formattedTime = groupDate.toLocaleTimeString('en-US', {
+  const formattedTime = date.toLocaleTimeString('en-US', {
     hour: 'numeric',
     minute: 'numeric',
     hour12: true,

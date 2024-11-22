@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { MagnifyingGlassIcon, CalendarIcon } from '@heroicons/react/24/solid'
 import CustomCalendar from './CustomCalendar'
-import { group } from '@/app/client/data/group-course'
+import { group } from '../../data/group-course'
 
 export default function CalendarPage() {
   const router = useRouter()

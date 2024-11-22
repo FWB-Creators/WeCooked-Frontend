@@ -47,7 +47,7 @@ export const courses: Course[] = [
   },
   {
     courseId: 4,
-    courseTitle: 'Paris Pastries - Provincial French courseCategory',
+    courseTitle: 'Paris Pastries - Provincial French Cuisine',
     courseCategory: 'French',
     coursePrice: 610,
     reviewRating: 4.3,
@@ -113,7 +113,7 @@ export const courses: Course[] = [
   },
   {
     courseId: 10,
-    courseTitle: 'Delhi Delight - Indian courseCategory',
+    courseTitle: 'Delhi Delight - Indian Cuisine',
     courseCategory: 'Indian',
     coursePrice: 290,
     reviewRating: 4.3,
