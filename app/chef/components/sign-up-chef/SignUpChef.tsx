@@ -153,7 +153,9 @@ export default function SignUpChef() {
                 {({ open }) => {
                   return (
                     <button
+                    type="button"
                       onClick={() => open?.()}
+                      aria-label="Upload profile photo"
                       className="rounded-lg h-[300px] w-full flex items-center justify-center bg-gray-100 border-b-2 border-[#C1C7CD] cursor-pointer"
                     >
                       {coverImageUrl ? (

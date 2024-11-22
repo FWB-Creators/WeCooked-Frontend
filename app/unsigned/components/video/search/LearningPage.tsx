@@ -52,7 +52,7 @@ export default function LearningPage() {
         />
       </div>
       <div className="absolute lg:right-20 right-4 lg:top-[640px] top-[540px] z-10 flex space-x-2.5">
-      <Link href={`/client/video/payment/${course.courseId}`}>
+      <Link href="/client/login">
         <button
           className="px-8 py-2 bg-gradient-to-b from-[#F0725C] to-[#FE3511] text-white rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
           type="button"

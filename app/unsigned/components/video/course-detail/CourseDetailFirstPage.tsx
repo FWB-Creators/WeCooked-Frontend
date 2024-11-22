@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import Image from 'next/image'
 
 export default function CourseDetailFirstPage() {
@@ -57,9 +58,11 @@ export default function CourseDetailFirstPage() {
           </button>
         </div>
         <div className="flex">
+        <Link href="/client/login">
           <button className="px-7 py-2 bg-gradient-to-b from-[#F0725C] to-[#FE3511] text-white rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
             Let&apos;s Cook
           </button>
+        </Link>
         </div>
       </div>
       <div className="absolute right-8 top-20 z-10 w-[45%]">
