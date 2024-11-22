@@ -6,7 +6,7 @@ export interface VideoData {
   coursePrice: number
   courseRevenue: number
   courseEnrolled: number
-  courseDate: Date
+  courseDate: Date | string
   userProfile: string
   name: string
   surname: string
