@@ -1,10 +1,10 @@
-import { Group } from "../types/group";
+import { Group } from '../types/group'
 
 const parseDate = (dateStr: string): Date => {
-  const cleanedDateStr = dateStr.replace('at', '').trim();
-  const parsedDate = new Date(cleanedDateStr);
-  return isNaN(parsedDate.getTime()) ? new Date() : parsedDate;
-};
+  const cleanedDateStr = dateStr.replace('at', '').trim()
+  const parsedDate = new Date(cleanedDateStr)
+  return isNaN(parsedDate.getTime()) ? new Date() : parsedDate
+}
 
 export const group: Group[] = [
   {
@@ -12,11 +12,12 @@ export const group: Group[] = [
     groupTitle: "Chef's Secrets - Mastering Pro Tips",
     groupDetail: 'Pro Chef Tips That Will Make You Cook Like a Restaurant!',
     groupPrice: 350,
-    groupNumberofparticipants: 10,
+    ingredientPrice: 20,
+    groupNumberOfParticipants: 10,
     groupDate: parseDate('November 5, 2024, at 6:00 PM'),
     groupCategory: 'Thai',
     groupLinkZoom: 'https://zoom.us/j/123456789',
-    groupPicture: '/images/gordon.png',
+    groupPicture: '/images/gordon-ramsay.png',
     chefImage: '/images/chef.png',
     chefName: 'Chef Gordon',
     reviewRating: 4.9,
@@ -25,9 +26,11 @@ export const group: Group[] = [
   {
     groupId: 1,
     groupTitle: 'Sweet and Savory Fusion - Perfect Pairings',
-    groupDetail: 'Learn how to pair sweet and savory flavors to create an impressive dish!',
+    groupDetail:
+      'Learn how to pair sweet and savory flavors to create an impressive dish!',
     groupPrice: 450,
-    groupNumberofparticipants: 20,
+    ingredientPrice: 15,
+    groupNumberOfParticipants: 20,
     groupDate: parseDate('November 12, 2024, at 7:00 PM'),
     groupCategory: 'Japanese',
     groupLinkZoom: 'https://zoom.us/j/123456789',
@@ -40,9 +43,11 @@ export const group: Group[] = [
   {
     groupId: 2,
     groupTitle: 'Vegan Delights - Healthy Cooking',
-    groupDetail: 'Discover delicious and nutritious vegan recipes for a healthier lifestyle.',
+    groupDetail:
+      'Discover delicious and nutritious vegan recipes for a healthier lifestyle.',
     groupPrice: 400,
-    groupNumberofparticipants: 15,
+    ingredientPrice: 25,
+    groupNumberOfParticipants: 15,
     groupDate: parseDate('November 15, 2024, at 5:30 PM'),
     groupCategory: 'Japanese',
     groupLinkZoom: 'https://zoom.us/j/123456789',
@@ -55,9 +60,11 @@ export const group: Group[] = [
   {
     groupId: 3,
     groupTitle: 'Italian Pasta Masterclass',
-    groupDetail: 'Learn the secrets to making authentic Italian pasta from scratch.',
+    groupDetail:
+      'Learn the secrets to making authentic Italian pasta from scratch.',
     groupPrice: 500,
-    groupNumberofparticipants: 12,
+    ingredientPrice: 25,
+    groupNumberOfParticipants: 12,
     groupDate: parseDate('November 18, 2024, at 6:00 PM'),
     groupCategory: 'Italian',
     groupLinkZoom: 'https://zoom.us/j/123456789',
@@ -70,9 +77,11 @@ export const group: Group[] = [
   {
     groupId: 4,
     groupTitle: 'BBQ Essentials - Grilling Techniques',
-    groupDetail: 'Master the art of grilling and impress your guests with BBQ favorites.',
+    groupDetail:
+      'Master the art of grilling and impress your guests with BBQ favorites.',
     groupPrice: 300,
-    groupNumberofparticipants: 18,
+    ingredientPrice: 15,
+    groupNumberOfParticipants: 18,
     groupDate: parseDate('November 20, 2024, at 7:30 PM'),
     groupCategory: 'American',
     groupLinkZoom: 'https://zoom.us/j/123456789',
@@ -85,9 +94,11 @@ export const group: Group[] = [
   {
     groupId: 5,
     groupTitle: 'French Pastry Workshop',
-    groupDetail: 'Dive into the world of French pastries and create your own croissants!',
+    groupDetail:
+      'Dive into the world of French pastries and create your own croissants!',
     groupPrice: 550,
-    groupNumberofparticipants: 8,
+    ingredientPrice: 10,
+    groupNumberOfParticipants: 8,
     groupDate: parseDate('November 22, 2024, at 4:00 PM'),
     groupCategory: 'French',
     groupLinkZoom: 'https://zoom.us/j/123456789',
@@ -100,9 +111,11 @@ export const group: Group[] = [
   {
     groupId: 6,
     groupTitle: 'Mexican Street Food Fiesta',
-    groupDetail: 'Experience the vibrant flavors of Mexico with street food classics.',
+    groupDetail:
+      'Experience the vibrant flavors of Mexico with street food classics.',
     groupPrice: 380,
-    groupNumberofparticipants: 14,
+    ingredientPrice: 20,
+    groupNumberOfParticipants: 14,
     groupDate: parseDate('November 25, 2024, at 5:00 PM'),
     groupCategory: 'Mexican',
     groupLinkZoom: 'https://zoom.us/j/123456789',
@@ -115,9 +128,11 @@ export const group: Group[] = [
   {
     groupId: 7,
     groupTitle: 'Sushi Rolling - Japanese Art',
-    groupDetail: 'Learn how to roll sushi like a pro in this hands-on workshop.',
+    groupDetail:
+      'Learn how to roll sushi like a pro in this hands-on workshop.',
     groupPrice: 420,
-    groupNumberofparticipants: 10,
+    ingredientPrice: 18,
+    groupNumberOfParticipants: 10,
     groupDate: parseDate('November 28, 2024, at 6:00 PM'),
     groupCategory: 'Japanese',
     groupLinkZoom: 'https://zoom.us/j/123456789',
@@ -130,9 +145,11 @@ export const group: Group[] = [
   {
     groupId: 8,
     groupTitle: 'Baking Basics - Perfect Bread Every Time',
-    groupDetail: 'Master the basics of bread making with this step-by-step class.',
+    groupDetail:
+      'Master the basics of bread making with this step-by-step class.',
     groupPrice: 320,
-    groupNumberofparticipants: 16,
+    ingredientPrice: 24,
+    groupNumberOfParticipants: 16,
     groupDate: parseDate('November 30, 2024, at 3:00 PM'),
     groupCategory: 'Mexican',
     groupLinkZoom: 'https://zoom.us/j/123456789',
@@ -145,9 +162,11 @@ export const group: Group[] = [
   {
     groupId: 9,
     groupTitle: 'Thai Street Food - The Ultimate Guide',
-    groupDetail: 'Explore the rich and bold flavors of authentic Thai street food.',
+    groupDetail:
+      'Explore the rich and bold flavors of authentic Thai street food.',
     groupPrice: 370,
-    groupNumberofparticipants: 20,
+    ingredientPrice: 21,
+    groupNumberOfParticipants: 20,
     groupDate: parseDate('December 2, 2024, at 5:00 PM'),
     groupCategory: 'Thai',
     groupLinkZoom: 'https://zoom.us/j/123456789',
@@ -162,7 +181,8 @@ export const group: Group[] = [
     groupTitle: 'Vegetarian Wonders - Cooking with Greens',
     groupDetail: 'Learn to create mouth-watering vegetarian dishes.',
     groupPrice: 350,
-    groupNumberofparticipants: 15,
+    ingredientPrice: 30,
+    groupNumberOfParticipants: 15,
     groupDate: parseDate('December 5, 2024, at 6:00 PM'),
     groupCategory: 'Mexican',
     groupLinkZoom: 'https://zoom.us/j/123456789',
@@ -177,7 +197,8 @@ export const group: Group[] = [
     groupTitle: 'Indian Curry Mastery',
     groupDetail: 'Dive deep into the world of Indian spices and curry.',
     groupPrice: 420,
-    groupNumberofparticipants: 12,
+    ingredientPrice: 23,
+    groupNumberOfParticipants: 12,
     groupDate: parseDate('December 10, 2024, at 7:00 PM'),
     groupCategory: 'Indian',
     groupLinkZoom: 'https://zoom.us/j/123456789',
@@ -192,7 +213,8 @@ export const group: Group[] = [
     groupTitle: 'Italian Tapas Experience',
     groupDetail: 'Master the art of preparing traditional Italian tapas.',
     groupPrice: 380,
-    groupNumberofparticipants: 16,
+    ingredientPrice: 17,
+    groupNumberOfParticipants: 16,
     groupDate: parseDate('December 15, 2024, at 4:00 PM'),
     groupCategory: 'Italian',
     groupLinkZoom: 'https://zoom.us/j/123456789',
@@ -207,7 +229,8 @@ export const group: Group[] = [
     groupTitle: 'Seafood Lovers - Gourmet Recipes',
     groupDetail: 'Prepare gourmet seafood dishes from start to finish.',
     groupPrice: 500,
-    groupNumberofparticipants: 10,
+    ingredientPrice: 19,
+    groupNumberOfParticipants: 10,
     groupDate: parseDate('December 20, 2024, at 6:00 PM'),
     groupCategory: 'Italian',
     groupLinkZoom: 'https://zoom.us/j/123456789',
@@ -222,7 +245,8 @@ export const group: Group[] = [
     groupTitle: 'Italian Dessert Heaven',
     groupDetail: 'Learn to create mouthwatering Italian desserts.',
     groupPrice: 480,
-    groupNumberofparticipants: 14,
+    ingredientPrice: 25,
+    groupNumberOfParticipants: 14,
     groupDate: parseDate('December 25, 2024, at 5:30 PM'),
     groupCategory: 'Italian',
     groupLinkZoom: 'https://zoom.us/j/123456789',
@@ -237,7 +261,8 @@ export const group: Group[] = [
     groupTitle: 'Gourmet Street Tacos',
     groupDetail: 'Learn to make gourmet street tacos with unique toppings.',
     groupPrice: 350,
-    groupNumberofparticipants: 14,
+    ingredientPrice: 27,
+    groupNumberOfParticipants: 14,
     groupDate: parseDate('December 15, 2025, at 4:30 PM'),
     groupCategory: 'Mexican',
     groupLinkZoom: 'https://zoom.us/j/123456789',
@@ -246,5 +271,5 @@ export const group: Group[] = [
     chefName: 'Chef Pablo',
     reviewRating: 4.9,
     groupStatus: false,
-  }
-];
+  },
+]
