@@ -1,11 +1,6 @@
 'use client'
 import Image from 'next/image'
-import {
-  EyeIcon,
-  EyeSlashIcon,
-  PencilIcon,
-  CreditCardIcon,
-} from '@heroicons/react/24/solid'
+import { EyeIcon, EyeSlashIcon, PencilIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 import { useState } from 'react'
 
@@ -31,21 +26,29 @@ export default function EditProfile() {
         </div>
 
         {/* Pencil Icon */}
-        <div className="absolute bottom-1 right-[465px] flex justify-center items-center rounded-full w-9 h-9 bg-[#F2F4F8] border border-[#C1C7CD]">
+        <div className="absolute bottom-1 right-[470px] flex justify-center items-center rounded-full w-9 h-9 bg-[#F2F4F8] border border-[#C1C7CD]">
           <PencilIcon className="text-[#C1C7CD] w-6 h-6" />
         </div>
       </div>
 
       <form>
-        <div className="grid grid-cols-10 mt-8">
+        <div className="grid grid-cols-10 h-full mt-8">
           {/*left side input */}
-          <div className="col-span-4">
+          <div className="col-span-4 flex flex-col h-full">
             <div className="mb-4">
               <p className="mb-2">First Name</p>
               <input
                 type="text"
                 className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
                 placeholder="Arm"
+              ></input>
+            </div>
+            <div className="mb-4 ">
+              <p className="mb-2">Last Name</p>
+              <input
+                type="text"
+                className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
+                placeholder="Rukkhim"
               ></input>
             </div>
             <div className="mb-4">
@@ -83,33 +86,17 @@ export default function EditProfile() {
                 placeholder="052-447-4872"
               ></input>
             </div>
-            <div>
-              <p className="mb-2">Payment Card</p>
-              <input
-                type="text"
-                className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
-                placeholder="052-447-4872"
-              ></input>
-            </div>
           </div>
 
           {/*middle line*/}
           <div></div>
-          <div className="flex justify center pt-8">
+          <div className="flex justify center pt-8 mb-4">
             <div className="border-l border-[#808080]"></div>
           </div>
 
-          {/*right side input */}
-          <div className="col-span-4">
-            <div className="mb-4 ">
-              <p className="mb-2">Last Name</p>
-              <input
-                type="text"
-                className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
-                placeholder="Rukkhim"
-              ></input>
-            </div>
-            <div className="mb-4 ">
+          {/* Right Side Input */}
+          <div className="col-span-4 flex flex-col h-full">
+            <div className="mb-4">
               <p className="mb-2">E-mail</p>
               <input
                 type="text"
@@ -136,10 +123,10 @@ export default function EditProfile() {
                 )}
               </button>
             </div>
-            <div>
+            <div className="flex flex-col h-full">
               <p className="mb-2">Address</p>
               <textarea
-                className="w-full h-[132px] px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
+                className="flex-grow px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none mb-4"
                 placeholder="1234 Elm Street Apartment 56B Springfield, IL 62704 USA"
               ></textarea>
             </div>

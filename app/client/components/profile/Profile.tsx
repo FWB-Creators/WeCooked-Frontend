@@ -27,16 +27,25 @@ export default function Profile() {
         </Link>
       </div>
       <form>
-        <div className="grid grid-cols-10 mt-8">
+        <div className="grid grid-cols-10 h-full mt-8">
           {/*left side input */}
-          <div className="col-span-4">
+          <div className="col-span-4 flex flex-col h-full">
             <div className="mb-4">
-              <p className="mb-2">Full Name</p>
+              <p className="mb-2">First Name</p>
               <input
                 type="text"
                 readOnly
                 className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
-                placeholder="Arm Rukkhim"
+                placeholder="Arm"
+              ></input>
+            </div>
+            <div className="mb-4">
+              <p className="mb-2">Last Name</p>
+              <input
+                type="text"
+                readOnly
+                className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
+                placeholder="Rukkhim"
               ></input>
             </div>
             <div className="mb-4">
@@ -66,28 +75,28 @@ export default function Profile() {
           </div>
 
           {/*right side input */}
-          <div className="col-span-4">
-            <div className="mb-4 ">
+          <div className="col-span-4 flex flex-col h-full">
+            <div className="mb-4">
               <p className="mb-2">E-mail</p>
               <input
                 type="text"
                 readOnly
                 className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
                 placeholder="arminwza007@gmail.com"
-              ></input>
+              />
             </div>
-            <div>
+            <div className="flex flex-col h-full">
               <p className="mb-2">Address</p>
               <textarea
                 readOnly
-                className="w-full h-[132px] px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
+                className="w-full flex-grow px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
                 placeholder="1234 Elm Street Apartment 56B Springfield, IL 62704 USA"
-              ></textarea>
+              />
             </div>
           </div>
         </div>
       </form>
-      <h1 className="text-lg mt-4 mb-4">Favorite Chefs</h1>
+      <h1 className="text-lg mt-8 mb-4">Favorite Chefs</h1>
       <div className="flex flex-row gap-x-16">
         <div className="flex flex-col justify-center">
           <div className="relative flex items-center justify-center max-w-28 max-h-28 w-28 h-28 overflow-hidden rounded-full">
@@ -137,7 +146,6 @@ export default function Profile() {
           </h1>
         </div>
       </div>
-      <h1 className="text-lg mt-4">Completed Course</h1>
     </div>
   )
 }

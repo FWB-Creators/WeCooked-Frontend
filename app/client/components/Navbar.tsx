@@ -31,8 +31,8 @@ export default function Navbar() {
   const navItems = [
     { label: 'Home', path: '/home' },
     { label: 'My Learning', path: '/my-learning' },
-    { label: 'Video', path: '/video' },
-    { label: 'Group', path: '/group' },
+    { label: 'Course', path: '/video' },
+    { label: 'Workshop', path: '/group' },
   ]
   const authcontextvalue = useAuthContext()
   const authLocalState = AuthLocal()
@@ -128,8 +128,8 @@ export default function Navbar() {
           <>
             <NavLink href="/unsigned/home">Home</NavLink>
             <NavLink href="/client/login">My Learning</NavLink>
-            <NavLink href="/unsigned/video">Video</NavLink>
-            <NavLink href="/unsigned/group">Group</NavLink>
+            <NavLink href="/unsigned/video">Course</NavLink>
+            <NavLink href="/unsigned/group">Workshop</NavLink>
           </>
         )}
       </div>
