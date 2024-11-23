@@ -3,7 +3,8 @@ export interface Group {
   groupTitle: string
   groupDetail: string
   groupPrice: number
-  groupNumberofparticipants: number
+  ingredientPrice: number
+  groupNumberOfParticipants: number
   groupDate: Date | string
   groupCategory: string
   groupLinkZoom?: string

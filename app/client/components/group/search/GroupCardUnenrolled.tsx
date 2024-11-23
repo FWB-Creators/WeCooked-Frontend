@@ -9,7 +9,7 @@ export default function GroupCardUnenrolled({
   groupTitle,
   groupDetail,
   groupPrice,
-  groupNumberofparticipants,
+  groupNumberOfParticipants,
   groupDate: groupDateProp,
   groupCategory,
   groupPicture,
