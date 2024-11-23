@@ -9,8 +9,8 @@ export default function GroupCardUnenrolled({
   groupTitle,
   groupDetail,
   groupPrice,
-  groupNumberOfParticipants,
-  groupDate,
+  groupNumberofparticipants,
+  groupDate: groupDateProp,
   groupCategory,
   groupPicture,
   chefImage,
@@ -30,6 +30,8 @@ export default function GroupCardUnenrolled({
       minute: 'numeric',
     })
   }
+
+  const groupDate = new Date(groupDateProp)
 
   return (
     <Link href={`/client/group/payment/${groupId}`}>

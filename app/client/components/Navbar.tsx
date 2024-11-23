@@ -105,7 +105,7 @@ export default function Navbar() {
   return (
     <nav className="flex items-center justify-between bg-white py-4">
       <div className="px-12">
-        <Link href="/client/home">
+        <Link href="/">
           <Image
             src="/svg/WecookedLogo.svg"
             alt="WeCooked Logo"
@@ -126,11 +126,10 @@ export default function Navbar() {
           </>
         ) : (
           <>
-            {navItems.map(({ label, path }) => (
-              <NavLink key={path} href={path}>
-                {label}
-              </NavLink>
-            ))}
+            <NavLink href="/unsigned/home">Home</NavLink>
+            <NavLink href="/client/login">My Learning</NavLink>
+            <NavLink href="/unsigned/video">Video</NavLink>
+            <NavLink href="/unsigned/group">Group</NavLink>
           </>
         )}
       </div>

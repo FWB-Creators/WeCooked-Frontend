@@ -1,5 +1,5 @@
 import Navbar from '../components/Navbar'
-import GroupTable from '../components/GroupTable'
+import GroupTable from '../components/group/GroupTable'
 
 export default function ChefGroupPage() {
   return (

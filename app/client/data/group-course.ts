@@ -210,8 +210,8 @@ export const group: Group[] = [
   },
   {
     groupId: 12,
-    groupTitle: 'Spanish Tapas Experience',
-    groupDetail: 'Master the art of preparing traditional Spanish tapas.',
+    groupTitle: 'Italian Tapas Experience',
+    groupDetail: 'Master the art of preparing traditional Italian tapas.',
     groupPrice: 380,
     ingredientPrice: 17,
     groupNumberOfParticipants: 16,

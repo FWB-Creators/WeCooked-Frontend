@@ -1,0 +1,134 @@
+[
+  {
+    "courseId": 0,
+    "courseTitle": "Authentic Italian - Pasta Masterclass",
+    "courseCategory": "Italian",
+    "coursePrice": 500,
+    "reviewRating": 4.5,
+    "chefName": "Chef Lorenzo",
+    "courseImage": "/images/ramachandra.png",
+    "chefImage": "/images/chef.png",
+    "courseDietary": ["Vegetarian"]
+  },
+  {
+    "courseId": 1,
+    "courseTitle": "Thai Street Food - Flavor Explosion",
+    "courseCategory": "Thai",
+    "coursePrice": 350,
+    "reviewRating": 4.3,
+    "chefName": "Chef Ananda",
+    "courseImage": "/images/uma-parlour.png",
+    "chefImage": "/images/chef.png",
+    "courseDietary": ["Vegan"]
+  },
+  {
+    "courseId": 2,
+    "courseTitle": "Japanese Sushi - Roll Your Own",
+    "courseCategory": "Japanese",
+    "coursePrice": 600,
+    "reviewRating": 4.7,
+    "chefName": "Chef Sato",
+    "courseImage": "/images/ramachandra.png",
+    "chefImage": "/images/chef.png",
+    "courseDietary": ["Gluten-Free"]
+  },
+  {
+    "courseId": 3,
+    "courseTitle": "Indian Spice Journey - Curry Basics",
+    "courseCategory": "Indian",
+    "coursePrice": 320,
+    "reviewRating": 4.1,
+    "chefName": "Chef Ayesha",
+    "courseImage": "/images/uma-parlour.png",
+    "chefImage": "/images/chef.png",
+    "courseDietary": ["Halal"]
+  },
+  {
+    "courseId": 4,
+    "courseTitle": "French Pastries - Sweet Indulgence",
+    "courseCategory": "French",
+    "coursePrice": 650,
+    "reviewRating": 4.6,
+    "chefName": "Chef Bernard",
+    "courseImage": "/images/ramachandra.png",
+    "chefImage": "/images/chef.png",
+    "courseDietary": ["Vegetarian"]
+  },
+  {
+    "courseId": 5,
+    "courseTitle": "Mexican Fiesta - Tacos & More",
+    "courseCategory": "Mexican",
+    "coursePrice": 380,
+    "reviewRating": 4.0,
+    "chefName": "Chef Elena",
+    "courseImage": "/images/ramachandra.png",
+    "chefImage": "/images/chef.png",
+    "courseDietary": ["Vegan"]
+  },
+  {
+    "courseId": 6,
+    "courseTitle": "American BBQ - Grill and Chill",
+    "courseCategory": "American",
+    "coursePrice": 450,
+    "reviewRating": 4.4,
+    "chefName": "Chef Jake",
+    "courseImage": "/images/uma-parlour.png",
+    "chefImage": "/images/chef.png",
+    "courseDietary": ["Low-Carb"]
+  },
+  {
+    "courseId": 7,
+    "courseTitle": "Italian Risotto - Creamy & Delicious",
+    "courseCategory": "Italian",
+    "coursePrice": 520,
+    "reviewRating": 4.8,
+    "chefName": "Chef Giulia",
+    "courseImage": "/images/ramachandra.png",
+    "chefImage": "/images/chef.png",
+    "courseDietary": ["Vegetarian"]
+  },
+  {
+    "courseId": 8,
+    "courseTitle": "Thai Curry - Spicy & Flavorful",
+    "courseCategory": "Thai",
+    "coursePrice": 300,
+    "reviewRating": 3.9,
+    "chefName": "Chef Ploy",
+    "courseImage": "/images/roti.png",
+    "chefImage": "/images/chef.png",
+    "courseDietary": ["Halal"]
+  },
+  {
+    "courseId": 9,
+    "courseTitle": "Japanese Ramen - Noodle Perfection",
+    "courseCategory": "Japanese",
+    "coursePrice": 550,
+    "reviewRating": 4.5,
+    "chefName": "Chef Kenji",
+    "courseImage": "/images/roti.png",
+    "chefImage": "/images/chef.png",
+    "courseDietary": ["Gluten-Free"]
+  },
+  {
+    "courseId": 10,
+    "courseTitle": "Indian Biryani - Aromatic Rice Dish",
+    "courseCategory": "Indian",
+    "coursePrice": 290,
+    "reviewRating": 4.2,
+    "chefName": "Chef Sanjay",
+    "courseImage": "/images/ramachandra.png",
+    "chefImage": "/images/chef.png",
+    "courseDietary": ["Halal", "Vegetarian"]
+  },
+  {
+    "courseId": 11,
+    "courseTitle": "French Soufflé - Light & Fluffy",
+    "courseCategory": "French",
+    "coursePrice": 680,
+    "reviewRating": 4.7,
+    "chefName": "Chef Amelie",
+    "courseImage": "/images/ramachandra.png",
+    "chefImage": "/images/chef.png",
+    "courseDietary": ["Vegetarian"]
+  }
+]
