@@ -11,7 +11,7 @@ import {
 import { CldUploadWidget } from 'next-cloudinary'
 import { CloudinaryUploadWidgetResults } from 'next-cloudinary'
 import CustomCalendar from './CustomCalendar'
-import GroupCardUnenrolled from './GroupCardUnenrolled'
+import GroupCardUnenrolled from './WorkshopCardUnenrolled'
 import TimeInput from './TimeInput'
 
 interface CourseSubmission {
@@ -21,7 +21,7 @@ interface CourseSubmission {
   coverImageUrl: string
 }
 
-export default function GroupUpload() {
+export default function WorkshopUpload() {
   const [isUploadComplete, setIsUploadComplete] = useState<boolean>(false)
   const [coverImageUrl, setCoverImageUrl] = useState<string>('')
   const [currentStep, setCurrentStep] = useState<number>(1)
@@ -245,7 +245,7 @@ export default function GroupUpload() {
               <div className="grid grid-cols-3 gap-4">
                 <div>
                   <label htmlFor="coursePrice" className="block mb-1">
-                    Price
+                    Course Price
                   </label>
                   <input
                     id="coursePrice"
@@ -468,7 +468,7 @@ export default function GroupUpload() {
                         : 'text-gray-400'
                     }`}
                   >
-                    {step === 1 ? 'Upload New Video Course' : 'Confirm Setting'}
+                    {step === 1 ? 'Upload New Workshop' : 'Confirm Setting'}
                   </span>
                   {step < 2 && (
                     <div className="w-32 h-[2px] mx-4 bg-gray-200">

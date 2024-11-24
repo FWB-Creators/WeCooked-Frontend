@@ -1,9 +1,9 @@
 'use client'
 import React, { useState, useMemo } from 'react'
 import Image from 'next/image'
-import GroupUpload from './GroupUpload'
-import { GroupData } from '../../types/groupdata'
-import { groupData } from '../../data/groupdata'
+import CourseUpload from './CourseUpload'
+import { VideoData } from '../../types/videodata'
+import { videoData } from '../../data/videodata'
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -15,7 +15,7 @@ import {
 const ITEMS_PER_PAGE = 5
 const VISIBLE_PAGES = 5
 
-type TabType = 'group' | 'enrolled' | 'review'
+type TabType = 'course' | 'enrolled' | 'review'
 
 interface TabButtonProps {
   label: string
@@ -94,24 +94,24 @@ const CheckboxAll: React.FC<{
   </div>
 )
 
-export default function GroupTable() {
-  const [activeTab, setActiveTab] = useState<TabType>('group')
+export default function CourseTable() {
+  const [activeTab, setActiveTab] = useState<TabType>('course')
   const [typePopup, setTypePopup] = useState<string | null>(null)
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [selectedItems, setSelectedItems] = useState<Set<number>>(new Set())
 
-  const totalPages = Math.ceil(groupData.length / ITEMS_PER_PAGE)
+  const totalPages = Math.ceil(videoData.length / ITEMS_PER_PAGE)
 
   const currentPageData = useMemo(() => {
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
-    return groupData.slice(startIndex, startIndex + ITEMS_PER_PAGE)
+    return videoData.slice(startIndex, startIndex + ITEMS_PER_PAGE)
   }, [currentPage])
 
   const isAllCurrentPageSelected = currentPageData.every((item) =>
-    selectedItems.has(item.groupId)
+    selectedItems.has(item.courseId)
   )
   const isSomeCurrentPageSelected = currentPageData.some((item) =>
-    selectedItems.has(item.groupId)
+    selectedItems.has(item.courseId)
   )
   const isIndeterminate = isSomeCurrentPageSelected && !isAllCurrentPageSelected
 
@@ -125,43 +125,43 @@ export default function GroupTable() {
     if (isAllCurrentPageSelected) {
       // Unselect all items on current page
       const newSelected = new Set(selectedItems)
-      currentPageData.forEach((item) => newSelected.delete(item.groupId))
+      currentPageData.forEach((item) => newSelected.delete(item.courseId))
       setSelectedItems(newSelected)
     } else {
       // Select all items on current page
       const newSelected = new Set(selectedItems)
-      currentPageData.forEach((item) => newSelected.add(item.groupId))
+      currentPageData.forEach((item) => newSelected.add(item.courseId))
       setSelectedItems(newSelected)
     }
   }
 
-  const handleSelectItem = (groupId: number) => {
+  const handleSelectItem = (courseId: number) => {
     const newSelected = new Set(selectedItems)
-    if (newSelected.has(groupId)) {
-      newSelected.delete(groupId)
+    if (newSelected.has(courseId)) {
+      newSelected.delete(courseId)
     } else {
-      newSelected.add(groupId)
+      newSelected.add(courseId)
     }
     setSelectedItems(newSelected)
   }
 
-  const handleRowClick = (groupId: number) => {
-    handleSelectItem(groupId)
+  const handleRowClick = (courseId: number) => {
+    handleSelectItem(courseId)
   }
 
-  const handleEditClick = (e: React.MouseEvent, groupId: number) => {
+  const handleEditClick = (e: React.MouseEvent, courseId: number) => {
     e.stopPropagation()
-    console.log('Edit course:', groupId)
+    console.log('Edit course:', courseId)
   }
 
-  const handleDeleteClick = (e: React.MouseEvent, groupId?: number) => {
+  const handleDeleteClick = (e: React.MouseEvent, courseId?: number) => {
     e.stopPropagation()
 
-    if (groupId) {
-      console.log('Delete course:', groupId)
+    if (courseId) {
+      console.log('Delete course:', courseId)
       setSelectedItems((prev) => {
         const updated = new Set(prev)
-        updated.delete(groupId)
+        updated.delete(courseId)
         return updated
       })
     } else {
@@ -219,8 +219,8 @@ export default function GroupTable() {
 
   const renderTableHeader = () => (
     <tr className="bg-gradient-to-b from-[#F0725C] to-[#FE3511] text-white">
-      {/* Render for "video" tab */}
-      {activeTab === 'group' && (
+      {/* Render for "course" tab */}
+      {activeTab === 'course' && (
         <>
           <th className="p-4 pl-8 text-left">
             <CheckboxAll
@@ -229,11 +229,11 @@ export default function GroupTable() {
               onChange={handleSelectAll}
             />
           </th>
-          <th className="p-4 text-left font-semibold">Video</th>
+          <th className="p-4 text-left font-semibold">Course</th>
           <th className="p-4 text-left font-semibold">Name</th>
           <th className="p-4 text-center font-semibold">Price</th>
           <th className="p-4 text-center font-semibold">Revenue</th>
-          <th className="p-4 text-center font-semibold">Participant</th>
+          <th className="p-4 text-center font-semibold">Enrolled</th>
           <th className="p-4 text-center font-semibold">Date</th>
           <th className="flex justify-end p-4 pr-6 font-semibold">
             <TrashIcon
@@ -251,66 +251,66 @@ export default function GroupTable() {
       {activeTab === 'enrolled' && (
         <>
           <th className="p-4 pl-12 text-left font-semibold">Enrolled Name</th>
-          <th className="p-4 text-left font-semibold">Group Name</th>
+          <th className="p-4 text-left font-semibold">Course Name</th>
           <th className="p-4 text-center font-semibold">Enrolled ID</th>
-          <th className="p-4 text-center font-semibold">Group ID</th>
+          <th className="p-4 text-center font-semibold">Course ID</th>
         </>
       )}
       {activeTab === 'review' && (
         <>
           <th className="p-4 pl-12 text-left font-semibold">Enrolled Name</th>
           <th className="p-4 text-left font-semibold">Review</th>
-          <th className="p-4 text-center font-semibold">Group Name</th>
+          <th className="p-4 text-center font-semibold">Course Name</th>
         </>
       )}
     </tr>
   )
 
-  const renderTableRow = (group: GroupData) => (
+  const renderTableRow = (video: VideoData) => (
     <tr
-      key={group.groupId}
+      key={video.courseId}
       className="border-x border-gray-200 text-gray-800 hover:bg-gray-50 cursor-pointer"
-      onClick={() => handleRowClick(group.groupId)}
+      onClick={() => handleRowClick(video.courseId)}
     >
-      {/* Render for "video" tab */}
-      {activeTab === 'group' && (
+      {/* Render for "course" tab */}
+      {activeTab === 'course' && (
         <>
           <td
             className="px-4 pl-8 border-b border-gray-200"
             onClick={(e) => e.stopPropagation()}
           >
             <Checkbox
-              checked={selectedItems.has(group.groupId)}
-              onChange={() => handleSelectItem(group.groupId)}
+              checked={selectedItems.has(video.courseId)}
+              onChange={() => handleSelectItem(video.courseId)}
             />
           </td>
           <td className="px-4 py-2 border-b border-gray-200">
             <Image
-              src={group.groupImage}
-              alt={group.groupTitle}
+              src={video.courseImage}
+              alt={video.courseTitle}
               width={144}
               height={96}
               className="object-cover rounded"
             />
           </td>
-          <td className="px-4 border-b border-gray-200">{group.groupTitle}</td>
+          <td className="px-4 border-b border-gray-200">{video.courseTitle}</td>
           <td className="px-4 text-center border-b border-gray-200">
-            {group.groupPrice.toLocaleString()} Baht
+            {video.coursePrice.toLocaleString()} Baht
           </td>
           <td className="px-4 text-center border-b border-gray-200">
-            {group.groupRevenue.toLocaleString()} Baht
+            {video.courseRevenue.toLocaleString()} Baht
           </td>
           <td className="px-4 text-center border-b border-gray-200">
-            {group.groupParticipant.toLocaleString()}
+            {video.courseEnrolled.toLocaleString()}
           </td>
           <td className="px-4 text-center border-b border-gray-200">
-            {formatDate(new Date(group.groupDate))}
+            {formatDate(new Date(video.courseDate))}
           </td>
           <td className="px-4 text-center border-b border-gray-200">
             <div className="flex justify-end">
               <button
                 className="py-2 pr-2 cursor-pointer"
-                onClick={(e) => handleEditClick(e, group.groupId)}
+                onClick={(e) => handleEditClick(e, video.courseId)}
                 aria-label="Edit"
               >
                 <PencilSquareIcon className="w-6 h-6 text-gray-800" />
@@ -326,23 +326,23 @@ export default function GroupTable() {
           <td className="flex items-center px-4 pl-12 py-2 border-b border-gray-200">
             <div className="flex items-center rounded-full w-11 h-11">
               <Image
-                src={group.userProfile}
-                alt={`Profile picture of ${group.userProfile}`}
+                src={video.userProfile}
+                alt={`Profile picture of ${video.userProfile}`}
                 width={35}
                 height={35}
                 className="rounded-full"
               />
             </div>
             <p className="text-gray-800 font-semibold">
-              {group.name} {group.surname}
+              {video.name} {video.surname}
             </p>
           </td>
-          <td className="px-4 border-b border-gray-200">{group.groupTitle}</td>
+          <td className="px-4 border-b border-gray-200">{video.courseTitle}</td>
           <td className="px-4 text-center border-b border-gray-200">
-            {group.groupEnrolledId}
+            {video.courseEnrolledId}
           </td>
           <td className="px-4 text-center border-b border-gray-200">
-            {group.groupId}
+            {video.courseId}
           </td>
         </>
       )}
@@ -353,8 +353,8 @@ export default function GroupTable() {
             <div className="flex items-center">
               <div className="flex items-center rounded-full w-11 h-11">
                 <Image
-                  src={group.userProfile}
-                  alt={`Profile picture of ${group.userProfile}`}
+                  src={video.userProfile}
+                  alt={`Profile picture of ${video.userProfile}`}
                   width={35}
                   height={35}
                   className="rounded-full"
@@ -362,23 +362,23 @@ export default function GroupTable() {
               </div>
               <div>
                 <p className="text-gray-800 font-semibold">
-                  {group.name} {group.surname}
+                  {video.name} {video.surname}
                 </p>
               </div>
             </div>
           </td>
           <td className="px-4 text-left border-b border-gray-200">
-            <p className="text-gray-800">{group.reviewDetail}</p>
+            <p className="text-gray-800">{video.reviewDetail}</p>
           </td>
           <td className="p-4 text-center border-b border-gray-200 flex flex-col items-center">
             <Image
-              src={group.groupImage}
-              alt={group.groupTitle}
+              src={video.courseImage}
+              alt={video.courseTitle}
               width={192}
               height={144}
               className="object-cover rounded"
             />
-            <p className="text-center">{group.groupTitle}</p>
+            <p className="text-center">{video.courseTitle}</p>
           </td>
         </>
       )}
@@ -388,12 +388,12 @@ export default function GroupTable() {
   return (
     <div className="p-6 px-16">
       <h1 className="py-1.5 font-bold text-6xl bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text">
-        Group Content
+        Course Content
       </h1>
 
       <div className="flex justify-between items-center my-6">
         <div className="flex gap-4">
-          {(['group', 'enrolled', 'review'] as const).map((tab) => (
+          {(['course', 'enrolled', 'review'] as const).map((tab) => (
             <TabButton
               key={tab}
               label={tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -402,7 +402,7 @@ export default function GroupTable() {
             />
           ))}
         </div>
-        {activeTab === 'group' && <GroupUpload />}
+        {activeTab === 'course' && <CourseUpload />}
       </div>
 
       <div className="overflow-x-auto">

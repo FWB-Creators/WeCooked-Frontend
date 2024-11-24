@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { Group } from '../../types/group'
 import { StarRating } from '../StarRating'
 
-export default function GroupCardUnenrolled({
+export default function WorkshopCardUnenrolled({
   groupId,
   groupTitle,
   groupDetail,

@@ -55,7 +55,7 @@ export default function Login() {
 
   const login = () => {
     setIsAuthenticated(true)
-    router.push('/chef/video')
+    router.push('/chef/course')
     if (remember == true && typeof window !== 'undefined') {
       // Access localStorage here (to prevent netlify approvement fail)
       localStorage.setItem('isAuthenticated', 'true')

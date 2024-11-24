@@ -47,7 +47,7 @@ export default function Navbar() {
     <nav className="flex items-center justify-between bg-white py-4 shadow-lg">
       <div className="flex items-center">
         <div className="px-12">
-          <Link href="/chef/video">
+          <Link href="/chef/course">
             <Image
               src="/svg/WecookedLogo.svg"
               alt="WeCooked Logo"
@@ -59,8 +59,8 @@ export default function Navbar() {
         </div>
         <div className="flex items-center px-6">
             <>
-              <NavLink href="/chef/video">Video</NavLink>
-              <NavLink href="/chef/group">Group</NavLink>
+              <NavLink href="/chef/course">Course</NavLink>
+              <NavLink href="/chef/workshop">Workshop</NavLink>
               <NavLink href="/chef/tutorial">Tutorial</NavLink>
             </>
         </div>
