@@ -1,5 +1,5 @@
-import React from 'react'
-import Image from 'next/image'
+import React from 'react';
+import Image from 'next/image';
 
 export default function MeetChefCurvePage() {
   return (
@@ -10,29 +10,31 @@ export default function MeetChefCurvePage() {
         width={1100}
         height={1100}
         className="w-full h-auto"
+        priority
       />
-      <div>
-        <div className="absolute w-5/12 left-20 top-56 z-10 max-w-2xl">
-          <h1 className="py-1.5 text-5xl font-bold text-white inline-block text-transparent bg-clip-text">
+      <div className="absolute inset-0 flex flex-row items-center justify-between px-16 z-10">
+        <div className="text-left w-[550px] max-w-2xl">
+          <h1 className="py-2 text-5xl font-bold text-white">
             Meet Chef Sieng: Master of Italian Cuisine
           </h1>
-          <p className="text-xl max-w-xl pt-12 text-white">
+          <p className="mt-8 text-lg text-white">
             Chef Sieng is a culinary expert specializing in authentic Italian
             dishes. With years of experience, he combines rich flavors and fresh
             ingredients to create delightful culinary experiences. Join him to
             explore the art of Italian cooking and master classic recipes!
           </p>
         </div>
-        <div className="absolute right-16 top-[168px] z-10 w-1/2 md:w-auto">
+        <div className="mt-8 w-6/12">
           <Image
             src="/images/chef_tutorial.png"
-            alt="Cooked Image"
+            alt="Chef holding a dish"
             width={750}
             height={750}
             className="object-contain w-full h-auto"
+            priority
           />
         </div>
       </div>
     </div>
-  )
+  );
 }

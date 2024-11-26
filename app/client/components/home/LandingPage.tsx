@@ -23,9 +23,9 @@ export default function LandingPage() {
           you&apos;re a beginner or a seasoned cook, our interactive classes
           will elevate your culinary skills.
         </p>
-        <div className="flex space-x-2.5 py-6">
+        <div className="flex items-center space-x-2.5 py-6">
           <Link href={`/client/video/payment/${course.courseId}`}>
-            <button className="px-8 py-2 bg-gradient-to-b from-[#F0725C] to-[#FE3511] text-white rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+            <button className="px-8 py-2.5 bg-gradient-to-b from-[#F0725C] to-[#FE3511] text-white rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
               Get Started
             </button>
           </Link>
