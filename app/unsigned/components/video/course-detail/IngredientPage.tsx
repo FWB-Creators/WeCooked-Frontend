@@ -5,7 +5,7 @@ import { ingredients } from '@/app/unsigned/data/ingredient';
 export default function IngredientPage() {
   return (
     <div className="h-[450px] relative w-full flex flex-col items-center">
-      <div className="absolute left-0 top-[-140px] z-10 w-1/2 md:w-auto">
+      <div className="absolute left-0 top-[-140px] z-10 w-1/2">
         <Image
           src="/images/spice.png"
           alt="Cooking spices and ingredients for the course"

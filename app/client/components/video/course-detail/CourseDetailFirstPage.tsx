@@ -57,7 +57,7 @@ export default function CourseDetailFirstPage() {
           </button>
         </div>
         <div className="flex">
-          <button className="px-7 py-2 bg-gradient-to-b from-[#F0725C] to-[#FE3511] text-white rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+          <button className="px-8 py-2.5 bg-gradient-to-b from-[#F0725C] to-[#FE3511] text-white rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
             Let&apos;s Cook
           </button>
         </div>

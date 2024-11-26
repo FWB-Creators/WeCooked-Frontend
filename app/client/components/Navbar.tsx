@@ -1,6 +1,6 @@
 'use client'
 import { useState, useRef, useEffect, useCallback } from 'react'
-import { MagnifyingGlassIcon } from '@heroicons/react/16/solid'
+import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import { Course } from '../types/courses'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -31,8 +31,8 @@ export default function Navbar() {
   const navItems = [
     { label: 'Home', path: '/home' },
     { label: 'My Learning', path: '/my-learning' },
-    { label: 'Video', path: '/video' },
-    { label: 'Group', path: '/group' },
+    { label: 'Course', path: '/video' },
+    { label: 'Workshop', path: '/group' },
   ]
   const authcontextvalue = useAuthContext()
   const authLocalState = AuthLocal()
@@ -128,8 +128,8 @@ export default function Navbar() {
           <>
             <NavLink href="/unsigned/home">Home</NavLink>
             <NavLink href="/client/login">My Learning</NavLink>
-            <NavLink href="/unsigned/video">Video</NavLink>
-            <NavLink href="/unsigned/group">Group</NavLink>
+            <NavLink href="/unsigned/video">Course</NavLink>
+            <NavLink href="/unsigned/group">Workshop</NavLink>
           </>
         )}
       </div>
@@ -158,24 +158,6 @@ export default function Navbar() {
       <div>
         {authcontextvalue?.isAuthenticated || authLocalState == 'true' ? (
           <div className="flex items-center px-6">
-            <Link href="/client/notification" aria-label="Notifications">
-              <Image
-                src="/svg/Bell.svg"
-                alt="Bell"
-                width={25}
-                height={25}
-                className="cursor-pointer mx-3 hover:opacity-80 transition-opacity"
-              />
-            </Link>
-            <Link href="/client/setting">
-              <Image
-                src="/svg/Cog.svg"
-                alt="Setting"
-                width={25}
-                height={25}
-                className="cursor-pointer mx-3 hover:opacity-80 transition-opacity"
-              />
-            </Link>
             <div className="flex items-center relative" ref={userDropdownRef}>
               <button
                 className="rounded-full border border-[#FE3511] w-11 h-11 mx-2 cursor-pointer transition duration-300 ease-in-out transform hover:scale-105 hover:border-[#F0725C]"

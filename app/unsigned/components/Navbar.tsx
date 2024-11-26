@@ -1,6 +1,6 @@
 'use client'
 import { useState, useRef, useEffect, useCallback } from 'react'
-import { MagnifyingGlassIcon } from '@heroicons/react/16/solid'
+import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import { Course } from '../types/courses'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -114,15 +114,15 @@ export default function Navbar() {
           <>
             <NavLink href="/client/home">Home</NavLink>
             <NavLink href="/client/my-learning">My Learning</NavLink>
-            <NavLink href="/client/video">Video</NavLink>
-            <NavLink href="/client/group">Group</NavLink>
+            <NavLink href="/client/video">Course</NavLink>
+            <NavLink href="/client/group">Workshop</NavLink>
           </>
         ) : (
           <>
             <NavLink href="/">Home</NavLink>
             <NavLink href="/client/login">My Learning</NavLink>
-            <NavLink href="/unsigned/video">Video</NavLink>
-            <NavLink href="/unsigned/group">Group</NavLink>
+            <NavLink href="/unsigned/video">Course</NavLink>
+            <NavLink href="/unsigned/group">Workshop</NavLink>
           </>
         )}
       </div>
