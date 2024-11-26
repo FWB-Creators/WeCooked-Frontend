@@ -11,4 +11,5 @@ export interface VideoData {
   name: string
   surname: string
   reviewDetail: string
+  reviewRating: number
 }

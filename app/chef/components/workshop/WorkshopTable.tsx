@@ -2,6 +2,7 @@
 import React, { useState, useMemo } from 'react'
 import Image from 'next/image'
 import WorkshopUpload from './WorkshopUpload'
+import { StarRating } from '../StarRating'
 import { GroupData } from '../../types/groupdata'
 import { groupData } from '../../data/groupdata'
 import {
@@ -260,6 +261,7 @@ export default function WorkshopTable() {
         <>
           <th className="p-4 pl-12 text-left font-semibold">Enrolled Name</th>
           <th className="p-4 text-left font-semibold">Review</th>
+          <th className="p-4 text-center font-semibold">Rating</th>
           <th className="p-4 text-center font-semibold">Group Name</th>
         </>
       )}
@@ -369,6 +371,9 @@ export default function WorkshopTable() {
           </td>
           <td className="px-4 text-left border-b border-gray-200">
             <p className="text-gray-800">{group.reviewDetail}</p>
+          </td>
+          <td className="px-4 text-center border-b border-gray-200">
+            <StarRating className="flex justify-center" reviewRating={group.reviewRating} />
           </td>
           <td className="p-4 text-center border-b border-gray-200 flex flex-col items-center">
             <Image

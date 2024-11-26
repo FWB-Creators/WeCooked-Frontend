@@ -14,6 +14,7 @@ export const groupData: GroupData[] = [
     name: 'John',
     surname: 'Doe',
     reviewDetail: 'Delicious and easy to cook!',
+    reviewRating: 4.5
   },
   {
     groupId: 1,
@@ -28,6 +29,7 @@ export const groupData: GroupData[] = [
     name: 'Jane',
     surname: 'Smith',
     reviewDetail: 'Tasty and well-loved dish!',
+    reviewRating: 4.2
   },
   {
     groupId: 2,
@@ -42,6 +44,7 @@ export const groupData: GroupData[] = [
     name: 'Alice',
     surname: 'Johnson',
     reviewDetail: 'Perfectly cooked salmon!',
+    reviewRating: 4.8
   },
   {
     groupId: 3,
@@ -56,6 +59,7 @@ export const groupData: GroupData[] = [
     name: 'Bob',
     surname: 'Williams',
     reviewDetail: 'Great vegetarian option!',
+    reviewRating: 4.0
   },
   {
     groupId: 4,
@@ -70,6 +74,7 @@ export const groupData: GroupData[] = [
     name: 'Charlie',
     surname: 'Brown',
     reviewDetail: 'A true classic dish!',
+    reviewRating: 4.3
   },
   {
     groupId: 5,
@@ -84,6 +89,7 @@ export const groupData: GroupData[] = [
     name: 'David',
     surname: 'Davis',
     reviewDetail: 'Simple but delicious!',
+    reviewRating: 4.6
   },
   {
     groupId: 6,
@@ -98,6 +104,7 @@ export const groupData: GroupData[] = [
     name: 'Eva',
     surname: 'Miller',
     reviewDetail: 'A fantastic taco recipe!',
+    reviewRating: 4.7
   },
   {
     groupId: 7,
@@ -112,6 +119,7 @@ export const groupData: GroupData[] = [
     name: 'Frank',
     surname: 'Wilson',
     reviewDetail: 'Rich and creamy curry!',
+    reviewRating: 4.4
   },
   {
     groupId: 8,
@@ -126,6 +134,7 @@ export const groupData: GroupData[] = [
     name: 'Grace',
     surname: 'Moore',
     reviewDetail: 'A must-try for sushi lovers!',
+    reviewRating: 4.9
   },
   {
     groupId: 9,
@@ -140,6 +149,7 @@ export const groupData: GroupData[] = [
     name: 'Hannah',
     surname: 'Taylor',
     reviewDetail: 'Wonderful pastry techniques!',
+    reviewRating: 4.5
   },
   {
     groupId: 10,
@@ -154,6 +164,7 @@ export const groupData: GroupData[] = [
     name: 'Isaac',
     surname: 'Anderson',
     reviewDetail: 'The ribs were mouthwatering!',
+    reviewRating: 4.7
   },
   {
     groupId: 11,
@@ -168,6 +179,7 @@ export const groupData: GroupData[] = [
     name: 'Jack',
     surname: 'Thomas',
     reviewDetail: 'Refreshing and healthy!',
+    reviewRating: 4.2
   },
   {
     groupId: 12,
@@ -182,6 +194,7 @@ export const groupData: GroupData[] = [
     name: 'Kathy',
     surname: 'Jackson',
     reviewDetail: 'A delightful dim sum experience!',
+    reviewRating: 4.3
   },
   {
     groupId: 13,
@@ -196,6 +209,7 @@ export const groupData: GroupData[] = [
     name: 'Liam',
     surname: 'White',
     reviewDetail: 'Great street food experience!',
+    reviewRating: 4.2
   },
   {
     groupId: 14,
@@ -210,6 +224,7 @@ export const groupData: GroupData[] = [
     name: 'Mona',
     surname: 'Harris',
     reviewDetail: 'Classic French dishes done right!',
+    reviewRating: 4.5
   },
   {
     groupId: 15,
@@ -224,5 +239,6 @@ export const groupData: GroupData[] = [
     name: 'Nathan',
     surname: 'Martin',
     reviewDetail: 'Delicious and authentic pasta!',
+    reviewRating: 4.6
   },
 ]
