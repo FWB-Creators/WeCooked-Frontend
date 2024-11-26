@@ -1,8 +1,8 @@
 'use client'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
-import CourseCard from '../CourseCard'
-import { courses } from '../../data/upcoming-course'
+import GroupCard from '../GroupCard'
+import { group } from '../../data/upcoming-course'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/16/solid'
 
 const useResponsiveCards = () => {
@@ -26,7 +26,7 @@ const useResponsiveCards = () => {
 export default function NewCourseCard() {
   const [startIndex, setStartIndex] = useState<number>(0)
   const cardsToShow = useResponsiveCards()
-  const maxIndex = Math.ceil(courses.length / cardsToShow) - 1
+  const maxIndex = Math.ceil(group.length / cardsToShow) - 1
 
   const nextSlide = () => {
     setStartIndex((prev) => Math.min(prev + 1, maxIndex))
@@ -57,9 +57,9 @@ export default function NewCourseCard() {
                 transform: `translateX(-${startIndex * (100 / cardsToShow)}%)`,
               }}
             >
-              {courses.map((course, index) => (
+              {group.map((group, index) => (
                 <div key={index} className="w-full pl-12">
-                  <CourseCard {...course} />
+                  <GroupCard {...group} />
                 </div>
               ))}
             </div>

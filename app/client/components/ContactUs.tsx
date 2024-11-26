@@ -20,14 +20,14 @@ export default function ContactUs() {
       <div className="flex gap-x-8">
         <div className="flex justify-center mt-16 pb-36">
           <Link href="/chef/sign-up-chef">
-            <button className="px-8 py-2 bg-gradient-to-b from-[#F0725C] to-[#FE3511] text-white rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+            <button className="px-8 py-2.5 bg-gradient-to-b from-[#F0725C] to-[#FE3511] text-white rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
               Join Now
             </button>
           </Link>
         </div>
         <div className="flex justify-center mt-16 pb-36">
           <Link href="/chef/login">
-            <button className="px-11 py-2 bg-gradient-to-b from-[#F0725C] to-[#FE3511] text-white rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+            <button className="px-11 py-2.5 bg-gradient-to-b from-[#F0725C] to-[#FE3511] text-white rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
               Login
             </button>
           </Link>

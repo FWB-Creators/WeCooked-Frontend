@@ -13,7 +13,8 @@ export const videoData: VideoData[] = [
     userProfile: '/images/nut.png',
     name: 'John',
     surname: 'Doe',
-    reviewDetail: 'Delicious and easy to cook!'
+    reviewDetail: 'Delicious and easy to cook!',
+    reviewRating: 4.5
   },
   {
     courseId: 1,
@@ -27,7 +28,8 @@ export const videoData: VideoData[] = [
     userProfile: '/images/nut.png',
     name: 'Jane',
     surname: 'Smith',
-    reviewDetail: 'Tasty and well-loved dish!'
+    reviewDetail: 'Tasty and well-loved dish!',
+    reviewRating: 4.2
   },
   {
     courseId: 2,
@@ -41,7 +43,8 @@ export const videoData: VideoData[] = [
     userProfile: '/images/nut.png',
     name: 'Alice',
     surname: 'Johnson',
-    reviewDetail: 'Perfectly cooked salmon!'
+    reviewDetail: 'Perfectly cooked salmon!',
+    reviewRating: 4.8
   },
   {
     courseId: 3,
@@ -55,7 +58,8 @@ export const videoData: VideoData[] = [
     userProfile: '/images/nut.png',
     name: 'Bob',
     surname: 'Williams',
-    reviewDetail: 'Great vegetarian option!'
+    reviewDetail: 'Great vegetarian option!',
+    reviewRating: 4.0
   },
   {
     courseId: 4,
@@ -69,7 +73,8 @@ export const videoData: VideoData[] = [
     userProfile: '/images/nut.png',
     name: 'Charlie',
     surname: 'Brown',
-    reviewDetail: 'A true classic dish!'
+    reviewDetail: 'A true classic dish!',
+    reviewRating: 4.7
   },
   {
     courseId: 5,
@@ -83,7 +88,8 @@ export const videoData: VideoData[] = [
     userProfile: '/images/nut.png',
     name: 'David',
     surname: 'Davis',
-    reviewDetail: 'Simple but delicious!'
+    reviewDetail: 'Simple but delicious!',
+    reviewRating: 4.3
   },
   {
     courseId: 6,
@@ -97,7 +103,8 @@ export const videoData: VideoData[] = [
     userProfile: '/images/nut.png',
     name: 'Eva',
     surname: 'Miller',
-    reviewDetail: 'A fantastic taco recipe!'
+    reviewDetail: 'A fantastic taco recipe!',
+    reviewRating: 4.6
   },
   {
     courseId: 7,
@@ -111,7 +118,8 @@ export const videoData: VideoData[] = [
     userProfile: '/images/nut.png',
     name: 'Frank',
     surname: 'Wilson',
-    reviewDetail: 'Rich and creamy curry!'
+    reviewDetail: 'Rich and creamy curry!',
+    reviewRating: 4.4
   },
   {
     courseId: 8,
@@ -125,7 +133,8 @@ export const videoData: VideoData[] = [
     userProfile: '/images/nut.png',
     name: 'Grace',
     surname: 'Moore',
-    reviewDetail: 'A must-try for sushi lovers!'
+    reviewDetail: 'A must-try for sushi lovers!',
+    reviewRating: 4.9
   },
   {
     courseId: 9,
@@ -139,7 +148,8 @@ export const videoData: VideoData[] = [
     userProfile: '/images/nut.png',
     name: 'Hannah',
     surname: 'Taylor',
-    reviewDetail: 'Wonderful pastry techniques!'
+    reviewDetail: 'Wonderful pastry techniques!',
+    reviewRating: 4.1
   },
   {
     courseId: 10,
@@ -153,7 +163,8 @@ export const videoData: VideoData[] = [
     userProfile: '/images/nut.png',
     name: 'Isaac',
     surname: 'Anderson',
-    reviewDetail: 'The ribs were mouthwatering!'
+    reviewDetail: 'The ribs were mouthwatering!',
+    reviewRating: 4.7
   },
   {
     courseId: 11,
@@ -167,7 +178,8 @@ export const videoData: VideoData[] = [
     userProfile: '/images/nut.png',
     name: 'Jack',
     surname: 'Thomas',
-    reviewDetail: 'Refreshing and healthy!'
+    reviewDetail: 'Refreshing and healthy!',
+    reviewRating: 4.0
   },
   {
     courseId: 12,
@@ -181,7 +193,8 @@ export const videoData: VideoData[] = [
     userProfile: '/images/nut.png',
     name: 'Kathy',
     surname: 'Jackson',
-    reviewDetail: 'A delightful dim sum experience!'
+    reviewDetail: 'A delightful dim sum experience!',
+    reviewRating: 4.5
   },
   {
     courseId: 13,
@@ -195,7 +208,8 @@ export const videoData: VideoData[] = [
     userProfile: '/images/nut.png',
     name: 'Liam',
     surname: 'White',
-    reviewDetail: 'Great street food experience!'
+    reviewDetail: 'Great street food experience!',
+    reviewRating: 4.2
   },
   {
     courseId: 14,
@@ -209,7 +223,8 @@ export const videoData: VideoData[] = [
     userProfile: '/images/nut.png',
     name: 'Mona',
     surname: 'Harris',
-    reviewDetail: 'Classic French dishes done right!'
+    reviewDetail: 'Classic French dishes done right!',
+    reviewRating: 4.8
   },
   {
     courseId: 15,
@@ -223,6 +238,7 @@ export const videoData: VideoData[] = [
     userProfile: '/images/nut.png',
     name: 'Nathan',
     surname: 'Martin',
-    reviewDetail: 'Delicious and authentic pasta!'
+    reviewDetail: 'Delicious and authentic pasta!',
+    reviewRating: 4.0
   },
 ]

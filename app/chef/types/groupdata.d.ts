@@ -11,4 +11,5 @@ export interface GroupData {
   name: string
   surname: string
   reviewDetail: string
+  reviewRating: number
 }
