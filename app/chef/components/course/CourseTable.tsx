@@ -2,6 +2,7 @@
 import React, { useState, useMemo } from 'react'
 import Image from 'next/image'
 import CourseUpload from './CourseUpload'
+import { StarRating } from '../StarRating'
 import { VideoData } from '../../types/videodata'
 import { videoData } from '../../data/videodata'
 import {
@@ -260,6 +261,7 @@ export default function CourseTable() {
         <>
           <th className="p-4 pl-12 text-left font-semibold">Enrolled Name</th>
           <th className="p-4 text-left font-semibold">Review</th>
+          <th className="p-4 text-center font-semibold">Rating</th>
           <th className="p-4 text-center font-semibold">Course Name</th>
         </>
       )}
@@ -369,6 +371,9 @@ export default function CourseTable() {
           </td>
           <td className="px-4 text-left border-b border-gray-200">
             <p className="text-gray-800">{video.reviewDetail}</p>
+          </td>
+          <td className="px-4 text-center border-b border-gray-200">
+            <StarRating className="flex justify-center" reviewRating={video.reviewRating} />
           </td>
           <td className="p-4 text-center border-b border-gray-200 flex flex-col items-center">
             <Image

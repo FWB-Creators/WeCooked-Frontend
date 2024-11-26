@@ -1,8 +1,8 @@
 'use client'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
-import { group } from '../../data/group-course'
-import GroupCard from '@/app/client/components/GroupCard'
+import GroupCard from '../GroupCard'
+import { group } from '../../data/upcoming-course'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/16/solid'
 
 const useResponsiveCards = () => {
@@ -34,11 +34,6 @@ export default function NewCourseCard() {
   const cardsToShow = useResponsiveCards()
   const maxIndex = Math.ceil(group.length / cardsToShow) - 1
 
-  // Adjust startIndex if cardsToShow changes
-  useEffect(() => {
-    if (startIndex > maxIndex) setStartIndex(maxIndex)
-  }, [cardsToShow, maxIndex, startIndex])
-
   const nextSlide = () => {
     setStartIndex((prev) => Math.min(prev + 1, maxIndex))
   }
@@ -69,13 +64,9 @@ export default function NewCourseCard() {
                 width: `${(100 * group.length) / cardsToShow}%`,
               }}
             >
-              {group.map((groupitem, index) => (
-                <div
-                  key={index}
-                  className="w-full"
-                  style={{ flex: `0 0 ${100 / cardsToShow}%` }}
-                >
-                  <GroupCard {...groupitem} />
+              {group.map((group, index) => (
+                <div key={index} className="w-full pl-12">
+                  <GroupCard {...group} />
                 </div>
               ))}
             </div>

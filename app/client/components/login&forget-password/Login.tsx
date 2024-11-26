@@ -213,20 +213,6 @@ export default function Login() {
             </button>
           </form>
           <div className="my-6 bg-[#E5E5E5] h-[0.5px]"></div>
-          <button className="w-full h-11 rounded-lg relative bg-gradient-to-t from-[#FE3511] to-[#F0725C] p-[1px] hover:shadow-md transition-shadow">
-            <div className="w-full h-full rounded-lg bg-white flex justify-center items-center gap-x-2">
-              <Image
-                width={20}
-                height={20}
-                src="/svg/Google.svg"
-                alt="google logo"
-              />
-              <p className="text-sm font-medium text-transparent bg-clip-text bg-gradient-to-t from-[#FE3511] to-[#F0725C]">
-                Sign in with Google
-              </p>
-            </div>
-          </button>
-
           <div className="flex justify-center mt-6 gap-x-1 text-sm">
             <p>Don&apos;t have an account?</p>
             <Link

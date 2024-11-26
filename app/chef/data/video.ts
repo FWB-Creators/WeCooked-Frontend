@@ -19,7 +19,7 @@ export const videoData: Video[] = [
         tutorialVideo: '/videos/VideoTutorial.mp4',
         tutorialTitle: 'How to Chop Vegetables Like a Pro 1',
         tutorialDetail: 'Keep your fingers curled under (a claw grip) to prevent accidental cuts. Use a serrated knife if your tomato is very soft, as it will grip the tomato skin better than a straight-edge knife. This tutorial will help you get evenly sized tomato pieces, perfect for salads, sauces, or garnishes. Tutorial: How to Properly Cut a Tomato',
-        timeStop1: null,
+        timeStop: null,
         timeTriggered: false,
       },
       {
@@ -27,7 +27,7 @@ export const videoData: Video[] = [
         tutorialVideo: '/videos/VideoTutorial.mp4',
         tutorialTitle: 'How to Chop Vegetables Like a Pro 2',
         tutorialDetail: 'Keep your fingers curled under (a claw grip) to prevent accidental cuts. Use a serrated knife if your tomato is very soft, as it will grip the tomato skin better than a straight-edge knife. This tutorial will help you get evenly sized tomato pieces, perfect for salads, sauces, or garnishes. Tutorial: How to Properly Cut a Tomato',
-        timeStop1: null,
+        timeStop: null,
         timeTriggered: false,
         
       },
@@ -36,7 +36,7 @@ export const videoData: Video[] = [
         tutorialVideo: '/videos/VideoTutorial.mp4',
         tutorialTitle: 'How to Chop Vegetables Like a Pro 3',
         tutorialDetail: 'Keep your fingers curled under (a claw grip) to prevent accidental cuts. Use a serrated knife if your tomato is very soft, as it will grip the tomato skin better than a straight-edge knife. This tutorial will help you get evenly sized tomato pieces, perfect for salads, sauces, or garnishes. Tutorial: How to Properly Cut a Tomato',
-        timeStop1: null,
+        timeStop: null,
         timeTriggered: false,
       },
       {
@@ -44,7 +44,7 @@ export const videoData: Video[] = [
         tutorialVideo: '/videos/VideoTutorial.mp4',
         tutorialTitle: 'How to Chop Vegetables Like a Pro 4',
         tutorialDetail: 'Keep your fingers curled under (a claw grip) to prevent accidental cuts. Use a serrated knife if your tomato is very soft, as it will grip the tomato skin better than a straight-edge knife. This tutorial will help you get evenly sized tomato pieces, perfect for salads, sauces, or garnishes. Tutorial: How to Properly Cut a Tomato',
-        timeStop1: null,
+        timeStop: null,
         timeTriggered: false,
       },
       {
@@ -52,7 +52,7 @@ export const videoData: Video[] = [
         tutorialVideo: '/videos/VideoTutorial.mp4',
         tutorialTitle: 'How to Chop Vegetables Like a Pro 5',
         tutorialDetail: 'Keep your fingers curled under (a claw grip) to prevent accidental cuts. Use a serrated knife if your tomato is very soft, as it will grip the tomato skin better than a straight-edge knife. This tutorial will help you get evenly sized tomato pieces, perfect for salads, sauces, or garnishes. Tutorial: How to Properly Cut a Tomato',
-        timeStop1: null,
+        timeStop: null,
         timeTriggered: false,
       },
       {
@@ -60,7 +60,7 @@ export const videoData: Video[] = [
         tutorialVideo: '/videos/VideoTutorial.mp4',
         tutorialTitle: 'How to Chop Vegetables Like a Pro 6',
         tutorialDetail: 'Keep your fingers curled under (a claw grip) to prevent accidental cuts. Use a serrated knife if your tomato is very soft, as it will grip the tomato skin better than a straight-edge knife. This tutorial will help you get evenly sized tomato pieces, perfect for salads, sauces, or garnishes. Tutorial: How to Properly Cut a Tomato',
-        timeStop1: null,
+        timeStop: null,
         timeTriggered: false,
       }
     ],
