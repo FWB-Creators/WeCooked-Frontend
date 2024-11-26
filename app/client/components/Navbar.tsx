@@ -207,7 +207,12 @@ export default function Navbar() {
       </div>
       {searchTerm && (
         <div
-          className="absolute top-14 right-[236px] z-30 border-2 border-red-400 mt-1 bg-white rounded-xl shadow-lg w-[530px] 2xl:right-[575px]"
+          className={`absolute top-14 z-30 border-2 border-red-400 mt-1 bg-white rounded-xl shadow-lg w-[530px] 
+          ${
+            authcontextvalue?.isAuthenticated || authLocalState == 'true'
+              ? 'right-[159px]'
+              : 'right-[223px]'
+          }`}
           role="listbox"
           id="search-results"
         >
