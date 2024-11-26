@@ -32,20 +32,10 @@ export default function CompleteCourseCard({
             </h3>
             <div className="flex items-center gap-4 mb-2">
               {/* Tags */}
-              <div className="flex items-center gap-1 text-gray-600">
+              <div className="flex justify-center items-center text-gray-600">
                 <div className="px-2 py-0.5 border-[1px] border-[#FE3511] rounded-xl font-semibold bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text transition-all duration-300 transform">
                   {course.courseCategory}
                 </div>
-
-                {course.courseDietary?.map((diet, index) => (
-                  <div
-                    key={index}
-                    className="px-2 py-0.5 border-[1px] border-[#FE3511] rounded-xl font-semibold bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text transition-all duration-300 transform"
-                    aria-label={`Dietary Restriction: ${diet}`}
-                  >
-                    {diet}
-                  </div>
-                ))}
               </div>
             </div>
 

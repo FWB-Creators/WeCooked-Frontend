@@ -1,12 +1,18 @@
 'use client'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
-import CourseCard from '../CourseCard'
-import { courses } from '../../data/upcoming-course'
+import { group } from '../../data/group-course'
+import GroupCard from '@/app/client/components/GroupCard'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/16/solid'
 
 const useResponsiveCards = () => {
-  const [cardsToShow, setCardsToShow] = useState<number>(3)
+  const [cardsToShow, setCardsToShow] = useState<number>(() => {
+    if (typeof window !== 'undefined') {
+      if (window.innerWidth < 640) return 1
+      if (window.innerWidth < 1024) return 2
+    }
+    return 3
+  })
 
   useEffect(() => {
     const updateCards = () => {
@@ -26,7 +32,12 @@ const useResponsiveCards = () => {
 export default function NewCourseCard() {
   const [startIndex, setStartIndex] = useState<number>(0)
   const cardsToShow = useResponsiveCards()
-  const maxIndex = Math.ceil(courses.length / cardsToShow) - 1
+  const maxIndex = Math.ceil(group.length / cardsToShow) - 1
+
+  // Adjust startIndex if cardsToShow changes
+  useEffect(() => {
+    if (startIndex > maxIndex) setStartIndex(maxIndex)
+  }, [cardsToShow, maxIndex, startIndex])
 
   const nextSlide = () => {
     setStartIndex((prev) => Math.min(prev + 1, maxIndex))
@@ -54,12 +65,17 @@ export default function NewCourseCard() {
             <div
               className="flex transition-transform duration-300 ease-in-out"
               style={{
-                transform: `translateX(-${startIndex * (100 / cardsToShow)}%)`,
+                transform: `translateX(-${startIndex * 100}%)`,
+                width: `${(100 * group.length) / cardsToShow}%`,
               }}
             >
-              {courses.map((course, index) => (
-                <div key={index} className="w-full pl-12">
-                  <CourseCard {...course} />
+              {group.map((groupitem, index) => (
+                <div
+                  key={index}
+                  className="w-full"
+                  style={{ flex: `0 0 ${100 / cardsToShow}%` }}
+                >
+                  <GroupCard {...groupitem} />
                 </div>
               ))}
             </div>
@@ -74,7 +90,7 @@ export default function NewCourseCard() {
             </button>
           )}
 
-          {startIndex + 1 < maxIndex && (
+          {startIndex < maxIndex && (
             <button
               onClick={nextSlide}
               className="absolute right-4 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg z-10"
