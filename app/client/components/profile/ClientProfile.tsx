@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-export default function Profile() {
+export default function ClientProfile() {
   return (
     <div className="mt-6 mx-48">
       <div className="flex justify-between items-center">

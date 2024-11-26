@@ -93,7 +93,7 @@ export default function Navbar() {
               aria-expanded={userDropdownOpen}
             >
               <Image
-                src="/images/profile.jpg"
+                src="/images/chef.png"
                 alt="Profile"
                 width={45}
                 height={45}
@@ -107,7 +107,7 @@ export default function Navbar() {
                 aria-orientation="vertical"
               >
                 <Link
-                  href="/client/profile"
+                  href="/chef/profile"
                   className="block px-4 py-2 hover:bg-gray-100"
                   role="menuitem"
                 >

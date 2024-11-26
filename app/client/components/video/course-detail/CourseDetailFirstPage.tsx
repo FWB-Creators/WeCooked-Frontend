@@ -1,7 +1,10 @@
+'use client'
 import React from 'react'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 export default function CourseDetailFirstPage() {
+  const router = useRouter()
   return (
     <div className="min-h-[800px] relative w-full flex flex-col items-center">
       <div className="absolute left-20 top-28 z-10 max-w-[45%]">
@@ -39,25 +42,12 @@ export default function CourseDetailFirstPage() {
           >
             Italian
           </button>
-          <button
-            className="px-2 py-0.5 border-[1px] border-[#FE3511] rounded-xl font-semibold bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
-            type="button"
-            aria-label="View more details"
-            tabIndex={0}
-          >
-            Pasta
-          </button>
-          <button
-            className="px-2 py-0.5 border-[1px] border-[#FE3511] rounded-xl font-semibold bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
-            type="button"
-            aria-label="View more details"
-            tabIndex={0}
-          >
-            Authentic
-          </button>
         </div>
         <div className="flex">
-          <button className="px-7 py-2 bg-gradient-to-b from-[#F0725C] to-[#FE3511] text-white rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+          <button
+            className="px-7 py-2 bg-gradient-to-b from-[#F0725C] to-[#FE3511] text-white rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+            onClick={() => router.push('/client/video/payment/1')}
+          >
             Let&apos;s Cook
           </button>
         </div>

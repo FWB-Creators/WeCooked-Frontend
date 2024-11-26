@@ -9,7 +9,7 @@ interface CourseListProps {
 export default function CompleteCourse({ limit = 5 }: CourseListProps) {
   const displayedCourses = courses.slice(0, limit)
   return (
-    <div className="flex flex-col justify-start pb-12 mx-48">
+    <div className="flex flex-col justify-start mb-16 mx-48">
       <h1 className="text-lg mt-8">Completed Course</h1>
       <div className="">
         {displayedCourses.map((course) => (

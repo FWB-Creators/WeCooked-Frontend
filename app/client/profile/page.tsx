@@ -1,13 +1,14 @@
 import Navbar from '../components/Navbar'
-import Profile from '../components/profile/Profile'
+import ClientProfile from '../components/profile/ClientProfile'
 import CompleteCourse from '../components/profile/CompleteCourse'
-
-export default function ProfilePage() {
+import Footer from '../components/Footer'
+export default function ClientProfilePage() {
   return (
-    <div>
+    <>
       <Navbar />
-      <Profile />
+      <ClientProfile />
       <CompleteCourse />
-    </div>
+      <Footer />
+    </>
   )
 }

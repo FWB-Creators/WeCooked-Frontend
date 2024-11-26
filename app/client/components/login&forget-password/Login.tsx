@@ -66,9 +66,41 @@ export default function Login() {
   const toggleRemember = () => setRemember((prev) => !prev)
 
   // Update handleFormSubmit to handle form data
-  const handleFormSubmit = (data: LoginFormData) => {
-    console.log(JSON.stringify(data)) // Placeholder for auth logic
-    login() //set login state to true
+  const handleFormSubmit = async (data: LoginFormData) => {
+    const clientLoginData = {
+      email: data.email,
+      password: data.password,
+    }
+
+    console.log(JSON.stringify(clientLoginData)) // Log the data for debugging
+    console.log(process.env)
+    console.log(process.env.NEXT_PUBLIC_BACKEND_URL)
+
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/login`,
+        {
+          // Adjust the URL as necessary
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(clientLoginData),
+        }
+      )
+
+      if (!response.ok) {
+        throw new Error('Login failed')
+      }
+
+      const responseData = await response.json()
+      console.log(responseData)
+      localStorage.setItem('token', responseData.token)
+
+      login() // Set login state to true and redirect
+    } catch (error) {
+      console.error('Login failed:', error)
+    }
   }
 
   return (

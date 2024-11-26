@@ -1,11 +1,12 @@
 import Navbar from '../../components/Navbar'
-import EditClientProfile from '../../components/profile/EditClientProfile'
+import EditChefProfile from '../../components/profile/EditChefProfile'
 import Footer from '../../components/Footer'
-export default function ClientEditProfilePage() {
+
+export default function EditChefProfilePage() {
   return (
     <>
       <Navbar />
-      <EditClientProfile />
+      <EditChefProfile />
       <Footer />
     </>
   )

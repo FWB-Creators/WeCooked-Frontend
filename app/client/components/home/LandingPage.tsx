@@ -29,11 +29,6 @@ export default function LandingPage() {
               Get Started
             </button>
           </Link>
-          <Link href={`/client/video/course-detail/${course.courseId}`}>
-            <button className="px-8 py-2 border-2 border-[#FE3511] rounded-full font-semibold bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
-              View More
-            </button>
-          </Link>
         </div>
       </div>
       <div className="absolute right-0 top-0 z-10 w-1/2">
