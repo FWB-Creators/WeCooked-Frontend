@@ -289,7 +289,7 @@ export default function WorkshopUpload() {
                 </div>
               </div>
               <div className="space-y-1 relative">
-                <p className="mt-6">Select Date Range</p>
+                <p className="mt-6">Select Date</p>
                 <input
                   ref={inputRef}
                   type="text"
