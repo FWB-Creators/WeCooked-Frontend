@@ -1,14 +1,23 @@
 'use client'
 import Image from 'next/image'
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useRef } from 'react'
+import Calendar from './Calendar'
 import { ArrowLeftIcon, CalendarIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 import { useRouter, useParams } from 'next/navigation'
-import CustomCalendar from '../CustomCalendar'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { group } from '../../../data/group-course'
+
+// Helper function to format dates to DD/MM/YYYY
+const formatDate = (date: Date | null): string => {
+  if (!date) return '' // Return empty string if no date
+  const day = String(date.getDate()).padStart(2, '0')
+  const month = String(date.getMonth() + 1).padStart(2, '0') // Months are zero-based
+  const year = date.getFullYear()
+  return `${month}/${day}/${year}`
+}
 
 const paymentSchema = (isDeliver: boolean) =>
   z.object({
@@ -42,55 +51,28 @@ const paymentSchema = (isDeliver: boolean) =>
       ),
   })
 
-// Create a type helper for forms dynamically
 type FormData = z.infer<ReturnType<typeof paymentSchema>>
 
 export default function GroupPayment() {
   const [isDeliver, setIsDeliver] = useState<boolean>(false)
-  const [isCalendarOpen, setIsCalendarOpen] = useState<boolean>(false)
-  const [selectedDate, setSelectedDate] = useState<{
-    startDate: Date | null
-    endDate: Date | null
-  }>({
+  const [selectedDate, setSelectedDate] = useState<{ startDate: Date | null }>({
     startDate: null,
-    endDate: null,
   })
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false)
+  const calendarRef = useRef<HTMLDivElement>(null)
 
   const toggleDelivery = () => {
-    setIsDeliver((prev) => {
-      const newState = !prev
-      if (!newState) {
-        setValue('deliveryDate', null) // Reset deliveryDate to null if toggling off
-        setValue('shippingAddress', '') // Reset address
-      }
-      return newState
-    })
+    setIsDeliver(!isDeliver)
   }
 
-  const toggleCalendar = () => setIsCalendarOpen((prev) => !prev)
+  const toggleCalendar = () => {
+    setIsCalendarOpen(!isCalendarOpen)
+  }
 
-  const handleDateChange = (value: {
-    startDate: Date | null
-    endDate: Date | null
-  }) => {
-    if (value.startDate) {
-      const today = new Date()
-      today.setHours(0, 0, 0, 0)
-
-      if (value.startDate < today) {
-        alert('Invalid date')
-        return // Prevent further execution if the date is invalid
-      }
-    }
-
-    // Update the selected date
+  const handleDateSelect = (value: { startDate: Date | null }) => {
     setSelectedDate(value)
-
-    // Set the value in the form
-    setValue('deliveryDate', value.startDate)
-
-    // Close the calendar after selecting a date
     setIsCalendarOpen(false)
+    setValue('deliveryDate', value.startDate) // Set the raw Date object in the form
   }
 
   const { groupId } = useParams<{ groupId: string }>() // TypeScript typing for useParams
@@ -181,29 +163,34 @@ export default function GroupPayment() {
             </div>
             <div className="mt-8 flex justify-between">
               <p className="font-bold">Subtotal</p>
-              <p className="font-bold">${groupPrice}</p>
+              <p className="font-bold">{groupPrice} THB</p>
             </div>
             {isDeliver && (
               <div className="flex justify-between text-[#808080]">
                 <p className="">Add-on Package</p>
-                <p className="font-bold">+${groupAddOn}</p>
+                <p className="font-bold">+ {groupAddOn} THB</p>
               </div>
             )}
             <div className="flex justify-between text-[#808080]">
               <p className="">Discount</p>
-              <p className="font-bold">-$0.00</p>
+              <p className="font-bold">-0.00 THB</p>
             </div>
             <div className="flex justify-between">
               <p className="font-bold">Total</p>
               <p className="font-bold">
-                {isDeliver ? `$${groupPrice + groupAddOn}` : `$${groupPrice}`}
+                {isDeliver
+                  ? `${groupPrice + groupAddOn} THB`
+                  : `${groupPrice} THB`}
               </p>
             </div>
             <button
               type="submit"
               className="mt-8 w-full py-3 px-4 rounded-lg font-semibold text-white bg-gradient-to-t from-[#FE3511] to-[#F0725C] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
             >
-              Pay {isDeliver ? `$${groupPrice + groupAddOn}` : `$${groupPrice}`}
+              Pay{' '}
+              {isDeliver
+                ? `${groupPrice + groupAddOn} THB`
+                : `${groupPrice} THB`}
             </button>
           </div>
           <div className="ml-16 mr-40">
@@ -211,7 +198,7 @@ export default function GroupPayment() {
               Beef Wellington is a classic and luxurious dish, featuring premium
               beef fillet wrapped in a layer of finely chopped mushrooms
               (Duxelles) and Parma ham, then encased in puff pastry and baked to
-              a golden perfection. It’s ideal for special occasions or a
+              a golden perfection. It&apos;s ideal for special occasions or a
               full-course meal.
             </div>
             <div className="mt-4 flex flex-col w-full px-4 py-2 rounded-lg bg-[#DDE1E6]">
@@ -240,9 +227,10 @@ export default function GroupPayment() {
                     placeholder="Select a date"
                     {...register('deliveryDate', { valueAsDate: true })}
                     readOnly
+                    onClick={toggleCalendar}
                     value={
                       selectedDate.startDate
-                        ? selectedDate.startDate.toISOString().split('T')[0]
+                        ? formatDate(selectedDate.startDate)
                         : ''
                     }
                   />
@@ -252,14 +240,19 @@ export default function GroupPayment() {
                     </p>
                   )}
                   <CalendarIcon
-                    className="absolute top-2 right-2 w-6 h-6 cursor-pointer"
                     onClick={toggleCalendar}
+                    className="h-5 w-5 text-gray-400 absolute right-3 bottom-3 cursor-pointer"
                   />
                   {isCalendarOpen && (
-                    <CustomCalendar
-                      value={selectedDate}
-                      onChange={handleDateChange}
-                    />
+                    <div
+                      ref={calendarRef}
+                      className="absolute z-20 mt-2 w-full"
+                    >
+                      <Calendar
+                        value={selectedDate}
+                        onChange={handleDateSelect}
+                      />
+                    </div>
                   )}
                 </div>
                 <p className="my-2">Shipping address</p>

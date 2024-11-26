@@ -1,9 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { courses } from '../../data/advert'
 
 export default function LandingPage() {
-  const course = courses[1]
   return (
     <div className="relative w-full flex flex-col items-center pb-2">
       <Image
@@ -23,9 +21,9 @@ export default function LandingPage() {
           you&apos;re a beginner or a seasoned cook, our interactive classes
           will elevate your culinary skills.
         </p>
-        <div className="flex space-x-2.5 py-6">
-          <Link href={`/client/video/payment/${course.courseId}`}>
-            <button className="px-8 py-2 bg-gradient-to-b from-[#F0725C] to-[#FE3511] text-white rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+        <div className="flex items-center space-x-2.5 py-6">
+          <Link href="/client/group">
+            <button className="px-8 py-2.5 bg-gradient-to-b from-[#F0725C] to-[#FE3511] text-white rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
               Get Started
             </button>
           </Link>

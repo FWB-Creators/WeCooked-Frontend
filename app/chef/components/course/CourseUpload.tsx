@@ -32,6 +32,7 @@ interface CourseSubmission {
   courseName: string
   courseDetail: string
   courseCategory: string
+  courseDietary: string
   coursePrice: number
   coursePackPrice: number
   courseIngredients: string
@@ -45,7 +46,7 @@ interface CourseSubmission {
   }>
 }
 
-export default function VideoUpload() {
+export default function CourseUpload() {
   const [isUploadComplete, setIsUploadComplete] = useState<boolean>(false)
   const [videoUrl, setVideoUrl] = useState<string>('')
   const [coverImageUrl, setCoverImageUrl] = useState<string>('')
@@ -54,6 +55,7 @@ export default function VideoUpload() {
   const [courseName, setCourseName] = useState<string>('')
   const [courseDetail, setCourseDetail] = useState<string>('')
   const [courseCategory, setCourseCategory] = useState<string>('')
+  const [courseDietary, setCourseDietary] = useState<string>('')
   const [coursePrice, setCoursePrice] = useState<number>(0)
   const [coursePackPrice, setCoursePackPrice] = useState<number>(0)
   const [courseIngredients, setCourseIngredients] = useState<string>('')
@@ -69,6 +71,7 @@ export default function VideoUpload() {
       courseName.trim() &&
       courseDetail.trim() &&
       courseCategory.trim() &&
+      courseDietary.trim() &&
       coursePrice &&
       coursePackPrice &&
       courseIngredients.trim() &&
@@ -80,6 +83,7 @@ export default function VideoUpload() {
     courseName,
     courseDetail,
     courseCategory,
+    courseDietary,
     coursePrice,
     coursePackPrice,
     courseIngredients,
@@ -98,6 +102,7 @@ export default function VideoUpload() {
         courseName,
         courseDetail,
         courseCategory,
+        courseDietary,
         coursePrice,
         coursePackPrice,
         courseIngredients,
@@ -130,7 +135,10 @@ export default function VideoUpload() {
   const mockSubmitToAPI = async (courseData: CourseSubmission) => {
     await new Promise((resolve) => setTimeout(resolve, 1500))
 
-    if (parseFloat(courseData.coursePrice.toString()) < 0 || parseFloat(coursePackPrice.toString()) < 0) {
+    if (
+      parseFloat(courseData.coursePrice.toString()) < 0 ||
+      parseFloat(coursePackPrice.toString()) < 0
+    ) {
       return {
         success: false,
         message: 'Price cannot be negative',
@@ -150,6 +158,7 @@ export default function VideoUpload() {
     setCourseName('')
     setCourseDetail('')
     setCourseCategory('')
+    setCourseDietary('')
     setCoursePrice(0)
     setCoursePackPrice(0)
     setCourseIngredients('')
@@ -180,11 +189,11 @@ export default function VideoUpload() {
   const handleUploadSuccess = (results: CloudinaryUploadWidgetResults) => {
     console.log('Upload successful:', results)
     setIsUploadComplete(true)
-  
+
     if (results.info && typeof results.info !== 'string') {
       const secureUrl = results.info.secure_url
       const resourceType = results.info.resource_type
-  
+
       if (secureUrl) {
         if (resourceType === 'image') {
           setCoverImageUrl(secureUrl)
@@ -326,68 +335,86 @@ export default function VideoUpload() {
                 />
               </div>
 
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="courseCategory" className="block mb-1">
-                    Category
+                  <label htmlFor="courseIngredients" className="block mb-1">
+                    Ingredients
                   </label>
-                  <input
-                    id="courseCategory"
-                    type="text"
-                    placeholder="Course Category"
+                  <textarea
+                    id="courseIngredients"
+                    placeholder="Course Ingredients"
                     required
-                    value={courseCategory}
-                    onChange={(e) => setCourseCategory(e.target.value)}
-                    className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
+                    value={courseIngredients}
+                    onChange={(e) => setCourseIngredients(e.target.value)}
+                    className="w-full min-h-[214px] max-h-[214px] px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
                   />
                 </div>
-                <div>
-                  <label htmlFor="coursePrice" className="block mb-1">
-                    Price
-                  </label>
-                  <input
-                    id="coursePrice"
-                    type="number"
-                    min="0"
-                    placeholder="Course Price"
-                    required
-                    value={coursePrice}
-                    onChange={(e) => setCoursePrice(Number(e.target.value))}
-                    className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
-                  />
+                <div className="space-y-4">
+                  <div>
+                    <label htmlFor="courseCategory" className="block mb-1">
+                      Category
+                    </label>
+                    <input
+                      id="courseCategory"
+                      type="text"
+                      placeholder="Course Category"
+                      required
+                      value={courseCategory}
+                      onChange={(e) => setCourseCategory(e.target.value)}
+                      className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="courseDietary" className="block mb-1">
+                      Dietary Preferences
+                    </label>
+                    <input
+                      id="courseDietary"
+                      type="text"
+                      placeholder="Course Dietary"
+                      required
+                      value={courseDietary}
+                      onChange={(e) => setCourseDietary(e.target.value)}
+                      className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
+                    />
+                  </div>
+                  <div className="grid grid-cols-2 gap-6">
+                    <div>
+                      <label htmlFor="coursePackPrice" className="block mb-1">
+                        Pack Price
+                      </label>
+                      <input
+                        id="coursePackPrice"
+                        type="number"
+                        min="0"
+                        placeholder="Course Pack Price"
+                        required
+                        value={coursePackPrice}
+                        onChange={(e) =>
+                          setCoursePackPrice(Number(e.target.value))
+                        }
+                        className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="coursePrice" className="block mb-1">
+                        Course Price
+                      </label>
+                      <input
+                        id="coursePrice"
+                        type="number"
+                        min="0"
+                        placeholder="Course Price"
+                        required
+                        value={coursePrice}
+                        onChange={(e) => setCoursePrice(Number(e.target.value))}
+                        className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
+                      />
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <label htmlFor="coursePackPrice" className="block mb-1">
-                    Pack Price
-                  </label>
-                  <input
-                    id="coursePackPrice"
-                    type="number"
-                    min="0"
-                    placeholder="Course Pack Price"
-                    required
-                    value={coursePackPrice}
-                    onChange={(e) => setCoursePackPrice(Number(e.target.value))}
-                    className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="courseIngredients" className="block mb-1">
-                  Ingredients
-                </label>
-                <textarea
-                  id="courseIngredients"
-                  placeholder="Course Ingredients"
-                  required
-                  value={courseIngredients}
-                  onChange={(e) => setCourseIngredients(e.target.value)}
-                  className="w-full min-h-32 max-h-32 px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
-                />
               </div>
             </div>
-
             <div className="space-y-4">
               <div className="overflow-hidden">
                 {videoUrl && (

@@ -1,9 +1,9 @@
 'use client'
 import React, { useState, useMemo } from 'react'
 import Image from 'next/image'
-import VideoUpload from './VideoUpload'
-import { VideoData } from '../../types/videodata'
-import { videoData } from '../../data/videodata'
+import WorkshopUpload from './WorkshopUpload'
+import { GroupData } from '../../types/groupdata'
+import { groupData } from '../../data/groupdata'
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -15,7 +15,7 @@ import {
 const ITEMS_PER_PAGE = 5
 const VISIBLE_PAGES = 5
 
-type TabType = 'video' | 'enrolled' | 'review'
+type TabType = 'workshop' | 'enrolled' | 'review'
 
 interface TabButtonProps {
   label: string
@@ -94,24 +94,24 @@ const CheckboxAll: React.FC<{
   </div>
 )
 
-export default function VideoTable() {
-  const [activeTab, setActiveTab] = useState<TabType>('video')
+export default function WorkshopTable() {
+  const [activeTab, setActiveTab] = useState<TabType>('workshop')
   const [typePopup, setTypePopup] = useState<string | null>(null)
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [selectedItems, setSelectedItems] = useState<Set<number>>(new Set())
 
-  const totalPages = Math.ceil(videoData.length / ITEMS_PER_PAGE)
+  const totalPages = Math.ceil(groupData.length / ITEMS_PER_PAGE)
 
   const currentPageData = useMemo(() => {
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
-    return videoData.slice(startIndex, startIndex + ITEMS_PER_PAGE)
+    return groupData.slice(startIndex, startIndex + ITEMS_PER_PAGE)
   }, [currentPage])
 
   const isAllCurrentPageSelected = currentPageData.every((item) =>
-    selectedItems.has(item.courseId)
+    selectedItems.has(item.groupId)
   )
   const isSomeCurrentPageSelected = currentPageData.some((item) =>
-    selectedItems.has(item.courseId)
+    selectedItems.has(item.groupId)
   )
   const isIndeterminate = isSomeCurrentPageSelected && !isAllCurrentPageSelected
 
@@ -125,43 +125,43 @@ export default function VideoTable() {
     if (isAllCurrentPageSelected) {
       // Unselect all items on current page
       const newSelected = new Set(selectedItems)
-      currentPageData.forEach((item) => newSelected.delete(item.courseId))
+      currentPageData.forEach((item) => newSelected.delete(item.groupId))
       setSelectedItems(newSelected)
     } else {
       // Select all items on current page
       const newSelected = new Set(selectedItems)
-      currentPageData.forEach((item) => newSelected.add(item.courseId))
+      currentPageData.forEach((item) => newSelected.add(item.groupId))
       setSelectedItems(newSelected)
     }
   }
 
-  const handleSelectItem = (courseId: number) => {
+  const handleSelectItem = (groupId: number) => {
     const newSelected = new Set(selectedItems)
-    if (newSelected.has(courseId)) {
-      newSelected.delete(courseId)
+    if (newSelected.has(groupId)) {
+      newSelected.delete(groupId)
     } else {
-      newSelected.add(courseId)
+      newSelected.add(groupId)
     }
     setSelectedItems(newSelected)
   }
 
-  const handleRowClick = (courseId: number) => {
-    handleSelectItem(courseId)
+  const handleRowClick = (groupId: number) => {
+    handleSelectItem(groupId)
   }
 
-  const handleEditClick = (e: React.MouseEvent, courseId: number) => {
+  const handleEditClick = (e: React.MouseEvent, groupId: number) => {
     e.stopPropagation()
-    console.log('Edit course:', courseId)
+    console.log('Edit course:', groupId)
   }
 
-  const handleDeleteClick = (e: React.MouseEvent, courseId?: number) => {
+  const handleDeleteClick = (e: React.MouseEvent, groupId?: number) => {
     e.stopPropagation()
 
-    if (courseId) {
-      console.log('Delete course:', courseId)
+    if (groupId) {
+      console.log('Delete course:', groupId)
       setSelectedItems((prev) => {
         const updated = new Set(prev)
-        updated.delete(courseId)
+        updated.delete(groupId)
         return updated
       })
     } else {
@@ -219,8 +219,8 @@ export default function VideoTable() {
 
   const renderTableHeader = () => (
     <tr className="bg-gradient-to-b from-[#F0725C] to-[#FE3511] text-white">
-      {/* Render for "video" tab */}
-      {activeTab === 'video' && (
+      {/* Render for "workshop" tab */}
+      {activeTab === 'workshop' && (
         <>
           <th className="p-4 pl-8 text-left">
             <CheckboxAll
@@ -229,11 +229,11 @@ export default function VideoTable() {
               onChange={handleSelectAll}
             />
           </th>
-          <th className="p-4 text-left font-semibold">Video</th>
+          <th className="p-4 text-left font-semibold">Workshop</th>
           <th className="p-4 text-left font-semibold">Name</th>
           <th className="p-4 text-center font-semibold">Price</th>
           <th className="p-4 text-center font-semibold">Revenue</th>
-          <th className="p-4 text-center font-semibold">Enrolled</th>
+          <th className="p-4 text-center font-semibold">Participant</th>
           <th className="p-4 text-center font-semibold">Date</th>
           <th className="flex justify-end p-4 pr-6 font-semibold">
             <TrashIcon
@@ -251,66 +251,66 @@ export default function VideoTable() {
       {activeTab === 'enrolled' && (
         <>
           <th className="p-4 pl-12 text-left font-semibold">Enrolled Name</th>
-          <th className="p-4 text-left font-semibold">Course Name</th>
+          <th className="p-4 text-left font-semibold">Group Name</th>
           <th className="p-4 text-center font-semibold">Enrolled ID</th>
-          <th className="p-4 text-center font-semibold">Course ID</th>
+          <th className="p-4 text-center font-semibold">Group ID</th>
         </>
       )}
       {activeTab === 'review' && (
         <>
           <th className="p-4 pl-12 text-left font-semibold">Enrolled Name</th>
           <th className="p-4 text-left font-semibold">Review</th>
-          <th className="p-4 text-center font-semibold">Course Name</th>
+          <th className="p-4 text-center font-semibold">Group Name</th>
         </>
       )}
     </tr>
   )
 
-  const renderTableRow = (video: VideoData) => (
+  const renderTableRow = (group: GroupData) => (
     <tr
-      key={video.courseId}
+      key={group.groupId}
       className="border-x border-gray-200 text-gray-800 hover:bg-gray-50 cursor-pointer"
-      onClick={() => handleRowClick(video.courseId)}
+      onClick={() => handleRowClick(group.groupId)}
     >
-      {/* Render for "video" tab */}
-      {activeTab === 'video' && (
+      {/* Render for "workshop" tab */}
+      {activeTab === 'workshop' && (
         <>
           <td
             className="px-4 pl-8 border-b border-gray-200"
             onClick={(e) => e.stopPropagation()}
           >
             <Checkbox
-              checked={selectedItems.has(video.courseId)}
-              onChange={() => handleSelectItem(video.courseId)}
+              checked={selectedItems.has(group.groupId)}
+              onChange={() => handleSelectItem(group.groupId)}
             />
           </td>
           <td className="px-4 py-2 border-b border-gray-200">
             <Image
-              src={video.courseImage}
-              alt={video.courseTitle}
+              src={group.groupImage}
+              alt={group.groupTitle}
               width={144}
               height={96}
               className="object-cover rounded"
             />
           </td>
-          <td className="px-4 border-b border-gray-200">{video.courseTitle}</td>
+          <td className="px-4 border-b border-gray-200">{group.groupTitle}</td>
           <td className="px-4 text-center border-b border-gray-200">
-            {video.coursePrice.toLocaleString()} Baht
+            {group.groupPrice.toLocaleString()} Baht
           </td>
           <td className="px-4 text-center border-b border-gray-200">
-            {video.courseRevenue.toLocaleString()} Baht
+            {group.groupRevenue.toLocaleString()} Baht
           </td>
           <td className="px-4 text-center border-b border-gray-200">
-            {video.courseEnrolled.toLocaleString()}
+            {group.groupParticipant.toLocaleString()}
           </td>
           <td className="px-4 text-center border-b border-gray-200">
-            {formatDate(new Date(video.courseDate))}
+            {formatDate(new Date(group.groupDate))}
           </td>
           <td className="px-4 text-center border-b border-gray-200">
             <div className="flex justify-end">
               <button
                 className="py-2 pr-2 cursor-pointer"
-                onClick={(e) => handleEditClick(e, video.courseId)}
+                onClick={(e) => handleEditClick(e, group.groupId)}
                 aria-label="Edit"
               >
                 <PencilSquareIcon className="w-6 h-6 text-gray-800" />
@@ -326,23 +326,23 @@ export default function VideoTable() {
           <td className="flex items-center px-4 pl-12 py-2 border-b border-gray-200">
             <div className="flex items-center rounded-full w-11 h-11">
               <Image
-                src={video.userProfile}
-                alt={`Profile picture of ${video.userProfile}`}
+                src={group.userProfile}
+                alt={`Profile picture of ${group.userProfile}`}
                 width={35}
                 height={35}
                 className="rounded-full"
               />
             </div>
             <p className="text-gray-800 font-semibold">
-              {video.name} {video.surname}
+              {group.name} {group.surname}
             </p>
           </td>
-          <td className="px-4 border-b border-gray-200">{video.courseTitle}</td>
+          <td className="px-4 border-b border-gray-200">{group.groupTitle}</td>
           <td className="px-4 text-center border-b border-gray-200">
-            {video.courseEnrolledId}
+            {group.groupEnrolledId}
           </td>
           <td className="px-4 text-center border-b border-gray-200">
-            {video.courseId}
+            {group.groupId}
           </td>
         </>
       )}
@@ -353,8 +353,8 @@ export default function VideoTable() {
             <div className="flex items-center">
               <div className="flex items-center rounded-full w-11 h-11">
                 <Image
-                  src={video.userProfile}
-                  alt={`Profile picture of ${video.userProfile}`}
+                  src={group.userProfile}
+                  alt={`Profile picture of ${group.userProfile}`}
                   width={35}
                   height={35}
                   className="rounded-full"
@@ -362,23 +362,23 @@ export default function VideoTable() {
               </div>
               <div>
                 <p className="text-gray-800 font-semibold">
-                  {video.name} {video.surname}
+                  {group.name} {group.surname}
                 </p>
               </div>
             </div>
           </td>
           <td className="px-4 text-left border-b border-gray-200">
-            <p className="text-gray-800">{video.reviewDetail}</p>
+            <p className="text-gray-800">{group.reviewDetail}</p>
           </td>
           <td className="p-4 text-center border-b border-gray-200 flex flex-col items-center">
             <Image
-              src={video.courseImage}
-              alt={video.courseTitle}
+              src={group.groupImage}
+              alt={group.groupTitle}
               width={192}
               height={144}
               className="object-cover rounded"
             />
-            <p className="text-center">{video.courseTitle}</p>
+            <p className="text-center">{group.groupTitle}</p>
           </td>
         </>
       )}
@@ -388,12 +388,12 @@ export default function VideoTable() {
   return (
     <div className="p-6 px-16">
       <h1 className="py-1.5 font-bold text-6xl bg-gradient-to-b from-[#F0725C] to-[#FE3511] inline-block text-transparent bg-clip-text">
-        Video Content
+        Workshop Content
       </h1>
 
       <div className="flex justify-between items-center my-6">
         <div className="flex gap-4">
-          {(['video', 'enrolled', 'review'] as const).map((tab) => (
+          {(['workshop', 'enrolled', 'review'] as const).map((tab) => (
             <TabButton
               key={tab}
               label={tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -402,7 +402,7 @@ export default function VideoTable() {
             />
           ))}
         </div>
-        {activeTab === 'video' && <VideoUpload />}
+        {activeTab === 'workshop' && <WorkshopUpload />}
       </div>
 
       <div className="overflow-x-auto">

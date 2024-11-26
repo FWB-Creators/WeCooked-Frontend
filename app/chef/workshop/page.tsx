@@ -1,11 +1,11 @@
 import Navbar from '../components/Navbar'
-import GroupTable from '../components/group/GroupTable'
+import WorkshopTable from '../components/workshop/WorkshopTable'
 
 export default function ChefGroupPage() {
   return (
     <div className="animate-fadeIn">
       <Navbar />
-      <GroupTable />
+      <WorkshopTable />
     </div>
   )
 }
