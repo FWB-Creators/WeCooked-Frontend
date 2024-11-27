@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { StarRating } from '../StarRating'
 
 export default function ChefProfile() {
   return (
@@ -68,28 +67,85 @@ export default function ChefProfile() {
                 placeholder="082-759-8539"
               ></input>
             </div>
-            <p>My ratings</p>
-            <div className="mb-4 flex justify-between">
+            <p className="mb-2">My Ratings</p>
+            <div className=" flex justify-between">
               <div>
-                <StarRating reviewRating={5} />
+                <div className="flex">
+                  {[...Array(5)].map((_, index) => (
+                    <div key={index} className="flex items-center">
+                      <svg
+                        className="h-5 w-5 text-green-400"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        aria-hidden="true"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z"
+                        />
+                      </svg>
+                      <span className="text-black font-semibold ml-1"></span>
+                    </div>
+                  ))}
+                </div>
                 <p className="text-[#F9644A] text-3xl font-bold flex justify-center">
                   4.5
                 </p>
-                <p className="text-[#919295]">Course Rating</p>
+                <p className="text-[#919295] flex justify-center">
+                  Course Rating
+                </p>
               </div>
               <div>
-                <StarRating reviewRating={5} />
+                <div className="flex">
+                  {[...Array(5)].map((_, index) => (
+                    <div key={index} className="flex items-center">
+                      <svg
+                        className="h-5 w-5 text-green-400"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        aria-hidden="true"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z"
+                        />
+                      </svg>
+                      <span className="text-black font-semibold ml-1"></span>
+                    </div>
+                  ))}
+                </div>
                 <p className="text-[#F9644A] text-3xl font-bold flex justify-center">
                   4.5
                 </p>
-                <p className="text-[#919295]">Workshop Rating</p>
+                <p className="text-[#919295] flex justify-center">
+                  Workshop Rating
+                </p>
               </div>
               <div>
-                <StarRating reviewRating={5} />
+                <div className="flex">
+                  {[...Array(5)].map((_, index) => (
+                    <div key={index} className="flex items-center">
+                      <svg
+                        className="h-5 w-5 text-green-400"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        aria-hidden="true"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M10 15.27L16.18 19l-1.64-7.03L20 7.24l-7.19-.61L10 0 7.19 6.63 0 7.24l5.46 4.73L3.82 19z"
+                        />
+                      </svg>
+                      <span className="text-black font-semibold ml-1"></span>
+                    </div>
+                  ))}
+                </div>
                 <p className="text-[#F9644A] text-3xl font-bold flex justify-center">
                   4.5
                 </p>
-                <p className="text-[#919295]">Overall Rating</p>
+                <p className="text-[#919295] flex justify-center">
+                  Overall Rating
+                </p>
               </div>
             </div>
           </div>
@@ -126,7 +182,7 @@ export default function ChefProfile() {
                   13
                 </p>
                 <p className="text-[#919295] flex justify-center">
-                  Video Course
+                  Courses
                 </p>
               </div>
               <div>
@@ -134,7 +190,7 @@ export default function ChefProfile() {
                   7
                 </p>
                 <p className="text-[#919295] flex justify-center">
-                  Online Course
+                  Workshops
                 </p>
               </div>
             </div>
