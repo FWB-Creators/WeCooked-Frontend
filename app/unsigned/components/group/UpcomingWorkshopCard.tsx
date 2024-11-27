@@ -6,7 +6,13 @@ import { group } from '../../data/upcoming-course'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/16/solid'
 
 const useResponsiveCards = () => {
-  const [cardsToShow, setCardsToShow] = useState<number>(3)
+  const [cardsToShow, setCardsToShow] = useState<number>(() => {
+    if (typeof window !== 'undefined') {
+      if (window.innerWidth < 640) return 1
+      if (window.innerWidth < 1024) return 2
+    }
+    return 3
+  })
 
   useEffect(() => {
     const updateCards = () => {
@@ -54,7 +60,8 @@ export default function NewCourseCard() {
             <div
               className="flex transition-transform duration-300 ease-in-out"
               style={{
-                transform: `translateX(-${startIndex * (100 / cardsToShow)}%)`,
+                transform: `translateX(-${startIndex * 100}%)`,
+                width: `${(100 * group.length) / cardsToShow}%`,
               }}
             >
               {group.map((group, index) => (
@@ -74,7 +81,7 @@ export default function NewCourseCard() {
             </button>
           )}
 
-          {startIndex + 1 < maxIndex && (
+          {startIndex < maxIndex && (
             <button
               onClick={nextSlide}
               className="absolute right-4 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg z-10"

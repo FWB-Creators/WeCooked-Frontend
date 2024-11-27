@@ -8,6 +8,7 @@ import { AuthContext, useAuthContext } from '@/app/contexts/authcontext'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+//import Cookies from 'js-cookie'
 
 // Define the validation schema
 const loginSchema = z.object({
@@ -56,9 +57,11 @@ export default function Login() {
   const login = () => {
     setIsAuthenticated(true)
     router.push('/chef/course')
-    if (remember == true && typeof window !== 'undefined') {
-      // Access localStorage here (to prevent netlify approvement fail)
-      localStorage.setItem('isAuthenticated', 'true')
+    if (remember) {
+      // Store authentication state in cookies
+      //Cookies.set('isAuthenticated', 'true', { expires: 7 }) // expires in 7 days if "Remember me" is checked
+    } else {
+      //Cookies.set('isAuthenticated', 'true') // session-based cookie
     }
   }
 
@@ -66,8 +69,11 @@ export default function Login() {
   const toggleRemember = () => setRemember((prev) => !prev)
 
   // Update handleFormSubmit to handle form data
-  const handleFormSubmit = (data: LoginFormData) => {
-    console.log(JSON.stringify(data)) // Placeholder for auth logic
+  const handleFormSubmit = async (data: LoginFormData) => {
+     const chefLoginData = {
+       email: data.email,
+       password: data.password,
+     }
     login() //set login state to true
   }
 

@@ -6,7 +6,6 @@ import NavLink from './NavLink'
 import { useRouter } from 'next/navigation'
 import { useAuthContext } from '@/app/contexts/authcontext'
 
-
 /**
  * Custom hook to manage authentication state in localStorage.
  * Wrapped in useEffect to prevent SSR issues with Netlify.

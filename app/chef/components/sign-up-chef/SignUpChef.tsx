@@ -16,10 +16,53 @@ export default function SignUpChef() {
   const [showPassword, setShowPassword] = useState(false)
   const [coverImageUrl, setCoverImageUrl] = useState('')
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const [formData, setFormData] = useState({
+    chefName: '',
+    chefSurname: '',
+    chefEmail: '',
+    chefPassword: '',
+    chefBio: '',
+    chefExperience: '',
+    chefSpecialty: '',
+    chefPhone: '',
+    chefSex: 'Male',
+  })
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target
+    setFormData((prevData) => ({ ...prevData, [name]: value }))
+  }
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (!coverImageUrl) return
-    router.push('/chef/sign-up-chef/complete')
+
+    // Collect form data into an object
+    const chefSignUpData = [{
+      ...formData, // Spread formData state
+      chefImage: coverImageUrl, // Include the image URL
+    }]
+
+    // Example of API call (replace with your actual API call)
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/chef/signup`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(chefSignUpData),
+        }
+      )
+
+      if (response.ok) {
+        router.push('/chef/sign-up-chef/complete') // Redirect on success
+      } else {
+        console.error('Failed to sign up')
+      }
+    } catch (error) {
+      console.error('Error submitting the form:', error)
+    }
   }
 
   const togglePasswordVisibility = () => {
@@ -49,18 +92,24 @@ export default function SignUpChef() {
               <div>
                 <p className="mb-1">First Name</p>
                 <input
+                  name="chefName"
                   type="text"
                   placeholder="First Name"
                   required
+                  value={formData.chefName}
+                  onChange={handleChange}
                   className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
                 />
               </div>
               <div>
                 <p className="mb-1">Last Name</p>
                 <input
+                  name="chefSurname"
                   type="text"
                   placeholder="Last Name"
                   required
+                  value={formData.chefSurname}
+                  onChange={handleChange}
                   className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
                 />
               </div>
@@ -69,9 +118,12 @@ export default function SignUpChef() {
             <div>
               <p className="mb-1">Email</p>
               <input
+                name="chefEmail"
                 type="email"
                 placeholder="Email"
                 required
+                value={formData.chefEmail}
+                onChange={handleChange}
                 className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
               />
             </div>
@@ -80,9 +132,12 @@ export default function SignUpChef() {
               <div>
                 <p className="mb-1">Password</p>
                 <input
+                  name="chefPassword"
                   type={showPassword ? 'text' : 'password'}
                   placeholder="Password"
                   required
+                  value={formData.chefPassword}
+                  onChange={handleChange}
                   className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
                 />
               </div>
@@ -105,9 +160,12 @@ export default function SignUpChef() {
             <div>
               <p className="mb-1">Experience</p>
               <input
+                name="chefExperience"
                 type="text"
                 placeholder="Experience"
                 required
+                value={formData.chefExperience}
+                onChange={handleChange}
                 className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
               />
             </div>
@@ -115,8 +173,11 @@ export default function SignUpChef() {
             <div>
               <p className="mb-1">Bio</p>
               <textarea
+                name="chefBio"
                 placeholder="Bio"
                 required
+                value={formData.chefBio}
+                onChange={handleChange}
                 className="w-full min-h-32 max-h-32 px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
               />
             </div>
@@ -127,9 +188,12 @@ export default function SignUpChef() {
             <div>
               <p className="mb-1">Phone</p>
               <input
+                name="chefPhone"
                 type="text"
                 placeholder="Phone"
                 required
+                value={formData.chefPhone}
+                onChange={handleChange}
                 className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
               />
             </div>
@@ -137,9 +201,12 @@ export default function SignUpChef() {
             <div>
               <p className="mb-1">Chef Specialty</p>
               <input
+                name="chefSpecialty"
                 type="text"
                 placeholder="Chef Specialty"
                 required
+                value={formData.chefSpecialty}
+                onChange={handleChange}
                 className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
               />
             </div>
@@ -153,7 +220,7 @@ export default function SignUpChef() {
                 {({ open }) => {
                   return (
                     <button
-                    type="button"
+                      type="button"
                       onClick={() => open?.()}
                       aria-label="Upload profile photo"
                       className="rounded-lg h-[300px] w-full flex items-center justify-center bg-gray-100 border-b-2 border-[#C1C7CD] cursor-pointer"
