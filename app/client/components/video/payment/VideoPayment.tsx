@@ -1,14 +1,23 @@
 'use client'
 import Image from 'next/image'
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useRef } from 'react'
+import Calendar from '../../group/payment/Calendar'
 import { ArrowLeftIcon, CalendarIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 import { useRouter, useParams } from 'next/navigation'
-import CustomCalendar from '../../group/CustomCalendar'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { courses } from '@/app/client/data/full-mock-data'
+
+// Helper function to format dates to DD/MM/YYYY
+const formatDate = (date: Date | null): string => {
+  if (!date) return '' // Return empty string if no date
+  const day = String(date.getDate()).padStart(2, '0')
+  const month = String(date.getMonth() + 1).padStart(2, '0') // Months are zero-based
+  const year = date.getFullYear()
+  return `${month}/${day}/${year}`
+}
 
 const paymentSchema = (isDeliver: boolean) =>
   z.object({
@@ -42,63 +51,36 @@ const paymentSchema = (isDeliver: boolean) =>
       ),
   })
 
-// Create a type helper for forms dynamically
 type FormData = z.infer<ReturnType<typeof paymentSchema>>
 
-export default function VideoPayment() {
+export default function GroupPayment() {
   const [isDeliver, setIsDeliver] = useState<boolean>(false)
-  const [isCalendarOpen, setIsCalendarOpen] = useState<boolean>(false)
-  const [selectedDate, setSelectedDate] = useState<{
-    startDate: Date | null
-    endDate: Date | null
-  }>({
+  const [selectedDate, setSelectedDate] = useState<{ startDate: Date | null }>({
     startDate: null,
-    endDate: null,
   })
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false)
+  const calendarRef = useRef<HTMLDivElement>(null)
 
   const toggleDelivery = () => {
-    setIsDeliver((prev) => {
-      const newState = !prev
-      if (!newState) {
-        setValue('deliveryDate', null) // Reset deliveryDate to null if toggling off
-        setValue('shippingAddress', '') // Reset address
-      }
-      return newState
-    })
+    setIsDeliver(!isDeliver)
   }
 
-  const toggleCalendar = () => setIsCalendarOpen((prev) => !prev)
+  const toggleCalendar = () => {
+    setIsCalendarOpen(!isCalendarOpen)
+  }
 
-  const handleDateChange = (value: {
-    startDate: Date | null
-    endDate: Date | null
-  }) => {
-    if (value.startDate) {
-      const today = new Date()
-      today.setHours(0, 0, 0, 0)
-
-      if (value.startDate < today) {
-        alert('Invalid date')
-        return // Prevent further execution if the date is invalid
-      }
-    }
-
-    // Update the selected date
+  const handleDateSelect = (value: { startDate: Date | null }) => {
     setSelectedDate(value)
-
-    // Set the value in the form
-    setValue('deliveryDate', value.startDate)
-
-    // Close the calendar after selecting a date
     setIsCalendarOpen(false)
+    setValue('deliveryDate', value.startDate) // Set the raw Date object in the form
   }
 
-  const { courseId } = useParams<{ courseId: string }>() // TypeScript typing for useParams
-  const ID = parseInt(courseId)
-  const courseTitle = courses[ID].courseTitle
-  const coursePrice = courses[ID].coursePrice
-  const courseAddOn = courses[ID].ingredientPrice
-  const coursePicture = courses[ID].courseImage
+ const { courseId } = useParams<{ courseId: string }>() // TypeScript typing for useParams
+ const ID = parseInt(courseId)
+ const courseTitle = courses[ID].courseTitle
+ const coursePrice = courses[ID].coursePrice
+ const courseAddOn = courses[ID].ingredientPrice
+ const coursePicture = courses[ID].courseImage
 
   // Dynamically generate the schema based on `isDeliver`
   const schema = useMemo(() => paymentSchema(isDeliver), [isDeliver])
@@ -118,47 +100,43 @@ export default function VideoPayment() {
 
   const router = useRouter()
 
-  const onPaid = (checkout_url) => {
-    router.push(checkout_url)
+  const onPaid = () => {
+    router.push('/client/group/payment/complete')
   }
 
   const handleFormSubmit = async () => {
-    const clientPaymentData = {
-      workshopId: parseInt(courseId),
-      isWithIngredient: isDeliver,
+    const videoPaymentData = {
+      courseId : ID,
+      isWithIngredient : isDeliver,
     }
+    console.log('ID:', ID)
+    console.log('Current isDeliver state:', isDeliver)
 
     try {
-      const token = localStorage.getItem('token')
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/payment/createPaymentForCourse`,
         {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            authorization: token, // Replace with actual token
-          },
-          body: JSON.stringify(clientPaymentData),
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(videoPaymentData),
         }
       )
 
-      if (!response.ok) {
-        throw new Error('Payment failed')
+      if (response.ok) {
+        onPaid() // Redirect on success
+      } else {
+        console.error('Failed to pay the course')
       }
-
-      const responseData = await response.json()
-      console.log(responseData)
-
-      onPaid(responseData.checkoutUrl)
     } catch (error) {
-      console.error('Error:', error)
+      console.error('Error submitting the form:', error)
     }
   }
+  
 
   return (
     <div>
       <form onSubmit={handleSubmit(handleFormSubmit)}>
-        <Link href="/client/group">
+        <Link href="/client/video">
           <ArrowLeftIcon className="absolute left-12 top-24 w-6 h-6 text-[#FE3511]" />
         </Link>
         <div className="ml-32 mt-8 pb-2 mb-4 text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#F0725C] to-[#FE3511]">
@@ -180,29 +158,34 @@ export default function VideoPayment() {
             </div>
             <div className="mt-8 flex justify-between">
               <p className="font-bold">Subtotal</p>
-              <p className="font-bold">${coursePrice}</p>
+              <p className="font-bold">{coursePrice} THB</p>
             </div>
             {isDeliver && (
               <div className="flex justify-between text-[#808080]">
                 <p className="">Add-on Package</p>
-                <p className="font-bold">+${courseAddOn}</p>
+                <p className="font-bold">+ {courseAddOn} THB</p>
               </div>
             )}
             <div className="flex justify-between text-[#808080]">
               <p className="">Discount</p>
-              <p className="font-bold">-$0.00</p>
+              <p className="font-bold">-0.00 THB</p>
             </div>
             <div className="flex justify-between">
               <p className="font-bold">Total</p>
               <p className="font-bold">
-                {isDeliver ? `$${coursePrice + courseAddOn}` : `$${coursePrice}`}
+                {isDeliver
+                  ? `${coursePrice + courseAddOn} THB`
+                  : `${coursePrice} THB`}
               </p>
             </div>
             <button
               type="submit"
               className="mt-8 w-full py-3 px-4 rounded-lg font-semibold text-white bg-gradient-to-t from-[#FE3511] to-[#F0725C] transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
             >
-              Pay {isDeliver ? `$${coursePrice + courseAddOn}` : `$${coursePrice}`}
+              Pay{' '}
+              {isDeliver
+                ? `${coursePrice + courseAddOn} THB`
+                : `${coursePrice} THB`}
             </button>
           </div>
           <div className="ml-16 mr-40">
@@ -210,7 +193,7 @@ export default function VideoPayment() {
               Beef Wellington is a classic and luxurious dish, featuring premium
               beef fillet wrapped in a layer of finely chopped mushrooms
               (Duxelles) and Parma ham, then encased in puff pastry and baked to
-              a golden perfection. It’s ideal for special occasions or a
+              a golden perfection. It&apos;s ideal for special occasions or a
               full-course meal.
             </div>
             <div className="mt-4 flex flex-col w-full px-4 py-2 rounded-lg bg-[#DDE1E6]">
@@ -234,31 +217,37 @@ export default function VideoPayment() {
               <div>
                 <p className="my-2">Delivery Date</p>
                 <div className="relative">
+                  <CalendarIcon
+                    onClick={toggleCalendar}
+                    className="h-5 w-5 text-gray-400 absolute right-3 top-3 cursor-pointer"
+                  />
+                  {isCalendarOpen && (
+                    <div
+                      ref={calendarRef}
+                      className="absolute z-20 mt-2 w-full"
+                    >
+                      <Calendar
+                        value={selectedDate}
+                        onChange={handleDateSelect}
+                      />
+                    </div>
+                  )}
                   <input
                     className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
                     placeholder="Select a date"
                     {...register('deliveryDate', { valueAsDate: true })}
                     readOnly
+                    onClick={toggleCalendar}
                     value={
                       selectedDate.startDate
-                        ? selectedDate.startDate.toISOString().split('T')[0]
+                        ? formatDate(selectedDate.startDate)
                         : ''
                     }
                   />
                   {errors.deliveryDate && (
-                    <p className="text-red-500 text-sm">
+                    <p className="text-red-500 text-sm mt-2">
                       {errors.deliveryDate.message}
                     </p>
-                  )}
-                  <CalendarIcon
-                    className="absolute top-2 right-2 w-6 h-6 cursor-pointer"
-                    onClick={toggleCalendar}
-                  />
-                  {isCalendarOpen && (
-                    <CustomCalendar
-                      value={selectedDate}
-                      onChange={handleDateChange}
-                    />
                   )}
                 </div>
                 <p className="my-2">Shipping address</p>

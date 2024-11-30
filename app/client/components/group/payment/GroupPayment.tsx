@@ -100,43 +100,39 @@ export default function GroupPayment() {
 
   const router = useRouter()
 
-  const onPaid = (checkout_url) => {
-    router.push(checkout_url)
+  const onPaid = () => {
+    router.push('/client/group/payment/complete')
   }
 
   const handleFormSubmit = async () => {
-    const clientPaymentData = {
-      workshopId: parseInt(groupId),
+
+    const groupPaymentData = {
+      workshopId: ID,
       isWithIngredient: isDeliver,
     }
+    console.log('ID:', ID)
+    console.log('Current isDeliver state:', isDeliver)
 
-    try {
-      const token = localStorage.getItem('token')
+     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/payment/createPaymentForWorkshop`,
         {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'authorization': token, // Replace with actual token
-          },
-          body: JSON.stringify(clientPaymentData),
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(groupPaymentData),
         }
       )
 
-      if (!response.ok) {
-        throw new Error('Payment failed')
+      if (response.ok) {
+        onPaid() // Redirect on success
+      } else {
+        console.error('Failed to pay the workshop')
       }
-
-      const responseData = await response.json()
-      console.log(responseData);
-      
-
-      onPaid(responseData.checkoutUrl)
     } catch (error) {
-      console.error('Error:', error)
+      console.error('Error submitting the form:', error)
     }
   }
+    
 
   return (
     <div>
@@ -222,6 +218,21 @@ export default function GroupPayment() {
               <div>
                 <p className="my-2">Delivery Date</p>
                 <div className="relative">
+                  <CalendarIcon
+                    onClick={toggleCalendar}
+                    className="h-5 w-5 text-gray-400 absolute right-3 top-3 cursor-pointer"
+                  />
+                  {isCalendarOpen && (
+                    <div
+                      ref={calendarRef}
+                      className="absolute z-20 mt-2 w-full"
+                    >
+                      <Calendar
+                        value={selectedDate}
+                        onChange={handleDateSelect}
+                      />
+                    </div>
+                  )}
                   <input
                     className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
                     placeholder="Select a date"
@@ -235,24 +246,9 @@ export default function GroupPayment() {
                     }
                   />
                   {errors.deliveryDate && (
-                    <p className="text-red-500 text-sm">
+                    <p className="text-red-500 text-sm mt-2">
                       {errors.deliveryDate.message}
                     </p>
-                  )}
-                  <CalendarIcon
-                    onClick={toggleCalendar}
-                    className="h-5 w-5 text-gray-400 absolute right-3 bottom-3 cursor-pointer"
-                  />
-                  {isCalendarOpen && (
-                    <div
-                      ref={calendarRef}
-                      className="absolute z-20 mt-2 w-full"
-                    >
-                      <Calendar
-                        value={selectedDate}
-                        onChange={handleDateSelect}
-                      />
-                    </div>
                   )}
                 </div>
                 <p className="my-2">Shipping address</p>

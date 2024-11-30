@@ -97,6 +97,46 @@ export default function CourseUpload() {
     setIsSubmitting(true)
     setSubmitError(null)
 
+    const courseUploadData = [
+      {
+        courseTitle: 'Masterbate British Cuisine',
+        courseDetail:
+          'Learn the secrets of British cuisine from Gordon Ramsay.',
+        coursePrice: 100,
+        courseCategory: 'Cooking',
+        courseVideoId: 1,
+        courseChefId: 1,
+        coursePackId: 'pack1',
+        courseVideoPath: 'test12345678.com',
+        courseIngredientPrice: 123456,
+        courseIngredientDetail: 'Pork,Pork,Pork,Pork',
+        courseImage: 'placeholderImage.com',
+      },
+    ]
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/chef/upload`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(courseUploadData),
+        }
+      )
+
+      if (response.ok) {
+        const responseData = await response.json()
+        console.log('Upload successful:', responseData)
+      } else {
+        const errorDetails = await response.json() // Optional: read error response
+        console.error('Failed to upload:', response.status, errorDetails)
+      }
+    } catch (error) {
+      console.error('Error submitting the form:', error)
+    }
+
+
     try {
       const courseData: CourseSubmission = {
         courseName,

@@ -24,7 +24,7 @@ export default function ThankYouPage() {
             Thank you for trusting in choosing our service!
           </p>
         </div>
-        <Link href="/">
+        <Link href="/chef/course">
           <div className="px-16 py-3 text-white cursor-pointer bg-gradient-to-b from-[#F0725C] to-[#FE3511] rounded-full font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
             Home
           </div>

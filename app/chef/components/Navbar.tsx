@@ -89,7 +89,7 @@ export default function Navbar() {
                   aria-orientation="vertical"
                 >
                   <Link
-                    href="/client/profile"
+                    href="/chef/profile"
                     className="block px-4 py-2 hover:bg-gray-100"
                     role="menuitem"
                   >

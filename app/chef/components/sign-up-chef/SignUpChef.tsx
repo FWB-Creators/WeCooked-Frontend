@@ -25,7 +25,7 @@ export default function SignUpChef() {
     chefExperience: '',
     chefSpecialty: '',
     chefPhone: '',
-    chefSex: 'Male',
+    chefSex: '',
   })
 
   const handleChange = (
@@ -185,17 +185,31 @@ export default function SignUpChef() {
 
           {/* Right Column */}
           <div className="space-y-4">
-            <div>
-              <p className="mb-1">Phone</p>
-              <input
-                name="chefPhone"
-                type="text"
-                placeholder="Phone"
-                required
-                value={formData.chefPhone}
-                onChange={handleChange}
-                className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
-              />
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <p className="mb-1">Phone</p>
+                <input
+                  name="chefPhone"
+                  type="text"
+                  placeholder="Phone"
+                  required
+                  value={formData.chefPhone}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
+                />
+              </div>
+              <div>
+                <p className="mb-1">Gender</p>
+                <input
+                  name="chefSex"
+                  type="text"
+                  placeholder="Gender"
+                  required
+                  value={formData.chefSex}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 rounded-lg bg-[#F2F4F8] border-b-2 border-[#C1C7CD] outline-none"
+                />
+              </div>
             </div>
 
             <div>

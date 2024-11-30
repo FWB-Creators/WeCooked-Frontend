@@ -41,10 +41,35 @@ export default function VideoControl() {
     setComment(e.target.value)
   }
 
-  const handleSubmitReview = () => {
+  const handleSubmitReview = async() => {
+
+    const ratingCourseData = {
+      rating: rating,
+      courseId: videoID,
+      reviewDetail: comment,
+    }
+
     console.log('Rating:', rating)
     console.log('Comment:', comment)
-    setShowRatingPopup(false)
+
+     try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/ratingcourse`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(ratingCourseData),
+        }
+      )
+
+      if (response.ok) {
+        setShowRatingPopup(false)
+      } else {
+        console.error('Failed to sign up')
+      }
+    } catch (error) {
+      console.error('Error submitting the form:', error)
+    }
   }
 
   return (

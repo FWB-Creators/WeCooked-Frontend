@@ -8,7 +8,7 @@ import { AuthContext, useAuthContext } from '@/app/contexts/authcontext'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-//import Cookies from 'js-cookie'
+import Cookies from 'js-cookie'
 
 // Define the validation schema
 const loginSchema = z.object({
@@ -59,9 +59,9 @@ export default function Login() {
     router.push('/chef/course')
     if (remember) {
       // Store authentication state in cookies
-      //Cookies.set('isAuthenticated', 'true', { expires: 7 }) // expires in 7 days if "Remember me" is checked
+      Cookies.set('Authorization', 'true', { expires: 7 }) // expires in 7 days if "Remember me" is checked
     } else {
-      //Cookies.set('isAuthenticated', 'true') // session-based cookie
+      
     }
   }
 
@@ -70,11 +70,36 @@ export default function Login() {
 
   // Update handleFormSubmit to handle form data
   const handleFormSubmit = async (data: LoginFormData) => {
-     const chefLoginData = {
-       email: data.email,
-       password: data.password,
-     }
-    login() //set login state to true
+
+    const chefLoginData = [{
+      chefEmail: data.email,
+      chefPassword: data.password,
+    }]
+
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/chef/login`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(chefLoginData),
+        }
+      )
+
+      if (!response.ok) {
+        throw new Error('Login failed')
+      }
+
+      const responseData = await response.json()
+      console.log('token received:', responseData.token)
+      Cookies.set('authorization', responseData.token)
+
+      login() // Redirect to the home page
+    } catch (error) {
+      console.error('Login failed:', error)
+    }
   }
 
   return (
@@ -190,7 +215,7 @@ export default function Login() {
           <div className="flex justify-center mt-6 gap-x-1 text-sm">
             <p>Don&apos;t have an account?</p>
             <Link
-              href="/client/sign-up"
+              href="/chef/sign-up-chef"
               className="cursor-pointer text-transparent bg-clip-text bg-gradient-to-t from-[#FE3511] to-[#F0725C] hover:underline font-medium"
             >
               Sign up now

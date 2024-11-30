@@ -18,7 +18,7 @@ export default function EditChefProfile() {
         {/* Profile Image Container */}
         <div className="relative flex items-center justify-center max-w-28 max-h-28 w-28 h-28 overflow-hidden rounded-full">
           <Image
-            src="/images/chef.png"
+            src="/images/profile.jpg"
             alt="Chef profile image"
             width={500}
             height={500}

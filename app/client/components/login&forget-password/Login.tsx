@@ -8,6 +8,7 @@ import { AuthContext, useAuthContext } from '@/app/contexts/authcontext'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import Cookies from 'js-cookie'
 
 // Define the validation schema
 const loginSchema = z.object({
@@ -57,8 +58,7 @@ export default function Login() {
     setIsAuthenticated(true)
     router.push('/client/home')
     if (remember == true && typeof window !== 'undefined') {
-      // Access localStorage here (to prevent netlify approvement fail)
-      localStorage.setItem('isAuthenticated', 'true')
+      Cookies.set('Authorization', 'true', { expires: 7 }) // expires in 7 days if "Remember me" is checked
     }
   }
 
@@ -67,25 +67,22 @@ export default function Login() {
 
   // Update handleFormSubmit to handle form data
   const handleFormSubmit = async (data: LoginFormData) => {
+
     const clientLoginData = {
       email: data.email,
       password: data.password,
     }
 
-    console.log(JSON.stringify(clientLoginData)) // Log the data for debugging
-    console.log(process.env)
-    console.log(process.env.NEXT_PUBLIC_BACKEND_URL)
-
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/login`,
         {
-          // Adjust the URL as necessary
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(clientLoginData),
+          credentials:"include"
         }
       )
 
@@ -95,7 +92,7 @@ export default function Login() {
 
       const responseData = await response.json()
       console.log(responseData)
-      localStorage.setItem('token', responseData.token)
+      Cookies.set('authorization', responseData.token)
 
       login() // Set login state to true and redirect
     } catch (error) {
