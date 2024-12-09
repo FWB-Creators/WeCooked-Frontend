@@ -67,7 +67,6 @@ export default function Login() {
 
   // Update handleFormSubmit to handle form data
   const handleFormSubmit = async (data: LoginFormData) => {
-
     const clientLoginData = {
       email: data.email,
       password: data.password,
@@ -82,7 +81,6 @@ export default function Login() {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(clientLoginData),
-          credentials:"include"
         }
       )
 
@@ -92,7 +90,7 @@ export default function Login() {
 
       const responseData = await response.json()
       console.log(responseData)
-      Cookies.set('authorization', responseData.token)
+      Cookies.set('Authorization', responseData.token)
 
       login() // Set login state to true and redirect
     } catch (error) {

@@ -9,6 +9,7 @@ export default function CourseDetailFirstPage() {
    
    const { courseId } = useParams<{ courseId: string }>() // TypeScript typing for useParams
    const ID = parseInt(courseId)
+   console.log("ID is",ID)
    const courseTitle = courses[ID].courseTitle
    const chefImage = courses[ID].chefImage
    const chefName = courses[ID].chefName
@@ -55,7 +56,7 @@ export default function CourseDetailFirstPage() {
         <div className="flex">
           <button
             className="px-8 py-2.5 bg-gradient-to-b from-[#F0725C] to-[#FE3511] text-white rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
-            onClick={() => router.push('/client/video/payment/1')}
+            onClick={() => router.push(`/client/video/payment/${ID}`)}
           >
             Let&apos;s Cook
           </button>

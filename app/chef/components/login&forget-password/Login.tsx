@@ -94,7 +94,7 @@ export default function Login() {
 
       const responseData = await response.json()
       console.log('token received:', responseData.token)
-      Cookies.set('authorization', responseData.token)
+      Cookies.set('Authorization', responseData.token)
 
       login() // Redirect to the home page
     } catch (error) {

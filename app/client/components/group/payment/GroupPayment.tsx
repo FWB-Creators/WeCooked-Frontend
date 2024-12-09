@@ -8,7 +8,7 @@ import { useRouter, useParams } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { group } from '../../../data/group-course'
+import { group } from '@/app/client/data/group-course'
 
 // Helper function to format dates to DD/MM/YYYY
 const formatDate = (date: Date | null): string => {
