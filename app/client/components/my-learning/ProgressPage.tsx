@@ -6,7 +6,7 @@ export default function ProgressPage() {
   return (
     <div className="flex flex-col justify-start py-12">
       <h1 className="text-3xl font-bold mb-2 text-white px-12">
-        Video Courses
+        Courses
       </h1>
       <div className="mx-12">
         {progress.length === 0 && (

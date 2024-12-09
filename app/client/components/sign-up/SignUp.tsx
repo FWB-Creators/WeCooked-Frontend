@@ -13,27 +13,43 @@ export default function SignUp() {
   const [password, setPassword] = useState<string>('')
   const router = useRouter()
 
-  const clientData = {
-    firstname: firstname,
-    lastname: lastname,
+  const clientSignUpData = {
+    firstName: firstname,
+    lastName: lastname,
     email: email,
     password: password,
   }
-
-  const clientJSON = JSON.stringify(clientData)
-  console.log(clientJSON)
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev)
   }
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
     try {
       if (!firstname || !lastname || !email || !password) {
-        //validation
+        // Validation
         throw new Error('All fields are required')
       }
+
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/signup`,
+        {
+          //change the url to correspond with backend
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(clientSignUpData),
+        }
+      )
+
+      if (!response.ok) {
+        throw new Error('Registration failed')
+      }
+
+      // If the request is successful, redirect the user to the login page
       router.push('/client/login')
     } catch (error) {
       console.error('Registration failed:', error)
