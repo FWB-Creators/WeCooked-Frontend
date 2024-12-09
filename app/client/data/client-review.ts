@@ -10,5 +10,6 @@ export const courses: Course[] = [
     chefName: 'Chef Sieng',
     courseImage: '/images/ramachandra.png',
     chefImage: '/images/chef.png',
+    ingredientPrice: 10, // Make it optional
   }
 ]
