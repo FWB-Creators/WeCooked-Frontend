@@ -72,9 +72,30 @@ export default function Login() {
       password: data.password,
     }
 
-    
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/login`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(clientLoginData),
+        }
+      )
+
+      if (!response.ok) {
+        throw new Error('Login failed')
+      }
+
+      const responseData = await response.json()
+      console.log(responseData)
+      Cookies.set('Authorization', responseData.token)
 
       login() // Set login state to true and redirect
+    } catch (error) {
+      console.error('Login failed:', error)
+    }
     
   }
 
