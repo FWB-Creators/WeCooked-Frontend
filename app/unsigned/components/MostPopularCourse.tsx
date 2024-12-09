@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { courses } from '@/app/unsigned/data/most-popular-course'
+import { courses } from '@/app/client/data/full-mock-data'
 import CourseCard from './CourseCard'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/16/solid'
 

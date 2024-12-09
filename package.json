@@ -10,7 +10,12 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.1.5",
+    "@next/env": "^15.0.3",
     "@types/lodash": "^4.17.13",
+    "axios": "^1.7.9",
+    "cookie": "^1.0.2",
+    "js-cookie": "^3.0.5",
+    "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
     "next": "14.2.14",
     "next-cloudinary": "^6.16.0",
@@ -22,6 +27,7 @@
   },
   "devDependencies": {
     "@hookform/resolvers": "^3.9.1",
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

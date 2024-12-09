@@ -3,6 +3,7 @@ export interface Group {
   groupTitle: string
   groupDetail: string
   groupPrice: number
+  ingredientPrice: number
   groupNumberofparticipants: number
   groupDate: Date | string
   groupCategory: string

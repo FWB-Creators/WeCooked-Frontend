@@ -27,7 +27,7 @@ export default function GroupCardEnrolled({
   })
 
   return (
-    <Link href={`/client/group-learning/${groupId}`}>
+    <Link href={`/client/group/learning/${groupId}`}>
       <div className="relative z-10 p-5 pr-7 rounded-xl bg-white my-4 transition-all duration-300 hover:scale-[1.01] hover:shadow-lg">
         <div className="flex gap-4">
           <div className="relative w-28 h-28 rounded-lg overflow-hidden">

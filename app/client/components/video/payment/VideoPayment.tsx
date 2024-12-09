@@ -1,14 +1,14 @@
 'use client'
 import Image from 'next/image'
 import { useState, useMemo, useRef } from 'react'
-import Calendar from './Calendar'
+import Calendar from '../../group/payment/Calendar'
 import { ArrowLeftIcon, CalendarIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
 import { useRouter, useParams } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { group } from '@/app/client/data/group-course'
+import { courses } from '@/app/client/data/full-mock-data'
 
 // Helper function to format dates to DD/MM/YYYY
 const formatDate = (date: Date | null): string => {
@@ -75,12 +75,12 @@ export default function GroupPayment() {
     setValue('deliveryDate', value.startDate) // Set the raw Date object in the form
   }
 
-  const { groupId } = useParams<{ groupId: string }>() // TypeScript typing for useParams
-  const ID = parseInt(groupId)
-  const groupTitle = group[ID].groupTitle
-  const groupPrice = group[ID].groupPrice
-  const groupAddOn = group[ID].ingredientPrice
-  const groupPicture = group[ID].groupPicture
+ const { courseId } = useParams<{ courseId: string }>() // TypeScript typing for useParams
+ const ID = parseInt(courseId)
+ const courseTitle = courses[ID].courseTitle
+ const coursePrice = courses[ID].coursePrice
+ const courseAddOn = courses[ID].ingredientPrice
+ const coursePicture = courses[ID].courseImage
 
   // Dynamically generate the schema based on `isDeliver`
   const schema = useMemo(() => paymentSchema(isDeliver), [isDeliver])
@@ -105,51 +105,50 @@ export default function GroupPayment() {
   }
 
   const handleFormSubmit = async () => {
-
-    const groupPaymentData = {
-      workshopId: ID,
-      isWithIngredient: isDeliver,
+    const videoPaymentData = {
+      courseId : ID,
+      isWithIngredient : isDeliver,
     }
     console.log('ID:', ID)
     console.log('Current isDeliver state:', isDeliver)
 
-     try {
+    try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/payment/createPaymentForWorkshop`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/payment/createPaymentForCourse`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(groupPaymentData),
+          body: JSON.stringify(videoPaymentData),
         }
       )
 
       if (response.ok) {
         onPaid() // Redirect on success
       } else {
-        console.error('Failed to pay the workshop')
+        console.error('Failed to pay the course')
       }
     } catch (error) {
       console.error('Error submitting the form:', error)
     }
   }
-    
+  
 
   return (
     <div>
       <form onSubmit={handleSubmit(handleFormSubmit)}>
-        <Link href="/client/group">
+        <Link href="/client/video">
           <ArrowLeftIcon className="absolute left-12 top-24 w-6 h-6 text-[#FE3511]" />
         </Link>
         <div className="ml-32 mt-8 pb-2 mb-4 text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-[#F0725C] to-[#FE3511]">
-          {groupTitle}
+          {courseTitle}
         </div>
         <div className="grid grid-cols-2 mt-8">
           <div className="ml-32 mr-24">
             <div className="rounded-3xl relative max-h-96 max-w-[500px] w-[500px] h-auto overflow-hidden">
               <Image
                 className="rounded-3xl"
-                src={groupPicture}
-                alt={`${groupTitle} course image`}
+                src={coursePicture}
+                alt={`${courseTitle} course image`}
                 width={1000}
                 height={1000}
                 quality={100}
@@ -159,12 +158,12 @@ export default function GroupPayment() {
             </div>
             <div className="mt-8 flex justify-between">
               <p className="font-bold">Subtotal</p>
-              <p className="font-bold">{groupPrice} THB</p>
+              <p className="font-bold">{coursePrice} THB</p>
             </div>
             {isDeliver && (
               <div className="flex justify-between text-[#808080]">
                 <p className="">Add-on Package</p>
-                <p className="font-bold">+ {groupAddOn} THB</p>
+                <p className="font-bold">+ {courseAddOn} THB</p>
               </div>
             )}
             <div className="flex justify-between text-[#808080]">
@@ -175,8 +174,8 @@ export default function GroupPayment() {
               <p className="font-bold">Total</p>
               <p className="font-bold">
                 {isDeliver
-                  ? `${groupPrice + groupAddOn} THB`
-                  : `${groupPrice} THB`}
+                  ? `${coursePrice + courseAddOn} THB`
+                  : `${coursePrice} THB`}
               </p>
             </div>
             <button
@@ -185,8 +184,8 @@ export default function GroupPayment() {
             >
               Pay{' '}
               {isDeliver
-                ? `${groupPrice + groupAddOn} THB`
-                : `${groupPrice} THB`}
+                ? `${coursePrice + courseAddOn} THB`
+                : `${coursePrice} THB`}
             </button>
           </div>
           <div className="ml-16 mr-40">
